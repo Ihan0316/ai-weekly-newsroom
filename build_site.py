@@ -7,7 +7,7 @@
 
 usage: python build_site.py
 """
-import json, os, glob, re, shutil
+import json, os, glob, re, shutil, hashlib
 from build import render_day, esc
 
 DAYS_DIR = os.path.join("data", "days")
@@ -91,7 +91,7 @@ def card(day_id, rec, hero=False):
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>'''
 
-def build_index(days):
+def build_index(days, ver=""):
     latest_id, latest = days[0]
     rest = days[1:]
     hero_card = card(latest_id, latest, hero=True)
@@ -105,7 +105,7 @@ def build_index(days):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/site.css{ver}">
 </head>
 <body>
 <div class="orbs"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span></div>
@@ -135,7 +135,7 @@ def build_index(days):
   </div>
 </div>
 <script src="{THREE_CDN}"></script>
-<script src="assets/site.js"></script>
+<script src="assets/site.js{ver}"></script>
 </body></html>'''
 
 def main():
@@ -151,17 +151,22 @@ def main():
 
     dst_assets = os.path.join(OUT_DIR, "assets")
     os.makedirs(dst_assets, exist_ok=True)
-    for fn in os.listdir(ASSETS_SRC):
-        shutil.copy2(os.path.join(ASSETS_SRC, fn), os.path.join(dst_assets, fn))
+    h = hashlib.md5()
+    for fn in sorted(os.listdir(ASSETS_SRC)):
+        sp = os.path.join(ASSETS_SRC, fn)
+        shutil.copy2(sp, os.path.join(dst_assets, fn))
+        with open(sp, "rb") as fb:
+            h.update(fb.read())
+    ver = "?v=" + h.hexdigest()[:8]      # 에셋 변경 시 캐시 무효화
     open(os.path.join(OUT_DIR, ".nojekyll"), "w").close()
 
     os.makedirs(os.path.join(OUT_DIR, "days"), exist_ok=True)
     for did, rec in days:
         out = os.path.join(OUT_DIR, "days", did + ".html")
         with open(out, "w", encoding="utf-8") as fh:
-            fh.write(render_day(rec, back_href="../index.html", asset_prefix="../"))
+            fh.write(render_day(rec, back_href="../index.html", asset_prefix="../", ver=ver))
     with open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8") as fh:
-        fh.write(build_index(days))
+        fh.write(build_index(days, ver))
     print("built index + %d days:" % len(days), ", ".join(d for d, _ in days))
 
 if __name__ == "__main__":

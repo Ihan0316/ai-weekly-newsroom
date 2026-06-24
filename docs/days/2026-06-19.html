@@ -4,7 +4,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/site.css?v=6c01459b">
 </head>
 <body>
 <div class="orbs"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span></div>
@@ -20,20 +20,29 @@
       <div class="secnum">01</div>
       <span class="seclabel">오늘의 뉴스</span>
       <ul class="newslist">
-        <li class="newsitem">
-          <span class="ni-src">요즘IT</span>
-          <h3 class="ni-title"><a href="https://yozm.wishket.com/magazine/detail/3812/" target="_blank" rel="noopener">오픈AI 사장·딥마인드 CEO·클로드 코드 창시자가 말하는 5가지 미래 ↗</a></h3>
-          <p class="ni-blurb">AI Ascent 2026에서 브록먼·허사비스·체르니 세 인터뷰에 공통으로 흐른 메시지를 5가지로 정리했다.</p>
+        <li>
+          <button class="newsitem" data-idx="0" type="button">
+            <span class="ni-src">요즘IT</span>
+            <h3 class="ni-title">오픈AI 사장·딥마인드 CEO·클로드 코드 창시자가 말하는 5가지 미래</h3>
+            <p class="ni-blurb">AI Ascent 2026에서 브록먼·허사비스·체르니 세 인터뷰에 공통으로 흐른 메시지를 5가지로 정리했다.</p>
+            <span class="ni-open">원문 보기 →</span>
+          </button>
         </li>
-        <li class="newsitem">
-          <span class="ni-src">요즘IT</span>
-          <h3 class="ni-title"><a href="https://yozm.wishket.com/magazine/detail/3811/" target="_blank" rel="noopener">아이팟·아이폰의 아버지 토니 파델: AI에게 넘겨선 안 될 한 가지 ↗</a></h3>
-          <p class="ni-blurb">앤트로픽 40만 세션 분석, 로컬 코딩 모델 현황, 토니 파델의 &#x27;생각은 넘기지 말라&#x27;는 조언 등 프로덕트 메이커가 주목할 세 가지.</p>
+        <li>
+          <button class="newsitem" data-idx="1" type="button">
+            <span class="ni-src">요즘IT</span>
+            <h3 class="ni-title">아이팟·아이폰의 아버지 토니 파델: AI에게 넘겨선 안 될 한 가지</h3>
+            <p class="ni-blurb">앤트로픽 40만 세션 분석, 로컬 코딩 모델 현황, 토니 파델의 &#x27;생각은 넘기지 말라&#x27;는 조언 등 프로덕트 메이커가 주목할 세 가지.</p>
+            <span class="ni-open">원문 보기 →</span>
+          </button>
         </li>
-        <li class="newsitem">
-          <span class="ni-src">요즘IT</span>
-          <h3 class="ni-title"><a href="https://yozm.wishket.com/magazine/detail/3810/" target="_blank" rel="noopener">AI는 어떤 사이트를 인용할까? ↗</a></h3>
-          <p class="ni-blurb">SEO 플랫폼을 직접 운영하며 두 달간 목격한, AI 검색 환경이 사이트를 평가하고 인용하는 구조의 변화를 기록했다.</p>
+        <li>
+          <button class="newsitem" data-idx="2" type="button">
+            <span class="ni-src">요즘IT</span>
+            <h3 class="ni-title">AI는 어떤 사이트를 인용할까?</h3>
+            <p class="ni-blurb">SEO 플랫폼을 직접 운영하며 두 달간 목격한, AI 검색 환경이 사이트를 평가하고 인용하는 구조의 변화를 기록했다.</p>
+            <span class="ni-open">원문 보기 →</span>
+          </button>
         </li></ul>
     </article>
 
@@ -41,15 +50,12 @@
       <div class="secnum">02</div>
       <span class="seclabel">기초상식 · 정처기</span>
       
-      <div class="quiz">
+      <div class="quiz" data-answer="1">
         <div class="sectag">#네트워크</div>
         <p class="q-question">TCP/IP 프로토콜에서 비연결형(connectionless) 전송을 제공하며 신뢰성보다 속도를 우선하는 전송 계층 프로토콜은?</p>
-        <ol class="qopts"><li class="qopt"><span class="ql">①</span> TCP</li><li class="qopt correct"><span class="ql">②</span> UDP</li><li class="qopt"><span class="ql">③</span> IP</li><li class="qopt"><span class="ql">④</span> ICMP</li></ol>
-        <details class="q-ans">
-          <summary>정답 &amp; 해설 보기</summary>
-          <p><b>정답: ②</b></p>
-          <p>UDP는 비연결형으로 흐름 제어·재전송·순서 보장을 하지 않아 오버헤드가 적고 빠르며 실시간 스트리밍이나 DNS 등에 쓰인다. TCP는 연결형으로 신뢰성을 보장한다. IP는 네트워크 계층 라우팅, ICMP는 오류·제어 메시지 전달 프로토콜이다.</p>
-        </details>
+        <ol class="qopts"><li class="qopt" data-i="0"><span class="ql">①</span><span class="qtext">TCP</span><span class="qmark"></span></li><li class="qopt" data-i="1"><span class="ql">②</span><span class="qtext">UDP</span><span class="qmark"></span></li><li class="qopt" data-i="2"><span class="ql">③</span><span class="qtext">IP</span><span class="qmark"></span></li><li class="qopt" data-i="3"><span class="ql">④</span><span class="qtext">ICMP</span><span class="qmark"></span></li></ol>
+        <p class="q-hint">보기를 클릭해 정답을 확인하세요.</p>
+        <div class="q-explain" hidden><b>정답: ②</b><p>UDP는 비연결형으로 흐름 제어·재전송·순서 보장을 하지 않아 오버헤드가 적고 빠르며 실시간 스트리밍이나 DNS 등에 쓰인다. TCP는 연결형으로 신뢰성을 보장한다. IP는 네트워크 계층 라우팅, ICMP는 오류·제어 메시지 전달 프로토콜이다.</p></div>
       </div>
     </article>
 
@@ -77,8 +83,19 @@
 
   <div class="foot">
     <span class="fbrand">데일리</span> · 읽을거리 · 2026. 6. 19<br>
-    뉴스는 yozm.wishket · GeekNews(news.hada.io) · Threads 등에서 수집한 링크입니다. 원문 출처를 확인하세요.
+    뉴스 본문은 yozm.wishket · GeekNews(news.hada.io) 등에서 수집·요약한 것입니다. 정확한 내용은 원문을 확인하세요.
   </div>
 </main>
-<script src="../assets/site.js"></script>
+
+<div class="modal-overlay" id="news-modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" type="button" aria-label="닫기">✕</button>
+    <div class="modal-src"></div>
+    <h2 class="modal-title" id="modal-title"></h2>
+    <div class="modal-body"></div>
+    <a class="modal-orig" target="_blank" rel="noopener">원문 사이트에서 보기 ↗</a>
+  </div>
+</div>
+<script id="news-data" type="application/json">[{"title": "오픈AI 사장·딥마인드 CEO·클로드 코드 창시자가 말하는 5가지 미래", "source": "요즘IT", "url": "https://yozm.wishket.com/magazine/detail/3812/", "blurb": "AI Ascent 2026에서 브록먼·허사비스·체르니 세 인터뷰에 공통으로 흐른 메시지를 5가지로 정리했다.", "content": []}, {"title": "아이팟·아이폰의 아버지 토니 파델: AI에게 넘겨선 안 될 한 가지", "source": "요즘IT", "url": "https://yozm.wishket.com/magazine/detail/3811/", "blurb": "앤트로픽 40만 세션 분석, 로컬 코딩 모델 현황, 토니 파델의 '생각은 넘기지 말라'는 조언 등 프로덕트 메이커가 주목할 세 가지.", "content": []}, {"title": "AI는 어떤 사이트를 인용할까?", "source": "요즘IT", "url": "https://yozm.wishket.com/magazine/detail/3810/", "blurb": "SEO 플랫폼을 직접 운영하며 두 달간 목격한, AI 검색 환경이 사이트를 평가하고 인용하는 구조의 변화를 기록했다.", "content": []}]</script>
+<script src="../assets/site.js?v=6c01459b"></script>
 </body></html>

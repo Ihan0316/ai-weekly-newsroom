@@ -4,7 +4,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/site.css?v=6c01459b">
 </head>
 <body>
 <div class="orbs"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span></div>
@@ -20,15 +20,21 @@
       <div class="secnum">01</div>
       <span class="seclabel">오늘의 뉴스</span>
       <ul class="newslist">
-        <li class="newsitem">
-          <span class="ni-src">GeekNews</span>
-          <h3 class="ni-title"><a href="https://news.hada.io/topic?id=30786" target="_blank" rel="noopener">LLM Wiki와 본유적 부하 ↗</a></h3>
-          <p class="ni-blurb">개인 지식관리 시스템에서 LLM Wiki 사용 시 인지 부하 감소에 대한 고찰</p>
+        <li>
+          <button class="newsitem" data-idx="0" type="button">
+            <span class="ni-src">GeekNews</span>
+            <h3 class="ni-title">LLM Wiki와 본유적 부하</h3>
+            <p class="ni-blurb">개인 지식관리 시스템에서 LLM Wiki 사용 시 인지 부하 감소에 대한 고찰</p>
+            <span class="ni-open">원문 보기 →</span>
+          </button>
         </li>
-        <li class="newsitem">
-          <span class="ni-src">GeekNews</span>
-          <h3 class="ni-title"><a href="https://news.hada.io/topic?id=30622" target="_blank" rel="noopener">구글 Open Knowledge Format 공개 - AI 에이전트를 위한 지식 공유 표준 ↗</a></h3>
-          <p class="ni-blurb">벤더 중립적 개방형 사양으로 여러 에이전트가 지식을 이식·소비 가능</p>
+        <li>
+          <button class="newsitem" data-idx="1" type="button">
+            <span class="ni-src">GeekNews</span>
+            <h3 class="ni-title">구글 Open Knowledge Format 공개 - AI 에이전트를 위한 지식 공유 표준</h3>
+            <p class="ni-blurb">벤더 중립적 개방형 사양으로 여러 에이전트가 지식을 이식·소비 가능</p>
+            <span class="ni-open">원문 보기 →</span>
+          </button>
         </li></ul>
     </article>
 
@@ -36,15 +42,12 @@
       <div class="secnum">02</div>
       <span class="seclabel">기초상식 · 정처기</span>
       
-      <div class="quiz">
+      <div class="quiz" data-answer="0">
         <div class="sectag">#운영체제</div>
         <p class="q-question">여러 프로세스가 공유 자원에 동시에 접근할 때 실행 순서에 따라 결과가 달라지는 문제를 무엇이라 하는가?</p>
-        <ol class="qopts"><li class="qopt correct"><span class="ql">①</span> 경쟁 상태(Race Condition)</li><li class="qopt"><span class="ql">②</span> 스래싱(Thrashing)</li><li class="qopt"><span class="ql">③</span> 단편화(Fragmentation)</li><li class="qopt"><span class="ql">④</span> 문맥 교환(Context Switching)</li></ol>
-        <details class="q-ans">
-          <summary>정답 &amp; 해설 보기</summary>
-          <p><b>정답: ①</b></p>
-          <p>경쟁 상태(Race Condition)는 둘 이상의 프로세스가 공유 자원에 동시 접근할 때 접근 순서에 따라 결과가 달라지는 문제로, 임계 구역(Critical Section)에 대한 상호 배제로 해결한다. 스래싱은 과도한 페이지 교체, 단편화는 메모리 낭비, 문맥 교환은 프로세스 전환 작업이다.</p>
-        </details>
+        <ol class="qopts"><li class="qopt" data-i="0"><span class="ql">①</span><span class="qtext">경쟁 상태(Race Condition)</span><span class="qmark"></span></li><li class="qopt" data-i="1"><span class="ql">②</span><span class="qtext">스래싱(Thrashing)</span><span class="qmark"></span></li><li class="qopt" data-i="2"><span class="ql">③</span><span class="qtext">단편화(Fragmentation)</span><span class="qmark"></span></li><li class="qopt" data-i="3"><span class="ql">④</span><span class="qtext">문맥 교환(Context Switching)</span><span class="qmark"></span></li></ol>
+        <p class="q-hint">보기를 클릭해 정답을 확인하세요.</p>
+        <div class="q-explain" hidden><b>정답: ①</b><p>경쟁 상태(Race Condition)는 둘 이상의 프로세스가 공유 자원에 동시 접근할 때 접근 순서에 따라 결과가 달라지는 문제로, 임계 구역(Critical Section)에 대한 상호 배제로 해결한다. 스래싱은 과도한 페이지 교체, 단편화는 메모리 낭비, 문맥 교환은 프로세스 전환 작업이다.</p></div>
       </div>
     </article>
 
@@ -72,8 +75,19 @@
 
   <div class="foot">
     <span class="fbrand">데일리</span> · 읽을거리 · 2026. 6. 13<br>
-    뉴스는 yozm.wishket · GeekNews(news.hada.io) · Threads 등에서 수집한 링크입니다. 원문 출처를 확인하세요.
+    뉴스 본문은 yozm.wishket · GeekNews(news.hada.io) 등에서 수집·요약한 것입니다. 정확한 내용은 원문을 확인하세요.
   </div>
 </main>
-<script src="../assets/site.js"></script>
+
+<div class="modal-overlay" id="news-modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" type="button" aria-label="닫기">✕</button>
+    <div class="modal-src"></div>
+    <h2 class="modal-title" id="modal-title"></h2>
+    <div class="modal-body"></div>
+    <a class="modal-orig" target="_blank" rel="noopener">원문 사이트에서 보기 ↗</a>
+  </div>
+</div>
+<script id="news-data" type="application/json">[{"title": "LLM Wiki와 본유적 부하", "source": "GeekNews", "url": "https://news.hada.io/topic?id=30786", "blurb": "개인 지식관리 시스템에서 LLM Wiki 사용 시 인지 부하 감소에 대한 고찰", "content": []}, {"title": "구글 Open Knowledge Format 공개 - AI 에이전트를 위한 지식 공유 표준", "source": "GeekNews", "url": "https://news.hada.io/topic?id=30622", "blurb": "벤더 중립적 개방형 사양으로 여러 에이전트가 지식을 이식·소비 가능", "content": []}]</script>
+<script src="../assets/site.js?v=6c01459b"></script>
 </body></html>

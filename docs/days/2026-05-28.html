@@ -4,7 +4,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/site.css?v=6c01459b">
 </head>
 <body>
 <div class="orbs"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span></div>
@@ -20,15 +20,21 @@
       <div class="secnum">01</div>
       <span class="seclabel">오늘의 뉴스</span>
       <ul class="newslist">
-        <li class="newsitem">
-          <span class="ni-src">GeekNews</span>
-          <h3 class="ni-title"><a href="https://news.hada.io/topic?id=30784" target="_blank" rel="noopener">SSH 터널 매니저 - GUI, 맥/윈도용 ↗</a></h3>
-          <p class="ni-blurb">터널링 관리 앱들이 유료가 많고 무료는 불편해 직접 만든 GUI SSH 터널 매니저</p>
+        <li>
+          <button class="newsitem" data-idx="0" type="button">
+            <span class="ni-src">GeekNews</span>
+            <h3 class="ni-title">SSH 터널 매니저 - GUI, 맥/윈도용</h3>
+            <p class="ni-blurb">터널링 관리 앱들이 유료가 많고 무료는 불편해 직접 만든 GUI SSH 터널 매니저</p>
+            <span class="ni-open">원문 보기 →</span>
+          </button>
         </li>
-        <li class="newsitem">
-          <span class="ni-src">GeekNews</span>
-          <h3 class="ni-title"><a href="https://www.smpte.org/blog/smpte-makes-its-standards-freely-accessible-openingstandards-library-to-the-global-media-technology-community" target="_blank" rel="noopener">SMPTE, 표준 라이브러리 무료 공개 ↗</a></h3>
-          <p class="ni-blurb">SMPTE가 미디어 기술 표준 카탈로그 전체를 무료로 공개해 산업 상호운용성 증진.</p>
+        <li>
+          <button class="newsitem" data-idx="1" type="button">
+            <span class="ni-src">GeekNews</span>
+            <h3 class="ni-title">SMPTE, 표준 라이브러리 무료 공개</h3>
+            <p class="ni-blurb">SMPTE가 미디어 기술 표준 카탈로그 전체를 무료로 공개해 산업 상호운용성 증진.</p>
+            <span class="ni-open">원문 보기 →</span>
+          </button>
         </li></ul>
     </article>
 
@@ -36,15 +42,12 @@
       <div class="secnum">02</div>
       <span class="seclabel">기초상식 · 정처기</span>
       
-      <div class="quiz">
+      <div class="quiz" data-answer="2">
         <div class="sectag">#프로그래밍 언어</div>
         <p class="q-question">컴파일러와 인터프리터에 대한 설명으로 옳은 것은?</p>
-        <ol class="qopts"><li class="qopt"><span class="ql">①</span> 인터프리터는 소스 전체를 한 번에 목적 코드로 번역한다</li><li class="qopt"><span class="ql">②</span> 컴파일러는 한 줄씩 해석하여 즉시 실행한다</li><li class="qopt correct"><span class="ql">③</span> 컴파일러는 실행 전 전체를 번역해 목적 파일을 생성한다</li><li class="qopt"><span class="ql">④</span> 인터프리터는 실행 속도가 컴파일러보다 항상 빠르다</li></ol>
-        <details class="q-ans">
-          <summary>정답 &amp; 해설 보기</summary>
-          <p><b>정답: ③</b></p>
-          <p>컴파일러는 소스 코드 전체를 실행 전에 한 번에 목적 코드(목적 파일)로 번역하여 이후 실행 속도가 빠르다. 인터프리터는 소스를 한 줄씩 해석·실행하므로 일반적으로 실행 속도가 더 느리지만 개발·디버깅이 편리하다.</p>
-        </details>
+        <ol class="qopts"><li class="qopt" data-i="0"><span class="ql">①</span><span class="qtext">인터프리터는 소스 전체를 한 번에 목적 코드로 번역한다</span><span class="qmark"></span></li><li class="qopt" data-i="1"><span class="ql">②</span><span class="qtext">컴파일러는 한 줄씩 해석하여 즉시 실행한다</span><span class="qmark"></span></li><li class="qopt" data-i="2"><span class="ql">③</span><span class="qtext">컴파일러는 실행 전 전체를 번역해 목적 파일을 생성한다</span><span class="qmark"></span></li><li class="qopt" data-i="3"><span class="ql">④</span><span class="qtext">인터프리터는 실행 속도가 컴파일러보다 항상 빠르다</span><span class="qmark"></span></li></ol>
+        <p class="q-hint">보기를 클릭해 정답을 확인하세요.</p>
+        <div class="q-explain" hidden><b>정답: ③</b><p>컴파일러는 소스 코드 전체를 실행 전에 한 번에 목적 코드(목적 파일)로 번역하여 이후 실행 속도가 빠르다. 인터프리터는 소스를 한 줄씩 해석·실행하므로 일반적으로 실행 속도가 더 느리지만 개발·디버깅이 편리하다.</p></div>
       </div>
     </article>
 
@@ -72,8 +75,19 @@
 
   <div class="foot">
     <span class="fbrand">데일리</span> · 읽을거리 · 2026. 5. 28<br>
-    뉴스는 yozm.wishket · GeekNews(news.hada.io) · Threads 등에서 수집한 링크입니다. 원문 출처를 확인하세요.
+    뉴스 본문은 yozm.wishket · GeekNews(news.hada.io) 등에서 수집·요약한 것입니다. 정확한 내용은 원문을 확인하세요.
   </div>
 </main>
-<script src="../assets/site.js"></script>
+
+<div class="modal-overlay" id="news-modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" type="button" aria-label="닫기">✕</button>
+    <div class="modal-src"></div>
+    <h2 class="modal-title" id="modal-title"></h2>
+    <div class="modal-body"></div>
+    <a class="modal-orig" target="_blank" rel="noopener">원문 사이트에서 보기 ↗</a>
+  </div>
+</div>
+<script id="news-data" type="application/json">[{"title": "SSH 터널 매니저 - GUI, 맥/윈도용", "source": "GeekNews", "url": "https://news.hada.io/topic?id=30784", "blurb": "터널링 관리 앱들이 유료가 많고 무료는 불편해 직접 만든 GUI SSH 터널 매니저", "content": []}, {"title": "SMPTE, 표준 라이브러리 무료 공개", "source": "GeekNews", "url": "https://www.smpte.org/blog/smpte-makes-its-standards-freely-accessible-openingstandards-library-to-the-global-media-technology-community", "blurb": "SMPTE가 미디어 기술 표준 카탈로그 전체를 무료로 공개해 산업 상호운용성 증진.", "content": []}]</script>
+<script src="../assets/site.js?v=6c01459b"></script>
 </body></html>

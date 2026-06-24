@@ -90,7 +90,109 @@
     });
   }
 
-  function boot() { initTilt(); initHero(); }
+  /* ---------- 3) 정처기 퀴즈: 클릭 시 정답/오답 ---------- */
+  function initQuiz() {
+    document.querySelectorAll('.quiz').forEach(function (quiz) {
+      var answer = parseInt(quiz.getAttribute('data-answer'), 10);
+      quiz.querySelectorAll('.qopt').forEach(function (opt) {
+        opt.addEventListener('click', function () {
+          if (quiz.classList.contains('answered')) return;
+          quiz.classList.add('answered');
+          var i = parseInt(opt.getAttribute('data-i'), 10);
+          var correct = quiz.querySelector('.qopt[data-i="' + answer + '"]');
+          if (i === answer) {
+            opt.classList.add('is-correct');
+            opt.querySelector('.qmark').textContent = '✓';
+          } else {
+            opt.classList.add('is-wrong');
+            opt.querySelector('.qmark').textContent = '✗';
+            if (correct) {
+              correct.classList.add('is-correct');
+              correct.querySelector('.qmark').textContent = '✓';
+            }
+          }
+          var ex = quiz.querySelector('.q-explain');
+          if (ex) ex.hidden = false;
+        });
+      });
+    });
+  }
+
+  /* ---------- 4) 뉴스 원문 3D 모달 ---------- */
+  function initNews() {
+    var dataEl = document.getElementById('news-data');
+    var overlay = document.getElementById('news-modal');
+    if (!dataEl || !overlay) return;
+    var items = [];
+    try { items = JSON.parse(dataEl.textContent || '[]'); } catch (e) { items = []; }
+    var titleEl = overlay.querySelector('.modal-title');
+    var srcEl = overlay.querySelector('.modal-src');
+    var bodyEl = overlay.querySelector('.modal-body');
+    var origEl = overlay.querySelector('.modal-orig');
+    var closeBtn = overlay.querySelector('.modal-close');
+    var lastFocus = null;
+
+    function open(idx) {
+      var it = items[idx];
+      if (!it) return;
+      lastFocus = document.activeElement;
+      titleEl.textContent = it.title || '';
+      srcEl.textContent = it.source || '';
+      origEl.href = it.url || '#';
+      bodyEl.innerHTML = '';
+      if (it.content && it.content.length) {
+        it.content.forEach(function (b) {
+          var el = document.createElement(b.t === 'h' ? 'h3' : 'p');
+          el.textContent = b.text;
+          bodyEl.appendChild(el);
+        });
+      } else {
+        if (it.blurb) {
+          var p = document.createElement('p');
+          p.className = 'mb-blurb'; p.textContent = it.blurb; bodyEl.appendChild(p);
+        }
+        var n = document.createElement('div');
+        n.className = 'mb-note';
+        n.textContent = '원문 본문은 아직 준비 중입니다. 아래 링크에서 원문을 확인하세요.';
+        bodyEl.appendChild(n);
+      }
+      overlay.hidden = false;
+      overlay.classList.add('open');            // display:flex 즉시 (rAF 비의존)
+      var showIt = function () { overlay.classList.add('show'); };
+      requestAnimationFrame(showIt);
+      setTimeout(showIt, 30);                   // 백그라운드 탭 등 rAF 미작동 시 폴백
+      document.body.style.overflow = 'hidden';
+      bodyEl.parentElement.scrollTop = 0;
+      if (closeBtn) closeBtn.focus();
+    }
+    function close() {
+      if (overlay.hidden) return;
+      overlay.classList.remove('show');
+      var done = function () {
+        if (overlay.hidden) return;
+        overlay.classList.remove('open');
+        overlay.hidden = true;
+        document.body.style.overflow = '';
+        if (lastFocus && lastFocus.focus) lastFocus.focus();
+      };
+      var t = setTimeout(done, 480);
+      overlay.addEventListener('transitionend', function te() {
+        clearTimeout(t); overlay.removeEventListener('transitionend', te); done();
+      });
+    }
+    document.querySelectorAll('.newsitem').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        open(parseInt(btn.getAttribute('data-idx'), 10));
+      });
+    });
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !overlay.hidden) close();
+    });
+  }
+
+  function boot() { initTilt(); initHero(); initQuiz(); initNews(); }
   if (document.readyState !== 'loading') boot();
   else document.addEventListener('DOMContentLoaded', boot);
 })();

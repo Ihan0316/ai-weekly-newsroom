@@ -4,7 +4,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/site.css?v=6c01459b">
 </head>
 <body>
 <div class="orbs"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span></div>
@@ -20,20 +20,29 @@
       <div class="secnum">01</div>
       <span class="seclabel">오늘의 뉴스</span>
       <ul class="newslist">
-        <li class="newsitem">
-          <span class="ni-src">GeekNews</span>
-          <h3 class="ni-title"><a href="https://news.hada.io/topic?id=30671" target="_blank" rel="noopener">ClickHouse 오픈소스 10년 ↗</a></h3>
-          <p class="ni-blurb">2016년 공개 후 2,000명 이상 기여, 분석 데이터베이스 대표 프로젝트로 성장</p>
+        <li>
+          <button class="newsitem" data-idx="0" type="button">
+            <span class="ni-src">GeekNews</span>
+            <h3 class="ni-title">ClickHouse 오픈소스 10년</h3>
+            <p class="ni-blurb">2016년 공개 후 2,000명 이상 기여, 분석 데이터베이스 대표 프로젝트로 성장</p>
+            <span class="ni-open">원문 보기 →</span>
+          </button>
         </li>
-        <li class="newsitem">
-          <span class="ni-src">GeekNews</span>
-          <h3 class="ni-title"><a href="https://news.hada.io/topic?id=30674" target="_blank" rel="noopener">AI가 우리의 능력을 망치고 있는가? 초기 연구 결과는 부정적 ↗</a></h3>
-          <p class="ni-blurb">의료·컴퓨터과학 등에서 AI 의존이 숙련도 약화 가능성을 보인다는 초기 근거</p>
+        <li>
+          <button class="newsitem" data-idx="1" type="button">
+            <span class="ni-src">GeekNews</span>
+            <h3 class="ni-title">AI가 우리의 능력을 망치고 있는가? 초기 연구 결과는 부정적</h3>
+            <p class="ni-blurb">의료·컴퓨터과학 등에서 AI 의존이 숙련도 약화 가능성을 보인다는 초기 근거</p>
+            <span class="ni-open">원문 보기 →</span>
+          </button>
         </li>
-        <li class="newsitem">
-          <span class="ni-src">GeekNews</span>
-          <h3 class="ni-title"><a href="https://news.hada.io/topic?id=30672" target="_blank" rel="noopener">머신러닝 연구의 선(Zen)과 예술 ↗</a></h3>
-          
+        <li>
+          <button class="newsitem" data-idx="2" type="button">
+            <span class="ni-src">GeekNews</span>
+            <h3 class="ni-title">머신러닝 연구의 선(Zen)과 예술</h3>
+            
+            <span class="ni-open">원문 보기 →</span>
+          </button>
         </li></ul>
     </article>
 
@@ -41,15 +50,12 @@
       <div class="secnum">02</div>
       <span class="seclabel">기초상식 · 정처기</span>
       
-      <div class="quiz">
+      <div class="quiz" data-answer="1">
         <div class="sectag">#데이터베이스</div>
         <p class="q-question">데이터베이스에서 다른 테이블의 기본키를 참조하여 참조 무결성을 보장하는 속성은?</p>
-        <ol class="qopts"><li class="qopt"><span class="ql">①</span> 기본키(Primary Key)</li><li class="qopt correct"><span class="ql">②</span> 외래키(Foreign Key)</li><li class="qopt"><span class="ql">③</span> 후보키(Candidate Key)</li><li class="qopt"><span class="ql">④</span> 대체키(Alternate Key)</li></ol>
-        <details class="q-ans">
-          <summary>정답 &amp; 해설 보기</summary>
-          <p><b>정답: ②</b></p>
-          <p>외래키(Foreign Key)는 한 테이블에서 다른(또는 같은) 테이블의 기본키를 참조하는 속성으로 참조 무결성을 보장한다. 기본키는 행을 유일하게 식별하는 키, 후보키는 기본키가 될 수 있는 키들, 대체키는 후보키 중 기본키로 선택되지 않은 키다.</p>
-        </details>
+        <ol class="qopts"><li class="qopt" data-i="0"><span class="ql">①</span><span class="qtext">기본키(Primary Key)</span><span class="qmark"></span></li><li class="qopt" data-i="1"><span class="ql">②</span><span class="qtext">외래키(Foreign Key)</span><span class="qmark"></span></li><li class="qopt" data-i="2"><span class="ql">③</span><span class="qtext">후보키(Candidate Key)</span><span class="qmark"></span></li><li class="qopt" data-i="3"><span class="ql">④</span><span class="qtext">대체키(Alternate Key)</span><span class="qmark"></span></li></ol>
+        <p class="q-hint">보기를 클릭해 정답을 확인하세요.</p>
+        <div class="q-explain" hidden><b>정답: ②</b><p>외래키(Foreign Key)는 한 테이블에서 다른(또는 같은) 테이블의 기본키를 참조하는 속성으로 참조 무결성을 보장한다. 기본키는 행을 유일하게 식별하는 키, 후보키는 기본키가 될 수 있는 키들, 대체키는 후보키 중 기본키로 선택되지 않은 키다.</p></div>
       </div>
     </article>
 
@@ -77,8 +83,19 @@
 
   <div class="foot">
     <span class="fbrand">데일리</span> · 읽을거리 · 2026. 6. 21<br>
-    뉴스는 yozm.wishket · GeekNews(news.hada.io) · Threads 등에서 수집한 링크입니다. 원문 출처를 확인하세요.
+    뉴스 본문은 yozm.wishket · GeekNews(news.hada.io) 등에서 수집·요약한 것입니다. 정확한 내용은 원문을 확인하세요.
   </div>
 </main>
-<script src="../assets/site.js"></script>
+
+<div class="modal-overlay" id="news-modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" type="button" aria-label="닫기">✕</button>
+    <div class="modal-src"></div>
+    <h2 class="modal-title" id="modal-title"></h2>
+    <div class="modal-body"></div>
+    <a class="modal-orig" target="_blank" rel="noopener">원문 사이트에서 보기 ↗</a>
+  </div>
+</div>
+<script id="news-data" type="application/json">[{"title": "ClickHouse 오픈소스 10년", "source": "GeekNews", "url": "https://news.hada.io/topic?id=30671", "blurb": "2016년 공개 후 2,000명 이상 기여, 분석 데이터베이스 대표 프로젝트로 성장", "content": []}, {"title": "AI가 우리의 능력을 망치고 있는가? 초기 연구 결과는 부정적", "source": "GeekNews", "url": "https://news.hada.io/topic?id=30674", "blurb": "의료·컴퓨터과학 등에서 AI 의존이 숙련도 약화 가능성을 보인다는 초기 근거", "content": []}, {"title": "머신러닝 연구의 선(Zen)과 예술", "source": "GeekNews", "url": "https://news.hada.io/topic?id=30672", "blurb": "", "content": []}]</script>
+<script src="../assets/site.js?v=6c01459b"></script>
 </body></html>

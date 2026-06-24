@@ -4,7 +4,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/site.css?v=6c01459b">
 </head>
 <body>
 <div class="orbs"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span></div>
@@ -20,20 +20,29 @@
       <div class="secnum">01</div>
       <span class="seclabel">오늘의 뉴스</span>
       <ul class="newslist">
-        <li class="newsitem">
-          <span class="ni-src">요즘IT</span>
-          <h3 class="ni-title"><a href="https://yozm.wishket.com/magazine/detail/3814/" target="_blank" rel="noopener">런던에서 만난 AI 시대 디자이너의 5가지 생존 전략 ↗</a></h3>
-          <p class="ni-blurb">런던 AI × Design 세미나에서 짚은 직무 통합, 디자인 대량 생산, 다크 디자인 시대 등 다섯 가지 변화를 정리했다.</p>
+        <li>
+          <button class="newsitem" data-idx="0" type="button">
+            <span class="ni-src">요즘IT</span>
+            <h3 class="ni-title">런던에서 만난 AI 시대 디자이너의 5가지 생존 전략</h3>
+            <p class="ni-blurb">런던 AI × Design 세미나에서 짚은 직무 통합, 디자인 대량 생산, 다크 디자인 시대 등 다섯 가지 변화를 정리했다.</p>
+            <span class="ni-open">원문 보기 →</span>
+          </button>
         </li>
-        <li class="newsitem">
-          <span class="ni-src">요즘IT</span>
-          <h3 class="ni-title"><a href="https://yozm.wishket.com/magazine/detail/3813/" target="_blank" rel="noopener">개발자는 여전히 수학을 잘해야 할까요? ↗</a></h3>
-          <p class="ni-blurb">과거 수학이 중요했던 이유와 달라진 개발 환경을 비교하며, 수학이 약한 개발자가 무엇부터 준비하면 좋을지 현실적으로 다룬다.</p>
+        <li>
+          <button class="newsitem" data-idx="1" type="button">
+            <span class="ni-src">요즘IT</span>
+            <h3 class="ni-title">개발자는 여전히 수학을 잘해야 할까요?</h3>
+            <p class="ni-blurb">과거 수학이 중요했던 이유와 달라진 개발 환경을 비교하며, 수학이 약한 개발자가 무엇부터 준비하면 좋을지 현실적으로 다룬다.</p>
+            <span class="ni-open">원문 보기 →</span>
+          </button>
         </li>
-        <li class="newsitem">
-          <span class="ni-src">GeekNews</span>
-          <h3 class="ni-title"><a href="https://news.hada.io/topic?id=30701" target="_blank" rel="noopener">ponytail - AI 에이전트를 가장 게으른 시니어 개발자처럼 생각하게 만들기 ↗</a></h3>
-          <p class="ni-blurb">불필요한 코드를 피하도록 AI 에이전트를 게으른 시니어 개발자 사고방식으로 유도하는 프레임워크</p>
+        <li>
+          <button class="newsitem" data-idx="2" type="button">
+            <span class="ni-src">GeekNews</span>
+            <h3 class="ni-title">ponytail - AI 에이전트를 가장 게으른 시니어 개발자처럼 생각하게 만들기</h3>
+            <p class="ni-blurb">불필요한 코드를 피하도록 AI 에이전트를 게으른 시니어 개발자 사고방식으로 유도하는 프레임워크</p>
+            <span class="ni-open">원문 보기 →</span>
+          </button>
         </li></ul>
     </article>
 
@@ -41,15 +50,12 @@
       <div class="secnum">02</div>
       <span class="seclabel">기초상식 · 정처기</span>
       
-      <div class="quiz">
+      <div class="quiz" data-answer="1">
         <div class="sectag">#데이터베이스</div>
         <p class="q-question">SQL에서 GROUP BY로 묶은 그룹에 대해 조건을 지정할 때 사용하는 절은?</p>
-        <ol class="qopts"><li class="qopt"><span class="ql">①</span> WHERE</li><li class="qopt correct"><span class="ql">②</span> HAVING</li><li class="qopt"><span class="ql">③</span> ORDER BY</li><li class="qopt"><span class="ql">④</span> DISTINCT</li></ol>
-        <details class="q-ans">
-          <summary>정답 &amp; 해설 보기</summary>
-          <p><b>정답: ②</b></p>
-          <p>HAVING 절은 GROUP BY로 형성된 그룹에 대한 조건을 지정하며 집계 함수(SUM, COUNT 등)를 조건으로 사용할 수 있다. WHERE는 그룹화 이전 개별 행에 대한 조건이고 집계 함수를 직접 쓸 수 없다. ORDER BY는 정렬, DISTINCT는 중복 제거에 쓰인다.</p>
-        </details>
+        <ol class="qopts"><li class="qopt" data-i="0"><span class="ql">①</span><span class="qtext">WHERE</span><span class="qmark"></span></li><li class="qopt" data-i="1"><span class="ql">②</span><span class="qtext">HAVING</span><span class="qmark"></span></li><li class="qopt" data-i="2"><span class="ql">③</span><span class="qtext">ORDER BY</span><span class="qmark"></span></li><li class="qopt" data-i="3"><span class="ql">④</span><span class="qtext">DISTINCT</span><span class="qmark"></span></li></ol>
+        <p class="q-hint">보기를 클릭해 정답을 확인하세요.</p>
+        <div class="q-explain" hidden><b>정답: ②</b><p>HAVING 절은 GROUP BY로 형성된 그룹에 대한 조건을 지정하며 집계 함수(SUM, COUNT 등)를 조건으로 사용할 수 있다. WHERE는 그룹화 이전 개별 행에 대한 조건이고 집계 함수를 직접 쓸 수 없다. ORDER BY는 정렬, DISTINCT는 중복 제거에 쓰인다.</p></div>
       </div>
     </article>
 
@@ -77,8 +83,19 @@
 
   <div class="foot">
     <span class="fbrand">데일리</span> · 읽을거리 · 2026. 6. 22<br>
-    뉴스는 yozm.wishket · GeekNews(news.hada.io) · Threads 등에서 수집한 링크입니다. 원문 출처를 확인하세요.
+    뉴스 본문은 yozm.wishket · GeekNews(news.hada.io) 등에서 수집·요약한 것입니다. 정확한 내용은 원문을 확인하세요.
   </div>
 </main>
-<script src="../assets/site.js"></script>
+
+<div class="modal-overlay" id="news-modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" type="button" aria-label="닫기">✕</button>
+    <div class="modal-src"></div>
+    <h2 class="modal-title" id="modal-title"></h2>
+    <div class="modal-body"></div>
+    <a class="modal-orig" target="_blank" rel="noopener">원문 사이트에서 보기 ↗</a>
+  </div>
+</div>
+<script id="news-data" type="application/json">[{"title": "런던에서 만난 AI 시대 디자이너의 5가지 생존 전략", "source": "요즘IT", "url": "https://yozm.wishket.com/magazine/detail/3814/", "blurb": "런던 AI × Design 세미나에서 짚은 직무 통합, 디자인 대량 생산, 다크 디자인 시대 등 다섯 가지 변화를 정리했다.", "content": []}, {"title": "개발자는 여전히 수학을 잘해야 할까요?", "source": "요즘IT", "url": "https://yozm.wishket.com/magazine/detail/3813/", "blurb": "과거 수학이 중요했던 이유와 달라진 개발 환경을 비교하며, 수학이 약한 개발자가 무엇부터 준비하면 좋을지 현실적으로 다룬다.", "content": []}, {"title": "ponytail - AI 에이전트를 가장 게으른 시니어 개발자처럼 생각하게 만들기", "source": "GeekNews", "url": "https://news.hada.io/topic?id=30701", "blurb": "불필요한 코드를 피하도록 AI 에이전트를 게으른 시니어 개발자 사고방식으로 유도하는 프레임워크", "content": []}]</script>
+<script src="../assets/site.js?v=6c01459b"></script>
 </body></html>

@@ -4,7 +4,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/site.css?v=6c01459b">
 </head>
 <body>
 <div class="orbs"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span></div>
@@ -20,20 +20,29 @@
       <div class="secnum">01</div>
       <span class="seclabel">오늘의 뉴스</span>
       <ul class="newslist">
-        <li class="newsitem">
-          <span class="ni-src">요즘IT</span>
-          <h3 class="ni-title"><a href="https://yozm.wishket.com/magazine/detail/3792/" target="_blank" rel="noopener">나만의 세컨 브레인: 옵시디언 기반 LLM 위키 구축기 ↗</a></h3>
-          <p class="ni-blurb">카파시의 &#x27;LLM 위키&#x27; 아이디어를 옵시디언·깃허브·클로드 코드 조합으로 구현해 나만의 세컨드 브레인을 만든 과정과 인사이트.</p>
+        <li>
+          <button class="newsitem" data-idx="0" type="button">
+            <span class="ni-src">요즘IT</span>
+            <h3 class="ni-title">나만의 세컨 브레인: 옵시디언 기반 LLM 위키 구축기</h3>
+            <p class="ni-blurb">카파시의 &#x27;LLM 위키&#x27; 아이디어를 옵시디언·깃허브·클로드 코드 조합으로 구현해 나만의 세컨드 브레인을 만든 과정과 인사이트.</p>
+            <span class="ni-open">원문 보기 →</span>
+          </button>
         </li>
-        <li class="newsitem">
-          <span class="ni-src">요즘IT</span>
-          <h3 class="ni-title"><a href="https://yozm.wishket.com/magazine/detail/3796" target="_blank" rel="noopener">&#x27;미토스(mythos)&#x27;급 &#x27;페이블 5(Fable 5)&#x27; 공개 + 차단 소식 업데이트 ↗</a></h3>
-          <p class="ni-blurb">6월 9일 앤트로픽이 역대 최강 모델 페이블 5와 안전장치를 들어낸 쌍둥이 미토스 5를 동시 공개한 배경과, 일반 사용자가 &#x27;통제&#x27;를 더한 페이블로 미토스를 만나게 된 맥락을 짚었습니다.</p>
+        <li>
+          <button class="newsitem" data-idx="1" type="button">
+            <span class="ni-src">요즘IT</span>
+            <h3 class="ni-title">&#x27;미토스(mythos)&#x27;급 &#x27;페이블 5(Fable 5)&#x27; 공개 + 차단 소식 업데이트</h3>
+            <p class="ni-blurb">6월 9일 앤트로픽이 역대 최강 모델 페이블 5와 안전장치를 들어낸 쌍둥이 미토스 5를 동시 공개한 배경과, 일반 사용자가 &#x27;통제&#x27;를 더한 페이블로 미토스를 만나게 된 맥락을 짚었습니다.</p>
+            <span class="ni-open">원문 보기 →</span>
+          </button>
         </li>
-        <li class="newsitem">
-          <span class="ni-src">요즘IT</span>
-          <h3 class="ni-title"><a href="https://yozm.wishket.com/magazine/detail/3793" target="_blank" rel="noopener">GEO 성과 측정 실전편: 인용률 트래킹과 AI 크롤러 로그 활용법 ↗</a></h3>
-          <p class="ni-blurb">AI 검색 환경에서 최종 KPI 대신 인용률 트래킹·AI 크롤러 로그·전환 추적 등 &#x27;전조 증상&#x27; 신호로 성과를 보는 GEO 측정법을, 동탄 피부과 사례와 GA4 테스트로 정리했습니다.</p>
+        <li>
+          <button class="newsitem" data-idx="2" type="button">
+            <span class="ni-src">요즘IT</span>
+            <h3 class="ni-title">GEO 성과 측정 실전편: 인용률 트래킹과 AI 크롤러 로그 활용법</h3>
+            <p class="ni-blurb">AI 검색 환경에서 최종 KPI 대신 인용률 트래킹·AI 크롤러 로그·전환 추적 등 &#x27;전조 증상&#x27; 신호로 성과를 보는 GEO 측정법을, 동탄 피부과 사례와 GA4 테스트로 정리했습니다.</p>
+            <span class="ni-open">원문 보기 →</span>
+          </button>
         </li></ul>
     </article>
 
@@ -41,15 +50,12 @@
       <div class="secnum">02</div>
       <span class="seclabel">기초상식 · 정처기</span>
       
-      <div class="quiz">
+      <div class="quiz" data-answer="0">
         <div class="sectag">#자료구조/알고리즘</div>
         <p class="q-question">이진 탐색(Binary Search)을 적용하기 위한 전제 조건으로 옳은 것은?</p>
-        <ol class="qopts"><li class="qopt correct"><span class="ql">①</span> 데이터가 정렬되어 있어야 한다</li><li class="qopt"><span class="ql">②</span> 데이터가 연결 리스트여야 한다</li><li class="qopt"><span class="ql">③</span> 데이터 개수가 홀수여야 한다</li><li class="qopt"><span class="ql">④</span> 데이터에 중복이 없어야 한다</li></ol>
-        <details class="q-ans">
-          <summary>정답 &amp; 해설 보기</summary>
-          <p><b>정답: ①</b></p>
-          <p>이진 탐색은 탐색 범위를 절반씩 줄이며 찾는 알고리즘으로, 반드시 데이터가 정렬되어 있어야 적용 가능하며 시간 복잡도는 O(log n)이다. 연결 리스트는 임의 접근이 비효율적이라 보통 배열에 적용하며, 데이터 개수의 홀짝이나 중복 여부는 전제 조건이 아니다.</p>
-        </details>
+        <ol class="qopts"><li class="qopt" data-i="0"><span class="ql">①</span><span class="qtext">데이터가 정렬되어 있어야 한다</span><span class="qmark"></span></li><li class="qopt" data-i="1"><span class="ql">②</span><span class="qtext">데이터가 연결 리스트여야 한다</span><span class="qmark"></span></li><li class="qopt" data-i="2"><span class="ql">③</span><span class="qtext">데이터 개수가 홀수여야 한다</span><span class="qmark"></span></li><li class="qopt" data-i="3"><span class="ql">④</span><span class="qtext">데이터에 중복이 없어야 한다</span><span class="qmark"></span></li></ol>
+        <p class="q-hint">보기를 클릭해 정답을 확인하세요.</p>
+        <div class="q-explain" hidden><b>정답: ①</b><p>이진 탐색은 탐색 범위를 절반씩 줄이며 찾는 알고리즘으로, 반드시 데이터가 정렬되어 있어야 적용 가능하며 시간 복잡도는 O(log n)이다. 연결 리스트는 임의 접근이 비효율적이라 보통 배열에 적용하며, 데이터 개수의 홀짝이나 중복 여부는 전제 조건이 아니다.</p></div>
       </div>
     </article>
 
@@ -77,8 +83,19 @@
 
   <div class="foot">
     <span class="fbrand">데일리</span> · 읽을거리 · 2026. 6. 10<br>
-    뉴스는 yozm.wishket · GeekNews(news.hada.io) · Threads 등에서 수집한 링크입니다. 원문 출처를 확인하세요.
+    뉴스 본문은 yozm.wishket · GeekNews(news.hada.io) 등에서 수집·요약한 것입니다. 정확한 내용은 원문을 확인하세요.
   </div>
 </main>
-<script src="../assets/site.js"></script>
+
+<div class="modal-overlay" id="news-modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" type="button" aria-label="닫기">✕</button>
+    <div class="modal-src"></div>
+    <h2 class="modal-title" id="modal-title"></h2>
+    <div class="modal-body"></div>
+    <a class="modal-orig" target="_blank" rel="noopener">원문 사이트에서 보기 ↗</a>
+  </div>
+</div>
+<script id="news-data" type="application/json">[{"title": "나만의 세컨 브레인: 옵시디언 기반 LLM 위키 구축기", "source": "요즘IT", "url": "https://yozm.wishket.com/magazine/detail/3792/", "blurb": "카파시의 'LLM 위키' 아이디어를 옵시디언·깃허브·클로드 코드 조합으로 구현해 나만의 세컨드 브레인을 만든 과정과 인사이트.", "content": []}, {"title": "'미토스(mythos)'급 '페이블 5(Fable 5)' 공개 + 차단 소식 업데이트", "source": "요즘IT", "url": "https://yozm.wishket.com/magazine/detail/3796", "blurb": "6월 9일 앤트로픽이 역대 최강 모델 페이블 5와 안전장치를 들어낸 쌍둥이 미토스 5를 동시 공개한 배경과, 일반 사용자가 '통제'를 더한 페이블로 미토스를 만나게 된 맥락을 짚었습니다.", "content": []}, {"title": "GEO 성과 측정 실전편: 인용률 트래킹과 AI 크롤러 로그 활용법", "source": "요즘IT", "url": "https://yozm.wishket.com/magazine/detail/3793", "blurb": "AI 검색 환경에서 최종 KPI 대신 인용률 트래킹·AI 크롤러 로그·전환 추적 등 '전조 증상' 신호로 성과를 보는 GEO 측정법을, 동탄 피부과 사례와 GA4 테스트로 정리했습니다.", "content": []}]</script>
+<script src="../assets/site.js?v=6c01459b"></script>
 </body></html>

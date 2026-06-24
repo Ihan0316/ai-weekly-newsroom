@@ -4,7 +4,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/site.css?v=6c01459b">
 </head>
 <body>
 <div class="orbs"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span></div>
@@ -20,20 +20,29 @@
       <div class="secnum">01</div>
       <span class="seclabel">오늘의 뉴스</span>
       <ul class="newslist">
-        <li class="newsitem">
-          <span class="ni-src">요즘IT</span>
-          <h3 class="ni-title"><a href="https://yozm.wishket.com/magazine/detail/3800/" target="_blank" rel="noopener">지금 진짜 쓸 만한 AI 에이전트 10가지 총정리(2) : 자율 에이전트 ↗</a></h3>
-          <p class="ni-blurb">OpenClaw·Hermes·OpenHuman·Gemini Spark 등 24시간 스스로 도는 자율 에이전트 4종을 정리하고, 어디까지 맡길지 정하는 감각의 중요성을 짚었다.</p>
+        <li>
+          <button class="newsitem" data-idx="0" type="button">
+            <span class="ni-src">요즘IT</span>
+            <h3 class="ni-title">지금 진짜 쓸 만한 AI 에이전트 10가지 총정리(2) : 자율 에이전트</h3>
+            <p class="ni-blurb">OpenClaw·Hermes·OpenHuman·Gemini Spark 등 24시간 스스로 도는 자율 에이전트 4종을 정리하고, 어디까지 맡길지 정하는 감각의 중요성을 짚었다.</p>
+            <span class="ni-open">원문 보기 →</span>
+          </button>
         </li>
-        <li class="newsitem">
-          <span class="ni-src">요즘IT</span>
-          <h3 class="ni-title"><a href="https://yozm.wishket.com/magazine/detail/3799/" target="_blank" rel="noopener">AI 활용 경험, 포트폴리오에 어떻게 담아야 할까 ↗</a></h3>
-          <p class="ni-blurb">어떤 AI 도구를 써야 하느냐는 주니어 디자이너들의 흔한 질문을 짚으며, AI 활용 경험을 포트폴리오에 담는 올바른 방향을 논한다.</p>
+        <li>
+          <button class="newsitem" data-idx="1" type="button">
+            <span class="ni-src">요즘IT</span>
+            <h3 class="ni-title">AI 활용 경험, 포트폴리오에 어떻게 담아야 할까</h3>
+            <p class="ni-blurb">어떤 AI 도구를 써야 하느냐는 주니어 디자이너들의 흔한 질문을 짚으며, AI 활용 경험을 포트폴리오에 담는 올바른 방향을 논한다.</p>
+            <span class="ni-open">원문 보기 →</span>
+          </button>
         </li>
-        <li class="newsitem">
-          <span class="ni-src">요즘IT</span>
-          <h3 class="ni-title"><a href="https://yozm.wishket.com/magazine/detail/3798" target="_blank" rel="noopener">클로드 페이블 5, 출시 하루 만에 너무 막힌다는 반응이 쏟아졌다 + 차단 소식 업데이트 ↗</a></h3>
-          <p class="ni-blurb">AI한테 매번 처음부터 다시 설명하기 지치셨다면. 모델은 그대로 두고 기억만 따로 붙여주는 오픈소스 도구 supermemory, 출시 하루 만에 너무 막혀서 못 쓰겠다는 반응이 쏟아졌다는 앤트로픽 Fable 5, 그리고 1~2년이면 AI가 차원이 달라진다며 정부 검증을 요구한 앤트로픽 CEO의 제안까지 정리했습니다.</p>
+        <li>
+          <button class="newsitem" data-idx="2" type="button">
+            <span class="ni-src">요즘IT</span>
+            <h3 class="ni-title">클로드 페이블 5, 출시 하루 만에 너무 막힌다는 반응이 쏟아졌다 + 차단 소식 업데이트</h3>
+            <p class="ni-blurb">AI한테 매번 처음부터 다시 설명하기 지치셨다면. 모델은 그대로 두고 기억만 따로 붙여주는 오픈소스 도구 supermemory, 출시 하루 만에 너무 막혀서 못 쓰겠다는 반응이 쏟아졌다는 앤트로픽 Fable 5, 그리고 1~2년이면 AI가 차원이 달라진다며 정부 검증을 요구한 앤트로픽 CEO의 제안까지 정리했습니다.</p>
+            <span class="ni-open">원문 보기 →</span>
+          </button>
         </li></ul>
     </article>
 
@@ -41,15 +50,12 @@
       <div class="secnum">02</div>
       <span class="seclabel">기초상식 · 정처기</span>
       
-      <div class="quiz">
+      <div class="quiz" data-answer="1">
         <div class="sectag">#자료구조/알고리즘</div>
         <p class="q-question">먼저 들어온 데이터가 먼저 나가는(FIFO) 구조로, 한쪽 끝에서 삽입하고 다른 쪽 끝에서 삭제하는 자료구조는?</p>
-        <ol class="qopts"><li class="qopt"><span class="ql">①</span> 스택(Stack)</li><li class="qopt correct"><span class="ql">②</span> 큐(Queue)</li><li class="qopt"><span class="ql">③</span> 트리(Tree)</li><li class="qopt"><span class="ql">④</span> 그래프(Graph)</li></ol>
-        <details class="q-ans">
-          <summary>정답 &amp; 해설 보기</summary>
-          <p><b>정답: ②</b></p>
-          <p>큐(Queue)는 선입선출(FIFO) 구조로 한쪽(rear)에서 삽입(enqueue)하고 다른 쪽(front)에서 삭제(dequeue)한다. 스택은 후입선출(LIFO) 구조다. 트리는 계층적, 그래프는 정점과 간선으로 이루어진 비선형 자료구조다.</p>
-        </details>
+        <ol class="qopts"><li class="qopt" data-i="0"><span class="ql">①</span><span class="qtext">스택(Stack)</span><span class="qmark"></span></li><li class="qopt" data-i="1"><span class="ql">②</span><span class="qtext">큐(Queue)</span><span class="qmark"></span></li><li class="qopt" data-i="2"><span class="ql">③</span><span class="qtext">트리(Tree)</span><span class="qmark"></span></li><li class="qopt" data-i="3"><span class="ql">④</span><span class="qtext">그래프(Graph)</span><span class="qmark"></span></li></ol>
+        <p class="q-hint">보기를 클릭해 정답을 확인하세요.</p>
+        <div class="q-explain" hidden><b>정답: ②</b><p>큐(Queue)는 선입선출(FIFO) 구조로 한쪽(rear)에서 삽입(enqueue)하고 다른 쪽(front)에서 삭제(dequeue)한다. 스택은 후입선출(LIFO) 구조다. 트리는 계층적, 그래프는 정점과 간선으로 이루어진 비선형 자료구조다.</p></div>
       </div>
     </article>
 
@@ -77,8 +83,19 @@
 
   <div class="foot">
     <span class="fbrand">데일리</span> · 읽을거리 · 2026. 6. 12<br>
-    뉴스는 yozm.wishket · GeekNews(news.hada.io) · Threads 등에서 수집한 링크입니다. 원문 출처를 확인하세요.
+    뉴스 본문은 yozm.wishket · GeekNews(news.hada.io) 등에서 수집·요약한 것입니다. 정확한 내용은 원문을 확인하세요.
   </div>
 </main>
-<script src="../assets/site.js"></script>
+
+<div class="modal-overlay" id="news-modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" type="button" aria-label="닫기">✕</button>
+    <div class="modal-src"></div>
+    <h2 class="modal-title" id="modal-title"></h2>
+    <div class="modal-body"></div>
+    <a class="modal-orig" target="_blank" rel="noopener">원문 사이트에서 보기 ↗</a>
+  </div>
+</div>
+<script id="news-data" type="application/json">[{"title": "지금 진짜 쓸 만한 AI 에이전트 10가지 총정리(2) : 자율 에이전트", "source": "요즘IT", "url": "https://yozm.wishket.com/magazine/detail/3800/", "blurb": "OpenClaw·Hermes·OpenHuman·Gemini Spark 등 24시간 스스로 도는 자율 에이전트 4종을 정리하고, 어디까지 맡길지 정하는 감각의 중요성을 짚었다.", "content": []}, {"title": "AI 활용 경험, 포트폴리오에 어떻게 담아야 할까", "source": "요즘IT", "url": "https://yozm.wishket.com/magazine/detail/3799/", "blurb": "어떤 AI 도구를 써야 하느냐는 주니어 디자이너들의 흔한 질문을 짚으며, AI 활용 경험을 포트폴리오에 담는 올바른 방향을 논한다.", "content": []}, {"title": "클로드 페이블 5, 출시 하루 만에 너무 막힌다는 반응이 쏟아졌다 + 차단 소식 업데이트", "source": "요즘IT", "url": "https://yozm.wishket.com/magazine/detail/3798", "blurb": "AI한테 매번 처음부터 다시 설명하기 지치셨다면. 모델은 그대로 두고 기억만 따로 붙여주는 오픈소스 도구 supermemory, 출시 하루 만에 너무 막혀서 못 쓰겠다는 반응이 쏟아졌다는 앤트로픽 Fable 5, 그리고 1~2년이면 AI가 차원이 달라진다며 정부 검증을 요구한 앤트로픽 CEO의 제안까지 정리했습니다.", "content": []}]</script>
+<script src="../assets/site.js?v=6c01459b"></script>
 </body></html>

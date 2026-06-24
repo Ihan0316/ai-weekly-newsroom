@@ -4,7 +4,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/site.css?v=6c01459b">
 </head>
 <body>
 <div class="orbs"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span></div>
@@ -20,15 +20,21 @@
       <div class="secnum">01</div>
       <span class="seclabel">오늘의 뉴스</span>
       <ul class="newslist">
-        <li class="newsitem">
-          <span class="ni-src">GeekNews</span>
-          <h3 class="ni-title"><a href="https://news.hada.io/topic?id=30770" target="_blank" rel="noopener">Moebius: 0.2B 이미지 인페인팅 모델로 10B급 성능 달성 ↗</a></h3>
-          <p class="ni-blurb">2% 미만 파라미터로 10B급 품질을 달성한 이미지 인페인팅 모델</p>
+        <li>
+          <button class="newsitem" data-idx="0" type="button">
+            <span class="ni-src">GeekNews</span>
+            <h3 class="ni-title">Moebius: 0.2B 이미지 인페인팅 모델로 10B급 성능 달성</h3>
+            <p class="ni-blurb">2% 미만 파라미터로 10B급 품질을 달성한 이미지 인페인팅 모델</p>
+            <span class="ni-open">원문 보기 →</span>
+          </button>
         </li>
-        <li class="newsitem">
-          <span class="ni-src">GeekNews</span>
-          <h3 class="ni-title"><a href="https://github.com/openai/codex/issues/28224" target="_blank" rel="noopener">Codex 로깅 버그가 로컬 SSD에 TB 단위 쓰기를 발생시켜 SSD 수명을 빠르게 소모할 수 있음 ↗</a></h3>
-          <p class="ni-blurb">Codex 로깅 버그가 로컬 SQLite에 대량 쓰기를 유발, 한 사용자는 21일간 약 37TB가 SSD에 기록됨.</p>
+        <li>
+          <button class="newsitem" data-idx="1" type="button">
+            <span class="ni-src">GeekNews</span>
+            <h3 class="ni-title">Codex 로깅 버그가 로컬 SSD에 TB 단위 쓰기를 발생시켜 SSD 수명을 빠르게 소모할 수 있음</h3>
+            <p class="ni-blurb">Codex 로깅 버그가 로컬 SQLite에 대량 쓰기를 유발, 한 사용자는 21일간 약 37TB가 SSD에 기록됨.</p>
+            <span class="ni-open">원문 보기 →</span>
+          </button>
         </li></ul>
     </article>
 
@@ -36,15 +42,12 @@
       <div class="secnum">02</div>
       <span class="seclabel">기초상식 · 정처기</span>
       
-      <div class="quiz">
+      <div class="quiz" data-answer="1">
         <div class="sectag">#소프트웨어 테스트</div>
         <p class="q-question">하위 모듈부터 상향식으로 통합하며 상위 모듈 역할을 대신하는 테스트 모듈(드라이버)이 필요한 통합 테스트 방식은?</p>
-        <ol class="qopts"><li class="qopt"><span class="ql">①</span> 하향식 통합 테스트</li><li class="qopt correct"><span class="ql">②</span> 상향식 통합 테스트</li><li class="qopt"><span class="ql">③</span> 빅뱅 통합 테스트</li><li class="qopt"><span class="ql">④</span> 회귀 테스트</li></ol>
-        <details class="q-ans">
-          <summary>정답 &amp; 해설 보기</summary>
-          <p><b>정답: ②</b></p>
-          <p>상향식 통합 테스트는 최하위 모듈부터 위로 통합하며 상위 모듈을 대신하는 테스트 드라이버(Driver)를 사용한다. 반면 하향식 통합은 상위부터 진행하며 하위 모듈을 대신하는 스텁(Stub)을 사용한다.</p>
-        </details>
+        <ol class="qopts"><li class="qopt" data-i="0"><span class="ql">①</span><span class="qtext">하향식 통합 테스트</span><span class="qmark"></span></li><li class="qopt" data-i="1"><span class="ql">②</span><span class="qtext">상향식 통합 테스트</span><span class="qmark"></span></li><li class="qopt" data-i="2"><span class="ql">③</span><span class="qtext">빅뱅 통합 테스트</span><span class="qmark"></span></li><li class="qopt" data-i="3"><span class="ql">④</span><span class="qtext">회귀 테스트</span><span class="qmark"></span></li></ol>
+        <p class="q-hint">보기를 클릭해 정답을 확인하세요.</p>
+        <div class="q-explain" hidden><b>정답: ②</b><p>상향식 통합 테스트는 최하위 모듈부터 위로 통합하며 상위 모듈을 대신하는 테스트 드라이버(Driver)를 사용한다. 반면 하향식 통합은 상위부터 진행하며 하위 모듈을 대신하는 스텁(Stub)을 사용한다.</p></div>
       </div>
     </article>
 
@@ -72,8 +75,19 @@
 
   <div class="foot">
     <span class="fbrand">데일리</span> · 읽을거리 · 2026. 6. 3<br>
-    뉴스는 yozm.wishket · GeekNews(news.hada.io) · Threads 등에서 수집한 링크입니다. 원문 출처를 확인하세요.
+    뉴스 본문은 yozm.wishket · GeekNews(news.hada.io) 등에서 수집·요약한 것입니다. 정확한 내용은 원문을 확인하세요.
   </div>
 </main>
-<script src="../assets/site.js"></script>
+
+<div class="modal-overlay" id="news-modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" type="button" aria-label="닫기">✕</button>
+    <div class="modal-src"></div>
+    <h2 class="modal-title" id="modal-title"></h2>
+    <div class="modal-body"></div>
+    <a class="modal-orig" target="_blank" rel="noopener">원문 사이트에서 보기 ↗</a>
+  </div>
+</div>
+<script id="news-data" type="application/json">[{"title": "Moebius: 0.2B 이미지 인페인팅 모델로 10B급 성능 달성", "source": "GeekNews", "url": "https://news.hada.io/topic?id=30770", "blurb": "2% 미만 파라미터로 10B급 품질을 달성한 이미지 인페인팅 모델", "content": []}, {"title": "Codex 로깅 버그가 로컬 SSD에 TB 단위 쓰기를 발생시켜 SSD 수명을 빠르게 소모할 수 있음", "source": "GeekNews", "url": "https://github.com/openai/codex/issues/28224", "blurb": "Codex 로깅 버그가 로컬 SQLite에 대량 쓰기를 유발, 한 사용자는 21일간 약 37TB가 SSD에 기록됨.", "content": []}]</script>
+<script src="../assets/site.js?v=6c01459b"></script>
 </body></html>
