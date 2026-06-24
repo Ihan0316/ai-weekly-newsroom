@@ -34,7 +34,7 @@ ai-weekly-news/
 ## 디자인 / 반응형
 
 - 타입: Fraunces(라틴 세리프) · Noto Serif KR(한글 헤드) · Hanken Grotesk(본문) · JetBrains Mono(라벨)
-- 색: 본(bone) + 잉크 + 테라코타. 섹션 구분색(뉴스=테라코타 / 꿀팁=그린 / 이것저것=블루)
+- 색: 본(bone) + 잉크 + 테라코타. 섹션 구분색(뉴스=테라코타 / 정처기=그린 / 용어=블루)
 - 3D: Three.js 회전 다면체 히어로, 데스크톱 카드 포인터 틸트, 플로팅 오브
 - 모바일: nav 축약, 카드 1열, 큰 번호↔제목 겹침 방지, 터치 틸트 비활성, 가로 스크롤 없음
 
@@ -48,7 +48,7 @@ git add -A; git commit -m "Update daily"; git push   # Pages 자동 재배포(1~
 ## 콘텐츠 파이프라인 (매일)
 
 ```
-[1] Claude 워크플로우: 그날 AI/테크 뉴스 웹검색 + 꿀팁 + 이것저것 → data/days/<날짜>.json
+[1] Claude 워크플로우: 소스 스크랩(뉴스) + 정처기 문제 + IT/개발/기획 용어 → data/days/<날짜>.json
 [2] python build_site.py → docs/
 [3] git push → Pages 자동 재배포
 ```

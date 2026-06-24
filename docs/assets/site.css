@@ -270,8 +270,8 @@ table.slang .sex{font-family:var(--mono); font-size:13px; color:var(--muted);}
 
 /* responsive */
 @media(max-width:900px){
-  .masthead{grid-template-columns:1fr; gap:10px; padding:40px 0 8px;}
-  .hero3d{min-height:250px; max-width:340px; margin:6px auto 0;}
+  .masthead{grid-template-columns:1fr; gap:8px; padding:36px 0 6px;}
+  .hero3d{min-height:200px; max-width:250px; margin:4px auto 0;}
   .featured .card{grid-template-columns:1fr;}
   .featured .thumb{min-height:200px; border-right:none; border-bottom:1px solid var(--line);}
   .featured .cbody{padding:30px 26px;}
@@ -288,8 +288,9 @@ table.slang .sex{font-family:var(--mono); font-size:13px; color:var(--muted);}
   .nav .brand{font-size:18px; white-space:nowrap;}
   .nav .pill{padding:4px 10px;}
   .wrap{padding:0 18px;}
-  .masthead{padding:30px 0 4px;}
-  .hero3d{min-height:220px; max-width:300px;}
+  .masthead{padding:26px 0 2px;}
+  /* 모바일: 3D는 작은 액센트로 — 헤드라인·본문이 먼저 보이도록 */
+  .hero3d{min-height:140px; max-width:170px; margin:2px auto 0; opacity:.92;}
   .featured .cbody{padding:24px 20px;}
   .grid{grid-template-columns:1fr; gap:18px;}
   .reader{padding:10px 18px 40px;}
@@ -307,6 +308,7 @@ table.slang .sex{font-family:var(--mono); font-size:13px; color:var(--muted);}
   .nav .pill{display:none;}
   .stitle{font-size:21px;}
   .snum, .secnum{font-size:30px;}
+  .hero3d{min-height:120px; max-width:140px;}
 }
 @media(prefers-reduced-motion:reduce){
   .orb{animation:none;} html{scroll-behavior:auto;}

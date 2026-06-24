@@ -2,7 +2,7 @@
 """
 데일리 다이제스트 사이트 생성기.
 - index.html: 미니멀 에디토리얼 + Three.js 3D 히어로 + 카드 틸트 (데일리 피드)
-- days/<id>.html: 하루치 상세 (뉴스/꿀팁/이것저것) — build.render_day()
+- days/<id>.html: 하루치 상세 (뉴스 / 기초상식·정처기 / IT·개발·기획 용어) — build.render_day()
 공유 assets/site.css · site.js (단일 디자인 소스).
 
 usage: python build_site.py
@@ -111,7 +111,7 @@ def build_index(days):
 <div class="orbs"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span></div>
 <nav class="nav">
   <span class="brand">데일리<span class="dot">.</span></span>
-  <span class="tag">알아두면 좋은 것들 — 뉴스·꿀팁·이것저것</span>
+  <span class="tag">알아두면 좋은 것들 — 뉴스·정처기·용어</span>
   <span class="spacer"></span>
   <span class="pill">{n} days</span>
 </nav>
@@ -120,7 +120,7 @@ def build_index(days):
     <div class="mh-copy">
       <div class="kicker">Daily · 매일 한 장</div>
       <h1>매일, <em>알아두면</em><br>좋은 것들.</h1>
-      <p>그날의 AI·테크 뉴스 하나, 실무 꿀팁 하나, 그리고 업무와 상관없는 흥미로운 이야기 하나.</p>
+      <p>그날의 IT·개발 뉴스 몇 개, 정보처리기사 기초 문제 하나, 그리고 IT·개발·기획 용어 몇 개.</p>
     </div>
     <div class="hero3d"><canvas id="scene"></canvas></div>
   </section>
