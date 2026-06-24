@@ -1,0 +1,88 @@
+{
+  "date_label": "2026. 6. 17 기준",
+  "official_date": "공식 발표일: 6.16",
+  "news": [
+    {
+      "n": 1,
+      "title_kr": "Apple, WWDC 2026에서\nSiri AI 대대적 업그레이드 발표!",
+      "date": "6.16",
+      "bubble_kr": "이제 내 화면을 보고 이해해!",
+      "bullets_kr": [
+        "상황 이해 + 화면 인식",
+        "개인 맥락 기억 & 대화 가능",
+        "프라이버시 최우선 설계",
+        "개발자 베타: 오늘부터",
+        "일반 사용자: 올 가을 출시"
+      ],
+      "star_kr": "더 똑똑하고 개인화된 AI 비서로 진화!",
+      "source": "Apple",
+      "url": "https://www.apple.com/newsroom/"
+    },
+    {
+      "n": 2,
+      "title_kr": "Google Cloud, Agentic Data Cloud용\n새 데이터 에이전트 공개!",
+      "date": "6.16",
+      "bubble_kr": "데이터를 이해하고 분석·관리·해결까지 도와줄게!",
+      "bullets_kr": [
+        "BigQuery: 대화형 분석 (preview)",
+        "Looker Embedded: 대화형 분석 (GA)",
+        "Data Engineering Agent (GA)",
+        "Data Science Agent (preview)",
+        "Database Observability Agent (preview)"
+      ],
+      "star_kr": "실시간 데이터에 근거한 추론으로 AI 에이전트가 더 똑똑해진다!",
+      "source": "Google Cloud Blog",
+      "url": "https://cloud.google.com/blog/"
+    },
+    {
+      "n": 3,
+      "title_kr": "Databricks, Agent Bricks를\n개발자용 종합 에이전트 플랫폼으로 확장!",
+      "date": "6.16",
+      "bubble_kr": "에이전트 10만 개+ 매년 1 Quadrillion+ 토큰 처리 중!",
+      "bullets_kr": [
+        "여러 모델·도구·데이터를 한 플랫폼에서",
+        "배포·보안·평가·모니터링·비용 통제까지",
+        "자체 benchmark: 더 낮은 비용, 더 빠른 성능"
+      ],
+      "star_kr": "좋은 프롬프트보다 '안전한 운영'이 더 중요!",
+      "source": "Databricks Blog",
+      "url": "https://www.databricks.com/blog"
+    }
+  ],
+  "english_expressions": [
+    { "n": 1, "term_en": "agentic workflow", "meaning_kr": "에이전트형 업무 흐름" },
+    { "n": 2, "term_en": "ground reasoning in data", "meaning_kr": "추론을 데이터에 근거하게 하다" },
+    { "n": 3, "term_en": "conversational analytics", "meaning_kr": "대화형 데이터 분석" },
+    { "n": 4, "term_en": "generally available (GA)", "meaning_kr": "정식 출시된 (일반 제공)" },
+    { "n": 5, "term_en": "public preview", "meaning_kr": "공개 미리보기" },
+    { "n": 6, "term_en": "quality gate", "meaning_kr": "품질 통과 기준" },
+    { "n": 7, "term_en": "usage-based billing", "meaning_kr": "사용량 기반 과금" },
+    { "n": 8, "term_en": "AI-assisted detection", "meaning_kr": "AI 보조 탐지" },
+    { "n": 9, "term_en": "secure sandbox", "meaning_kr": "안전한 격리 실행 환경" },
+    { "n": 10, "term_en": "token capacity", "meaning_kr": "토큰 처리 용량" }
+  ],
+  "dev_slang": [
+    { "term": "tokenmaxing", "general_kr": "토큰을 최대한 쓰는 것", "context_kr": "AI 작업에서 토큰을 과하게 써 성능이나 점수를 끌어올리는 행동", "when_kr": "AI 비용, agentic coding, 사용량 관리", "work_kr": "토큰 과소비", "example_en": "Stop tokenmaxing every coding task." },
+    { "term": "AI slop", "general_kr": "지저분한 AI 결과물", "context_kr": "품질 낮은 AI 생성 콘텐츠가 데이터를 오염시키는 상황", "when_kr": "검색 품질, RAG, 데이터 거버넌스", "work_kr": "AI 찌꺼기 정보", "example_en": "AI slop can pollute the knowledge base." },
+    { "term": "prompt-injecting", "general_kr": "프롬프트를 주입하는 것", "context_kr": "AI 에이전트가 잘못된 지시를 따르도록 조작하는 공격", "when_kr": "AI 보안, red teaming, agent security", "work_kr": "프롬프트 주입 공격", "example_en": "We tested prompt-injecting attacks." },
+    { "term": "self-hosted", "general_kr": "자체 호스팅된", "context_kr": "내 서버나 PC에서 직접 AI를 실행하는 방식", "when_kr": "privacy, 비용 절감, 로컬 LLM 사용", "work_kr": "자체 호스팅", "example_en": "I prefer self-hosted tools for privacy." },
+    { "term": "metered usage", "general_kr": "계량된 사용량", "context_kr": "토큰·요청 수 등 사용량을 측정해 요금에 반영하는 방식", "when_kr": "SaaS 과금, Copilot, API 사용량", "work_kr": "사용량 과금", "example_en": "Metered usage can surprise small teams." }
+  ],
+  "mini_practice": {
+    "fill_blank": "The feature is now ______ available.",
+    "fill_answer": "generally",
+    "kr_to_en": "그 에이전트는 안전한 격리 환경에서 실행됩니다.",
+    "kr_to_en_answer": "The agent runs in a secure sandbox.",
+    "speaking": "AI in Cloud is adding data agents, agentic analytics, and more!"
+  },
+  "summary_kr": [
+    "AI 에이전트가 데이터·분석·코드까지 기업 업무 전반으로 확산되고 있다.",
+    "좋은 프롬프트보다 안전한 운영, 비용 관리, 품질 기준이 더 중요해졌다.",
+    "local·self-hosted 에이전트 트렌드와 usage-based 과금이 함께 커지고 있다."
+  ],
+  "memo": {
+    "official_date": "공식 발표일: 모두 2026년 6월 16일",
+    "sources": "Google Cloud Blog, Databricks Blog, GitHub Changelog",
+    "x_reaction": "기대↑, agent 플랫폼 경쟁 & 비용 관리 이슈 주목!"
+  }
+}
