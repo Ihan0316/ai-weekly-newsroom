@@ -162,6 +162,7 @@ def main():
 
     # 뉴럴 TTS 오디오 연결: url 해시(gen_audio와 동일)로 docs/audio/<hash>.mp3 존재 시 주입
     n_audio = 0
+    n_img = 0
     for _did, rec in days:
         for it in rec.get("news", []):
             u = (it.get("url") or "").strip()
@@ -170,7 +171,10 @@ def main():
             h = hashlib.md5(u.encode("utf-8")).hexdigest()[:12]
             if os.path.exists(os.path.join(OUT_DIR, "audio", h + ".mp3")):
                 it["audio"] = "../audio/" + h + ".mp3"; n_audio += 1
-    print("audio linked:", n_audio)
+            imgs = glob.glob(os.path.join(OUT_DIR, "images", h + ".*"))
+            if imgs:
+                it["image"] = "../images/" + os.path.basename(imgs[0]); n_img += 1
+    print("audio linked:", n_audio, "| images linked:", n_img)
 
     os.makedirs(os.path.join(OUT_DIR, "days"), exist_ok=True)
     for did, rec in days:

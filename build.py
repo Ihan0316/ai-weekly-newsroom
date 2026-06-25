@@ -29,13 +29,18 @@ def build_news(news):
     out = []
     for i, it in enumerate(news):
         blurb = f'<p class="ni-blurb">{esc(it["blurb_kr"])}</p>' if it.get("blurb_kr") else ""
+        thumb = (f'<img class="ni-thumb" src="{esc(it["image"])}" alt="" loading="lazy" '
+                 f'onerror="this.remove()">') if it.get("image") else ""
         out.append(f'''
         <li>
-          <button class="newsitem" data-idx="{i}" type="button">
-            <span class="ni-src">{esc(it.get("source",""))}</span>
-            <h3 class="ni-title">{esc(oneline(it["title_kr"]))}</h3>
-            {blurb}
-            <span class="ni-open">원문 보기 →</span>
+          <button class="newsitem{(" has-thumb" if thumb else "")}" data-idx="{i}" type="button">
+            <div class="ni-text">
+              <span class="ni-src">{esc(it.get("source",""))}</span>
+              <h3 class="ni-title">{esc(oneline(it["title_kr"]))}</h3>
+              {blurb}
+              <span class="ni-open">원문 보기 →</span>
+            </div>
+            {thumb}
           </button>
         </li>''')
     return f'<ul class="newslist">{"".join(out)}</ul>'
@@ -51,6 +56,7 @@ def news_payload(news):
             "blurb": it.get("blurb_kr", ""),
             "content": it.get("content", []) or [],
             "audio": it.get("audio", ""),
+            "image": it.get("image", ""),
         })
     js = json.dumps(items, ensure_ascii=False)
     return js.replace("</", "<\\/")
@@ -97,6 +103,7 @@ MODAL = '''
         <span class="tts-ico">🔊</span><span class="tts-label">본문 듣기</span>
       </button>
     </div>
+    <img class="modal-hero" alt="" hidden>
     <div class="modal-body"></div>
     <a class="modal-orig" target="_blank" rel="noopener">원문 사이트에서 보기 ↗</a>
   </div>

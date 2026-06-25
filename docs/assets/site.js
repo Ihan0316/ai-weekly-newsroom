@@ -129,7 +129,9 @@
     var srcEl = overlay.querySelector('.modal-src');
     var bodyEl = overlay.querySelector('.modal-body');
     var origEl = overlay.querySelector('.modal-orig');
+    var heroEl = overlay.querySelector('.modal-hero');
     var closeBtn = overlay.querySelector('.modal-close');
+    if (heroEl) heroEl.onerror = function () { heroEl.hidden = true; };
     var lastFocus = null;
 
     /* ----- TTS: 뉴럴 MP3(있으면) 우선, 없으면 브라우저 음성 폴백 ----- */
@@ -216,6 +218,10 @@
       titleEl.textContent = it.title || '';
       srcEl.textContent = it.source || '';
       origEl.href = it.url || '#';
+      if (heroEl) {
+        if (it.image) { heroEl.hidden = false; heroEl.src = it.image; }
+        else { heroEl.hidden = true; heroEl.removeAttribute('src'); }
+      }
       bodyEl.innerHTML = '';
       if (it.content && it.content.length) {
         var t = (it.title || '').trim();

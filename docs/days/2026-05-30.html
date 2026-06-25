@@ -4,7 +4,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=57254ccd">
+<link rel="stylesheet" href="../assets/site.css?v=3a0b5352">
 </head>
 <body>
 <div class="orbs"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span></div>
@@ -21,19 +21,25 @@
       <span class="seclabel">오늘의 뉴스</span>
       <ul class="newslist">
         <li>
-          <button class="newsitem" data-idx="0" type="button">
-            <span class="ni-src">GeekNews</span>
-            <h3 class="ni-title">취업과 소프트웨어는 망했다</h3>
-            <p class="ni-blurb">AI로 증폭된 채용 시장이 자동화 시험으로 규칙 준수형 지원자에게 불리하게 작용</p>
-            <span class="ni-open">원문 보기 →</span>
+          <button class="newsitem has-thumb" data-idx="0" type="button">
+            <div class="ni-text">
+              <span class="ni-src">GeekNews</span>
+              <h3 class="ni-title">취업과 소프트웨어는 망했다</h3>
+              <p class="ni-blurb">AI로 증폭된 채용 시장이 자동화 시험으로 규칙 준수형 지원자에게 불리하게 작용</p>
+              <span class="ni-open">원문 보기 →</span>
+            </div>
+            <img class="ni-thumb" src="../images/6bf114064169.png" alt="" loading="lazy" onerror="this.remove()">
           </button>
         </li>
         <li>
-          <button class="newsitem" data-idx="1" type="button">
-            <span class="ni-src">GeekNews</span>
-            <h3 class="ni-title">Show GN: GWEB: Go 언어를 위한 문학적 프로그래밍 도구</h3>
-            <p class="ni-blurb">GWEB은 Knuth의 CWEB 구조를 본떠 Go를 위한 문학적 프로그래밍을 구현.</p>
-            <span class="ni-open">원문 보기 →</span>
+          <button class="newsitem has-thumb" data-idx="1" type="button">
+            <div class="ni-text">
+              <span class="ni-src">GeekNews</span>
+              <h3 class="ni-title">Show GN: GWEB: Go 언어를 위한 문학적 프로그래밍 도구</h3>
+              <p class="ni-blurb">GWEB은 Knuth의 CWEB 구조를 본떠 Go를 위한 문학적 프로그래밍을 구현.</p>
+              <span class="ni-open">원문 보기 →</span>
+            </div>
+            <img class="ni-thumb" src="../images/050f95f229a4.png" alt="" loading="lazy" onerror="this.remove()">
           </button>
         </li></ul>
     </article>
@@ -89,10 +95,11 @@
         <span class="tts-ico">🔊</span><span class="tts-label">본문 듣기</span>
       </button>
     </div>
+    <img class="modal-hero" alt="" hidden>
     <div class="modal-body"></div>
     <a class="modal-orig" target="_blank" rel="noopener">원문 사이트에서 보기 ↗</a>
   </div>
 </div>
-<script id="news-data" type="application/json">[{"title": "취업과 소프트웨어는 망했다", "source": "GeekNews", "url": "https://news.hada.io/topic?id=30767", "blurb": "AI로 증폭된 채용 시장이 자동화 시험으로 규칙 준수형 지원자에게 불리하게 작용", "content": [{"t": "p", "text": "약 10년 경력의 소프트웨어 엔지니어가 작성한 글. 과거 소규모 외주 업체를 거쳐 약 7년간 Blizzard에서 근무했으며, 2025년 6월 팀 전체와 함께 정리해고된 뒤 계속 구직 중이다. 최근 몇 년 사이 본 것 중 가장 나쁜 채용 시장인 것 같다고 토로한다."}, {"t": "h", "text": "최종 단계 탈락의 아픔"}, {"t": "p", "text": "지난 6개월간 최종 단계까지 간 면접 몇 건, 초반에 걸러진 면접 몇 건, 그리고 직무가 잘 맞음에도 아무 응답 없이 끝난 다수의 면접을 겪었다. 모든 흐름이 긍정적이었는데 다른 지원자나 내부 이동자가 앞서가며 탈락하는 일이 특히 아팠다. 무의미한 연결과 채용 담당자에 지쳐 LinkedIn 연결을 삭제하기도 했다."}, {"t": "h", "text": "AI와 초기 필터가 키운 소모감"}, {"t": "p", "text": "가장 짜증나는 지점은 Coderpad, HackerRank, AI 감독관 시험 같은 초기 필터다. 회사는 이를 여러 방식의 필터로 쓰지만, 휴대폰과 최신 AI 도구를 쓰는 부정행위에는 무력화될 수 있다. 규칙을 지키려는 쪽이 오히려 불리해지는 구조다."}, {"t": "p", "text": "이 앱들은 전체화면으로 잠겨서 API 레퍼런스나 도움 페이지 접근을 차단해 버린다. 강하게 거부하고 싶지만 선택지는 순응(comply)뿐이다. 이런 필터는 개발 실무와 동떨어진 사람들이 만들어 '코드가 많을수록 더 낫다'는 인식만 반영한다."}, {"t": "h", "text": "AI 중심 채용 시스템과 업무 과부하"}, {"t": "p", "text": "AI를 곳곳에 밀어붙이는 기업들 속에서 구직 자체가 시지프스(Sisyphean)적 과제로 변모했다. Claude에 소진되는 토큰 할당량을 채우려 스스로와 기술을 깎아내리도록 강요받는 과정처럼 느껴진다. 키워드 기반 이력서 스크리닝과 바쁜 과제들 때문에 통과하기 더 어려워진 시스템이 구축되어 간다."}, {"t": "p", "text": "지원할 때마다 기업이 레고를 흩뿌려 놓고 그 위를 맨발로 춤추며 가치를 증명하라고 요구하는 것처럼 느껴진다."}, {"t": "h", "text": "신입 개발자와 사다리 걷어차기"}, {"t": "p", "text": "면접 기회라도 얻는 본인은 운 좋은 축에 속하며, 그 면접이 성과로 이어지지 않더라도 마찬가지다. 갓 졸업한 사람들은 기업이 사다리를 완전히 걷어차고, Anthropic이 주니어 필요성을 아예 없애주길 기대하는 것처럼 보일 것이다."}, {"t": "h", "text": "AI 코딩 수용 거부와 엔지니어의 존엄"}, {"t": "p", "text": "채용 시장은 AI 이전에도 좋지 않았으나, AI가 모든 최악의 측면을 증폭(supercharge)시켰다. 더 똑똑하다는 이들이 AI 코딩을 미래로 받아들이고 굴복하자고 주장하지만, 이를 받아들이는 일은 예술을 하는 친구들, 테스트·리뷰에 애쓰는 사람들, 평범한 대사에도 에너지를 쏟는 작가들을 내치는 것과 같다."}, {"t": "p", "text": "또한 보안과 코드를 진심으로 중시하는 엔지니어로서의 존엄성을 버리는 일이기도 하다. 그럼에도 '이상한 컴퓨터 괴짜(weird computer nerd)'로서 느끼는 즐거움만은 빼앗기지 않겠다는 입장이지만, 이 전체 과정은 매우 지치게 만든다."}], "audio": "../audio/6bf114064169.mp3"}, {"title": "Show GN: GWEB: Go 언어를 위한 문학적 프로그래밍 도구", "source": "GeekNews", "url": "https://news.hada.io/topic?id=30761", "blurb": "GWEB은 Knuth의 CWEB 구조를 본떠 Go를 위한 문학적 프로그래밍을 구현.", "content": [{"t": "h", "text": "GWEB: Go 언어를 위한 문학적 프로그래밍 도구"}, {"t": "p", "text": "GWEB은 도널드 커누스의 CWEB 구조를 모델로 한 Go 언어용 문학적 프로그래밍 시스템이다. 개발자는 단일 .w 파일에 TeX 문서와 Go 코드를 함께 작성하고, 이를 기계와 인간이 각각 읽을 수 있는 두 가지 형태로 변환한다."}, {"t": "h", "text": "핵심 기능"}, {"t": "p", "text": "gtangle: 문서 설명을 제외하고 Go 코드 섹션만 모아 컴파일 가능한 .go 파일을 생성하며, gofmt 스타일로 자동 포맷팅한다."}, {"t": "p", "text": "gweave: 사람이 읽기 좋은 조판 문서(.tex → PDF)를 생성한다. 예약어는 굵게, 식별자는 이탤릭으로 표시되고 교차 참조 인덱스가 자동 생성된다."}, {"t": "h", "text": "주요 특징"}, {"t": "p", "text": "//line 지시어를 지원하여 컴파일 에러 발생 시 원본 .w 파일의 정확한 위치를 가리킨다. GWEB 자체도 문학적 프로그래밍으로 개발되었으며, VS Code·Vim·Emacs용 구문 강조 기능을 제공한다. 복잡한 Go 프로젝트의 설계 의도와 알고리즘을 책을 쓰듯이 관리할 수 있다."}], "audio": "../audio/050f95f229a4.mp3"}]</script>
-<script src="../assets/site.js?v=57254ccd"></script>
+<script id="news-data" type="application/json">[{"title": "취업과 소프트웨어는 망했다", "source": "GeekNews", "url": "https://news.hada.io/topic?id=30767", "blurb": "AI로 증폭된 채용 시장이 자동화 시험으로 규칙 준수형 지원자에게 불리하게 작용", "content": [{"t": "p", "text": "약 10년 경력의 소프트웨어 엔지니어가 작성한 글. 과거 소규모 외주 업체를 거쳐 약 7년간 Blizzard에서 근무했으며, 2025년 6월 팀 전체와 함께 정리해고된 뒤 계속 구직 중이다. 최근 몇 년 사이 본 것 중 가장 나쁜 채용 시장인 것 같다고 토로한다."}, {"t": "h", "text": "최종 단계 탈락의 아픔"}, {"t": "p", "text": "지난 6개월간 최종 단계까지 간 면접 몇 건, 초반에 걸러진 면접 몇 건, 그리고 직무가 잘 맞음에도 아무 응답 없이 끝난 다수의 면접을 겪었다. 모든 흐름이 긍정적이었는데 다른 지원자나 내부 이동자가 앞서가며 탈락하는 일이 특히 아팠다. 무의미한 연결과 채용 담당자에 지쳐 LinkedIn 연결을 삭제하기도 했다."}, {"t": "h", "text": "AI와 초기 필터가 키운 소모감"}, {"t": "p", "text": "가장 짜증나는 지점은 Coderpad, HackerRank, AI 감독관 시험 같은 초기 필터다. 회사는 이를 여러 방식의 필터로 쓰지만, 휴대폰과 최신 AI 도구를 쓰는 부정행위에는 무력화될 수 있다. 규칙을 지키려는 쪽이 오히려 불리해지는 구조다."}, {"t": "p", "text": "이 앱들은 전체화면으로 잠겨서 API 레퍼런스나 도움 페이지 접근을 차단해 버린다. 강하게 거부하고 싶지만 선택지는 순응(comply)뿐이다. 이런 필터는 개발 실무와 동떨어진 사람들이 만들어 '코드가 많을수록 더 낫다'는 인식만 반영한다."}, {"t": "h", "text": "AI 중심 채용 시스템과 업무 과부하"}, {"t": "p", "text": "AI를 곳곳에 밀어붙이는 기업들 속에서 구직 자체가 시지프스(Sisyphean)적 과제로 변모했다. Claude에 소진되는 토큰 할당량을 채우려 스스로와 기술을 깎아내리도록 강요받는 과정처럼 느껴진다. 키워드 기반 이력서 스크리닝과 바쁜 과제들 때문에 통과하기 더 어려워진 시스템이 구축되어 간다."}, {"t": "p", "text": "지원할 때마다 기업이 레고를 흩뿌려 놓고 그 위를 맨발로 춤추며 가치를 증명하라고 요구하는 것처럼 느껴진다."}, {"t": "h", "text": "신입 개발자와 사다리 걷어차기"}, {"t": "p", "text": "면접 기회라도 얻는 본인은 운 좋은 축에 속하며, 그 면접이 성과로 이어지지 않더라도 마찬가지다. 갓 졸업한 사람들은 기업이 사다리를 완전히 걷어차고, Anthropic이 주니어 필요성을 아예 없애주길 기대하는 것처럼 보일 것이다."}, {"t": "h", "text": "AI 코딩 수용 거부와 엔지니어의 존엄"}, {"t": "p", "text": "채용 시장은 AI 이전에도 좋지 않았으나, AI가 모든 최악의 측면을 증폭(supercharge)시켰다. 더 똑똑하다는 이들이 AI 코딩을 미래로 받아들이고 굴복하자고 주장하지만, 이를 받아들이는 일은 예술을 하는 친구들, 테스트·리뷰에 애쓰는 사람들, 평범한 대사에도 에너지를 쏟는 작가들을 내치는 것과 같다."}, {"t": "p", "text": "또한 보안과 코드를 진심으로 중시하는 엔지니어로서의 존엄성을 버리는 일이기도 하다. 그럼에도 '이상한 컴퓨터 괴짜(weird computer nerd)'로서 느끼는 즐거움만은 빼앗기지 않겠다는 입장이지만, 이 전체 과정은 매우 지치게 만든다."}], "audio": "../audio/6bf114064169.mp3", "image": "../images/6bf114064169.png"}, {"title": "Show GN: GWEB: Go 언어를 위한 문학적 프로그래밍 도구", "source": "GeekNews", "url": "https://news.hada.io/topic?id=30761", "blurb": "GWEB은 Knuth의 CWEB 구조를 본떠 Go를 위한 문학적 프로그래밍을 구현.", "content": [{"t": "h", "text": "GWEB: Go 언어를 위한 문학적 프로그래밍 도구"}, {"t": "p", "text": "GWEB은 도널드 커누스의 CWEB 구조를 모델로 한 Go 언어용 문학적 프로그래밍 시스템이다. 개발자는 단일 .w 파일에 TeX 문서와 Go 코드를 함께 작성하고, 이를 기계와 인간이 각각 읽을 수 있는 두 가지 형태로 변환한다."}, {"t": "h", "text": "핵심 기능"}, {"t": "p", "text": "gtangle: 문서 설명을 제외하고 Go 코드 섹션만 모아 컴파일 가능한 .go 파일을 생성하며, gofmt 스타일로 자동 포맷팅한다."}, {"t": "p", "text": "gweave: 사람이 읽기 좋은 조판 문서(.tex → PDF)를 생성한다. 예약어는 굵게, 식별자는 이탤릭으로 표시되고 교차 참조 인덱스가 자동 생성된다."}, {"t": "h", "text": "주요 특징"}, {"t": "p", "text": "//line 지시어를 지원하여 컴파일 에러 발생 시 원본 .w 파일의 정확한 위치를 가리킨다. GWEB 자체도 문학적 프로그래밍으로 개발되었으며, VS Code·Vim·Emacs용 구문 강조 기능을 제공한다. 복잡한 Go 프로젝트의 설계 의도와 알고리즘을 책을 쓰듯이 관리할 수 있다."}], "audio": "../audio/050f95f229a4.mp3", "image": "../images/050f95f229a4.png"}]</script>
+<script src="../assets/site.js?v=3a0b5352"></script>
 </body></html>

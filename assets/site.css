@@ -244,6 +244,10 @@ table.slang .sex{font-family:var(--mono); font-size:13px; color:var(--muted);}
 .ni-blurb{font-size:14.5px; color:var(--muted); margin:6px 0 0; line-height:1.5;}
 .ni-open{display:inline-block; margin-top:10px; font-family:var(--mono); font-size:12px; color:var(--accent); font-weight:600;}
 .newsitem:hover .ni-open{text-decoration:underline;}
+.newsitem.has-thumb{display:flex; gap:16px; align-items:center;}
+.ni-text{flex:1 1 auto; min-width:0;}
+.ni-thumb{flex:0 0 auto; width:116px; height:84px; object-fit:cover; border-radius:10px;
+  border:1px solid var(--line); background:var(--surface-2);}
 
 /* 정처기 퀴즈 (클릭형 정답/오답) */
 .quiz .q-question{font-family:var(--serif-kr); font-weight:600; font-size:18.5px; line-height:1.5; margin:0 0 16px;}
@@ -312,6 +316,9 @@ table.slang .sex{font-family:var(--mono); font-size:13px; color:var(--muted);}
 .tts-toggle:active{transform:scale(.97);}
 .tts-toggle.on{background:var(--accent); color:#fff;}
 .tts-toggle .tts-ico{font-size:14px; line-height:1;}
+.modal-hero{display:block; width:100%; max-height:300px; object-fit:cover; border-radius:14px;
+  border:1px solid var(--line); margin:0 0 22px; background:var(--surface-2);}
+.modal-hero[hidden]{display:none;}
 .modal-body{font-size:16.5px; line-height:1.92; color:var(--ink-soft); letter-spacing:.005em;}
 .modal-body h3{font-family:var(--serif-kr); font-weight:600; font-size:20px; color:var(--ink);
   margin:34px 0 12px; line-height:1.4;}
@@ -364,6 +371,8 @@ table.slang .sex{font-family:var(--mono); font-size:13px; color:var(--muted);}
   .modal-body{font-size:16.5px;}    /* 모바일 가독성 */
   body{font-size:16.5px;}
   .ni-blurb{font-size:15px;} .t-mean{font-size:15px;}
+  .ni-thumb{width:84px; height:64px;}
+  .modal-hero{max-height:210px; margin-bottom:18px;}
   /* IT·개발·기획 용어: 모바일은 2행 스택 (긴 용어가 뜻 칸을 밀어내던 문제 수정) */
   .termrow{grid-template-columns:auto 1fr; gap:6px 10px; align-items:center;}
   .t-kind{padding:3px 8px;}
