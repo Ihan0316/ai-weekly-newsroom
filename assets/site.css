@@ -30,6 +30,9 @@
 }
 
 *{box-sizing:border-box;}
+/* 스크롤바: 폭 차지·레이아웃 시프트 0, 시각적으로 숨김(스크롤은 휠·터치·키로 유지) */
+*{scrollbar-width:none; -ms-overflow-style:none;}
+*::-webkit-scrollbar{width:0; height:0; display:none;}
 html{scroll-behavior:smooth;}
 body{
   margin:0; background:var(--bg); color:var(--ink);
