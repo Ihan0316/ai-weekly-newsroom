@@ -277,9 +277,59 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && !overlay.hidden) close();
     });
+    // 검색 결과에서 들어온 경우 해당 기사 모달 자동 오픈 (?n=)
+    var n0 = new URLSearchParams(location.search).get('n');
+    if (n0 !== null) { var ni = parseInt(n0, 10); if (!isNaN(ni)) open(ni); }
   }
 
-  function boot() { initTilt(); initHero(); initQuiz(); initNews(); }
+  /* ---------- 5) 뉴스 검색 (인덱스 페이지) ---------- */
+  function initSearch() {
+    var input = document.getElementById('news-search');
+    var results = document.getElementById('search-results');
+    var feed = document.getElementById('feed');
+    var clearBtn = document.getElementById('search-clear');
+    var dataEl = document.getElementById('search-index');
+    if (!input || !results || !feed || !dataEl) return;
+    var items = [];
+    try { items = JSON.parse(dataEl.textContent || '[]'); } catch (e) { items = []; }
+    function esc(s) {
+      return String(s).replace(/[&<>"]/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+      });
+    }
+    function render(q) {
+      var ql = q.trim().toLowerCase();
+      clearBtn.hidden = !q;
+      if (!ql) { results.hidden = true; results.innerHTML = ''; feed.hidden = false; return; }
+      var terms = ql.split(/\s+/).filter(Boolean);
+      var hits = items.filter(function (it) {
+        var hay = (it.t + ' ' + it.b + ' ' + it.s + ' ' + it.d).toLowerCase();
+        return terms.every(function (t) { return hay.indexOf(t) >= 0; });
+      });
+      feed.hidden = true; results.hidden = false;
+      if (!hits.length) {
+        results.innerHTML = '<p class="search-empty">“' + esc(q) + '” 검색 결과가 없습니다.</p>';
+        return;
+      }
+      var html = '<div class="search-count">' + hits.length + '건</div>';
+      hits.forEach(function (it) {
+        var href = 'days/' + it.id + '.html?n=' + it.n;
+        var thumb = it.img ? '<img class="sr-thumb" src="' + esc(it.img) + '" alt="" loading="lazy" onerror="this.remove()">' : '';
+        html += '<a class="sr-item" href="' + href + '">' + thumb +
+          '<div class="sr-text"><div class="sr-meta">' + esc(it.s) + ' · ' + esc(it.d) +
+          (it.wd ? (' (' + esc(it.wd) + ')') : '') + '</div>' +
+          '<div class="sr-title">' + esc(it.t) + '</div>' +
+          (it.b ? ('<div class="sr-blurb">' + esc(it.b) + '</div>') : '') + '</div></a>';
+      });
+      results.innerHTML = html;
+    }
+    input.addEventListener('input', function () { render(input.value); });
+    clearBtn.addEventListener('click', function () { input.value = ''; render(''); input.focus(); });
+    var q0 = new URLSearchParams(location.search).get('q');
+    if (q0) { input.value = q0; render(q0); }
+  }
+
+  function boot() { initTilt(); initHero(); initQuiz(); initNews(); initSearch(); }
   if (document.readyState !== 'loading') boot();
   else document.addEventListener('DOMContentLoaded', boot);
 })();

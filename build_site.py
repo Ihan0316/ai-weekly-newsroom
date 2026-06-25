@@ -91,7 +91,7 @@ def card(day_id, rec, hero=False):
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>'''
 
-def build_index(days, ver=""):
+def build_index(days, ver="", search_json="[]"):
     latest_id, latest = days[0]
     rest = days[1:]
     hero_card = card(latest_id, latest, hero=True)
@@ -125,15 +125,26 @@ def build_index(days, ver=""):
     <div class="hero3d"><canvas id="scene"></canvas></div>
   </section>
 
+  <div class="searchbar">
+    <span class="search-ico" aria-hidden="true">🔎</span>
+    <input id="news-search" class="search-input" type="search" autocomplete="off"
+      placeholder="주제·키워드로 뉴스 검색 (예: 에이전트, 보안, 디자인)" aria-label="뉴스 검색">
+    <button id="search-clear" class="search-clear" type="button" hidden aria-label="검색어 지우기">✕</button>
+  </div>
+  <div class="search-results" id="search-results" hidden></div>
+
+  <div class="feed" id="feed">
   {hero_card}
   {rest_h}
   {grid}
+  </div>
 
   <div class="foot">
     <span class="fbrand">데일리</span> · 자동 생성 MVP<br>
     뉴스 본문은 LLM 웹검색 자동 수집물입니다. 게시 전 출처 확인을 권장합니다.
   </div>
 </div>
+<script id="search-index" type="application/json">{search_json}</script>
 <script src="{THREE_CDN}"></script>
 <script src="assets/site.js{ver}"></script>
 </body></html>'''
@@ -181,8 +192,24 @@ def main():
         out = os.path.join(OUT_DIR, "days", did + ".html")
         with open(out, "w", encoding="utf-8") as fh:
             fh.write(render_day(rec, back_href="../index.html", asset_prefix="../", ver=ver))
+    # 클라이언트 검색 인덱스(전체 뉴스)
+    search = []
+    for did, rec in days:
+        for i, it in enumerate(rec.get("news", [])):
+            img = it.get("image", "")
+            search.append({
+                "t": " ".join((it.get("title_kr") or "").split("\n")),
+                "b": it.get("blurb_kr", ""),
+                "s": it.get("source", ""),
+                "d": rec.get("date_label", ""),
+                "wd": rec.get("weekday", ""),
+                "id": did, "n": i,
+                "img": img.replace("../", "") if img else "",
+            })
+    search_json = json.dumps(search, ensure_ascii=False).replace("</", "<\\/")
+
     with open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8") as fh:
-        fh.write(build_index(days, ver))
+        fh.write(build_index(days, ver, search_json))
     print("built index + %d days:" % len(days), ", ".join(d for d, _ in days))
 
 if __name__ == "__main__":
