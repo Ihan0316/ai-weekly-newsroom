@@ -343,6 +343,7 @@
         bodyEl.appendChild(n);
       }
       overlay.hidden = false;
+      document.body.classList.add('modal-open');
       overlay.classList.add('open');            // display:flex 즉시 (rAF 비의존)
       var showIt = function () { overlay.classList.add('show'); };
       requestAnimationFrame(showIt);
@@ -354,6 +355,7 @@
     function close() {
       if (overlay.hidden) return;
       ttsReset(); closePanel(); if (askFab) askFab.hidden = true;
+      document.body.classList.remove('modal-open');
       overlay.classList.remove('show');
       var done = function () {
         if (overlay.hidden) return;
