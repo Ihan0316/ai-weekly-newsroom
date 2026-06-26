@@ -11,7 +11,7 @@ import json, sys, html, os
 KIND_COLORS = {"IT": "#0071e3", "개발": "#1d9d57", "기획": "#c25e00"}
 
 # 기사 Q&A 프록시(Cloudflare Worker 등) 엔드포인트. 비우면 질문 UI 숨김.
-ASK_ENDPOINT = ""
+ASK_ENDPOINT = "https://ai-weekly-newsroom.aijnjj12.workers.dev"
 
 def esc(s):
     return html.escape(html.unescape(str(s)))
