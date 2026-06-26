@@ -1,0 +1,4 @@
+name = "ai-weekly-newsroom"
+main = "worker.js"
+compatibility_date = "2025-01-01"
+# GEMINI_API_KEY 는 여기 적지 말 것(비밀). Cloudflare 변수/시크릿(암호화)으로 추가.
