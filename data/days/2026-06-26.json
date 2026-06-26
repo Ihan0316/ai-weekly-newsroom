@@ -1,0 +1,159 @@
+{
+  "date_label": "2026. 6. 26",
+  "weekday": "금",
+  "news": [
+    {
+      "title_kr": "Hacker News 데이터로 살펴보는 18년간 기술 트렌드 변화",
+      "source": "GeekNews",
+      "url": "https://hackernewstrends.com/?q=anthropic",
+      "blurb_kr": "Hacker Trends는 Hacker News에 축적된 약 4,500만 건의 게시글과 댓글을 분석하여 특정 기술, 제품, 기업, 인물의 언급량 변화를 시계열로 보여줍니다.",
+      "content": [
+        {
+          "t": "p",
+          "text": "Charts how often any topic, tool, or person has come up on Hacker News. Overlay a few terms to watch their traction rise and fall. Each line is a live date-histogram over 45M posts and comments, built on Upstash Redis Search. Below the chart sit the actual stories and comments behind the lines, filterable by term or author."
+        },
+        {
+          "t": "h",
+          "text": "Popular Comparisons"
+        },
+        {
+          "t": "p",
+          "text": "The deploy-platform rivalry: Cloudflare carries the CDN/edge conversation for years, then Vercel surges on the Next.js wave and the two trade blows as both push into edge functions and full-stack hosting."
+        },
+        {
+          "t": "p",
+          "text": "David vs Goliath of the lab era: OpenAI's repeated towers lead from 2023, until a sudden 2026 Anthropic surge pulls level and the lead changes hands."
+        },
+        {
+          "t": "p",
+          "text": "The silicon baton pass: AMD leads 2017–20 on the Ryzen/Zen comeback, then Nvidia overtakes with the 2020–23 GPU-and-AI surge."
+        },
+        {
+          "t": "p",
+          "text": "A three-way relay across the JVM/mobile era: Scala is the hot language ~2011, Swift grabs the baton with iOS mid-decade, then Kotlin overtakes both as Android goes Kotlin-first."
+        },
+        {
+          "t": "p",
+          "text": "Frontend's generations in a line: Angular leads the framework wars ~2013–14, Vue rises 2016–19, then Svelte takes the newcomer crown 2020–22."
+        },
+        {
+          "t": "p",
+          "text": "The database lead-swap: MySQL owns the conversation around 2009–11, then goes quiet as Postgres climbs to overtake it by 2017–20."
+        },
+        {
+          "t": "p",
+          "text": "ML frameworks, generation by generation: TensorFlow launches the deep-learning gold rush 2015–16, PyTorch overtakes research 2019–21, then JAX becomes the cutting-edge favorite 2021–23."
+        },
+        {
+          "t": "p",
+          "text": "Bundler changing of the guard: Webpack owns the build step 2015–20, then Vite arrives and overtakes it from 2022 on."
+        },
+        {
+          "t": "p",
+          "text": "Crypto-exchange lead-swap: Coinbase is the exchange people talk about through 2013–21, then Binance takes over the headlines in 2022–23."
+        },
+        {
+          "t": "p",
+          "text": "The editor wars, old guard vs new: Vim and Emacs trade the modal-vs-extensible argument year after year, then Zed bursts in and spikes hard across 2024–26."
+        }
+      ]
+    },
+    {
+      "title_kr": "AI시대, 나의 전문성을 재설계하는 법 [구글 슬라이드, 165P]",
+      "source": "GeekNews",
+      "url": "https://drive.google.com/file/d/19rY4idXdBoFyqqzu0ImZe45C31ETb7rC/view",
+      "blurb_kr": "데이터오븐 하용호님의 발표자료로, 회사의 AX(AI 전환) 여정이 대부분 비슷한 5단계를 거친다는 내용과 AI 시대에 전문성을 재설계하는 방법에 대한 가이드입니다.",
+      "content": [
+        {
+          "t": "p",
+          "text": "제공된 HTML은 Google Drive의 PDF 뷰어 페이지로, 실제 기사 본문 콘텐츠를 포함하고 있지 않습니다. 따라서 핵심 본문을 추출할 수 없습니다."
+        }
+      ]
+    },
+    {
+      "title_kr": "Code as Agent Harness — 코드를 에이전트의 실행 기반으로 보는 102페이지 서베이",
+      "source": "GeekNews",
+      "url": "https://code-as-harness.github.io/code-as-harness-webpage/",
+      "blurb_kr": "UIUC, Meta, Stanford 합작으로 5월 arXiv에 올라온 서베이 논문으로, 코드를 LLM이 생성하는 결과물이 아니라 에이전트의 실행 기반으로 보는 관점을 제시합니다.",
+      "content": [
+        {
+          "t": "h",
+          "text": "Code as Agent Harness"
+        },
+        {
+          "t": "p",
+          "text": "A code-centered view of agentic AI: code is not only generated output, but the operational substrate for reasoning, acting, environment modeling, execution feedback, and multi-agent coordination."
+        },
+        {
+          "t": "h",
+          "text": "Code becomes the runtime medium for agents."
+        },
+        {
+          "t": "p",
+          "text": "Recent LLMs have become strong code generators, but emerging agentic systems use code for more than final answers. This survey frames code as an agent harness: a unified infrastructure layer for agent reasoning, action, environment modeling, feedback-driven control, and verification. It studies how code connects agents to executable steps, durable state, reusable tools, tests, traces, repositories, and multi-agent workflows."
+        },
+        {
+          "t": "h",
+          "text": "Three Layers of Code as Harness"
+        },
+        {
+          "t": "h",
+          "text": "Harness Interface"
+        },
+        {
+          "t": "p",
+          "text": "Code connects agents to reasoning, action, and environment modeling: executable reasoning traces, programmable actions, DOM/API interfaces, simulators, tests, and state representations."
+        },
+        {
+          "t": "h",
+          "text": "Harness Mechanisms"
+        },
+        {
+          "t": "p",
+          "text": "Planning, memory, tool use, control, and optimization sustain agents over long-horizon execution. Failures become feedback for repair rather than dead ends."
+        },
+        {
+          "t": "h",
+          "text": "Scaling the Harness"
+        },
+        {
+          "t": "p",
+          "text": "Shared code artifacts allow multiple agents to coordinate, review, test, debate, red-team, and verify progress inside a common repository or workflow state."
+        },
+        {
+          "t": "h",
+          "text": "Harness engineering is the hard part."
+        }
+      ]
+    }
+  ],
+  "quiz": {
+    "category": "데이터베이스",
+    "question": "관계형 데이터베이스에서 데이터를 저장하는 가장 기본적인 단위로, 행(Row)과 열(Column)로 구성된 것은?",
+    "options": [
+      "뷰(View)",
+      "테이블(Table)",
+      "인덱스(Index)",
+      "스키마(Schema)"
+    ],
+    "answer": 1,
+    "explain_kr": "테이블은 관계형 데이터베이스에서 데이터를 실제로 저장하는 기본 구조입니다. 행은 레코드(튜플)를, 열은 속성(애트리뷰트)을 나타냅니다. 뷰는 하나 이상의 테이블에서 파생된 가상 테이블이며, 인덱스는 데이터 검색 속도를 높이는 자료구조이고, 스키마는 데이터베이스의 전체적인 구조와 제약 조건을 정의합니다."
+  },
+  "terms": [
+    {
+      "term": "쿠버네티스 (Kubernetes)",
+      "kind": "개발",
+      "meaning_kr": "컨테이너화된 워크로드와 서비스를 자동으로 배포, 확장 및 관리해주는 오픈소스 시스템입니다."
+    },
+    {
+      "term": "데드락 (Deadlock)",
+      "kind": "IT",
+      "meaning_kr": "두 개 이상의 프로세스가 서로 상대방이 가지고 있는 자원을 기다리며 무한히 대기하는 상태를 말합니다."
+    },
+    {
+      "term": "로드밸런싱 (Load Balancing)",
+      "kind": "IT",
+      "meaning_kr": "네트워크 트래픽을 여러 서버에 분산하여 특정 서버에 부하가 집중되는 것을 방지하고 서비스의 안정성과 성능을 향상시키는 기술입니다."
+    }
+  ]
+}
