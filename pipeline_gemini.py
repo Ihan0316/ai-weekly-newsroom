@@ -38,9 +38,18 @@ def gemini(prompt, schema=None, max_tokens=8192, temp=0.4):
     raise RuntimeError("gemini failed: %s" % last)
 
 def fetch(url, maxbytes=500000):
-    req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "*/*"})
-    with urllib.request.urlopen(req, timeout=25) as r:
-        return r.read(maxbytes).decode("utf-8", "ignore")
+    # 직접 시도 → 실패(데이터센터 IP 403 등) 시 r.jina.ai 리더 프록시 경유
+    last = None
+    for u in (url, "https://r.jina.ai/" + url):
+        try:
+            req = urllib.request.Request(u, headers={
+                "User-Agent": UA, "Accept": "text/html,*/*", "Accept-Language": "ko,en;q=0.8"})
+            with urllib.request.urlopen(req, timeout=45) as r:
+                return r.read(maxbytes).decode("utf-8", "ignore")
+        except Exception as e:
+            last = e
+            sys.stderr.write("fetch fail (%s): %s\n" % (u[:40], e))
+    raise last
 
 def clean_html(html, limit=120000):
     html = re.sub(r"(?is)<(script|style|noscript|svg)[^>]*>.*?</\1>", " ", html)
