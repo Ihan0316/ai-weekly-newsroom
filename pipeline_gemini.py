@@ -85,11 +85,16 @@ def select_news(today, ex_urls):
     yozm = clean_html(fetch("https://yozm.wishket.com/magazine/list/new/"))
     hada = clean_html(fetch("https://news.hada.io/"))
     prompt = (
-        "오늘은 %s. 아래는 요즘IT 매거진 목록과 GeekNews 프런트의 HTML이다.\n"
-        "가장 최근(오늘 또는 가장 신선한) 기사 중 서로 다른 주제 3건을 고른다. 요즘IT와 GeekNews를 섞어서.\n"
-        "광고·이벤트·채용·홍보 글은 제외. 아래 '이미 수록된 URL'에 있는 것은 제외.\n"
-        "각 항목: title_kr(한국어 제목), source('요즘IT' 또는 'GeekNews'), url(절대 링크), blurb_kr(한 줄 요약).\n\n"
-        "[이미 수록된 URL]\n%s\n\n[요즘IT HTML]\n%s\n\n[GeekNews HTML]\n%s\n"
+        "오늘은 %s. 아래는 요즘IT 매거진 목록과 GeekNews 프런트 페이지 내용이다.\n"
+        "가장 최근(오늘 또는 가장 신선한) 기사 중 서로 다른 주제 3건을 고른다.\n"
+        "규칙:\n"
+        "- 출처를 섞을 것: 가능하면 요즘IT 1건 이상 포함.\n"
+        "- 한국어 본문이 있는 기사를 우선(영어 전용 외부 페이지·검색결과·툴·PDF 뷰어는 피함).\n"
+        "- GeekNews 항목의 url은 반드시 'https://news.hada.io/topic?id=...' (GeekNews 토픽 페이지)로 줄 것. 외부 원문 링크 금지.\n"
+        "- 요즘IT 항목의 url은 'https://yozm.wishket.com/magazine/detail/...' 형태.\n"
+        "- 광고·이벤트·채용·홍보 글 제외. 아래 '이미 수록된 URL'에 있는 것 제외.\n"
+        "각 항목: title_kr(한국어 제목), source('요즘IT' 또는 'GeekNews'), url(위 규칙대로), blurb_kr(한 줄 요약, 한국어).\n\n"
+        "[이미 수록된 URL]\n%s\n\n[요즘IT 페이지]\n%s\n\n[GeekNews 페이지]\n%s\n"
     ) % (today, "\n".join(sorted(ex_urls)), yozm, hada)
     out = gemini(prompt, NEWS_SCHEMA, max_tokens=4096)
     items = [it for it in out.get("items", []) if (it.get("url") or "").strip() not in ex_urls][:3]
@@ -100,21 +105,47 @@ def extract_body(url):
         html = clean_html(fetch(url), limit=100000)
     except Exception as e:
         sys.stderr.write("fetch fail %s: %s\n" % (url, e)); return []
-    prompt = ("다음 기사 HTML에서 핵심 본문만 추출한다. 내비·광고·댓글·추천·푸터 제외.\n"
-              "blocks 배열: 소제목 {t:'h', text}, 문단 {t:'p', text}. 원문 언어 유지. 최대 12블록, 각 400자 이내.\n"
-              "기사 형식이 아니면 핵심을 2~5개 p로 요약.\n\n[HTML]\n%s") % html
+    prompt = ("다음 페이지에서 기사 핵심 본문만 추출한다. 내비·광고·댓글·추천·푸터 제외.\n"
+              "blocks 배열: 소제목 {t:'h', text}, 문단 {t:'p', text}. 한국어 본문이면 한국어로, 영어면 한국어로 자연스럽게 옮겨 적는다. 최대 12블록, 각 400자 이내.\n"
+              "중요: 기사 본문이 없거나(PDF뷰어·검색결과·툴 페이지 등) 추출 불가하면 반드시 blocks:[] 로만 반환하고, 설명·변명 문장을 절대 넣지 말 것.\n\n[페이지]\n%s") % html
     try:
         out = gemini(prompt, BODY_SCHEMA, max_tokens=8192)
-        return [{"t": ("h" if b.get("t") == "h" else "p"), "text": b.get("text", "")} for b in out.get("blocks", []) if b.get("text")]
+        blocks = [{"t": ("h" if b.get("t") == "h" else "p"), "text": (b.get("text") or "").strip()}
+                  for b in out.get("blocks", []) if (b.get("text") or "").strip()]
+        return clean_blocks(blocks)
     except Exception as e:
         sys.stderr.write("extract fail %s: %s\n" % (url, e)); return []
+
+FAIL_HINTS = ("추출할 수 없", "포함하고 있지 않", "본문이 없", "본문을 찾을 수 없",
+              "제공된 HTML", "제공된 페이지", "PDF 뷰어", "내용을 확인할 수 없", "robots")
+
+def clean_blocks(blocks):
+    # 추출 실패 변명이 본문으로 저장되는 것 방지 → 빈 배열(모달은 blurb 폴백)
+    if len(blocks) <= 1:
+        txt = blocks[0]["text"] if blocks else ""
+        if (not blocks) or any(h in txt for h in FAIL_HINTS) or len(txt) < 40:
+            return []
+    # 본문(p) 한 개도 없으면(소제목만) 버림
+    if not any(b["t"] == "p" for b in blocks):
+        return []
+    # 뒤쪽에 본문 없이 매달린 소제목 제거
+    while blocks and blocks[-1]["t"] == "h":
+        blocks.pop()
+    # 연속된 소제목 중 본문이 안 따라오는 것 제거
+    out = []
+    for i, b in enumerate(blocks):
+        if b["t"] == "h" and (i + 1 >= len(blocks) or blocks[i + 1]["t"] == "h"):
+            continue
+        out.append(b)
+    return out
 
 def make_quiz_terms(ex_qs, ex_terms):
     prompt = (
         "정보처리기사(정처기) 4지선다 문제 1개와 IT·개발·기획 현업 용어 3개를 만든다.\n"
         "아래 '기존 문제/용어'와 절대 겹치지 않게 새로 만든다.\n"
-        "quiz: category(분야), question, options(보기 4개), answer(정답 인덱스 0~3), explain_kr(2~3문장 해설). 정답·해설 정확히.\n"
-        "terms: 3개. 각 term(용어명), kind('IT'|'개발'|'기획' 중 하나), meaning_kr(한 문장 정의).\n\n"
+        "quiz: category(분야), question, options(보기 4개), answer(정답 인덱스 0~3), explain_kr(2~3문장 해설). 정답·해설 정확히. 너무 쉬운 정의 암기보다 개념 이해를 묻는 수준으로.\n"
+        "terms: 3개. 각 term(용어명), kind('IT'|'개발'|'기획' 중 하나), meaning_kr(한 문장 정의).\n"
+        "용어는 기존과 '같은 개념의 변형'도 피할 것 (예: 로드밸런서/로드밸런싱, CI-CD/지속적배포는 같은 것으로 본다).\n\n"
         "[기존 문제(겹치지 말 것)]\n%s\n\n[기존 용어(겹치지 말 것)]\n%s\n"
     ) % ("\n".join(ex_qs[-60:]), ", ".join(sorted(ex_terms)))
     out = gemini(prompt, QT_SCHEMA, max_tokens=4096, temp=0.7)
