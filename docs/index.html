@@ -6,6 +6,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css?v=c57a71dd">
 <meta name="site-build" content="3d63636345" data-src="build.json">
+<script>
+/* 모바일 직접 접속 시 오늘 뉴스로 자동 이동. 사이트 내부 이동('전체 보기' 등)·재방문은 제외 */
+(function(){try{
+  var mobile = window.matchMedia && window.matchMedia('(max-width:700px)').matches;
+  var internal = document.referrer && document.referrer.indexOf(location.origin) === 0;
+  if (mobile && !internal && !sessionStorage.getItem('rdrToday')) {
+    sessionStorage.setItem('rdrToday','1');
+    location.replace('today.html');
+  }
+}catch(e){}})();
+</script>
 </head>
 <body>
 <div class="orbs"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span></div>
