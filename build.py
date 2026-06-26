@@ -10,6 +10,9 @@ import json, sys, html, os
 
 KIND_COLORS = {"IT": "#0071e3", "개발": "#1d9d57", "기획": "#c25e00"}
 
+# 기사 Q&A 프록시(Cloudflare Worker 등) 엔드포인트. 비우면 질문 UI 숨김.
+ASK_ENDPOINT = ""
+
 def esc(s):
     return html.escape(html.unescape(str(s)))
 
@@ -105,6 +108,14 @@ MODAL = '''
     </div>
     <img class="modal-hero" alt="" hidden>
     <div class="modal-body"></div>
+    <div class="ask" hidden>
+      <div class="ask-row">
+        <input class="ask-input" type="text" maxlength="500" autocomplete="off"
+          placeholder="이 기사에서 모르는 걸 물어보세요" aria-label="기사에 대해 질문">
+        <button class="ask-send" type="button">질문</button>
+      </div>
+      <div class="ask-answer" hidden></div>
+    </div>
     <a class="modal-orig" target="_blank" rel="noopener">원문 사이트에서 보기 ↗</a>
   </div>
 </div>'''
@@ -120,6 +131,7 @@ def render_day(d, back_href=None, asset_prefix="../", ver="", build_v=""):
 <title>데일리 다이제스트 · {esc(d["date_label"])}</title>
 <link rel="stylesheet" href="{a}assets/site.css{ver}">
 <meta name="site-build" content="{build_v}" data-src="{a}build.json">
+<meta name="ask-endpoint" content="{ASK_ENDPOINT}">
 </head>
 <body>
 {back}

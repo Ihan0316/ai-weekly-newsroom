@@ -210,10 +210,44 @@
       }
     });
 
+    /* ----- 기사 Q&A (Gemini, 서버리스 프록시 경유) ----- */
+    var amEl = document.querySelector('meta[name="ask-endpoint"]');
+    var askEndpoint = amEl ? (amEl.getAttribute('content') || '') : '';
+    var askBox = overlay.querySelector('.ask');
+    var askInput = overlay.querySelector('.ask-input');
+    var askSend = overlay.querySelector('.ask-send');
+    var askAnswer = overlay.querySelector('.ask-answer');
+    var asking = false;
+    if (askEndpoint && askBox) askBox.hidden = false;
+    function askReset() {
+      if (askInput) askInput.value = '';
+      if (askAnswer) { askAnswer.hidden = true; askAnswer.textContent = ''; askAnswer.classList.remove('err'); }
+      asking = false; if (askSend) askSend.disabled = false;
+    }
+    function doAsk() {
+      if (asking || !askEndpoint || !curItem) return;
+      var q = (askInput.value || '').trim();
+      if (!q) return;
+      asking = true; askSend.disabled = true;
+      askAnswer.hidden = false; askAnswer.classList.remove('err'); askAnswer.textContent = '답변 생성 중…';
+      var ctx = '';
+      (curItem.content || []).forEach(function (b) { if (b.text) ctx += b.text + '\n'; });
+      if (!ctx) ctx = curItem.blurb || '';
+      fetch(askEndpoint, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question: q, title: curItem.title || '', context: ctx.slice(0, 8000) })
+      }).then(function (r) { return r.json(); })
+        .then(function (j) { askAnswer.textContent = (j && j.answer) ? j.answer : '답변을 받지 못했어요.'; })
+        .catch(function () { askAnswer.textContent = '오류가 났어요. 잠시 후 다시 시도해 주세요.'; askAnswer.classList.add('err'); })
+        .then(function () { asking = false; askSend.disabled = false; });
+    }
+    if (askSend) askSend.addEventListener('click', doAsk);
+    if (askInput) askInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') doAsk(); });
+
     function open(idx) {
       var it = items[idx];
       if (!it) return;
-      curItem = it; ttsReset();
+      curItem = it; ttsReset(); askReset();
       lastFocus = document.activeElement;
       titleEl.textContent = it.title || '';
       srcEl.textContent = it.source || '';
