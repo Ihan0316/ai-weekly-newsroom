@@ -18,7 +18,9 @@ DAYS = os.path.join(HERE, "data", "days")
 WD = ["월", "화", "수", "목", "금", "토", "일"]
 
 def gemini(prompt, schema=None, max_tokens=8192, temp=0.4):
-    cfg = {"temperature": temp, "maxOutputTokens": max_tokens, "responseMimeType": "application/json"}
+    # thinkingBudget 0: 2.5 Flash의 추론 토큰이 출력 예산을 먹어 JSON이 잘리는 것 방지
+    cfg = {"temperature": temp, "maxOutputTokens": max_tokens, "responseMimeType": "application/json",
+           "thinkingConfig": {"thinkingBudget": 0}}
     if schema:
         cfg["responseSchema"] = schema
     body = {"contents": [{"parts": [{"text": prompt}]}], "generationConfig": cfg}
@@ -89,7 +91,7 @@ def select_news(today, ex_urls):
         "각 항목: title_kr(한국어 제목), source('요즘IT' 또는 'GeekNews'), url(절대 링크), blurb_kr(한 줄 요약).\n\n"
         "[이미 수록된 URL]\n%s\n\n[요즘IT HTML]\n%s\n\n[GeekNews HTML]\n%s\n"
     ) % (today, "\n".join(sorted(ex_urls)), yozm, hada)
-    out = gemini(prompt, NEWS_SCHEMA, max_tokens=2048)
+    out = gemini(prompt, NEWS_SCHEMA, max_tokens=4096)
     items = [it for it in out.get("items", []) if (it.get("url") or "").strip() not in ex_urls][:3]
     return items
 
@@ -102,7 +104,7 @@ def extract_body(url):
               "blocks 배열: 소제목 {t:'h', text}, 문단 {t:'p', text}. 원문 언어 유지. 최대 12블록, 각 400자 이내.\n"
               "기사 형식이 아니면 핵심을 2~5개 p로 요약.\n\n[HTML]\n%s") % html
     try:
-        out = gemini(prompt, BODY_SCHEMA, max_tokens=4096)
+        out = gemini(prompt, BODY_SCHEMA, max_tokens=8192)
         return [{"t": ("h" if b.get("t") == "h" else "p"), "text": b.get("text", "")} for b in out.get("blocks", []) if b.get("text")]
     except Exception as e:
         sys.stderr.write("extract fail %s: %s\n" % (url, e)); return []
@@ -115,7 +117,7 @@ def make_quiz_terms(ex_qs, ex_terms):
         "terms: 3개. 각 term(용어명), kind('IT'|'개발'|'기획' 중 하나), meaning_kr(한 문장 정의).\n\n"
         "[기존 문제(겹치지 말 것)]\n%s\n\n[기존 용어(겹치지 말 것)]\n%s\n"
     ) % ("\n".join(ex_qs[-60:]), ", ".join(sorted(ex_terms)))
-    out = gemini(prompt, QT_SCHEMA, max_tokens=2048, temp=0.7)
+    out = gemini(prompt, QT_SCHEMA, max_tokens=4096, temp=0.7)
     q = out["quiz"]; q["answer"] = max(0, min(3, int(q.get("answer", 0))))
     return q, out["terms"][:3]
 
