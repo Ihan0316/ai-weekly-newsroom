@@ -210,22 +210,54 @@
       }
     });
 
-    /* ----- 기사 Q&A (Gemini, 서버리스 프록시 경유) ----- */
+    /* ----- 기사 Q&A: FAB + 드래그 선택 질문 + 패널, 기기당 일일 한도 ----- */
     var amEl = document.querySelector('meta[name="ask-endpoint"]');
     var askEndpoint = amEl ? (amEl.getAttribute('content') || '') : '';
-    var askBox = overlay.querySelector('.ask');
+    var enabled = !!askEndpoint;
+    var askFab = overlay.querySelector('.ask-fab');
+    var askPanel = overlay.querySelector('.ask-panel');
     var askInput = overlay.querySelector('.ask-input');
     var askSend = overlay.querySelector('.ask-send');
     var askAnswer = overlay.querySelector('.ask-answer');
-    var asking = false;
-    if (askEndpoint && askBox) askBox.hidden = false;
+    var askQuote = overlay.querySelector('.ask-quote');
+    var askCountEl = overlay.querySelector('.ask-count');
+    var askX = overlay.querySelector('.ask-x');
+    var selAsk = document.querySelector('.sel-ask');
+    var selBtn = selAsk ? selAsk.querySelector('.sel-ask-btn') : null;
+    var asking = false, selectedText = '';
+    var ASK_LIMIT = 50;
+
+    function todayKey() { var d = new Date(); return 'ask:' + d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); }
+    function getCount() { try { return parseInt(localStorage.getItem(todayKey()) || '0', 10) || 0; } catch (e) { return 0; } }
+    function bumpCount() { try { localStorage.setItem(todayKey(), String(getCount() + 1)); } catch (e) {} }
+    function updateCount() {
+      var left = Math.max(0, ASK_LIMIT - getCount());
+      if (askCountEl) askCountEl.textContent = '오늘 남은 질문 ' + left + '/' + ASK_LIMIT + ' · 이 기기 기준';
+      var out = left <= 0;
+      if (askInput) { askInput.disabled = out; if (out) askInput.placeholder = '오늘 질문 한도를 다 썼어요'; }
+      if (askSend) askSend.disabled = out || asking;
+    }
+    function hideSel() { if (selAsk) selAsk.hidden = true; }
+    function setQuote(t) {
+      selectedText = t || '';
+      if (!askQuote) return;
+      if (selectedText) { askQuote.hidden = false; askQuote.textContent = '“' + selectedText.slice(0, 140) + (selectedText.length > 140 ? '…' : '') + '”'; }
+      else { askQuote.hidden = true; askQuote.textContent = ''; }
+    }
+    function openPanel() { if (!enabled || !askPanel) return; askPanel.hidden = false; updateCount(); setTimeout(function () { if (askInput && !askInput.disabled) askInput.focus(); }, 50); }
+    function closePanel() { if (askPanel) askPanel.hidden = true; hideSel(); }
     function askReset() {
-      if (askInput) askInput.value = '';
+      asking = false; setQuote('');
+      if (askInput) { askInput.value = ''; askInput.disabled = false; askInput.placeholder = '이 기사에서 궁금한 점'; }
       if (askAnswer) { askAnswer.hidden = true; askAnswer.textContent = ''; askAnswer.classList.remove('err'); }
-      asking = false; if (askSend) askSend.disabled = false;
+      if (askPanel) askPanel.hidden = true;
+      hideSel();
+      if (askFab) askFab.hidden = !enabled;
+      updateCount();
     }
     function doAsk() {
-      if (asking || !askEndpoint || !curItem) return;
+      if (asking || !enabled || !curItem) return;
+      if (getCount() >= ASK_LIMIT) { updateCount(); return; }
       var q = (askInput.value || '').trim();
       if (!q) return;
       asking = true; askSend.disabled = true;
@@ -235,14 +267,31 @@
       if (!ctx) ctx = curItem.blurb || '';
       fetch(askEndpoint, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ question: q, title: curItem.title || '', context: ctx.slice(0, 8000) })
+        body: JSON.stringify({ question: q, title: curItem.title || '', context: ctx.slice(0, 8000), selection: selectedText.slice(0, 500) })
       }).then(function (r) { return r.json(); })
-        .then(function (j) { askAnswer.textContent = (j && j.answer) ? j.answer : '답변을 받지 못했어요.'; })
+        .then(function (j) { askAnswer.textContent = (j && j.answer) ? j.answer : '답변을 받지 못했어요.'; bumpCount(); })
         .catch(function () { askAnswer.textContent = '오류가 났어요. 잠시 후 다시 시도해 주세요.'; askAnswer.classList.add('err'); })
-        .then(function () { asking = false; askSend.disabled = false; });
+        .then(function () { asking = false; updateCount(); });
     }
+    if (askFab) askFab.addEventListener('click', function () { setQuote(''); openPanel(); });
+    if (askX) askX.addEventListener('click', closePanel);
     if (askSend) askSend.addEventListener('click', doAsk);
     if (askInput) askInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') doAsk(); });
+    if (enabled && bodyEl) {
+      bodyEl.addEventListener('mouseup', function () {
+        setTimeout(function () {
+          var sel = window.getSelection(); var t = sel ? String(sel) : '';
+          if (t && t.trim().length >= 2 && sel.anchorNode && bodyEl.contains(sel.anchorNode)) {
+            var rect = sel.getRangeAt(0).getBoundingClientRect();
+            selAsk.style.left = Math.min(window.innerWidth - 96, Math.max(8, rect.left + rect.width / 2 - 44)) + 'px';
+            selAsk.style.top = Math.max(8, rect.top - 46) + 'px';
+            selAsk.hidden = false; selAsk._text = t.trim();
+          } else { hideSel(); }
+        }, 10);
+      });
+    }
+    if (selBtn) selBtn.addEventListener('click', function () { setQuote(selAsk._text || ''); hideSel(); openPanel(); });
+    window.addEventListener('scroll', hideSel, true);
 
     function open(idx) {
       var it = items[idx];
@@ -287,7 +336,7 @@
     }
     function close() {
       if (overlay.hidden) return;
-      ttsReset();
+      ttsReset(); closePanel();
       overlay.classList.remove('show');
       var done = function () {
         if (overlay.hidden) return;

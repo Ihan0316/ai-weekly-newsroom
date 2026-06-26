@@ -36,13 +36,17 @@ export default {
     const q = String(body.question || "").slice(0, 500).trim();
     const title = String(body.title || "").slice(0, 200);
     const ctx = String(body.context || "").slice(0, 8000);
+    const sel = String(body.selection || "").slice(0, 500);
     if (!q) return json({ error: "empty question" }, 400, h);
 
     const prompt =
-      "다음은 한국어 뉴스 기사다. 사용자가 기사를 읽다가 모르는 부분을 물었다. " +
-      "기사 맥락을 바탕으로 한국어로 쉽고 간결하게(3~5문장) 답하라. " +
-      "기사에 없는 내용은 일반 지식으로 보완하되 '(일반 지식)'처럼 표시하고, 모르면 모른다고 하라.\n\n" +
-      "[제목]\n" + title + "\n\n[기사]\n" + ctx + "\n\n[질문]\n" + q;
+      "너는 아래 '기사 본문' 내용에 대해서만 답하는 도우미다. 규칙을 반드시 지켜라:\n" +
+      "- 오직 아래 기사 본문에 담긴 정보에 근거해서만 한국어로 답한다.\n" +
+      "- 기사에 없거나 기사와 무관한 질문(일반 상식, 코딩/작문 요청, 다른 주제 등)은 답하지 말고 정확히 이 문장만 출력한다: 이 기사 내용에 대한 질문만 답할 수 있어요.\n" +
+      "- 기사 속 용어·문장을 쉽게 풀어 설명하는 것은 허용. 추측·창작 금지.\n" +
+      "- 3~5문장으로 간결히.\n\n" +
+      (sel ? ("[사용자가 선택한 부분]\n" + sel + "\n\n") : "") +
+      "[기사 제목]\n" + title + "\n\n[기사 본문]\n" + ctx + "\n\n[질문]\n" + q;
 
     let r;
     try {

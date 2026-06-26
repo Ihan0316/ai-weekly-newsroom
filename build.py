@@ -108,17 +108,23 @@ MODAL = '''
     </div>
     <img class="modal-hero" alt="" hidden>
     <div class="modal-body"></div>
-    <div class="ask" hidden>
+    <a class="modal-orig" target="_blank" rel="noopener">원문 사이트에서 보기 ↗</a>
+
+    <button class="ask-fab" type="button" hidden aria-label="이 기사에 질문하기">🤔 질문하기</button>
+    <div class="ask-panel" hidden role="dialog" aria-label="기사 질문">
+      <div class="ask-head"><span>이 기사에 질문</span><button class="ask-x" type="button" aria-label="닫기">✕</button></div>
+      <div class="ask-quote" hidden></div>
       <div class="ask-row">
         <input class="ask-input" type="text" maxlength="500" autocomplete="off"
-          placeholder="이 기사에서 모르는 걸 물어보세요" aria-label="기사에 대해 질문">
+          placeholder="이 기사에서 궁금한 점" aria-label="질문 입력">
         <button class="ask-send" type="button">질문</button>
       </div>
       <div class="ask-answer" hidden></div>
+      <div class="ask-count"></div>
     </div>
-    <a class="modal-orig" target="_blank" rel="noopener">원문 사이트에서 보기 ↗</a>
   </div>
-</div>'''
+</div>
+<div class="sel-ask" hidden><button class="sel-ask-btn" type="button">🤔 질문</button></div>'''
 
 def render_day(d, back_href=None, asset_prefix="../", ver="", build_v=""):
     a = asset_prefix

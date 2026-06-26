@@ -1,7 +1,7 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>데일리 다이제스트 · 2026. 6. 16</title>
-<link rel="stylesheet" href="../assets/site.css?v=67b04756">
+<link rel="stylesheet" href="../assets/site.css?v=d5befe9c">
 <meta name="site-build" content="3d63636345" data-src="../build.json">
 <meta name="ask-endpoint" content="">
 </head>
@@ -95,17 +95,23 @@
     </div>
     <img class="modal-hero" alt="" hidden>
     <div class="modal-body"></div>
-    <div class="ask" hidden>
+    <a class="modal-orig" target="_blank" rel="noopener">원문 사이트에서 보기 ↗</a>
+
+    <button class="ask-fab" type="button" hidden aria-label="이 기사에 질문하기">🤔 질문하기</button>
+    <div class="ask-panel" hidden role="dialog" aria-label="기사 질문">
+      <div class="ask-head"><span>이 기사에 질문</span><button class="ask-x" type="button" aria-label="닫기">✕</button></div>
+      <div class="ask-quote" hidden></div>
       <div class="ask-row">
         <input class="ask-input" type="text" maxlength="500" autocomplete="off"
-          placeholder="이 기사에서 모르는 걸 물어보세요" aria-label="기사에 대해 질문">
+          placeholder="이 기사에서 궁금한 점" aria-label="질문 입력">
         <button class="ask-send" type="button">질문</button>
       </div>
       <div class="ask-answer" hidden></div>
+      <div class="ask-count"></div>
     </div>
-    <a class="modal-orig" target="_blank" rel="noopener">원문 사이트에서 보기 ↗</a>
   </div>
 </div>
+<div class="sel-ask" hidden><button class="sel-ask-btn" type="button">🤔 질문</button></div>
 <script id="news-data" type="application/json">[{"title": "바이브 코딩을 만난 1년, 40대 비개발자에게 일어난 일들", "source": "요즘IT", "url": "https://yozm.wishket.com/magazine/detail/3803/", "blurb": "에러 메시지를 AI에 붙여넣으며 시작한 평범한 40대 직장인이 AI를 만나 겪은 1년간의 변화 기록.", "content": [{"t": "h", "text": "바이브 코딩을 만난 1년, 40대 비개발자에게 일어난 일들"}, {"t": "p", "text": "2025년 4월의 어느 평일 밤, 육아를 마치고 처음 맡은 외주 작업의 에러 메시지를 한참 멍하니 보고 있었습니다. 영어로 늘어선 메시지를 AI에 붙여 넣고 한 줄씩 다시 물어보며 새벽을 보냈습니다. '이게 정말 될까?' 하는 의심도 있었지만, '죽이 되든 밥이 되든 일단 끝까지 해보자'는 생각이 더 컸습니다."}, {"t": "p", "text": "거창한 계획 없이 한 건씩 끝내다 보니 1년 사이 외주 작업이 120건을 넘었습니다. 누적 매출은 5,000만 원을 넘었고, 요즘IT 첫 기고, 카카오 AI TOP 100 Finalist 선정, 두 번의 해커톤 연속 대상, 카카오 AI 앰배서더 활동, 책 출간까지 이어졌습니다. 최근에는 본업의 방향까지 바꾸기 시작했습니다."}, {"t": "p", "text": "1년 전의 저는 이 중 단 하나도 자신 있게 그릴 수 없는 사람이었습니다. 그래서 이 글은 자랑이 아니라, 평범한 40대 직장인이 AI를 만나 겪은 1년의 변화를 기록으로 적은 것입니다. 평범한 누구나 AI를 통해 많은 것을 이룰 수 있다는 경험을 나누고자 합니다."}, {"t": "h", "text": "AI가 가져다준 새로운 능력: 바이브 코딩"}, {"t": "p", "text": "처음 AI를 만났을 때는 ChatGPT에게 미래 직장 생활의 두려움을 털어놓는 단순 상담으로 시작해 점차 업무적 질문으로 넘어갔습니다. GPT가 알려주는 대로 VS Code를 설치하고 코드를 복사 붙여넣기 하며 첫 업무 자동화 프로그램을 만들었습니다. 이게 첫 바이브 코딩 경험이었고, 이후 동료들의 아이디어를 받아 자동화 프로그램을 만들어 배포하는 경험까지 하게 되었습니다."}, {"t": "h", "text": "회사 밖에서도 내 기술이 통할까? 외주 개발 도전"}, {"t": "p", "text": "단돈 1만 원이라도 누군가 내 결과물에 값을 친다면 제 기술이 회사 안에서만 쓸모 있는 게 아니라는 증거가 될 것 같았습니다. 늦은 밤 외주 플랫폼에 상품을 등록했고, 한 건씩 맡다 보니 1년 만에 작업 120여 건, 누적 매출 5,000만 원을 넘었습니다. 매출보다 뿌듯한 것은 지금까지 유지하는 평점 5.0점입니다."}, {"t": "p", "text": "경험이 쌓이며 노하우가 생기고 문제를 보는 시각도 넓어졌습니다. 이 경험은 다시 회사 안으로 돌아와 안과 밖에서 동시에 성과를 내는 선순환을 만들었고, 사내에서도 규모 있는 프로젝트를 단독으로 맡게 되었습니다. 이 이야기들은 훗날 이직 과정에서 중요한 포트폴리오가 되었습니다."}, {"t": "h", "text": "경험을 글로 옮겨 봤더니: 작가 활동 시작"}, {"t": "p", "text": "2025년 10월 요즘IT에 첫 기고를 했습니다. '40대 비개발자도 이렇게 시작할 수 있구나'라는 댓글을 보며 내 경험도 누군가에게 도움이 될 수 있겠다고 처음 생각했습니다. 카카오톡 오픈채팅방에서 외주 경험을 나누던 중, 제 이야기를 지켜보던 한 출판사 편집자가 먼저 연락해 책 집필을 제안했습니다. IT 서적을 내게 될 줄은 상상도 못 했습니다."}, {"t": "h", "text": "대외 활동, 그리고 방향과 속도가 달라진 1년"}, {"t": "p", "text": "카카오 AI TOP 100 Finalist 선정과 두 번의 해커톤 연속 대상으로, AI 시대에는 나이가 약점이 아니라 강점이 될 수 있겠다는 생각을 하게 됐고 2026년 3월 카카오 AI 앰배서더가 되었습니다. 작은 외주 실험이 글쓰기, 대외 활동, 본업의 선택지까지 넓혔습니다. 달라진 건 망설임 앞에서 '일단 해보자'고 노트북을 여는 일이 더 이상 두렵지 않다는 것입니다. AI의 힘은 기업만의 것이 아니며, 평범한 개인도 향상된 생산성을 무기로 1년 전이라면 엄두도 못 냈을 일을 해낼 수 있는 시대가 됐습니다."}], "audio": "../audio/b31142d0d31b.mp3", "image": "../images/b31142d0d31b.png"}, {"title": "Git에서 파일을 무시하는 방법은 .gitignore만이 아님", "source": "GeekNews", "url": "https://news.hada.io/topic?id=30627", "blurb": "파일 무시 규칙의 세 수준(.gitignore, .git/info/exclude, ~/.config/git/ignore) 설명", "content": [{"t": "h", "text": "Git에서 파일을 무시하는 방법은 .gitignore만이 아님"}, {"t": "p", "text": "Git의 파일 무시 규칙은 세 가지 수준으로 구성된다. 각각 적용 범위와 공유 여부가 다르므로 용도에 맞게 선택해야 한다."}, {"t": "h", "text": "1. .gitignore (저장소 공유 규칙)"}, {"t": "p", "text": "코드와 함께 커밋되어 팀 전체가 공유하는 규칙이다. 무시할 파일명을 작성하는 일반적인 파일로, 팀 전체가 동일하게 적용해야 하는 항목에 적합하다."}, {"t": "h", "text": "2. .git/info/exclude (저장소별 개인 규칙)"}, {"t": "p", "text": "Git에 체크인되지 않는다. notes.txt처럼 개인 워크플로우에만 필요한 파일에 적합하다. 특정 저장소에서만 무시하되 팀 규칙에는 포함하고 싶지 않을 때 사용한다."}, {"t": "h", "text": "3. ~/.config/git/ignore (머신 전역 규칙)"}, {"t": "p", "text": "홈 디렉터리의 전역 설정으로 모든 Git 저장소에 적용된다. macOS의 .DS_Store 같은 OS/IDE 생성 파일에 적합하다."}, {"t": "h", "text": "유용한 명령어"}, {"t": "p", "text": "파일이 어떤 규칙으로 무시되는지 확인하려면 git check-ignore -v <파일명>을 사용한다. 매칭되는 규칙이 없으면 출력이 없다."}, {"t": "h", "text": "전역 설정 커스터마이징"}, {"t": "p", "text": "전역 무시 파일의 기본 위치를 변경하려면 git config --global core.excludesFile ~/.gitignore_global 명령을 사용한다."}], "audio": "../audio/391065192e96.mp3", "image": "../images/391065192e96.png"}]</script>
-<script src="../assets/site.js?v=67b04756"></script>
+<script src="../assets/site.js?v=d5befe9c"></script>
 </body></html>
