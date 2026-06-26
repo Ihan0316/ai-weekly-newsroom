@@ -25,35 +25,20 @@ def parse_md(day_id):
     return "", "•"
 
 def thumb_svg(day_id, rec):
+    # 기사 이미지가 없을 때 쓰는 Apple-미니멀 플레이스홀더 (연그레이 + 큰 날짜)
     mo, da = parse_md(day_id)
     wd = rec.get("weekday", "")
-    top = headline(rec)
-    top = (top[:26] + "…") if len(top) > 27 else top
-    gid = "o" + day_id.replace("-", "")
-    chips = ["뉴스", "정처기", "용어"]
-    chipcols = [ACCENT, "#0a8f6b", "#1f6feb"]
-    cx = 50
-    chip_svg = ""
-    for c, col in zip(chips, chipcols):
-        w = 30 + len(c) * 13
-        chip_svg += (f'<rect x="{cx}" y="150" width="{w}" height="24" rx="12" fill="{col}"/>'
-                     f'<text x="{cx + w/2}" y="167" text-anchor="middle" font-family="\'Noto Serif KR\',sans-serif" font-size="13" fill="#fff">{c}</text>')
-        cx += w + 8
-    return f'''<svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="{gid}" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="{ACCENT}"/><stop offset="1" stop-color="{ADEEP}"/>
-        </radialGradient>
-        <filter id="b{gid}" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="{BONE}"/>
-      <circle cx="398" cy="74" r="60" fill="url(#{gid})" filter="url(#b{gid})" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#{gid})" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="{FAINT}">{da}</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="{ACCENT}">{mo}월 · {wd}요일</text>
-      {chip_svg}
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="{INK}">{esc(top)}</text>
+    return f'''<svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
+      <rect width="480" height="300" fill="#f5f5f7"/>
+      <text x="40" y="186" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="150" font-weight="700" fill="#1d1d1f" letter-spacing="-7">{da}</text>
+      <text x="46" y="238" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="20" font-weight="500" fill="#6e6e73">{mo}월 · {wd}요일</text>
     </svg>'''
+
+def card_image(rec):
+    news = rec.get("news") or []
+    if news and news[0].get("image"):
+        return news[0]["image"].replace("../", "")   # index 기준 상대경로
+    return None
 
 def headline(rec):
     news = rec.get("news") or []
@@ -73,17 +58,19 @@ def card(day_id, rec, hero=False):
     wd = rec.get("weekday", "")
     label = f'{rec["date_label"]}' + (f' ({wd})' if wd else '')
     href = f'days/{day_id}.html'
+    img = card_image(rec)
+    thumb = (f'<img src="{esc(img)}" alt="" loading="lazy">' if img else thumb_svg(day_id, rec))
     if hero:
-        return f'''<div class="featured"><a class="card tilt featured-tilt" href="{esc(href)}">
-      <div class="thumb lift">{thumb_svg(day_id, rec)}</div>
+        return f'''<div class="featured"><a class="card" href="{esc(href)}">
+      <div class="thumb">{thumb}</div>
       <div class="cbody">
         <div class="eyebrow">오늘 · {esc(label)}</div>
         <h3 class="ctitle">{esc(top)}</h3>
         <p class="cmeta">{esc(meta_line(rec))}</p>
         <span class="clink">오늘 읽기 <span class="arr">→</span></span>
       </div></a></div>'''
-    return f'''<a class="card tilt" href="{esc(href)}">
-      <div class="thumb">{thumb_svg(day_id, rec)}</div>
+    return f'''<a class="card" href="{esc(href)}">
+      <div class="thumb">{thumb}</div>
       <div class="cbody">
         <div class="eyebrow">{esc(label)}</div>
         <h3 class="ctitle">{esc(top)}</h3>
@@ -102,9 +89,6 @@ def build_index(days, ver="", build_v=""):
     return f'''<!doctype html><html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>데일리 · 알아두면 좋은 것들</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css{ver}">
 <meta name="site-build" content="{build_v}" data-src="build.json">
 <script>
@@ -120,7 +104,6 @@ def build_index(days, ver="", build_v=""):
 </script>
 </head>
 <body>
-<div class="orbs"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span></div>
 <nav class="nav">
   <span class="brand">데일리<span class="dot">.</span></span>
   <span class="tag">알아두면 좋은 것들 — 뉴스·정처기·용어</span>
@@ -130,11 +113,10 @@ def build_index(days, ver="", build_v=""):
 <div class="wrap">
   <section class="masthead">
     <div class="mh-copy">
-      <div class="kicker">Daily · 매일 한 장</div>
-      <h1>매일, <em>알아두면</em><br>좋은 것들.</h1>
-      <p>그날의 IT·개발 뉴스 몇 개, 정보처리기사 기초 문제 하나, 그리고 IT·개발·기획 용어 몇 개.</p>
+      <div class="kicker">매일 한 장</div>
+      <h1>매일, <em>알아두면</em> 좋은 것들.</h1>
+      <p>그날의 IT·개발 뉴스, 정보처리기사 기초 문제, 그리고 IT·개발·기획 용어를 한 장에.</p>
     </div>
-    <div class="hero3d"><canvas id="scene"></canvas></div>
   </section>
 
   <div class="searchbar">
@@ -157,7 +139,6 @@ def build_index(days, ver="", build_v=""):
     뉴스 본문은 LLM 웹검색 자동 수집물입니다. 게시 전 출처 확인을 권장합니다.
   </div>
 </div>
-<script src="{THREE_CDN}"></script>
 <script src="assets/site.js{ver}"></script>
 </body></html>'''
 

@@ -1,10 +1,7 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>데일리 · 알아두면 좋은 것들</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=c57a71dd">
+<link rel="stylesheet" href="assets/site.css?v=3f309847">
 <meta name="site-build" content="3d63636345" data-src="build.json">
 <script>
 /* 모바일 직접 접속 시 오늘 뉴스로 자동 이동. 사이트 내부 이동('전체 보기' 등)·재방문은 제외 */
@@ -19,7 +16,6 @@
 </script>
 </head>
 <body>
-<div class="orbs"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span></div>
 <nav class="nav">
   <span class="brand">데일리<span class="dot">.</span></span>
   <span class="tag">알아두면 좋은 것들 — 뉴스·정처기·용어</span>
@@ -29,39 +25,24 @@
 <div class="wrap">
   <section class="masthead">
     <div class="mh-copy">
-      <div class="kicker">Daily · 매일 한 장</div>
-      <h1>매일, <em>알아두면</em><br>좋은 것들.</h1>
-      <p>그날의 IT·개발 뉴스 몇 개, 정보처리기사 기초 문제 하나, 그리고 IT·개발·기획 용어 몇 개.</p>
+      <div class="kicker">매일 한 장</div>
+      <h1>매일, <em>알아두면</em> 좋은 것들.</h1>
+      <p>그날의 IT·개발 뉴스, 정보처리기사 기초 문제, 그리고 IT·개발·기획 용어를 한 장에.</p>
     </div>
-    <div class="hero3d"><canvas id="scene"></canvas></div>
   </section>
 
   <div class="searchbar">
     <span class="search-ico" aria-hidden="true">🔎</span>
     <input id="news-search" class="search-input" type="search" autocomplete="off"
-      data-index="search.json?v=c57a71dd"
+      data-index="search.json?v=3f309847"
       placeholder="주제·키워드로 뉴스 검색 (제목·본문까지)" aria-label="뉴스 검색">
     <button id="search-clear" class="search-clear" type="button" hidden aria-label="검색어 지우기">✕</button>
   </div>
   <div class="search-results" id="search-results" hidden></div>
 
   <div class="feed" id="feed">
-  <div class="featured"><a class="card tilt featured-tilt" href="days/2026-06-26.html">
-      <div class="thumb lift"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260626" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260626" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260626)" filter="url(#bo20260626)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260626)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">26</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">6월 · 금요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">auth.md — 에이전트가 사용자를 대신해 가…</text>
-    </svg></div>
+  <div class="featured"><a class="card" href="days/2026-06-26.html">
+      <div class="thumb"><img src="images/6f8b9cf45ef1.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">오늘 · 2026. 6. 26 (금)</div>
         <h3 class="ctitle">auth.md — 에이전트가 사용자를 대신해 가입시키기 위한 오픈 프로토콜</h3>
@@ -69,704 +50,256 @@
         <span class="clink">오늘 읽기 <span class="arr">→</span></span>
       </div></a></div>
   <div class="sec-label">지난 날</div>
-  <div class="grid"><a class="card tilt" href="days/2026-06-25.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260625" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260625" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260625)" filter="url(#bo20260625)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260625)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">25</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">6월 · 목요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">시장에서 이기는 AI 프로덕트를 위한 지표와 운…</text>
-    </svg></div>
+  <div class="grid"><a class="card" href="days/2026-06-25.html">
+      <div class="thumb"><img src="images/4b2448ec1933.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 6. 25 (목)</div>
         <h3 class="ctitle">시장에서 이기는 AI 프로덕트를 위한 지표와 운영법</h3>
         <p class="cmeta">뉴스 3 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-06-24.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260624" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260624" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260624)" filter="url(#bo20260624)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260624)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">24</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">6월 · 수요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">K8s 운영을 AI 에이전트에 맡길 수 있을까?</text>
-    </svg></div>
+<a class="card" href="days/2026-06-24.html">
+      <div class="thumb"><img src="images/87d1e199de43.jpg" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 6. 24 (수)</div>
         <h3 class="ctitle">K8s 운영을 AI 에이전트에 맡길 수 있을까?</h3>
         <p class="cmeta">뉴스 3 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-06-23.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260623" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260623" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260623)" filter="url(#bo20260623)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260623)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">23</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">6월 · 화요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">제가 정말 루프 엔지니어링까지 알아야 할까요?</text>
-    </svg></div>
+<a class="card" href="days/2026-06-23.html">
+      <div class="thumb"><img src="images/fea05fa3639f.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 6. 23 (화)</div>
         <h3 class="ctitle">제가 정말 루프 엔지니어링까지 알아야 할까요?</h3>
         <p class="cmeta">뉴스 3 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-06-22.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260622" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260622" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260622)" filter="url(#bo20260622)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260622)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">22</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">6월 · 월요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">런던에서 만난 AI 시대 디자이너의 5가지 생존…</text>
-    </svg></div>
+<a class="card" href="days/2026-06-22.html">
+      <div class="thumb"><img src="images/b26275f7cdfc.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 6. 22 (월)</div>
         <h3 class="ctitle">런던에서 만난 AI 시대 디자이너의 5가지 생존 전략</h3>
         <p class="cmeta">뉴스 3 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-06-21.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260621" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260621" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260621)" filter="url(#bo20260621)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260621)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">21</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">6월 · 일요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">ClickHouse 오픈소스 10년</text>
-    </svg></div>
+<a class="card" href="days/2026-06-21.html">
+      <div class="thumb"><img src="images/ef9203100d32.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 6. 21 (일)</div>
         <h3 class="ctitle">ClickHouse 오픈소스 10년</h3>
         <p class="cmeta">뉴스 3 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-06-20.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260620" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260620" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260620)" filter="url(#bo20260620)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260620)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">20</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">6월 · 토요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">AI 시대에 K-공문서(HWP)를 못 여는 진짜…</text>
-    </svg></div>
+<a class="card" href="days/2026-06-20.html">
+      <div class="thumb"><img src="images/192f5054bd9c.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 6. 20 (토)</div>
         <h3 class="ctitle">AI 시대에 K-공문서(HWP)를 못 여는 진짜 이유, 그리고 해법</h3>
         <p class="cmeta">뉴스 2 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-06-19.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260619" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260619" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260619)" filter="url(#bo20260619)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260619)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">19</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">6월 · 금요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">오픈AI 사장·딥마인드 CEO·클로드 코드 창시…</text>
-    </svg></div>
+<a class="card" href="days/2026-06-19.html">
+      <div class="thumb"><img src="images/9bb6572439ae.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 6. 19 (금)</div>
         <h3 class="ctitle">오픈AI 사장·딥마인드 CEO·클로드 코드 창시자가 말하는 5가지 미래</h3>
         <p class="cmeta">뉴스 3 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-06-18.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260618" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260618" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260618)" filter="url(#bo20260618)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260618)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">18</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">6월 · 목요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">AI PRD는 무엇이 달라야 하는가</text>
-    </svg></div>
+<a class="card" href="days/2026-06-18.html">
+      <div class="thumb"><img src="images/ed8c1dd6ca2e.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 6. 18 (목)</div>
         <h3 class="ctitle">AI PRD는 무엇이 달라야 하는가</h3>
         <p class="cmeta">뉴스 3 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-06-17.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260617" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260617" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260617)" filter="url(#bo20260617)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260617)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">17</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">6월 · 수요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">타입 계층과 호환성, extends가 진짜 의미…</text>
-    </svg></div>
+<a class="card" href="days/2026-06-17.html">
+      <div class="thumb"><img src="images/545471eecc48.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 6. 17 (수)</div>
         <h3 class="ctitle">타입 계층과 호환성, extends가 진짜 의미하는 것</h3>
         <p class="cmeta">뉴스 3 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-06-16.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260616" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260616" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260616)" filter="url(#bo20260616)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260616)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">16</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">6월 · 화요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">바이브 코딩을 만난 1년, 40대 비개발자에게 …</text>
-    </svg></div>
+<a class="card" href="days/2026-06-16.html">
+      <div class="thumb"><img src="images/b31142d0d31b.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 6. 16 (화)</div>
         <h3 class="ctitle">바이브 코딩을 만난 1년, 40대 비개발자에게 일어난 일들</h3>
         <p class="cmeta">뉴스 2 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-06-15.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260615" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260615" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260615)" filter="url(#bo20260615)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260615)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">15</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">6월 · 월요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">Typescript 7.0 RC버전이 배포되었습…</text>
-    </svg></div>
+<a class="card" href="days/2026-06-15.html">
+      <div class="thumb"><img src="images/33028605da36.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 6. 15 (월)</div>
         <h3 class="ctitle">Typescript 7.0 RC버전이 배포되었습니다</h3>
         <p class="cmeta">뉴스 2 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-06-14.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260614" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260614" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260614)" filter="url(#bo20260614)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260614)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">14</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">6월 · 일요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">FUTO Swipe: 공개형 스와이프 입력 모델</text>
-    </svg></div>
+<a class="card" href="days/2026-06-14.html">
+      <div class="thumb"><img src="images/879de4792804.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 6. 14 (일)</div>
         <h3 class="ctitle">FUTO Swipe: 공개형 스와이프 입력 모델</h3>
         <p class="cmeta">뉴스 2 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-06-13.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260613" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260613" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260613)" filter="url(#bo20260613)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260613)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">13</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">6월 · 토요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">LLM Wiki와 본유적 부하</text>
-    </svg></div>
+<a class="card" href="days/2026-06-13.html">
+      <div class="thumb"><img src="images/9a7d34affd5e.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 6. 13 (토)</div>
         <h3 class="ctitle">LLM Wiki와 본유적 부하</h3>
         <p class="cmeta">뉴스 2 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-06-12.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260612" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260612" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260612)" filter="url(#bo20260612)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260612)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">12</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">6월 · 금요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">지금 진짜 쓸 만한 AI 에이전트 10가지 총정…</text>
-    </svg></div>
+<a class="card" href="days/2026-06-12.html">
+      <div class="thumb"><img src="images/bfbb9c4055e1.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 6. 12 (금)</div>
         <h3 class="ctitle">지금 진짜 쓸 만한 AI 에이전트 10가지 총정리(2) : 자율 에이전트</h3>
         <p class="cmeta">뉴스 3 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-06-11.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260611" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260611" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260611)" filter="url(#bo20260611)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260611)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">11</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">6월 · 목요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">AI 기능은 &#x27;프롬프트&#x27;가 아니라 &#x27;시스템&#x27;으로…</text>
-    </svg></div>
+<a class="card" href="days/2026-06-11.html">
+      <div class="thumb"><img src="images/c256551ffea6.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 6. 11 (목)</div>
         <h3 class="ctitle">AI 기능은 &#x27;프롬프트&#x27;가 아니라 &#x27;시스템&#x27;으로 만든다</h3>
         <p class="cmeta">뉴스 2 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-06-10.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260610" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260610" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260610)" filter="url(#bo20260610)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260610)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">10</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">6월 · 수요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">나만의 세컨 브레인: 옵시디언 기반 LLM 위키…</text>
-    </svg></div>
+<a class="card" href="days/2026-06-10.html">
+      <div class="thumb"><img src="images/d275cf6ad95a.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 6. 10 (수)</div>
         <h3 class="ctitle">나만의 세컨 브레인: 옵시디언 기반 LLM 위키 구축기</h3>
         <p class="cmeta">뉴스 3 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-06-09.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260609" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260609" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260609)" filter="url(#bo20260609)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260609)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">9</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">6월 · 화요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">AI 챗봇을 도입했는데, 왜 업무는 그대로일까</text>
-    </svg></div>
+<a class="card" href="days/2026-06-09.html">
+      <div class="thumb"><img src="images/fd42622b757d.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 6. 9 (화)</div>
         <h3 class="ctitle">AI 챗봇을 도입했는데, 왜 업무는 그대로일까</h3>
         <p class="cmeta">뉴스 3 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-06-08.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260608" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260608" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260608)" filter="url(#bo20260608)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260608)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">8</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">6월 · 월요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">GEO 콘텐츠 전략: SEO 키워드 보다 AI …</text>
-    </svg></div>
+<a class="card" href="days/2026-06-08.html">
+      <div class="thumb"><img src="images/f11c5b1bb787.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 6. 8 (월)</div>
         <h3 class="ctitle">GEO 콘텐츠 전략: SEO 키워드 보다 AI &#x27;맥락&#x27; 설계하는 법</h3>
         <p class="cmeta">뉴스 2 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-06-07.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260607" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260607" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260607)" filter="url(#bo20260607)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260607)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">7</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">6월 · 일요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">boring - 단순하고 가벼운 커맨드라인 SS…</text>
-    </svg></div>
+<a class="card" href="days/2026-06-07.html">
+      <div class="thumb"><img src="images/59cc722a5117.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 6. 7 (일)</div>
         <h3 class="ctitle">boring - 단순하고 가벼운 커맨드라인 SSH 터널 매니저</h3>
         <p class="cmeta">뉴스 2 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-06-06.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260606" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260606" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260606)" filter="url(#bo20260606)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260606)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">6</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">6월 · 토요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">Unlimited OCR — Baidu의 원샷 …</text>
-    </svg></div>
+<a class="card" href="days/2026-06-06.html">
+      <div class="thumb"><img src="images/3bd886f1bbdb.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 6. 6 (토)</div>
         <h3 class="ctitle">Unlimited OCR — Baidu의 원샷 장문 파싱 모델</h3>
         <p class="cmeta">뉴스 2 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-06-05.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260605" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260605" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260605)" filter="url(#bo20260605)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260605)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">5</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">6월 · 금요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">지금 진짜 쓸 만한 AI 에이전트 10가지 총정…</text>
-    </svg></div>
+<a class="card" href="days/2026-06-05.html">
+      <div class="thumb"><img src="images/58255c85646e.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 6. 5 (금)</div>
         <h3 class="ctitle">지금 진짜 쓸 만한 AI 에이전트 10가지 총정리(1) : 웹·코딩 에이전트</h3>
         <p class="cmeta">뉴스 2 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-06-04.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260604" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260604" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260604)" filter="url(#bo20260604)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260604)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">4</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">6월 · 목요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">PM은 LLM을 어디까지 이해해야 할까?</text>
-    </svg></div>
+<a class="card" href="days/2026-06-04.html">
+      <div class="thumb"><img src="images/2475fd486537.jpg" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 6. 4 (목)</div>
         <h3 class="ctitle">PM은 LLM을 어디까지 이해해야 할까?</h3>
         <p class="cmeta">뉴스 2 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-06-03.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260603" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260603" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260603)" filter="url(#bo20260603)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260603)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">3</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">6월 · 수요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">Moebius: 0.2B 이미지 인페인팅 모델로…</text>
-    </svg></div>
+<a class="card" href="days/2026-06-03.html">
+      <div class="thumb"><img src="images/5f890e421c93.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 6. 3 (수)</div>
         <h3 class="ctitle">Moebius: 0.2B 이미지 인페인팅 모델로 10B급 성능 달성</h3>
         <p class="cmeta">뉴스 2 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-06-02.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260602" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260602" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260602)" filter="url(#bo20260602)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260602)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">2</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">6월 · 화요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">MCP·Skills·Hooks·Sub-agent…</text>
-    </svg></div>
+<a class="card" href="days/2026-06-02.html">
+      <div class="thumb"><img src="images/d005589b2b1f.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 6. 2 (화)</div>
         <h3 class="ctitle">MCP·Skills·Hooks·Sub-agents, 4가지 중 뭘 골라야 할까?</h3>
         <p class="cmeta">뉴스 2 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-06-01.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260601" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260601" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260601)" filter="url(#bo20260601)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260601)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">1</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">6월 · 월요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">AX의 어려움은 전 직원이 AI를 쓴 이후부터 …</text>
-    </svg></div>
+<a class="card" href="days/2026-06-01.html">
+      <div class="thumb"><img src="images/327d4aef5ce4.jpg" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 6. 1 (월)</div>
         <h3 class="ctitle">AX의 어려움은 전 직원이 AI를 쓴 이후부터 시작된다</h3>
         <p class="cmeta">뉴스 2 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-05-31.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260531" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260531" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260531)" filter="url(#bo20260531)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260531)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">31</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">5월 · 일요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">Show GN: AI 에이전트를 내 걸로 만드는…</text>
-    </svg></div>
+<a class="card" href="days/2026-05-31.html">
+      <div class="thumb"><img src="images/18af294b2932.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 5. 31 (일)</div>
         <h3 class="ctitle">Show GN: AI 에이전트를 내 걸로 만드는 방법</h3>
         <p class="cmeta">뉴스 2 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-05-30.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260530" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260530" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260530)" filter="url(#bo20260530)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260530)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">30</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">5월 · 토요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">취업과 소프트웨어는 망했다</text>
-    </svg></div>
+<a class="card" href="days/2026-05-30.html">
+      <div class="thumb"><img src="images/6bf114064169.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 5. 30 (토)</div>
         <h3 class="ctitle">취업과 소프트웨어는 망했다</h3>
         <p class="cmeta">뉴스 2 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-05-29.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260529" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260529" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260529)" filter="url(#bo20260529)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260529)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">29</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">5월 · 금요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">구글을 AI로 해킹해서 7억원 벌기</text>
-    </svg></div>
+<a class="card" href="days/2026-05-29.html">
+      <div class="thumb"><img src="images/7382df1af2cf.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 5. 29 (금)</div>
         <h3 class="ctitle">구글을 AI로 해킹해서 7억원 벌기</h3>
         <p class="cmeta">뉴스 2 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-05-28.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260528" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260528" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260528)" filter="url(#bo20260528)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260528)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">28</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">5월 · 목요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">SSH 터널 매니저 - GUI, 맥/윈도용</text>
-    </svg></div>
+<a class="card" href="days/2026-05-28.html">
+      <div class="thumb"><img src="images/98a60961d87c.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 5. 28 (목)</div>
         <h3 class="ctitle">SSH 터널 매니저 - GUI, 맥/윈도용</h3>
         <p class="cmeta">뉴스 2 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-05-27.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260527" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260527" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260527)" filter="url(#bo20260527)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260527)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">27</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">5월 · 수요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">Next API Capture – App Rou…</text>
-    </svg></div>
+<a class="card" href="days/2026-05-27.html">
+      <div class="thumb"><img src="images/df866095ca24.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 5. 27 (수)</div>
         <h3 class="ctitle">Next API Capture – App Router의 &#x27;서버에서 부르는 API&#x27;를 DevTools에서 보기</h3>
         <p class="cmeta">뉴스 2 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-05-26.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260526" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260526" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260526)" filter="url(#bo20260526)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260526)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">26</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">5월 · 화요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">정말로 지금은 Codex가 Claude Code…</text>
-    </svg></div>
+<a class="card" href="days/2026-05-26.html">
+      <div class="thumb"><img src="images/485130c21cf7.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 5. 26 (화)</div>
         <h3 class="ctitle">정말로 지금은 Codex가 Claude Code보다 나을까?</h3>
         <p class="cmeta">뉴스 2 · 정처기 1 · 용어 3</p>
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>
-<a class="card tilt" href="days/2026-05-25.html">
-      <div class="thumb"><svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="o20260525" cx="0.35" cy="0.3" r="0.75">
-          <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#c2532f"/><stop offset="1" stop-color="#9c3f20"/>
-        </radialGradient>
-        <filter id="bo20260525" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
-      </defs>
-      <rect width="480" height="250" fill="#f6f4ec"/>
-      <circle cx="398" cy="74" r="60" fill="url(#o20260525)" filter="url(#bo20260525)" opacity="0.5"/>
-      <circle cx="398" cy="74" r="44" fill="url(#o20260525)" opacity="0.95"/>
-      <text x="46" y="118" font-family="Fraunces,Georgia,serif" font-style="italic" font-size="92" font-weight="600" fill="#ece3d2">25</text>
-      <text x="52" y="58" font-family="'JetBrains Mono',monospace" font-size="14" letter-spacing="2" fill="#c2532f">5월 · 월요일</text>
-      <rect x="50" y="150" width="56" height="24" rx="12" fill="#c2532f"/><text x="78.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">뉴스</text><rect x="114" y="150" width="69" height="24" rx="12" fill="#0a8f6b"/><text x="148.5" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">정처기</text><rect x="191" y="150" width="56" height="24" rx="12" fill="#1f6feb"/><text x="219.0" y="167" text-anchor="middle" font-family="'Noto Serif KR',sans-serif" font-size="13" fill="#fff">용어</text>
-      <text x="52" y="210" font-family="'Noto Serif KR',serif" font-size="15" font-weight="600" fill="#191711">개인 웹사이트를 위한 JSON-LD 설명</text>
-    </svg></div>
+<a class="card" href="days/2026-05-25.html">
+      <div class="thumb"><img src="images/bf5b2d5f1c67.png" alt="" loading="lazy"></div>
       <div class="cbody">
         <div class="eyebrow">2026. 5. 25 (월)</div>
         <h3 class="ctitle">개인 웹사이트를 위한 JSON-LD 설명</h3>
@@ -780,6 +313,5 @@
     뉴스 본문은 LLM 웹검색 자동 수집물입니다. 게시 전 출처 확인을 권장합니다.
   </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
-<script src="assets/site.js?v=c57a71dd"></script>
+<script src="assets/site.js?v=3f309847"></script>
 </body></html>

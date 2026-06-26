@@ -8,7 +8,7 @@ usage: python build.py <day.json> [out.html]
 """
 import json, sys, html, os
 
-KIND_COLORS = {"IT": "#1f6feb", "개발": "#0a8f6b", "기획": "#c2532f"}
+KIND_COLORS = {"IT": "#0071e3", "개발": "#1d9d57", "기획": "#c25e00"}
 
 def esc(s):
     return html.escape(html.unescape(str(s)))
@@ -118,14 +118,10 @@ def render_day(d, back_href=None, asset_prefix="../", ver="", build_v=""):
     return f'''<!doctype html><html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>데일리 다이제스트 · {esc(d["date_label"])}</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{a}assets/site.css{ver}">
 <meta name="site-build" content="{build_v}" data-src="{a}build.json">
 </head>
 <body>
-<div class="orbs"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span></div>
 {back}
 <main class="reader">
   <div class="kicker">{label} · 데일리 다이제스트</div>

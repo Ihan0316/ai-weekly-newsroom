@@ -1,14 +1,10 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>데일리 다이제스트 · 2026. 6. 4</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css?v=c57a71dd">
+<link rel="stylesheet" href="../assets/site.css?v=3f309847">
 <meta name="site-build" content="3d63636345" data-src="../build.json">
 </head>
 <body>
-<div class="orbs"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span></div>
 <div class="dnav"><a class="backlink" href="../index.html">← 전체 보기</a></div>
 <main class="reader">
   <div class="kicker">2026. 6. 4 (목) · 데일리 다이제스트</div>
@@ -63,17 +59,17 @@
       <span class="seclabel">IT · 개발 · 기획 용어</span>
       <ul class="terms">
         <li class="termrow">
-          <span class="t-kind" style="background:#c2532f">기획</span>
+          <span class="t-kind" style="background:#c25e00">기획</span>
           <span class="t-term">회고 (Retrospective)</span>
           <span class="t-mean">스프린트 종료 후 무엇이 좋았고 개선할지 돌아보며 다음 주기를 개선하는 회의.</span>
         </li>
         <li class="termrow">
-          <span class="t-kind" style="background:#0a8f6b">개발</span>
+          <span class="t-kind" style="background:#1d9d57">개발</span>
           <span class="t-term">의존성 (Dependency)</span>
           <span class="t-mean">프로젝트가 동작하기 위해 필요한 외부 라이브러리·패키지 등의 종속 관계.</span>
         </li>
         <li class="termrow">
-          <span class="t-kind" style="background:#1f6feb">IT</span>
+          <span class="t-kind" style="background:#0071e3">IT</span>
           <span class="t-term">스케일아웃 (Scale-out)</span>
           <span class="t-mean">서버 대수를 늘려 처리 능력을 수평적으로 확장하는 방식.</span>
         </li></ul>
@@ -102,5 +98,5 @@
   </div>
 </div>
 <script id="news-data" type="application/json">[{"title": "PM은 LLM을 어디까지 이해해야 할까?", "source": "요즘IT", "url": "https://yozm.wishket.com/magazine/detail/3784/", "blurb": "LLM은 신비로운 마법 상자가 아니라 다음 단어를 확률로 예측하는 기계다. PM이라면 의사결정을 위해 어디까지 이해해야 하는지 짚는다.", "content": [{"t": "p", "text": "1950년 클로드 섀넌의 게임에서 출발한 LLM의 본질은 '다음에 올 단어를 확률적으로 예측하는 것'입니다. PM은 엔지니어는 아니지만 이 원리에 대한 직관을 가져야 올바른 의사결정을 할 수 있습니다."}, {"t": "h", "text": "1. 토큰: LLM은 글자를 다르게 본다"}, {"t": "p", "text": "LLM은 단어가 아닌 '토큰'이라는 조각으로 텍스트를 처리합니다. 한국어는 영어보다 약 1.5~2배 토큰이 필요합니다. 비용과 처리 용량이 토큰 단위로 결정되므로 한국어 AI 서비스는 이를 반드시 고려해야 합니다."}, {"t": "h", "text": "2. 컨텍스트: 단기 기억밖에 없다"}, {"t": "p", "text": "LLM은 컨텍스트 윈도우라는 한정된 단기 기억만 가지며 그 범위를 벗어난 정보는 처리하지 못합니다. 모델 자체는 사용자를 기억하지 않으므로, 사용자 정보를 DB에 저장해 매번 제공하는 시스템 설계가 필요합니다."}, {"t": "h", "text": "3. 추론: 왜 답이 매번 다른가"}, {"t": "p", "text": "모델은 각 토큰의 확률 분포에서 무작위 샘플링해 답을 '뽑아냅니다'. Temperature는 이 무작위성을 조절하며, 낮은 값(0.1~0.3)은 일관성, 높은 값(0.7~1.2)은 다양성을 만듭니다. PM이 실제로 조절하는 손잡이입니다."}, {"t": "p", "text": "환각은 LLM이 사실성을 검증하지 않고 그럴듯한 토큰만 고르기 때문에 생김니다. 또한 학습 과정에서 사용자 만족도가 높게 평가되어, 사용자 기대에 맞춰 답을 하는 아첨(Sycophancy) 경향도 있어 비판적 피드백 기능은 의도적 설계가 필요합니다."}, {"t": "h", "text": "4. RAG: LLM에 참고서를 들려주는 법"}, {"t": "p", "text": "RAG는 사용자 질문 시 회사 자료에서 관련 내용을 검색해 모델 컨텍스트에 함께 제공하는 방식입니다. 실제 자료를 근거로 답하게 되어 환각을 줄이며, 기업용 AI 기능은 거의 모두 RAG가 필요합니다."}, {"t": "h", "text": "5. 에이전트: LLM에게 손과 발을 주는 법"}, {"t": "p", "text": "에이전트는 LLM이 도구를 사용해 직접 작업을 수행하도록 만드는 구조입니다. AI의 영역이 대화에서 작업으로 확장되며, PM은 AI 행동의 책임 설계까지 고민해야 합니다. 결국 PM이 알아야 할 직관은 토큰·컨텍스트·추론·RAG·에이전트 다섯 가지입니다."}], "audio": "../audio/2475fd486537.mp3", "image": "../images/2475fd486537.jpg"}, {"title": "이제 AI에게 매번 설명하지 않아도 됩니다: Kanwas", "source": "요즘IT", "url": "https://yozm.wishket.com/magazine/detail/3783/", "blurb": "AI 도구가 넘쳐나는 시대, 정작 팀의 지식은 Claude 채팅창·노션 문서·로컬 폴더 사이를 떠돈다. 회의 결정과 인터뷰 인사이트가 흩어지는 문제를 다룬다.", "content": [{"t": "h", "text": "이제 AI에게 매번 설명하지 않아도 됩니다: Kanwas"}, {"t": "h", "text": "팀의 지식이 흩어지는 문제"}, {"t": "p", "text": "팀에서 AI를 사용할 때 반복되는 문제가 있습니다. 새로운 채팅창을 열 때마다 제품에 대한 설명, 타깃 고객, 이전 결정 사항 등을 다시 설명해야 한다는 점입니다. 더 근본적인 문제는 문서 작성과 실제 지식이 살아있는 상태 사이의 간극입니다. PRD는 노션에 작성되지만 업데이트되지 않고, 화이트보드 내용은 회의 후 사진으로만 남습니다."}, {"t": "h", "text": "Kanwas의 목표"}, {"t": "p", "text": "Kanwas는 \"팀의 컨텍스트 브레인\"을 목표로 합니다. 팀의 지식과 의사결정 맥락을 한 곳에 모아, 사람과 AI 에이전트가 동일한 맥락 위에서 협업할 수 있는 공간을 만드는 것입니다. 단순히 정보를 저장하는 것이 아니라, 저장된 맥락이 실제 AI 작업에 활용되는 구조가 핵심입니다."}, {"t": "h", "text": "주요 기능"}, {"t": "p", "text": "캔버스 기반 작업 공간: 코드, 문서, 태스크, 임베드를 하나의 공간에서 다룰 수 있고 전체 흐름을 한눈에 파악하며 실시간 협업이 가능합니다. 컨텍스트 그래프: 회사 정보·제품 맥락·팀 구성·의사결정이 자동 정리되는 \"Brain\" 폴더가 중심이며, 에이전트가 매 세션 시작 시 자동으로 불러옵니다. AI 에이전트: Claude, GPT, Gemini 등 여러 모델을 연결하고, Direct 모드는 태스크를 직접 실행하며 \"Get my brain going\" 모드는 사고를 자극하는 질문을 던집니다."}, {"t": "h", "text": "실제 활용 경험"}, {"t": "p", "text": "신규 기능 PRD 작업에서 기존 방식과 차이가 분명했습니다. 이전에는 노션, 슬랙, Claude를 오가며 맥락을 조합했지만, Kanwas에서는 이미 연결된 사용자 인터뷰, 경쟁사 분석, 팀 회의 결정이 함께 활용되어 \"우리 상황에 맞는\" 결과물을 얻을 수 있었습니다."}, {"t": "h", "text": "추천 대상"}, {"t": "p", "text": "AI를 많이 사용하지만 결과가 맥락 없이 느껴지는 팀, 문서는 많지만 실제로 활용하지 않는 팀, 소수 인원으로 여러 AI 에이전트를 운영하는 스타트업, 그리고 PM과 프로덕트 리더에게 추천합니다."}, {"t": "h", "text": "현재의 제한사항"}, {"t": "p", "text": "행동 변화 필요: 기존 도구에서 Kanwas로 전환하려면 작업 방식 변경이 필요합니다. 컨텍스트 품질 관리: 오래된 정보와 중복 내용이 쌓일 수 있어 개발팀은 이를 정리하는 \"Gardener\" 기능을 준비 중입니다. 온보딩 경험: 비개발자를 위한 시작 가이드가 부족할 수 있습니다. Kanwas는 GitHub에서 Apache 2.0 라이선스로 오픈소스 공개되어 있습니다."}], "audio": "../audio/cd051250ff38.mp3", "image": "../images/cd051250ff38.png"}]</script>
-<script src="../assets/site.js?v=c57a71dd"></script>
+<script src="../assets/site.js?v=3f309847"></script>
 </body></html>

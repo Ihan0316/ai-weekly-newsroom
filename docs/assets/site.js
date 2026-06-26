@@ -407,7 +407,7 @@
     setInterval(function () { check(false); }, 300000);
   }
 
-  function boot() { initTilt(); initHero(); initQuiz(); initNews(); initSearch(); initUpdateCheck(); }
+  function boot() { initQuiz(); initNews(); initSearch(); initUpdateCheck(); }
   if (document.readyState !== 'loading') boot();
   else document.addEventListener('DOMContentLoaded', boot);
 })();
