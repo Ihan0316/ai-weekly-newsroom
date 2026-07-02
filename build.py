@@ -112,7 +112,7 @@ MODAL = '''
   </div>
 </div>
 <div class="ask-panel" hidden role="dialog" aria-label="기사 질문">
-  <div class="ask-head"><span>이 기사에 질문</span></div>
+  <div class="ask-head"><span>이 기사에 질문</span><button class="ask-x" type="button" aria-label="질문 패널 닫기">✕</button></div>
   <div class="ask-thread"></div>
   <div class="ask-foot">
     <div class="ask-quote" hidden></div>
@@ -126,15 +126,36 @@ MODAL = '''
 </div>
 <div class="sel-ask" hidden><button class="sel-ask-btn" type="button">🤔 질문</button></div>'''
 
-def render_day(d, back_href=None, asset_prefix="../", ver="", build_v=""):
+def day_desc(d):
+    """공유·검색용 요약: 첫 기사 blurb → 제목 → 기본 문구."""
+    news = d.get("news") or []
+    if news and news[0].get("blurb_kr"):
+        return oneline(news[0]["blurb_kr"])[:155]
+    if news and news[0].get("title_kr"):
+        return oneline(news[0]["title_kr"])[:155]
+    return "그날의 IT·개발 뉴스, 정보처리기사 기초 문제, IT·개발·기획 용어를 한 장에."
+
+def render_day(d, back_href=None, asset_prefix="../", ver="", build_v="", canonical="", og_image=""):
     a = asset_prefix
     back = (f'<div class="dnav"><a class="backlink" href="{esc(back_href)}">← 전체 보기</a></div>') if back_href else ''
     wd = d.get("weekday", "")
     label = f'{esc(d["date_label"])}' + (f' ({esc(wd)})' if wd else '')
     news = d.get("news", [])
+    desc = esc(day_desc(d))
+    og_title = esc(f'{d["date_label"]} · 데일리 다이제스트')
+    canon = f'<link rel="canonical" href="{esc(canonical)}">' if canonical else ''
+    og_url = f'<meta property="og:url" content="{esc(canonical)}">' if canonical else ''
+    og_img = f'<meta property="og:image" content="{esc(og_image)}">' if og_image else ''
     return f'''<!doctype html><html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>데일리 다이제스트 · {esc(d["date_label"])}</title>
+<meta name="description" content="{desc}">
+{canon}
+<meta property="og:type" content="article">
+<meta property="og:title" content="{og_title}">
+<meta property="og:description" content="{desc}">
+{og_url}
+{og_img}
 <link rel="stylesheet" href="{a}assets/site.css{ver}">
 <meta name="site-build" content="{build_v}" data-src="{a}build.json">
 <meta name="ask-endpoint" content="{ASK_ENDPOINT}">

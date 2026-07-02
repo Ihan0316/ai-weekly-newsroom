@@ -242,7 +242,7 @@
       if (selectedText) { askQuote.hidden = false; askQuote.textContent = '“' + selectedText.slice(0, 140) + (selectedText.length > 140 ? '…' : '') + '”'; }
       else { askQuote.hidden = true; askQuote.textContent = ''; }
     }
-    function openPanel() { if (!enabled || !askPanel) return; askPanel.hidden = false; updateCount(); setTimeout(function () { if (askInput && !askInput.disabled) askInput.focus(); }, 50); }
+    function openPanel() { if (!enabled || !askPanel) return; askPanel.classList.remove('ask-collapsed'); askPanel.hidden = false; updateCount(); setTimeout(function () { if (askInput && !askInput.disabled) askInput.focus(); }, 50); }
     function closePanel() { if (askPanel) askPanel.hidden = true; hideSel(); }
     function bubble(cls, text) {
       var el = document.createElement('div');
@@ -288,22 +288,40 @@
     }
     if (askSend) askSend.addEventListener('click', doAsk);
     if (askInput) askInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') doAsk(); });
-    if (enabled && bodyEl) {
-      bodyEl.addEventListener('mouseup', function () {
-        setTimeout(function () {
-          var sel = window.getSelection(); var t = sel ? String(sel) : '';
-          if (t && t.trim().length >= 2 && sel.anchorNode && bodyEl.contains(sel.anchorNode)) {
-            var rect = sel.getRangeAt(0).getBoundingClientRect();
-            selAsk.style.left = Math.min(window.innerWidth - 96, Math.max(8, rect.left + rect.width / 2 - 44)) + 'px';
-            selAsk.style.top = Math.max(8, rect.top - 46) + 'px';
-            selAsk.hidden = false; selAsk._text = t.trim();
-          } else { hideSel(); }
-        }, 10);
+    if (enabled && bodyEl && selAsk) {
+      var showSelAsk = function () {
+        var sel = window.getSelection(); var t = sel ? String(sel) : '';
+        if (t && t.trim().length >= 2 && sel.rangeCount && sel.anchorNode && bodyEl.contains(sel.anchorNode)) {
+          var rect = sel.getRangeAt(0).getBoundingClientRect();
+          if (!rect.width && !rect.height) { hideSel(); return; }   // 접힌 선택
+          selAsk.style.left = Math.min(window.innerWidth - 96, Math.max(8, rect.left + rect.width / 2 - 44)) + 'px';
+          selAsk.style.top = Math.max(8, rect.top - 46) + 'px';
+          selAsk.hidden = false; selAsk._text = t.trim();
+        } else { hideSel(); }
+      };
+      var deferShow = function () { setTimeout(showSelAsk, 10); };
+      bodyEl.addEventListener('mouseup', deferShow);
+      bodyEl.addEventListener('touchend', deferShow);   // 터치: mouseup 미발생 대응
+      // 모바일에서 선택이 드래그 핸들로 확정될 때 → selectionchange 디바운스 폴백 (모달 열렸을 때만)
+      var selTimer = null;
+      document.addEventListener('selectionchange', function () {
+        if (overlay.hidden) return;
+        clearTimeout(selTimer); selTimer = setTimeout(showSelAsk, 250);
       });
     }
     if (selBtn) selBtn.addEventListener('click', function () { setQuote(selAsk._text || ''); hideSel(); openPanel(); });
     if (askQuote) { askQuote.title = '선택 해제'; askQuote.addEventListener('click', function () { setQuote(''); }); }
+    var askX = askPanel ? askPanel.querySelector('.ask-x') : null;
+    if (askX) askX.addEventListener('click', function () { if (askPanel) askPanel.classList.add('ask-collapsed'); });
     window.addEventListener('scroll', hideSel, true);
+
+    function setBackgroundInert(on) {
+      // 배경 콘텐츠를 탭 순서/스크린리더에서 제외 (모달·질문패널은 제외 대상 아님)
+      document.querySelectorAll('.reader, .dnav').forEach(function (el) {
+        if (on) { el.setAttribute('inert', ''); el.setAttribute('aria-hidden', 'true'); }
+        else { el.removeAttribute('inert'); el.removeAttribute('aria-hidden'); }
+      });
+    }
 
     function open(idx) {
       var it = items[idx];
@@ -339,7 +357,8 @@
       }
       overlay.hidden = false;
       document.body.classList.add('modal-open');
-      if (enabled && askPanel) { askPanel.hidden = false; updateCount(); }  // 패널 상시 표시(FAB 없음)
+      setBackgroundInert(true);   // 배경(reader/dnav) 탭 순서에서 제외 → 포커스 다이얼로그 안에 가둠
+      if (enabled && askPanel) { askPanel.classList.remove('ask-collapsed'); askPanel.hidden = false; updateCount(); }  // 패널 상시 표시(FAB 없음)
       overlay.classList.add('open');            // display:flex 즉시 (rAF 비의존)
       var showIt = function () { overlay.classList.add('show'); };
       requestAnimationFrame(showIt);
@@ -353,17 +372,20 @@
       ttsReset(); closePanel();
       document.body.classList.remove('modal-open');
       overlay.classList.remove('show');
+      var t, te;
       var done = function () {
         if (overlay.hidden) return;
+        clearTimeout(t);
+        overlay.removeEventListener('transitionend', te);   // 리스너 누수·재오픈 레이스 방지
         overlay.classList.remove('open');
         overlay.hidden = true;
         document.body.style.overflow = '';
+        setBackgroundInert(false);
         if (lastFocus && lastFocus.focus) lastFocus.focus();
       };
-      var t = setTimeout(done, 480);
-      overlay.addEventListener('transitionend', function te() {
-        clearTimeout(t); overlay.removeEventListener('transitionend', te); done();
-      });
+      te = function (e) { if (e.target !== overlay) return; done(); };   // 자식 전이 버블 무시
+      t = setTimeout(done, 480);
+      overlay.addEventListener('transitionend', te);
     }
     document.querySelectorAll('.newsitem').forEach(function (btn) {
       btn.addEventListener('click', function () {

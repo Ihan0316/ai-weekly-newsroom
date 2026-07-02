@@ -1,7 +1,14 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>데일리 다이제스트 · 2026. 6. 6</title>
-<link rel="stylesheet" href="../assets/site.css?v=8c88856a">
+<meta name="description" content="단일 순전파로 여러 페이지 문서를 전사하는 엔드투엔드 OCR 모델">
+<link rel="canonical" href="https://ihan0316.github.io/ai-weekly-newsroom/days/2026-06-06.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2026. 6. 6 · 데일리 다이제스트">
+<meta property="og:description" content="단일 순전파로 여러 페이지 문서를 전사하는 엔드투엔드 OCR 모델">
+<meta property="og:url" content="https://ihan0316.github.io/ai-weekly-newsroom/days/2026-06-06.html">
+<meta property="og:image" content="https://ihan0316.github.io/ai-weekly-newsroom/images/3bd886f1bbdb.png">
+<link rel="stylesheet" href="../assets/site.css?v=f86f885d">
 <meta name="site-build" content="84fb0aaa09" data-src="../build.json">
 <meta name="ask-endpoint" content="https://ai-weekly-newsroom.aijnjj12.workers.dev">
 </head>
@@ -99,7 +106,7 @@
   </div>
 </div>
 <div class="ask-panel" hidden role="dialog" aria-label="기사 질문">
-  <div class="ask-head"><span>이 기사에 질문</span></div>
+  <div class="ask-head"><span>이 기사에 질문</span><button class="ask-x" type="button" aria-label="질문 패널 닫기">✕</button></div>
   <div class="ask-thread"></div>
   <div class="ask-foot">
     <div class="ask-quote" hidden></div>
@@ -113,5 +120,5 @@
 </div>
 <div class="sel-ask" hidden><button class="sel-ask-btn" type="button">🤔 질문</button></div>
 <script id="news-data" type="application/json">[{"title": "Unlimited OCR — Baidu의 원샷 장문 파싱 모델", "source": "GeekNews", "url": "https://news.hada.io/topic?id=30775", "blurb": "단일 순전파로 여러 페이지 문서를 전사하는 엔드투엔드 OCR 모델", "content": [{"t": "h", "text": "Unlimited OCR — Baidu의 원샷 장문 파싱 모델"}, {"t": "p", "text": "DeepSeek OCR을 기반으로 한 E2E OCR 모델로, 수십 페이지 분량의 문서를 한 번의 순전파(single forward pass)로 전사한다. 핵심 기술인 Reference Sliding Window Attention(R-SWA)을 통해 KV 캐시를 상수 크기로 유지한다."}, {"t": "p", "text": "R-SWA는 인간의 작업 기억을 모사해, 멀리 떨어진 출력은 부드럽게 잊고 인접 문맥만 참조한다. 참조 토큰에는 전체 접근을 허용하되 출력 어텐션은 최근 n개(기본값 128)로 제한하여, KV 캐시 크기를 Lm + min(n,T) ≤ Lm + n으로 제한한다."}, {"t": "h", "text": "성능 결과"}, {"t": "p", "text": "OmniDocBench v1.6에서 93.92%를 달성해 end-to-end SOTA를 기록했으며, DeepSeek OCR 대비 6% 우위를 보였다. 처리 속도는 5580 TPS로 DeepSeek OCR 대비 12.7% 향상되었다."}, {"t": "h", "text": "기술 아키텍처"}, {"t": "p", "text": "DeepEncoder와 MoE 디코더(총 3B, 활성 500M 파라미터)를 결합한 구조다. R-SWA가 참조 토큰 전체 접근과 최근 토큰 제한 어텐션을 조합해 긴 문서에서도 메모리를 일정하게 유지한다."}, {"t": "h", "text": "학습 및 평가"}, {"t": "p", "text": "약 200만 건의 문서 OCR 데이터로 학습했으며 단일:멀티페이지 비율은 9:1이다. 8×16 A800 GPU로 4,000스텝 추가 학습을 수행했다. 장문 파싱에서는 20페이지 동시 입력에서도 강건한 결과를 보였고, 40페이지 이상에서도 편집 거리 0.11 미만을 기록했다."}, {"t": "h", "text": "한계 및 향후 계획"}, {"t": "p", "text": "현재 유한한 컨텍스트 길이(32K) 제약이 있다. 향후 128K 등 더 긴 컨텍스트 모델을 학습하고, 'prefill pool'을 구축해 진정한 무제한(Unlimited) OCR 달성을 목표로 한다."}], "audio": "../audio/3bd886f1bbdb.mp3", "image": "../images/3bd886f1bbdb.png"}, {"title": "미첼 하시모토, Zig 재단에 40만 달러 추가 기부 약정", "source": "GeekNews", "url": "https://mitchellh.com/writing/zig-donation-2026", "blurb": "하시모토 가족이 Zig 소프트웨어 재단에 40만 달러를 추가 약정해 2024년 이후 총 70만 달러 지원.", "content": [{"t": "h", "text": "Pledging Another $400,000 to the Zig Software Foundation"}, {"t": "p", "text": "My family is pledging another $400,000 to the Zig Software Foundation (ZSF). This brings our total pledged support for ZSF to $700,000, after our initial donation in 2024."}, {"t": "p", "text": "Zig continues to earn my respect as a technical project and as a community. The 2026 devlog shows steady progress on the hard problems of building an excellent language and compiler. I also deeply respect the project's approach to maintainership and community, reflected in initiatives like Loris Cro's Contributor Poker and Zig's AI Ban. That philosophy continues to attract and develop some of the most talented people in open source."}, {"t": "p", "text": "Recently, Zig's strict no-LLM contribution policy became a public topic of discussion again, especially in the context of Bun's Zig fork and Rust rewrite. I have no problem with what Bun did, I think Bun is a great project, and I'm not interested in turning this into a Bun post. Instead, what stood out to me was how quickly people villainized one another. Too much of the conversation lacked empathy and respect for viewpoints different from our own."}, {"t": "p", "text": "I use AI heavily. I've written about my AI adoption journey and shipping real features with AI assistance. I'm also quite vocal about remaining rational about its capabilities and frustrated with its negative impacts on open source."}, {"t": "p", "text": "The point is that I have opinions. Those opinions don't fully align with ZSF's approach. And yet, I have nothing but respect for ZSF: the people, the policies, and the project. Part of what makes the internet and open source great is that projects can be weird and different. They can set unusual boundaries, build their own culture, and pursue quality in ways that won't make sense to everyone."}, {"t": "p", "text": "Zig is exceptional software: ambitious, practical, independent, and unusually serious about quality. Ghostty exists in large part because Zig made it possible for me to build the kind of software I wanted to build. This is why I support Zig."}, {"t": "p", "text": "I'm proud to support Zig and the Zig Software Foundation again. Please consider donating if you can."}], "audio": "../audio/f51df01d602b.mp3", "image": ""}]</script>
-<script src="../assets/site.js?v=8c88856a"></script>
+<script src="../assets/site.js?v=f86f885d"></script>
 </body></html>

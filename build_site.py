@@ -13,6 +13,7 @@ from build import render_day, esc
 DAYS_DIR = os.path.join("data", "days")
 OUT_DIR = "docs"
 ASSETS_SRC = "assets"
+SITE_BASE = "https://ihan0316.github.io/ai-weekly-newsroom/"   # GitHub Pages 루트(canonical·OG용)
 THREE_CDN = "https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"
 
 INK = "#191711"; BONE = "#f6f4ec"; FAINT = "#ece3d2"; MUTED = "#7c7669"
@@ -86,15 +87,22 @@ def build_index(days, ver="", build_v=""):
     grid = f'<div class="grid">{cards}</div>' if rest else ''
     rest_h = '<div class="sec-label">지난 날</div>' if rest else ''
     n = len(days)
+    desc = "매일 IT·개발 뉴스, 정보처리기사 기초 문제, IT·개발·기획 용어를 한 장에 모은 데일리 다이제스트."
     return f'''<!doctype html><html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>데일리 · 알아두면 좋은 것들</title>
+<meta name="description" content="{esc(desc)}">
+<link rel="canonical" href="{SITE_BASE}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="데일리 · 알아두면 좋은 것들">
+<meta property="og:description" content="{esc(desc)}">
+<meta property="og:url" content="{SITE_BASE}">
 <link rel="stylesheet" href="assets/site.css{ver}">
 <meta name="site-build" content="{build_v}" data-src="build.json">
 <script>
 /* 모바일 직접 접속 시 오늘 뉴스로 자동 이동. 사이트 내부 이동('전체 보기' 등)·재방문은 제외 */
 (function(){{try{{
-  var mobile = window.matchMedia && window.matchMedia('(max-width:700px)').matches;
+  var mobile = window.matchMedia && window.matchMedia('(max-width:620px)').matches;
   var internal = document.referrer && document.referrer.indexOf(location.origin) === 0;
   if (mobile && !internal && !sessionStorage.getItem('rdrToday')) {{
     sessionStorage.setItem('rdrToday','1');
@@ -188,8 +196,18 @@ def main():
     os.makedirs(os.path.join(OUT_DIR, "days"), exist_ok=True)
     for did, rec in days:
         out = os.path.join(OUT_DIR, "days", did + ".html")
+        canonical = SITE_BASE + "days/" + did + ".html"
+        news0 = (rec.get("news") or [{}])[0]
+        img = news0.get("image", "")
+        if img.startswith("http"):
+            og_image = img
+        elif img:
+            og_image = SITE_BASE + img.replace("../", "")   # ../images/x.png → 절대 URL
+        else:
+            og_image = ""
         with open(out, "w", encoding="utf-8") as fh:
-            fh.write(render_day(rec, back_href="../index.html", asset_prefix="../", ver=ver, build_v=build_v))
+            fh.write(render_day(rec, back_href="../index.html", asset_prefix="../",
+                                ver=ver, build_v=build_v, canonical=canonical, og_image=og_image))
     # 클라이언트 검색 인덱스(전체 뉴스, 본문 포함) → docs/search.json (지연 로드)
     search = []
     for did, rec in days:

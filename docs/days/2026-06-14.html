@@ -1,7 +1,14 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>데일리 다이제스트 · 2026. 6. 14</title>
-<link rel="stylesheet" href="../assets/site.css?v=8c88856a">
+<meta name="description" content="프라이버시를 우선하는 모바일 키보드용 오픈소스 스와이프 입력 구현">
+<link rel="canonical" href="https://ihan0316.github.io/ai-weekly-newsroom/days/2026-06-14.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2026. 6. 14 · 데일리 다이제스트">
+<meta property="og:description" content="프라이버시를 우선하는 모바일 키보드용 오픈소스 스와이프 입력 구현">
+<meta property="og:url" content="https://ihan0316.github.io/ai-weekly-newsroom/days/2026-06-14.html">
+<meta property="og:image" content="https://ihan0316.github.io/ai-weekly-newsroom/images/879de4792804.png">
+<link rel="stylesheet" href="../assets/site.css?v=f86f885d">
 <meta name="site-build" content="84fb0aaa09" data-src="../build.json">
 <meta name="ask-endpoint" content="https://ai-weekly-newsroom.aijnjj12.workers.dev">
 </head>
@@ -99,7 +106,7 @@
   </div>
 </div>
 <div class="ask-panel" hidden role="dialog" aria-label="기사 질문">
-  <div class="ask-head"><span>이 기사에 질문</span></div>
+  <div class="ask-head"><span>이 기사에 질문</span><button class="ask-x" type="button" aria-label="질문 패널 닫기">✕</button></div>
   <div class="ask-thread"></div>
   <div class="ask-foot">
     <div class="ask-quote" hidden></div>
@@ -113,5 +120,5 @@
 </div>
 <div class="sel-ask" hidden><button class="sel-ask-btn" type="button">🤔 질문</button></div>
 <script id="news-data" type="application/json">[{"title": "FUTO Swipe: 공개형 스와이프 입력 모델", "source": "GeekNews", "url": "https://news.hada.io/topic?id=30787", "blurb": "프라이버시를 우선하는 모바일 키보드용 오픈소스 스와이프 입력 구현", "content": [{"t": "h", "text": "FUTO Swipe: 공개형 스와이프 입력 모델"}, {"t": "p", "text": "FUTO Swipe는 양질의 스와이프 타이핑이 독점 키보드 앱이나 라이선스 없는 라이브러리에 묶여 있던 문제를 해결하기 위해 만들어진 오픈소스 스와이프 입력 시스템이다. 손가락으로 키보드를 쓸어 입력하는 제스처를 신경망 모델과 알고리즘으로 인식한다."}, {"t": "p", "text": "이 시스템은 완전 오프라인으로 동작하는 안드로이드 앱인 FUTO Keyboard에 통합되어 있으며, 커스텀 빌드를 위해 모델을 직접 내려받을 수도 있다."}, {"t": "h", "text": "데이터셋"}, {"t": "p", "text": "2024년 8월부터 100만 건 이상의 QWERTY 영어 스와이프 제스처를 수집했다. 사용자들이 모바일 웹 포털에 자발적으로 접속해 위키백과 문장의 단어들을 스와이프하는 방식으로 데이터를 모았다. 이 데이터셋은 2025년 3월 MIT 라이선스로 HuggingFace에 공개되었다."}, {"t": "h", "text": "아키텍처"}, {"t": "p", "text": "세 가지 특화 신경망 모델로 구성된다: 범용 Encoder(약 635K 파라미터), 언어별 ContextLM(1.5M 파라미터), 언어/레이아웃별 Decoder(약 304K 파라미터). 현재 Decoder는 QWERTY 영어에 대해서만 존재한다."}, {"t": "h", "text": "성능"}, {"t": "p", "text": "벤치마크 결과 top-4 실패율이 약 4%이며, 사전에 없는(out-of-vocabulary) 단어를 제외하면 오류율은 1% 미만이다. 전체 시스템은 약 250만 파라미터를 사용하며, C++ swipe-library를 통해 저사양 기기에서도 밀리초 단위 추론이 가능하다."}, {"t": "h", "text": "라이선스"}, {"t": "p", "text": "모델은 FUTO Model License를 따르며, C++ 추론 라이브러리는 GPL 라이선스로 제공된다."}], "audio": "../audio/879de4792804.mp3", "image": "../images/879de4792804.png"}, {"title": "한국 무기 산업의 부상", "source": "GeekNews", "url": "https://news.hada.io/topic?id=30700", "blurb": "한국이 세계 9위이자 가장 빠르게 성장하는 무기 수출국으로 부상 중", "content": [{"t": "h", "text": "미국의 후퇴와 한국 방산의 부상"}, {"t": "p", "text": "백악관 연설에서 미국은 더 이상 세계 보호를 떠맡을 수 없다는 입장을 표명했다. 이는 1969년 Richard Nixon의 아시아 정책에서 비롯된 것으로, 미국이 동맹국에 대한 안보 공약을 축소하면서 한국이 세계적 무기 거래국으로 성장할 길을 열어주었다."}, {"t": "h", "text": "한국 방산의 역사적 기원"}, {"t": "p", "text": "무기 사업의 부상은 베트남 전쟁까지 거슬러 올라간다. Nixon은 아시아 동맹국이 미군 의존 대신 스스로 방위 책임을 져야 한다고 판단했고, 한반도에서 미군 약 2만 명이 철수했다. 박정희 대통령은 자주국방을 강조하며 방위 산업에 대규모 자금을 투자했고, 라이선스 생산과 역설계를 통해 정교한 무기를 개발했다. 현재 한국은 세계 9위 무기 수출국이다."}, {"t": "h", "text": "시장 환경과 기회"}, {"t": "p", "text": "4대 방산기업(한화그룹, 현대로템, LIG넥스1, 한국항공우주산업)의 2026년 합산 매출 전망치는 약 56조원으로 2021년 대비 약 4배 증가했다. 유럽 NATO 회원국 대상 공급에서는 미국에 이어 두 번째로 큰 공급국이 되었다. 우크라이나·이란 전쟁이 만든 긴급 수요와 Trump 행정부의 글로벌 후퇴가 한국 방산에 시장 진입 기회를 열었다."}, {"t": "h", "text": "유럽과 폴란드: 대표 시장"}, {"t": "p", "text": "폴란드는 2022년 러시아의 우크라이나 침공 후 실존적 위협을 느껴 한국 무기 수입에 나섰다. 독일의 초기 대응이 신중하고 주저하자 그 공백에 한국이 들어섰고, 폴란드는 K2 전차, 로켓 발사기, 포병 장비 등을 포함한 137억 달러 규모 계약을 체결했다."}, {"t": "h", "text": "한국 무기의 경쟁력"}, {"t": "p", "text": "가장 중요한 강점은 빠른 납기다. 북한의 상시 위협으로 이미 높은 가동률로 운영되어 온 준비 상태가 지정학적 위기 속에서 더 큰 가치를 가진다. 대규모 생산과 국내 공급망·낮은 인건비로 비용 경쟁력을 유지한다. 또한 서방 전통 수출국보다 기술 이전과 현지 생산 제공 의지가 강해, 폴란드는 한국의 기술 이전이 국내 방산을 되살리길 기대한다."}, {"t": "p", "text": "고객 맞춤형 제작도 강점이다. 이집트는 육상 타격용 자주포를 해상 전함 공격용으로 개조해달라 요청했고, 한화가 이를 수락해 2022년 17억 달러 규모 계약으로 K9 자주포 수백 문을 판매했다. 아울러 주요 수출국들이 안고 있는 정치적 부담이 상대적으로 적어 '한국에서 무기를 사는 이유를 누구도 문제 삼지 않는다'는 평가가 있다."}, {"t": "h", "text": "향후 과제와 전망"}, {"t": "p", "text": "한국은 2030년까지 세계 4위 무기 수출국을 목표로 한다. 이란 전쟁에서 LIG Nex1의 Cheongung-II 방공 시스템이 표적 30기 중 29기를 맞힌 것으로 보도돼 긍정적 홍보 효과를 줬다."}, {"t": "p", "text": "가장 큰 도전은 확고한 경쟁자에 가려진 위상이다. 항공기와 대형 함정은 아직 주목을 충분히 받지 못한다. Hanwha Ocean의 캐나다 잠수함 600억 달러 계약은 NATO 잠수함 생산 이력을 가진 독일 ThyssenKrupp Marine Systems와 경쟁하며 '수백 년 경험·평판의 유럽 공급국'에 비해 신뢰받는 주자로 받아들여지지 못하는 장애물에 직면해 있다. 유럽의 전략적 자율성 추진과 일본의 무기 수출 해금도 향후 과제다."}], "audio": "../audio/f55d05fd1de6.mp3", "image": "../images/f55d05fd1de6.png"}]</script>
-<script src="../assets/site.js?v=8c88856a"></script>
+<script src="../assets/site.js?v=f86f885d"></script>
 </body></html>

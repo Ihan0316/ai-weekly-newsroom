@@ -224,6 +224,7 @@ mark{background:#fff3c4; color:inherit; border-radius:3px; padding:0 1px;}
 /* 기사 Q&A : 선택 팝업 + 패널 (FAB 없음 — 모달 열리면 패널 상시 표시) */
 /* 패널·선택팝업 모두 기사 모달이 열린 동안에만 표시 — 본문 밖에선 절대 안 뜸 */
 body.modal-open .ask-panel{display:flex !important;}
+body.modal-open .ask-panel.ask-collapsed{display:none !important;}   /* 사용자가 ✕로 접으면 우선 적용 */
 body:not(.modal-open) .ask-panel,
 body:not(.modal-open) .sel-ask{display:none !important;}
 .ask-panel{position:fixed; right:26px; bottom:26px; z-index:211; width:360px; max-width:calc(100vw - 36px);
@@ -322,6 +323,10 @@ body.modal-open .ask-panel{animation:popIn .28s both;}
   .reader{padding:14px 18px 40px;}
   .grid{grid-template-columns:1fr; gap:18px;}
   .daysec{padding:24px 20px;}
+  /* 용어 행: 좁은 화면에서 종류칩 위, 용어+뜻 아래로 재배치 (긴 영문 병기어의 가로 오버플로 방지) */
+  .termrow{grid-template-columns:auto 1fr; column-gap:12px; row-gap:4px;}
+  .t-kind{grid-row:span 2;}
+  .t-term,.t-mean{min-width:0; overflow-wrap:anywhere;}
   .modal{padding:32px 22px 28px;}
   .modal-title{font-size:23px;}
   .modal-body{font-size:16px;}
@@ -335,6 +340,13 @@ body.modal-open .ask-panel{animation:popIn .28s both;}
   .nav .pill{display:none;}
   .newsitem.has-thumb{flex-direction:column; align-items:stretch; gap:12px;}
   .ni-thumb{width:100%; height:160px;}
+}
+/* 터치 기기: 작은 아이콘 버튼에 44px 히트존 확보 (시각 크기는 유지) */
+@media(pointer:coarse){
+  .modal-close,.ask-x,.search-clear{position:relative;}
+  .modal-close::before,.ask-x::before,.search-clear::before{
+    content:""; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:44px; height:44px;}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}

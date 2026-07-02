@@ -33,6 +33,7 @@ export default {
 
     let body;
     try { body = await req.json(); } catch { return json({ error: "bad json" }, 400, h); }
+    if (!body || typeof body !== "object") return json({ error: "bad json" }, 400, h);
     const q = String(body.question || "").slice(0, 500).trim();
     const title = String(body.title || "").slice(0, 200);
     const ctx = String(body.context || "").slice(0, 8000);
