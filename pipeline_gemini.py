@@ -139,6 +139,39 @@ def clean_blocks(blocks):
         out.append(b)
     return out
 
+# 블로그 코멘트 페르소나 — 톤 바꾸려면 이 문자열만 수정
+COMMENT_PERSONA = (
+    "너는 개발을 배우는 주니어 개발자이자 IT 블로거다. 아래 각 뉴스에 대해 "
+    "블로그에 덧붙일 '내 코멘트'를 1인칭으로 쓴다.\n"
+    "규칙:\n"
+    "- 2~4문장, 자연스러운 구어체 한국어.\n"
+    "- 뉴스 요약을 반복하지 말고, 내 생각·시사점·실무나 학습 관점 연결·가벼운 의견이나 질문을 담을 것.\n"
+    "- 과장·홍보·클릭베이트 금지. 아는 척보다 배우는 사람의 솔직한 시선.\n"
+    "- 각 코멘트는 서로 다른 각도로."
+)
+COMMENT_SCHEMA = {"type": "OBJECT", "properties": {"comments": {"type": "ARRAY",
+    "items": {"type": "OBJECT", "properties": {"comment_kr": {"type": "STRING"}},
+              "required": ["comment_kr"]}}}, "required": ["comments"]}
+
+def gen_comments(news):
+    """뉴스 리스트에 대해 1인칭 블로그 코멘트를 배치로 생성해 comment_kr 채움(실패 시 빈 문자열)."""
+    if not news:
+        return
+    lines = []
+    for i, it in enumerate(news, 1):
+        body = " ".join((b.get("text") or "") for b in (it.get("content") or []))[:600]
+        lines.append("[%d] 제목: %s\n요약: %s\n본문일부: %s" % (
+            i, it.get("title_kr", ""), it.get("blurb_kr", ""), body))
+    prompt = COMMENT_PERSONA + "\n\n뉴스 %d건. 순서대로 comments 배열로 반환.\n\n%s" % (
+        len(news), "\n\n".join(lines))
+    try:
+        out = gemini(prompt, COMMENT_SCHEMA, max_tokens=2048, temp=0.8)
+        cs = out.get("comments", [])
+    except Exception as e:
+        sys.stderr.write("comment gen fail: %s\n" % e); cs = []
+    for i, it in enumerate(news):
+        it["comment_kr"] = (cs[i].get("comment_kr", "").strip() if i < len(cs) else "")
+
 def make_quiz_terms(ex_qs, ex_terms):
     prompt = (
         "정보처리기사(정처기) 4지선다 문제 1개와 IT·개발·기획 현업 용어 3개를 만든다.\n"
@@ -167,13 +200,15 @@ def main():
         print("추가할 신규 뉴스 없음"); return
     for it in news:
         it["content"] = extract_body(it.get("url", ""))
+    gen_comments(news)   # 뉴스별 1인칭 블로그 코멘트(복사 시에만 사용)
     quiz, terms = make_quiz_terms(ex_qs, ex_terms)
 
     rec = {
         "date_label": "%d. %d. %d" % (today.year, today.month, today.day),
         "weekday": WD[today.weekday()],
         "news": [{"title_kr": it["title_kr"], "source": it["source"], "url": it["url"],
-                  "blurb_kr": it.get("blurb_kr", ""), "content": it.get("content", [])} for it in news],
+                  "blurb_kr": it.get("blurb_kr", ""), "content": it.get("content", []),
+                  "comment_kr": it.get("comment_kr", "")} for it in news],
         "quiz": quiz, "terms": terms,
     }
     os.makedirs(DAYS, exist_ok=True)

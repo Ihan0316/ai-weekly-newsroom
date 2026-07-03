@@ -60,6 +60,7 @@ def news_payload(news):
             "content": it.get("content", []) or [],
             "audio": it.get("audio", ""),
             "image": it.get("image", ""),
+            "comment": it.get("comment_kr", ""),   # 화면 미표시, 복사 시에만 사용
         })
     js = json.dumps(items, ensure_ascii=False)
     return js.replace("</", "<\\/")

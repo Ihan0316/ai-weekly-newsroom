@@ -52,7 +52,8 @@
           "t": "p",
           "text": "지원하는 데이터베이스(드라이버)로는 공식적으로 PostgreSQL, SQLite, DuckDB, Snowflake, BigQuery, Flight SQL 지원 DB가 있으며, ADBC Driver Foundry 확장을 통해 Amazon Redshift, Apache DataFusion, Apache Spark, ClickHouse, Databricks, Exasol, Microsoft SQL Server도 지원합니다."
         }
-      ]
+      ],
+      "comment_kr": "psql이나 DBeaver만 쓰다 보니 ADBC라는 표준은 처음 들었는데, 결과를 행이 아니라 컬럼(Arrow) 단위로 돌려준다는 발상이 신선했다. 분석 쿼리를 자주 돌리는 입장에선 변환 비용이 준다는 게 은근 큰 차이일 듯. 터미널에서 바로 CSV/Arrow로 내보내지는 것도 실습 때 편할 것 같아 주말에 SQLite로 한번 붙여봐야겠다."
     },
     {
       "title_kr": "OpenAI, Codex 전용 미니 키보드 ‘Codex Micro’ 티저 공개",
@@ -108,7 +109,8 @@
           "t": "p",
           "text": "개발자 입장에서는 단순한 굿즈가 아니라, Codex 호출·작업 승인·리팩터링·테스트 실행·PR 생성 같은 반복 작업을 물리 버튼에 매핑하는 장치가 될 가능성이 있습니다. 실제로 어느 정도까지 커스터마이즈가 가능한지, VS Code/Cursor/JetBrains 같은 IDE와 어떻게 연동되는지, 표준 HID 장치로 동작하는지는 아직 공개되지 않았습니다."
         }
-      ]
+      ],
+      "comment_kr": "AI 코딩 툴이 이제 전용 하드웨어까지 나온다는 게 신기하면서도 물음표가 남는다. 단축키 몇 개를 물리 키로 뺀다고 생산성이 확 오를까? 개인적으론 소프트웨어 단축키가 더 유연해서 회의적인데, 그래도 '코딩=AI에게 지시' 흐름이 하드웨어로 굳어지는 신호 같아 방향은 눈여겨보게 된다."
     }
   ],
   "quiz": {

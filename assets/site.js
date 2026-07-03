@@ -224,6 +224,8 @@
     function npParts(it) {
       var title = (it.title || '').trim();
       var L = [];
+      var cmt = (it.comment || '').trim();
+      if (cmt) { L.push(cmt); L.push(''); }   // 내 코멘트: 복사 본문 맨 위(사이트엔 미표시)
       var blocks = it.content || [];
       if (blocks.length) {
         blocks.forEach(function (b, i) {
