@@ -8,7 +8,7 @@
 <meta property="og:description" content="ADBC(Arrow Database Connectivity)를 통해 데이터베이스에 연결하고 SQL을 실행하는 커맨드라인 도구입니다.">
 <meta property="og:url" content="https://ihan0316.github.io/ai-weekly-newsroom/days/2026-07-03.html">
 <meta property="og:image" content="https://ihan0316.github.io/ai-weekly-newsroom/images/c4d711def87b.png">
-<link rel="stylesheet" href="../assets/site.css?v=f86f885d">
+<link rel="stylesheet" href="../assets/site.css?v=685c25eb">
 <meta name="site-build" content="5d54ad2900" data-src="../build.json">
 <meta name="ask-endpoint" content="https://ai-weekly-newsroom.aijnjj12.workers.dev">
 </head>
@@ -99,10 +99,17 @@
       <button class="tts-toggle" type="button" hidden aria-label="본문 읽어주기">
         <span class="tts-ico">🔊</span><span class="tts-label">본문 듣기</span>
       </button>
+      <button class="np-copy" type="button" data-part="title" aria-label="네이버 제목 복사">
+        <span class="np-ico">📋</span><span>제목</span>
+      </button>
+      <button class="np-copy" type="button" data-part="body" aria-label="네이버 본문 복사">
+        <span class="np-ico">📝</span><span>본문</span>
+      </button>
     </div>
     <img class="modal-hero" alt="" hidden>
     <div class="modal-body"></div>
     <a class="modal-orig" target="_blank" rel="noopener">원문 사이트에서 보기 ↗</a>
+    <div class="np-toast" role="status" aria-live="polite" hidden>복사됨</div>
   </div>
 </div>
 <div class="ask-panel" hidden role="dialog" aria-label="기사 질문">
@@ -120,5 +127,5 @@
 </div>
 <div class="sel-ask" hidden><button class="sel-ask-btn" type="button">🤔 질문</button></div>
 <script id="news-data" type="application/json">[{"title": "databow - ADBC로 데이터베이스를 조회하는 CLI 도구", "source": "GeekNews", "url": "https://news.hada.io/topic?id=31069", "blurb": "ADBC(Arrow Database Connectivity)를 통해 데이터베이스에 연결하고 SQL을 실행하는 커맨드라인 도구입니다.", "content": [{"t": "h", "text": "databow - ADBC로 데이터베이스를 조회하는 CLI 도구"}, {"t": "p", "text": "ADBC(Arrow Database Connectivity)를 통해 데이터베이스에 연결하고 SQL을 실행하는 커맨드라인 도구입니다."}, {"t": "p", "text": "호환되는 ADBC 드라이버가 있는 모든 데이터베이스에 연결할 수 있습니다."}, {"t": "p", "text": "명령 히스토리와 직관적인 네비게이션을 지원하는 대화형 SQL 셸을 제공하며, SQL 쿼리 하이라이팅 기능도 있습니다."}, {"t": "p", "text": "동적인 컬럼 너비로 깔끔하게 정렬된 테이블 형태로 결과를 표시하고, 쿼리 결과를 JSON, CSV, Arrow IPC 파일로 익스포트할 수 있습니다."}, {"t": "p", "text": "대화형 사용 외에도 `--query`로 쿼리를 직접 실행하거나, stdin 입력 또는 `--file`로 파일을 실행하고 `--output`으로 결과 파일을 저장하는 등 비대화형 사용도 지원합니다."}, {"t": "p", "text": "Apache-2.0 라이선스로 Rust로 구현되었습니다."}, {"t": "p", "text": "ADBC(Arrow Database Connectivity)는 Apache Arrow 프로젝트의 하위 표준으로, 서로 다른 데이터베이스에서 Arrow 데이터를 넣고 빼기 위한 단일 API입니다."}, {"t": "p", "text": "JDBC/ODBC의 컬럼 지향 대안으로, 결과를 행(row) 단위가 아닌 컬럼 단위 Arrow 데이터로 반환합니다. 이는 대량 컬럼 분석 워크플로우에서 행 지향 형식으로 변환했다가 되돌리는 비용을 피할 수 있어 ODBC/JDBC 대비 효율적입니다."}, {"t": "p", "text": "2023년에 1.0.0이 발표되었고 현재 버전은 1.1.0입니다."}, {"t": "p", "text": "지원하는 데이터베이스(드라이버)로는 공식적으로 PostgreSQL, SQLite, DuckDB, Snowflake, BigQuery, Flight SQL 지원 DB가 있으며, ADBC Driver Foundry 확장을 통해 Amazon Redshift, Apache DataFusion, Apache Spark, ClickHouse, Databricks, Exasol, Microsoft SQL Server도 지원합니다."}], "audio": "../audio/c4d711def87b.mp3", "image": "../images/c4d711def87b.png"}, {"title": "OpenAI, Codex 전용 미니 키보드 ‘Codex Micro’ 티저 공개", "source": "GeekNews", "url": "https://news.hada.io/topic?id=31049", "blurb": "OpenAI가 Codex 사용자를 위한 전용 하드웨어 Codex Micro를 예고했습니다.", "content": [{"t": "p", "text": "OpenAI가 Codex 사용자를 위한 전용 하드웨어 Codex Micro를 예고했습니다. OpenAI Developers 계정에 올라온 티저에는 “Your favorite Codex shortcuts are getting an upgrade”라는 문구와 함께 작은 매크로패드 형태의 장치가 등장했으며, 정식 공개일은 2026년 7월 15일로 표시됐습니다."}, {"t": "p", "text": "이 제품은 일반 키보드라기보다는 Codex용 단축키 컨트롤러에 가까운 장치로 보입니다. 티저에 등장한 실루엣은 키보드·매크로패드 제조사 Work Louder의 Creator Micro 2와 유사하며, OpenAI와 Work Louder의 로고가 함께 노출됐습니다."}, {"t": "h", "text": "주요 내용"}, {"t": "p", "text": "OpenAI가 Codex용 전용 입력 장치 Codex Micro를 티저 공개"}, {"t": "p", "text": "정식 공개 예정일은 2026년 7월 15일"}, {"t": "p", "text": "Work Louder와 협업한 제품으로 보이며, 기존 Creator Micro 2와 비슷한 매크로패드 형태"}, {"t": "p", "text": "여러 개의 물리 버튼, 조이스틱/다이얼류 입력 장치를 활용해 Codex 관련 액션을 빠르게 실행하는 용도로 추정"}, {"t": "p", "text": "OpenAI가 Jony Ive와 개발 중인 소비자용 AI 디바이스와는 별개의 제품"}, {"t": "p", "text": "Figma가 Work Louder와 협업해 전용 매크로패드를 만든 사례처럼, 특정 소프트웨어 워크플로우에 맞춘 물리 인터페이스 전략으로 볼 수 있음"}, {"t": "h", "text": "흥미로운 점"}, {"t": "p", "text": "Codex Micro는 “AI 코딩 도구를 위한 물리적 인터페이스”라는 점에서 의미가 있습니다. 지금까지 AI 코딩 에이전트는 IDE, 터미널, 웹 UI 안에서만 주로 사용됐지만, OpenAI가 자주 쓰는 Codex 액션을 별도 하드웨어 버튼으로 분리하려는 시도를 하고 있습니다."}, {"t": "p", "text": "개발자 입장에서는 단순한 굿즈가 아니라, Codex 호출·작업 승인·리팩터링·테스트 실행·PR 생성 같은 반복 작업을 물리 버튼에 매핑하는 장치가 될 가능성이 있습니다. 실제로 어느 정도까지 커스터마이즈가 가능한지, VS Code/Cursor/JetBrains 같은 IDE와 어떻게 연동되는지, 표준 HID 장치로 동작하는지는 아직 공개되지 않았습니다."}], "audio": "../audio/9e7ef179f50e.mp3", "image": "../images/9e7ef179f50e.png"}]</script>
-<script src="../assets/site.js?v=f86f885d"></script>
+<script src="../assets/site.js?v=685c25eb"></script>
 </body></html>

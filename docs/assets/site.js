@@ -210,6 +210,70 @@
       }
     });
 
+    /* ----- 네이버 블로그 복사: 이 기사 1개를 제목/본문으로 클립보드 복사 ----- */
+    var npBtns = overlay.querySelectorAll('.np-copy');
+    var npToast = overlay.querySelector('.np-toast');
+    var npToastT = null;
+    function npShow(msg) {
+      if (!npToast) return;
+      npToast.textContent = msg;
+      npToast.classList.add('on');
+      clearTimeout(npToastT);
+      npToastT = setTimeout(function () { npToast.classList.remove('on'); }, 1400);
+    }
+    function npParts(it) {
+      var title = (it.title || '').trim();
+      var L = [];
+      var blocks = it.content || [];
+      if (blocks.length) {
+        blocks.forEach(function (b, i) {
+          var tx = (b.text || '').trim();
+          if (!tx) return;
+          if (i === 0 && b.t === 'h' && tx === title) return;   // 제목과 중복인 첫 소제목 제외
+          if (b.t === 'h') { L.push(''); L.push('▪ ' + tx); }
+          else L.push(tx);
+        });
+      } else if (it.blurb) {
+        L.push(it.blurb.trim());
+      }
+      L.push('');
+      L.push('───────────');
+      var src = (it.source || '').trim();
+      if (src) L.push('출처: ' + src);
+      if (it.url) L.push('원문: ' + it.url);
+      var tag = src ? src.replace(/\s+/g, '') : '뉴스';
+      L.push('');
+      L.push('#AI #인공지능 #개발 #IT #데일리뉴스 #' + tag);
+      var body = L.join('\n').replace(/\n{3,}/g, '\n\n').replace(/^\n+/, '').replace(/\n+$/, '');
+      return { title: title, body: body };
+    }
+    function npCopy(text, btn, label) {
+      function ok() {
+        npShow(label + ' 복사됨');
+        if (btn) { btn.classList.add('done'); setTimeout(function () { btn.classList.remove('done'); }, 900); }
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(ok, function () { npFallback(text, ok); });
+      } else { npFallback(text, ok); }
+    }
+    function npFallback(text, ok) {
+      try {
+        var ta = document.createElement('textarea');
+        ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.focus(); ta.select();
+        document.execCommand('copy'); document.body.removeChild(ta); ok();
+      } catch (e) { npShow('복사 실패 — 길게 눌러 복사'); }
+    }
+    npBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (!curItem) return;
+        var p = npParts(curItem);
+        var part = btn.getAttribute('data-part');
+        if (part === 'title') npCopy(p.title, btn, '제목');
+        else npCopy(p.body, btn, '본문');
+      });
+    });
+
     /* ----- 기사 Q&A: FAB + 드래그 선택 질문 + 패널, 기기당 일일 한도 ----- */
     var amEl = document.querySelector('meta[name="ask-endpoint"]');
     var askEndpoint = amEl ? (amEl.getAttribute('content') || '') : '';

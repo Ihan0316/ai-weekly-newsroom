@@ -105,10 +105,17 @@ MODAL = '''
       <button class="tts-toggle" type="button" hidden aria-label="본문 읽어주기">
         <span class="tts-ico">🔊</span><span class="tts-label">본문 듣기</span>
       </button>
+      <button class="np-copy" type="button" data-part="title" aria-label="네이버 제목 복사">
+        <span class="np-ico">📋</span><span>제목</span>
+      </button>
+      <button class="np-copy" type="button" data-part="body" aria-label="네이버 본문 복사">
+        <span class="np-ico">📝</span><span>본문</span>
+      </button>
     </div>
     <img class="modal-hero" alt="" hidden>
     <div class="modal-body"></div>
     <a class="modal-orig" target="_blank" rel="noopener">원문 사이트에서 보기 ↗</a>
+    <div class="np-toast" role="status" aria-live="polite" hidden>복사됨</div>
   </div>
 </div>
 <div class="ask-panel" hidden role="dialog" aria-label="기사 질문">
