@@ -225,24 +225,30 @@
       var title = (it.title || '').trim();
       var L = [];
       var cmt = (it.comment || '').trim();
-      if (cmt) { L.push(cmt); L.push(''); }   // 내 코멘트: 복사 본문 맨 위(사이트엔 미표시)
+      if (cmt) { L.push('💬 내 생각'); L.push(cmt); L.push(''); }   // 코멘트: 복사 맨 위(사이트엔 미표시)
+      // 본문 문단 수집(문단 사이 빈 줄로 숨 트이게)
       var blocks = it.content || [];
+      var paras = [];
       if (blocks.length) {
         blocks.forEach(function (b, i) {
           var tx = (b.text || '').trim();
           if (!tx) return;
           if (i === 0 && b.t === 'h' && tx === title) return;   // 제목과 중복인 첫 소제목 제외
-          if (b.t === 'h') { L.push(''); L.push('▪ ' + tx); }
-          else L.push(tx);
+          paras.push(b.t === 'h' ? '▪ ' + tx : tx);
         });
       } else if (it.blurb) {
-        L.push(it.blurb.trim());
+        paras.push(it.blurb.trim());
+      }
+      if (paras.length) {
+        L.push('📰 무슨 내용이냐면');
+        L.push('');
+        L.push(paras.join('\n\n'));
       }
       L.push('');
-      L.push('───────────');
+      L.push('━━━━━━━━━━');
       var src = (it.source || '').trim();
-      if (src) L.push('출처: ' + src);
-      if (it.url) L.push('원문: ' + it.url);
+      if (src) L.push('📎 출처: ' + src);
+      if (it.url) L.push('🔗 원문: ' + it.url);
       var tag = src ? src.replace(/\s+/g, '') : '뉴스';
       L.push('');
       L.push('#AI #인공지능 #개발 #IT #데일리뉴스 #' + tag);
