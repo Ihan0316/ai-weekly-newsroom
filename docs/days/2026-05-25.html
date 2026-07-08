@@ -8,7 +8,7 @@
 <meta property="og:description" content="구조화 데이터로 크롤러의 페이지 이해도를 높이고 검색 노출을 개선하는 방법">
 <meta property="og:url" content="https://ihan0316.github.io/ai-weekly-newsroom/days/2026-05-25.html">
 <meta property="og:image" content="https://ihan0316.github.io/ai-weekly-newsroom/images/bf5b2d5f1c67.png">
-<link rel="stylesheet" href="../assets/site.css?v=b83ec0f2">
+<link rel="stylesheet" href="../assets/site.css?v=ce61f4a4">
 <meta name="site-build" content="fe39bc9867" data-src="../build.json">
 <meta name="ask-endpoint" content="https://ai-weekly-newsroom.aijnjj12.workers.dev">
 </head>
@@ -113,7 +113,7 @@
   </div>
 </div>
 <div class="ask-panel" hidden role="dialog" aria-label="기사 질문">
-  <div class="ask-head"><span>이 기사에 질문</span><button class="ask-x" type="button" aria-label="질문 패널 닫기">✕</button></div>
+  <div class="ask-head"><span>이 기사에 질문</span></div>
   <div class="ask-thread"></div>
   <div class="ask-foot">
     <div class="ask-quote" hidden></div>
@@ -127,5 +127,5 @@
 </div>
 <div class="sel-ask" hidden><button class="sel-ask-btn" type="button">🤔 질문</button></div>
 <script id="news-data" type="application/json">[{"title": "개인 웹사이트를 위한 JSON-LD 설명", "source": "GeekNews", "url": "https://news.hada.io/topic?id=30729", "blurb": "구조화 데이터로 크롤러의 페이지 이해도를 높이고 검색 노출을 개선하는 방법", "content": [{"t": "h", "text": "개인 웹사이트를 위한 JSON-LD"}, {"t": "p", "text": "JSON-LD는 웹페이지에 구조화 데이터(structured data)를 추가하는 형식으로, 크롤러가 사이트의 의미 구조를 이해하도록 돕는다. 이를 통해 링크 미리보기 품질 개선과 검색 노출 개선을 기대할 수 있다."}, {"t": "h", "text": "기본 구현 방식"}, {"t": "p", "text": "<head> 섹션에 <script type=\"application/ld+json\"> 태그를 추가하고, @context를 Schema.org로 지정한 뒤 @graph에 노드를 배치한다. 각 노드는 @type, @id, 속성으로 구성된다."}, {"t": "h", "text": "주요 노드 유형"}, {"t": "p", "text": "루트 페이지에는 WebSite, ProfilePage, Person 노드를 사용한다. 블로그는 Blog와 BlogPosting, 프로젝트는 SoftwareApplication, 목록 페이지는 CollectionPage와 BreadcrumbList로 표현한다."}, {"t": "h", "text": "실무 고려사항"}, {"t": "p", "text": "웹 크롤러는 같은 @id를 가진 노드의 속성을 여러 페이지에 걸쳐 병합하지만, 단일 페이지만 읽는 LLM 스크레이퍼는 병합하지 않는다. Person 정보는 특히 중요하며, sameAs 속성으로 동명이인을 구분하도록 돕는다."}, {"t": "h", "text": "최소 구현 기준"}, {"t": "p", "text": "정적 사이트라도 루트 페이지에 WebSite, ProfilePage, Person 노드를 추가하면 기본적인 이점을 얻을 수 있다."}], "audio": "../audio/bf5b2d5f1c67.mp3", "image": "../images/bf5b2d5f1c67.png", "comment": ""}, {"title": "Epic Games, 오픈소스 버전 관리 시스템 Lore 발표", "source": "GeekNews", "url": "https://lore.org/", "blurb": "Lore는 코드와 대용량 바이너리 자산을 함께 다루는 차세대 오픈소스 버전 관리 시스템.", "content": [{"t": "h", "text": "Lore: Next-Generation Open Source Version Control"}, {"t": "p", "text": "Lore는 Epic Games가 유지보수하는 오픈소스 버전 관리 시스템으로, \"데이터와 팀 모두의 전례 없는 확장성(unprecedented scalability of both data and teams)\"을 목표로 설계되었다. 코드와 대용량 바이너리 에셋을 함께 다루는 프로젝트를 겨냥하며, 개발자와 아티스트를 모두 지원한다."}, {"t": "p", "text": "주요 기능: 몇 분 내 로컬 모드로 배포 가능하고 필요에 따라 확장되는 온디맨드 확장성, 데이터 공유와 선택적 다운로드로 느려짐을 제거하는 빠르고 효율적인 처리, 실험과 반복을 위한 가벼운 브랜치 생성·관리(자유로운 브랜칭), 리비전 추적을 위한 \"변조 감지 가능한 단일 진실 공급원(tamper-evident source of truth)\", 모든 기능에 접근 가능한 직관적 CLI, 그리고 C/C++·C#·Rust·Go·Python·JavaScript 확장을 지원하는 포괄적 API."}, {"t": "p", "text": "아키텍처: Lore는 머클 트리(Merkle tree)와 불변 리비전 체인을 사용하는 \"중앙집중식 콘텐츠 주소 지정 버전 관리 시스템\"을 채택한다. 기술 구성 요소로는 해시 참조를 통한 콘텐츠 주소 지정 저장소, 대용량 에셋을 위한 청크 단위 파일 저장, 온디맨드 데이터 검색, 캐싱 계층을 갖춘 서비스 기반 인프라가 있다."}, {"t": "p", "text": "라이선스 및 커뮤니티: MIT 라이선스로 공개되어 협업 개발을 강조한다. 여러 프로그래밍 언어용 SDK가 제공되며, 저장소는 Epic Games의 GitHub에서 호스팅된다."}], "audio": "../audio/c4683e58b20f.mp3", "image": "../images/c4683e58b20f.jpg", "comment": ""}]</script>
-<script src="../assets/site.js?v=b83ec0f2"></script>
+<script src="../assets/site.js?v=ce61f4a4"></script>
 </body></html>

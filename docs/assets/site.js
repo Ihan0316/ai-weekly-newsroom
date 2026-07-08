@@ -314,7 +314,7 @@
       if (selectedText) { askQuote.hidden = false; askQuote.textContent = '“' + selectedText.slice(0, 140) + (selectedText.length > 140 ? '…' : '') + '”'; }
       else { askQuote.hidden = true; askQuote.textContent = ''; }
     }
-    function openPanel() { if (!enabled || !askPanel) return; askPanel.classList.remove('ask-collapsed'); askPanel.hidden = false; updateCount(); setTimeout(function () { if (askInput && !askInput.disabled) askInput.focus(); }, 50); }
+    function openPanel() { if (!enabled || !askPanel) return; askPanel.hidden = false; updateCount(); setTimeout(function () { if (askInput && !askInput.disabled) askInput.focus(); }, 50); }
     function closePanel() { if (askPanel) askPanel.hidden = true; hideSel(); }
     function bubble(cls, text) {
       var el = document.createElement('div');
@@ -383,8 +383,6 @@
     }
     if (selBtn) selBtn.addEventListener('click', function () { setQuote(selAsk._text || ''); hideSel(); openPanel(); });
     if (askQuote) { askQuote.title = '선택 해제'; askQuote.addEventListener('click', function () { setQuote(''); }); }
-    var askX = askPanel ? askPanel.querySelector('.ask-x') : null;
-    if (askX) askX.addEventListener('click', function () { if (askPanel) askPanel.classList.add('ask-collapsed'); });
     window.addEventListener('scroll', hideSel, true);
 
     function setBackgroundInert(on) {
@@ -430,7 +428,7 @@
       overlay.hidden = false;
       document.body.classList.add('modal-open');
       setBackgroundInert(true);   // 배경(reader/dnav) 탭 순서에서 제외 → 포커스 다이얼로그 안에 가둠
-      if (enabled && askPanel) { askPanel.classList.remove('ask-collapsed'); askPanel.hidden = false; updateCount(); }  // 패널 상시 표시(FAB 없음)
+      if (enabled && askPanel) { askPanel.hidden = false; updateCount(); }  // 패널 상시 표시(FAB 없음)
       overlay.classList.add('open');            // display:flex 즉시 (rAF 비의존)
       var showIt = function () { overlay.classList.add('show'); };
       requestAnimationFrame(showIt);
@@ -599,7 +597,31 @@
     setInterval(function () { check(false); }, 300000);
   }
 
-  function boot() { initQuiz(); initNews(); initSearch(); initUpdateCheck(); }
+  /* ---------- 7) 인덱스 피드 '더보기' 페이지네이션 ---------- */
+  function initFeed() {
+    var grid = document.querySelector('.feed .grid');
+    var wrap = document.querySelector('.feed-more');
+    if (!grid || !wrap) return;
+    var btn = wrap.querySelector('.more-btn');
+    if (!btn) return;
+    var page = parseInt(btn.getAttribute('data-page'), 10) || 12;
+    function hiddenCards() {
+      return Array.prototype.slice.call(grid.querySelectorAll('.card[hidden]'));
+    }
+    function refresh() {
+      var rem = hiddenCards().length;
+      if (rem <= 0) { wrap.hidden = true; return; }
+      wrap.hidden = false;
+      btn.textContent = '지난 날 더보기 (' + rem + ')';
+    }
+    btn.addEventListener('click', function () {
+      hiddenCards().slice(0, page).forEach(function (c) { c.hidden = false; });
+      refresh();
+    });
+    refresh();
+  }
+
+  function boot() { initQuiz(); initNews(); initSearch(); initUpdateCheck(); initFeed(); }
   if (document.readyState !== 'loading') boot();
   else document.addEventListener('DOMContentLoaded', boot);
 })();

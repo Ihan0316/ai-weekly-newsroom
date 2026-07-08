@@ -79,13 +79,22 @@ def card(day_id, rec, hero=False):
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>'''
 
+PAGE_SIZE = 12   # 인덱스 피드 '지난 날' 초기 노출 카드 수 (나머지는 '더보기'로 점진 노출)
+
 def build_index(days, ver="", build_v=""):
     latest_id, latest = days[0]
     rest = days[1:]
     hero_card = card(latest_id, latest, hero=True)
-    cards = "\n".join(card(i, r) for i, r in rest)
+    rest_cards = [card(i, r) for i, r in rest]
+    # 초기엔 PAGE_SIZE개만 노출, 나머지는 hidden → JS '더보기'가 점진 공개 (검색엔진/무JS는 noscript로 전부 노출)
+    extra_n = max(0, len(rest_cards) - PAGE_SIZE)
+    shown = rest_cards[:PAGE_SIZE]
+    hidden = [c.replace('<a class="card"', '<a class="card" hidden', 1) for c in rest_cards[PAGE_SIZE:]]
+    cards = "\n".join(shown + hidden)
     grid = f'<div class="grid">{cards}</div>' if rest else ''
     rest_h = '<div class="sec-label">지난 날</div>' if rest else ''
+    more = (f'<div class="feed-more"><button class="more-btn" type="button" data-page="{PAGE_SIZE}">지난 날 더보기 ({extra_n})</button></div>'
+            if extra_n else '')
     n = len(days)
     desc = "매일 IT·개발 뉴스, 정보처리기사 기초 문제, IT·개발·기획 용어를 한 장에 모은 데일리 다이제스트."
     return f'''<!doctype html><html lang="ko"><head><meta charset="utf-8">
@@ -98,6 +107,7 @@ def build_index(days, ver="", build_v=""):
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:url" content="{SITE_BASE}">
 <link rel="stylesheet" href="assets/site.css{ver}">
+<noscript><style>.grid .card[hidden]{{display:flex !important}} .feed-more{{display:none !important}}</style></noscript>
 <meta name="site-build" content="{build_v}" data-src="build.json">
 <script>
 /* 모바일 직접 접속 시 오늘 뉴스로 자동 이동. 사이트 내부 이동('전체 보기' 등)·재방문은 제외 */
@@ -140,6 +150,7 @@ def build_index(days, ver="", build_v=""):
   {hero_card}
   {rest_h}
   {grid}
+  {more}
   </div>
 
   <div class="foot">

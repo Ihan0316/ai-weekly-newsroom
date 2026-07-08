@@ -90,7 +90,18 @@ mark{background:#fff3c4; color:inherit; border-radius:3px; padding:0 1px;}
 
 .sec-label{font-size:22px; font-weight:600; letter-spacing:-.02em; color:var(--ink); margin:50px 0 20px;}
 
-.grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; padding-bottom:48px;}
+.grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; padding-bottom:36px;}
+
+/* '더보기' 페이지네이션 (.card{display:flex}가 기본 [hidden]을 덮으므로 명시적으로 숨김) */
+.grid .card[hidden]{display:none !important;}
+.feed-more{display:flex; justify-content:center; padding-bottom:56px;}
+.feed-more[hidden]{display:none;}
+.more-btn{border:1px solid var(--line); background:var(--bg); color:var(--ink);
+  font-family:var(--sans); font-size:15px; font-weight:600; letter-spacing:-.01em;
+  padding:13px 30px; border-radius:980px; cursor:pointer;
+  transition:background .2s, border-color .2s, transform .2s;}
+.more-btn:hover{background:var(--bg-sub); border-color:var(--ink-4); transform:translateY(-1px);}
+.more-btn:active{transform:translateY(0);}
 
 /* 카드 */
 .card{display:flex; flex-direction:column; background:var(--bg); border:1px solid var(--line-soft); border-radius:var(--radius);
@@ -234,7 +245,6 @@ mark{background:#fff3c4; color:inherit; border-radius:3px; padding:0 1px;}
 /* 기사 Q&A : 선택 팝업 + 패널 (FAB 없음 — 모달 열리면 패널 상시 표시) */
 /* 패널·선택팝업 모두 기사 모달이 열린 동안에만 표시 — 본문 밖에선 절대 안 뜸 */
 body.modal-open .ask-panel{display:flex !important;}
-body.modal-open .ask-panel.ask-collapsed{display:none !important;}   /* 사용자가 ✕로 접으면 우선 적용 */
 body:not(.modal-open) .ask-panel,
 body:not(.modal-open) .sel-ask{display:none !important;}
 .ask-panel{position:fixed; right:26px; bottom:26px; z-index:211; width:360px; max-width:calc(100vw - 36px);
@@ -242,9 +252,7 @@ body:not(.modal-open) .sel-ask{display:none !important;}
   background:#fff; border:1px solid var(--line-soft); border-radius:18px; box-shadow:0 22px 60px rgba(0,0,0,.25); padding:16px;}
 .ask-head, .ask-quote, .ask-foot{flex:0 0 auto;}
 .ask-foot{margin-top:2px;}
-.ask-head{display:flex; align-items:center; justify-content:space-between; font-size:15px; font-weight:600; color:var(--ink); margin-bottom:12px;}
-.ask-x{border:none; background:var(--bg-sub); color:var(--ink-3); width:28px; height:28px; border-radius:50%; cursor:pointer; font-size:13px;}
-.ask-x:hover{background:var(--line);}
+.ask-head{display:flex; align-items:center; font-size:15px; font-weight:600; color:var(--ink); margin-bottom:12px;}
 .ask-quote{font-size:13px; color:var(--ink-3); background:var(--bg-sub); border-left:3px solid var(--accent);
   border-radius:0 8px 8px 0; padding:9px 11px; margin-bottom:11px; max-height:84px; overflow:auto;}
 .ask-row{display:flex; gap:8px;}
@@ -353,8 +361,8 @@ body.modal-open .ask-panel{animation:popIn .28s both;}
 }
 /* 터치 기기: 작은 아이콘 버튼에 44px 히트존 확보 (시각 크기는 유지) */
 @media(pointer:coarse){
-  .modal-close,.ask-x,.search-clear{position:relative;}
-  .modal-close::before,.ask-x::before,.search-clear::before{
+  .modal-close,.search-clear{position:relative;}
+  .modal-close::before,.search-clear::before{
     content:""; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
     width:44px; height:44px;}
 }
