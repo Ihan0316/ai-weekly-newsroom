@@ -36,8 +36,18 @@ def collect():
     return seen
 
 async def synth(text, path):
-    c = edge_tts.Communicate(text, VOICE)
-    await c.save(path)
+    # 임시 파일에 쓰고 성공 시에만 원자적 교체 → 네트워크 중단으로 잘린 mp3가
+    # 최종 경로에 남아 증분 스킵으로 영구 고착되는 것 방지.
+    tmp = path + ".part"
+    try:
+        c = edge_tts.Communicate(text, VOICE)
+        await c.save(tmp)
+        if os.path.getsize(tmp) < 1024:   # 정상 mp3면 최소 수 KB
+            raise RuntimeError("출력 too small (%dB)" % os.path.getsize(tmp))
+        os.replace(tmp, path)
+    finally:
+        if os.path.exists(tmp):
+            os.remove(tmp)
 
 def main():
     os.makedirs(OUT, exist_ok=True)

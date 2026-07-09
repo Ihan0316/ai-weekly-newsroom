@@ -13,7 +13,7 @@
 - 비어있는 날은 풀에서 라운드로빈으로 채움(날짜당 최대 2). 그래도 0이면 그 날은 생성 안 함.
 - 각 생성일에 quiz/terms 뱅크를 인덱스로 배정.
 """
-import json, os, glob
+import json, os, glob, sys, hashlib
 from datetime import date, timedelta
 
 END_DATE = date(2026, 6, 24)
@@ -89,19 +89,28 @@ def main():
     built = [d for d in dates if buckets[d]]
     built.sort(reverse=True)
 
-    # 기존 day 파일 제거
+    # 기존 day 파일 제거 — 파괴적. 이미 발행된 날(창 밖)의 content/comment_kr 유실 +
+    # 퀴즈/용어 재셔플 위험이 있어 --force 없이는 중단 (운영 중 재실행 금지).
     days_dir = os.path.join(HERE, "data", "days")
     os.makedirs(days_dir, exist_ok=True)
-    for f in glob.glob(os.path.join(days_dir, "*.json")):
+    existing = glob.glob(os.path.join(days_dir, "*.json"))
+    if existing and "--force" not in sys.argv:
+        print(f"중단: data/days 에 {len(existing)}개 파일 존재. 이 스크립트는 전량 삭제 후 "
+              f"{END_DATE} 기준 {DAYS}일 창만 재생성하므로 창 밖 날짜의 본문/코멘트가 유실됩니다.\n"
+              f"정말 초기화하려면 --force 로 실행하세요.")
+        return
+    for f in existing:
         os.remove(f)
 
     for i, d in enumerate(built):
+        # 위치 인덱스(i) 대신 날짜 결정적 배정 → 재실행/목록변동에도 같은 날은 같은 퀴즈/용어
+        qi = int(hashlib.md5(d.isoformat().encode("utf-8")).hexdigest(), 16)
         rec = {
             "date_label": date_label(d),
             "weekday": WD[d.weekday()],
             "news": buckets[d][:3],
-            "quiz": quizzes[i % len(quizzes)],
-            "terms": termsets[i % len(termsets)],
+            "quiz": quizzes[qi % len(quizzes)],
+            "terms": termsets[qi % len(termsets)],
         }
         out = os.path.join(days_dir, d.isoformat() + ".json")
         with open(out, "w", encoding="utf-8") as f:

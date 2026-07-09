@@ -7,7 +7,7 @@
 
 usage: python build_site.py
 """
-import json, os, glob, re, shutil, hashlib
+import json, os, glob, re, shutil, hashlib, sys
 from build import render_day, esc
 
 DAYS_DIR = os.path.join("data", "days")
@@ -161,15 +161,55 @@ def build_index(days, ver="", build_v=""):
 <script src="assets/site.js{ver}"></script>
 </body></html>'''
 
+def validate_day(rec):
+    """렌더에 필요한 최소 스키마 검증. 불량 day 1개가 전체 빌드를 중단시키지 않도록 사전 차단.
+    반환: 문제 사유(str) 또는 None(정상)."""
+    if not isinstance(rec, dict):
+        return "레코드가 dict 아님"
+    if not rec.get("date_label"):
+        return "date_label 없음"
+    q = rec.get("quiz")
+    if not isinstance(q, dict):
+        return "quiz 없음/형식오류"
+    opts = q.get("options")
+    if not isinstance(opts, list) or not (1 <= len(opts) <= 5):
+        return "quiz.options 개수 오류"
+    try:
+        ans = int(q.get("answer"))
+    except (TypeError, ValueError):
+        return "quiz.answer 정수 아님"
+    if not (0 <= ans < len(opts)):
+        return "quiz.answer 범위 초과"
+    for k in ("question", "explain_kr"):
+        if not q.get(k):
+            return "quiz.%s 없음" % k
+    for it in rec.get("news", []):
+        if not it.get("title_kr"):
+            return "news 항목 title_kr 없음"
+    return None
+
 def main():
     files = glob.glob(os.path.join(DAYS_DIR, "*.json"))
     if not files:
-        print("no days in", DAYS_DIR); return
+        print("no days in", DAYS_DIR); sys.exit(1)
     days = []
+    skipped = []
     for f in files:
         did = os.path.splitext(os.path.basename(f))[0]
-        with open(f, "r", encoding="utf-8") as fh:
-            days.append((did, json.load(fh)))
+        try:
+            with open(f, "r", encoding="utf-8") as fh:
+                rec = json.load(fh)
+        except (json.JSONDecodeError, OSError) as e:
+            skipped.append((did, "로드 실패: %s" % e)); continue
+        reason = validate_day(rec)
+        if reason:
+            skipped.append((did, reason)); continue
+        days.append((did, rec))
+    if skipped:
+        for did, why in skipped:
+            print("SKIP", did, "—", why, file=sys.stderr)
+    if not days:
+        print("유효한 day 없음 — 중단", file=sys.stderr); sys.exit(1)
     days.sort(key=lambda x: x[0], reverse=True)  # 최신 날짜 먼저
 
     dst_assets = os.path.join(OUT_DIR, "assets")
@@ -177,6 +217,8 @@ def main():
     h = hashlib.md5()
     for fn in sorted(os.listdir(ASSETS_SRC)):
         sp = os.path.join(ASSETS_SRC, fn)
+        if not os.path.isfile(sp):   # 하위 폴더(assets/fonts/ 등)는 건너뜀 — copy2/open 크래시 방지
+            continue
         shutil.copy2(sp, os.path.join(dst_assets, fn))
         with open(sp, "rb") as fb:
             h.update(fb.read())

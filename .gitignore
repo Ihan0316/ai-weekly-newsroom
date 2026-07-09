@@ -4,3 +4,9 @@ __pycache__/
 Thumbs.db
 dist/
 data/_*.json
+.naver_profile/
+.claude/
+
+# 네이버 자동 발행 도구 — public repo 비공개 (계정ID·자동화 코드 노출 방지)
+naver_publish.py
+run_naver.bat

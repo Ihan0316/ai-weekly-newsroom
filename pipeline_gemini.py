@@ -97,7 +97,23 @@ def select_news(today, ex_urls):
         "[이미 수록된 URL]\n%s\n\n[요즘IT 페이지]\n%s\n\n[GeekNews 페이지]\n%s\n"
     ) % (today, "\n".join(sorted(ex_urls)), yozm, hada)
     out = gemini(prompt, NEWS_SCHEMA, max_tokens=4096)
-    items = [it for it in out.get("items", []) if (it.get("url") or "").strip() not in ex_urls][:3]
+
+    def valid_url(u):
+        # 프롬프트 규칙 강제: GeekNews=토픽 페이지, 요즘IT=매거진 상세. 그 외(모델이 재구성한
+        # 외부 원문/환각 링크)는 본문추출 실패·죽은 링크로 이어지므로 코드에서 버림.
+        return (u.startswith("https://news.hada.io/topic?id=")
+                or u.startswith("https://yozm.wishket.com/magazine/detail/"))
+
+    items = []
+    for it in out.get("items", []):
+        u = (it.get("url") or "").strip()
+        if not u or u in ex_urls:
+            continue
+        if not valid_url(u):
+            sys.stderr.write("skip off-pattern url: %s\n" % u[:80]); continue
+        items.append(it)
+        if len(items) >= 3:
+            break
     return items
 
 def extract_body(url):
@@ -215,9 +231,15 @@ def main():
     json.dump(rec, open(out_path, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
     print("작성:", out_path, "| 뉴스", len(news), "| 본문", sum(1 for it in news if it.get("content")))
 
-    for script in ("fetch_images.py", "gen_audio.py", "build_site.py"):
+    # day JSON은 위에서 이미 기록됨. 이미지·오디오는 부가물 → 실패해도 그날 콘텐츠를 버리지 않음
+    # (check=False). 사이트 생성(build_site)만 필수라 실패 시 예외로 중단.
+    for script in ("fetch_images.py", "gen_audio.py"):
         print("== run", script, "==")
-        subprocess.run([sys.executable, os.path.join(HERE, script)], check=True)
+        r = subprocess.run([sys.executable, os.path.join(HERE, script)])
+        if r.returncode != 0:
+            sys.stderr.write("WARN %s 실패(rc=%s) — 계속 진행\n" % (script, r.returncode))
+    print("== run build_site.py ==")
+    subprocess.run([sys.executable, os.path.join(HERE, "build_site.py")], check=True)
 
 if __name__ == "__main__":
     main()

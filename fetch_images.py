@@ -16,6 +16,20 @@ OUT = os.path.join(HERE, "docs", "images")
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36"
 EXT = {"image/jpeg": "jpg", "image/jpg": "jpg", "image/png": "png", "image/webp": "webp", "image/gif": "gif", "image/avif": "avif"}
 
+def sniff_ext(data):
+    """매직 바이트로 실제 이미지 포맷 판별. 이미지 아니면 None (HTML 오류페이지 저장 방지)."""
+    if data[:3] == b"\xff\xd8\xff":
+        return "jpg"
+    if data[:8] == b"\x89PNG\r\n\x1a\n":
+        return "png"
+    if data[:6] in (b"GIF87a", b"GIF89a"):
+        return "gif"
+    if data[:4] == b"RIFF" and data[8:12] == b"WEBP":
+        return "webp"
+    if data[4:12] in (b"ftypavif", b"ftypavis") or data[4:8] == b"ftyp" and b"avif" in data[8:20]:
+        return "avif"
+    return None
+
 def get(url, maxbytes):
     req = Request(url, headers={"User-Agent": UA, "Accept": "*/*"})
     with urlopen(req, timeout=15) as r:
@@ -63,13 +77,13 @@ def main():
             if not img:
                 fail += 1; print("noimg", u[:60]); continue
             data, ct, _ = get(img, 6000000)
-            ext = EXT.get(ct.split(";")[0].strip().lower())
-            if not ext:
-                m = re.search(r'\.(jpg|jpeg|png|webp|gif|avif)(?:\?|$)', img, re.I)
-                ext = (m.group(1).lower() if m else "jpg")
-                if ext == "jpeg": ext = "jpg"
             if not data or len(data) < 1000:
                 fail += 1; print("tiny", u[:60]); continue
+            # 매직바이트 우선(신뢰), 없으면 Content-Type. 둘 다 이미지 아니면 버림
+            # (증분 스킵 때문에 손상/HTML 파일이 저장되면 영구 고착되므로 저장 전 차단).
+            ext = sniff_ext(data) or EXT.get(ct.split(";")[0].strip().lower())
+            if not ext:
+                fail += 1; print("notimg", u[:60], ct[:30]); continue
             with open(os.path.join(OUT, h + "." + ext), "wb") as fb:
                 fb.write(data)
             done += 1
