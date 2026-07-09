@@ -316,6 +316,14 @@
     }
     function openPanel() { if (!enabled || !askPanel) return; askPanel.hidden = false; updateCount(); setTimeout(function () { if (askInput && !askInput.disabled) askInput.focus(); }, 50); }
     function closePanel() { if (askPanel) askPanel.hidden = true; hideSel(); }
+    // 질문창 접기/펴기 — 모바일에서 패널이 '원문 보기' 링크를 가릴 때 사용자가 접을 수 있게.
+    var askMinBtn = askPanel ? askPanel.querySelector('.ask-min-btn') : null;
+    function setMin(min) {
+      if (!askPanel) return;
+      askPanel.classList.toggle('ask-min', min);
+      if (askMinBtn) askMinBtn.textContent = min ? '▴' : '▾';
+    }
+    if (askMinBtn) askMinBtn.addEventListener('click', function () { setMin(!askPanel.classList.contains('ask-min')); });
     function bubble(cls, text) {
       var el = document.createElement('div');
       el.className = 'msg ' + cls; el.textContent = text;
@@ -428,7 +436,7 @@
       overlay.hidden = false;
       document.body.classList.add('modal-open');
       setBackgroundInert(true);   // 배경(reader/dnav) 탭 순서에서 제외 → 포커스 다이얼로그 안에 가둠
-      if (enabled && askPanel) { askPanel.hidden = false; updateCount(); }  // 패널 상시 표시(FAB 없음)
+      if (enabled && askPanel) { askPanel.hidden = false; setMin(false); updateCount(); }  // 패널 상시 표시(FAB 없음), 펼친 상태로 시작
       overlay.classList.add('open');            // display:flex 즉시 (rAF 비의존)
       var showIt = function () { overlay.classList.add('show'); };
       requestAnimationFrame(showIt);
@@ -462,7 +470,11 @@
         open(parseInt(btn.getAttribute('data-idx'), 10));
       });
     });
-    overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+    // 배경 클릭으로 닫기: 단, 드래그 선택(본문 시작 → 오버레이 여백에서 끝)은 제외.
+    // click은 down/up 타깃이 다르면 공통 조상(overlay)에서 발생 → down 지점이 overlay일 때만 닫음.
+    var downOnOverlay = false;
+    overlay.addEventListener('pointerdown', function (e) { downOnOverlay = (e.target === overlay); });
+    overlay.addEventListener('click', function (e) { if (e.target === overlay && downOnOverlay) close(); });
     if (closeBtn) closeBtn.addEventListener('click', close);
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && !overlay.hidden) close();
@@ -489,9 +501,11 @@
     }
     function escRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
     function highlight(text, terms) {
-      var out = esc(text);
-      terms.forEach(function (t) { if (t) out = out.replace(new RegExp('(' + escRe(esc(t)) + ')', 'gi'), '<mark>$1</mark>'); });
-      return out;
+      // 모든 텀을 한 정규식으로 합쳐 1회 치환 → 앞 텀이 삽입한 <mark> 태그 내부를
+      // 뒤 텀이 다시 매칭해 마크업이 깨지는 문제 방지.
+      var parts = terms.filter(Boolean).map(function (t) { return escRe(esc(t)); });
+      if (!parts.length) return esc(text);
+      return esc(text).replace(new RegExp('(' + parts.join('|') + ')', 'gi'), '<mark>$1</mark>');
     }
     function snippet(c, terms) {
       if (!c) return '';
@@ -564,6 +578,16 @@
     var cur = meta.getAttribute('content') || '';
     var src = meta.getAttribute('data-src') || 'build.json';
     if (!cur) return;
+    // 캐시버스터 _ 만 갱신하고 기존 쿼리(?n= 기사, ?q= 검색 딥링크)는 보존 → 배포 직후에도 링크 안 깨짐
+    function reloadWith(v) {
+      try {
+        var u = new URL(location.href);
+        u.searchParams.set('_', v);
+        location.replace(u.pathname + u.search + u.hash);
+      } catch (e) {
+        location.replace(location.pathname + '?_=' + v);
+      }
+    }
     var toasted = false;
     function toast(v) {
       if (toasted) return; toasted = true;
@@ -571,7 +595,7 @@
       el.className = 'update-toast';
       el.innerHTML = '새 글이 업데이트됐어요 <button type="button">새로고침</button>';
       el.querySelector('button').addEventListener('click', function () {
-        location.replace(location.pathname + '?_=' + v);
+        reloadWith(v);
       });
       document.body.appendChild(el);
       requestAnimationFrame(function () { el.classList.add('show'); });
@@ -586,7 +610,7 @@
           try { seen = !!sessionStorage.getItem(key); } catch (e) {}
           if (initial && !seen) {
             try { sessionStorage.setItem(key, '1'); } catch (e) {}
-            location.replace(location.pathname + '?_=' + j.v);   // 캐시 무시 새로고침
+            reloadWith(j.v);   // 캐시 무시 새로고침 (기존 쿼리 보존)
           } else {
             toast(j.v);
           }

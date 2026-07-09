@@ -7,6 +7,23 @@ const ALLOW = [
   "http://localhost:8753",
 ];
 const MODEL = "gemini-2.5-flash";
+const IP_DAILY_CAP = 60;   // IP당 하루 질문 상한 (공유 Gemini 무료 쿼터 소진 공격 방어)
+
+function dayKey() {
+  // UTC 날짜 기준 rl:<yyyy-mm-dd>:<ip>
+  return new Date().toISOString().slice(0, 10);
+}
+
+// KV(env.RL) 바인딩이 있으면 IP별 일일 카운트 강제. 없으면 무해하게 통과(기능 유지).
+async function rateLimited(env, ip) {
+  if (!env.RL || !ip) return false;
+  const key = "rl:" + dayKey() + ":" + ip;
+  let n = 0;
+  try { n = parseInt((await env.RL.get(key)) || "0", 10) || 0; } catch { return false; }
+  if (n >= IP_DAILY_CAP) return true;
+  try { await env.RL.put(key, String(n + 1), { expirationTtl: 172800 }); } catch {}
+  return false;
+}
 
 function cors(origin) {
   const allow = ALLOW.includes(origin) ? origin : ALLOW[0];
@@ -30,6 +47,15 @@ export default {
     if (req.method === "OPTIONS") return new Response(null, { headers: h });
     if (req.method !== "POST") return json({ error: "POST only" }, 405, h);
     if (!env.GEMINI_API_KEY) return json({ error: "server not configured" }, 500, h);
+
+    // Origin 하드 거부: 브라우저 요청이면 반드시 허용 목록이어야 함(다른 사이트 임베드 차단).
+    // (CORS 헤더는 브라우저에서만 강제되므로 서버측 검사로 보강. Origin 스푸핑은 IP 한도로 추가 방어.)
+    if (origin && !ALLOW.includes(origin)) return json({ error: "forbidden origin" }, 403, h);
+
+    const ip = req.headers.get("CF-Connecting-IP") || "";
+    if (await rateLimited(env, ip)) {
+      return json({ error: "rate limited", answer: "오늘 질문 한도를 다 썼어요. 내일 다시 시도해 주세요." }, 429, h);
+    }
 
     let body;
     try { body = await req.json(); } catch { return json({ error: "bad json" }, 400, h); }

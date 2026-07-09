@@ -2,3 +2,10 @@ name = "ai-weekly-newsroom"
 main = "worker.js"
 compatibility_date = "2025-01-01"
 # GEMINI_API_KEY 는 여기 적지 말 것(비밀). Cloudflare 변수/시크릿(암호화)으로 추가.
+
+# IP별 일일 질문 한도용 KV. 아래 id 를 실제 네임스페이스로 채운 뒤 배포해야 rate-limit 활성.
+# 생성: wrangler kv namespace create RL  → 출력된 id 를 여기에.
+# 미설정 시 worker 는 rate-limit 없이 정상 동작(graceful).
+# [[kv_namespaces]]
+# binding = "RL"
+# id = "<여기에 네임스페이스 id>"

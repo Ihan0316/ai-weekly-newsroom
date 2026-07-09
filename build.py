@@ -120,7 +120,7 @@ MODAL = '''
   </div>
 </div>
 <div class="ask-panel" hidden role="dialog" aria-label="기사 질문">
-  <div class="ask-head"><span>이 기사에 질문</span></div>
+  <div class="ask-head"><span>이 기사에 질문</span><button class="ask-min-btn" type="button" aria-label="질문창 접기/펴기">▾</button></div>
   <div class="ask-thread"></div>
   <div class="ask-foot">
     <div class="ask-quote" hidden></div>
