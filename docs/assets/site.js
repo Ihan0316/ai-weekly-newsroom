@@ -134,81 +134,7 @@
     if (heroEl) heroEl.onerror = function () { heroEl.hidden = true; };
     var lastFocus = null;
 
-    /* ----- TTS: 뉴럴 MP3(있으면) 우선, 없으면 브라우저 음성 폴백 ----- */
-    var synth = window.speechSynthesis;
-    var ttsBtn = overlay.querySelector('.tts-toggle');
-    var ttsState = 'idle';   // idle | playing | paused
-    var usingAudio = false;
-    var koVoice = null;
     var curItem = null;
-    var audioEl = (typeof Audio !== 'undefined') ? new Audio() : null;
-    if (audioEl) {
-      audioEl.preload = 'none';
-      audioEl.addEventListener('ended', function () { ttsState = 'idle'; ttsUI('idle'); });
-      audioEl.addEventListener('error', function () { if (usingAudio) { ttsState = 'idle'; ttsUI('idle'); } });
-    }
-    function ttsUI(state) {
-      if (!ttsBtn) return;
-      var ico = ttsBtn.querySelector('.tts-ico'), lab = ttsBtn.querySelector('.tts-label');
-      if (state === 'playing') { ico.textContent = '⏸'; lab.textContent = '일시정지'; ttsBtn.classList.add('on'); }
-      else if (state === 'paused') { ico.textContent = '▶'; lab.textContent = '이어 듣기'; ttsBtn.classList.add('on'); }
-      else { ico.textContent = '🔊'; lab.textContent = '본문 듣기'; ttsBtn.classList.remove('on'); }
-    }
-    if (ttsBtn && (synth || audioEl)) {
-      ttsBtn.hidden = false;
-      if (synth) {
-        var pickVoice = function () {
-          var vs = synth.getVoices() || [];
-          var ko = vs.filter(function (v) { return /ko/i.test(v.lang); });
-          // 여성 보이스 우선(이름 힌트) → 그다음 Google/Neural 고품질 → 나머지
-          var female = ko.filter(function (v) { return /female|여성|sunhi|sun-?hi|heami|yuna|nari|jimin|ji-?min|seo|yujin|소|선희|아라|유나/i.test(v.name); });
-          var pool = female.length ? female : ko;
-          koVoice = pool.filter(function (v) { return /google|neural|natural/i.test(v.name); })[0] || pool[0] || null;
-        };
-        pickVoice();
-        try { synth.onvoiceschanged = pickVoice; } catch (e) {}
-      }
-    }
-    function ttsReset() {
-      if (synth) synth.cancel();
-      if (audioEl) { try { audioEl.pause(); audioEl.currentTime = 0; } catch (e) {} }
-      ttsState = 'idle'; ttsUI('idle');
-    }
-    function ttsTextOf(it) {
-      var parts = [];
-      if (it.title) parts.push(it.title);
-      (it.content || []).forEach(function (b) { if (b.text) parts.push(b.text); });
-      if (!parts.length && it.blurb) parts.push(it.blurb);
-      return parts.join('.\n');
-    }
-    function ttsStart() {
-      if (!curItem) return;
-      if (curItem.audio && audioEl) {
-        usingAudio = true;
-        audioEl.src = curItem.audio;
-        var p = audioEl.play();
-        if (p && p.catch) p.catch(function () { ttsState = 'idle'; ttsUI('idle'); });
-      } else if (synth) {
-        usingAudio = false;
-        synth.cancel();
-        var u = new SpeechSynthesisUtterance(ttsTextOf(curItem));
-        u.lang = 'ko-KR'; if (koVoice) u.voice = koVoice; u.rate = 1.0;
-        u.onend = function () { ttsState = 'idle'; ttsUI('idle'); };
-        u.onerror = function () { ttsState = 'idle'; ttsUI('idle'); };
-        synth.speak(u);
-      } else { return; }
-      ttsState = 'playing'; ttsUI('playing');
-    }
-    if (ttsBtn) ttsBtn.addEventListener('click', function () {
-      if (ttsState === 'idle') ttsStart();
-      else if (ttsState === 'playing') {
-        if (usingAudio && audioEl) audioEl.pause(); else if (synth) synth.pause();
-        ttsState = 'paused'; ttsUI('paused');
-      } else if (ttsState === 'paused') {
-        if (usingAudio && audioEl) audioEl.play(); else if (synth) synth.resume();
-        ttsState = 'playing'; ttsUI('playing');
-      }
-    });
 
     /* ----- 네이버 블로그 복사: 이 기사 1개를 제목/본문으로 클립보드 복사 ----- */
     var npBtns = overlay.querySelectorAll('.np-copy');
@@ -404,7 +330,7 @@
     function open(idx) {
       var it = items[idx];
       if (!it) return;
-      curItem = it; ttsReset(); askReset();
+      curItem = it; askReset();
       lastFocus = document.activeElement;
       titleEl.textContent = it.title || '';
       srcEl.textContent = it.source || '';
@@ -447,7 +373,7 @@
     }
     function close() {
       if (overlay.hidden) return;
-      ttsReset(); closePanel();
+      closePanel();
       document.body.classList.remove('modal-open');
       overlay.classList.remove('show');
       var t, te;

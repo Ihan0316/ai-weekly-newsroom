@@ -2,7 +2,7 @@
 """
 무인 데일리 파이프라인 (GitHub Actions용). LLM 단계는 Google Gemini(무료 티어) 사용.
 오늘 날짜의 뉴스 3건을 골라 본문 추출·퀴즈/용어 생성 → data/days/<오늘>.json 작성 →
-fetch_images.py / gen_audio.py / build_site.py 실행. (git 커밋·푸시는 워크플로우가 담당.)
+fetch_images.py / build_site.py 실행. (git 커밋·푸시는 워크플로우가 담당.)
 
 env: GEMINI_API_KEY 필요. TZ=Asia/Seoul 권장(오늘 날짜 기준).
 """
@@ -231,13 +231,12 @@ def main():
     json.dump(rec, open(out_path, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
     print("작성:", out_path, "| 뉴스", len(news), "| 본문", sum(1 for it in news if it.get("content")))
 
-    # day JSON은 위에서 이미 기록됨. 이미지·오디오는 부가물 → 실패해도 그날 콘텐츠를 버리지 않음
+    # day JSON은 위에서 이미 기록됨. 이미지는 부가물 → 실패해도 그날 콘텐츠를 버리지 않음
     # (check=False). 사이트 생성(build_site)만 필수라 실패 시 예외로 중단.
-    for script in ("fetch_images.py", "gen_audio.py"):
-        print("== run", script, "==")
-        r = subprocess.run([sys.executable, os.path.join(HERE, script)])
-        if r.returncode != 0:
-            sys.stderr.write("WARN %s 실패(rc=%s) — 계속 진행\n" % (script, r.returncode))
+    print("== run fetch_images.py ==")
+    r = subprocess.run([sys.executable, os.path.join(HERE, "fetch_images.py")])
+    if r.returncode != 0:
+        sys.stderr.write("WARN fetch_images.py 실패(rc=%s) — 계속 진행\n" % r.returncode)
     print("== run build_site.py ==")
     subprocess.run([sys.executable, os.path.join(HERE, "build_site.py")], check=True)
 

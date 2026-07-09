@@ -58,7 +58,6 @@ def news_payload(news):
             "url": it.get("url", ""),
             "blurb": it.get("blurb_kr", ""),
             "content": it.get("content", []) or [],
-            "audio": it.get("audio", ""),
             "image": it.get("image", ""),
             "comment": it.get("comment_kr", ""),   # 화면 미표시, 복사 시에만 사용
         })
@@ -103,9 +102,6 @@ MODAL = '''
     <div class="modal-src"></div>
     <h2 class="modal-title" id="modal-title"></h2>
     <div class="modal-tools">
-      <button class="tts-toggle" type="button" hidden aria-label="본문 읽어주기">
-        <span class="tts-ico">🔊</span><span class="tts-label">본문 듣기</span>
-      </button>
       <button class="np-copy" type="button" data-part="title" aria-label="네이버 제목 복사">
         <span class="np-ico">📋</span><span>제목</span>
       </button>

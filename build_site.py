@@ -225,8 +225,7 @@ def main():
     ver = "?v=" + h.hexdigest()[:8]      # 에셋 변경 시 캐시 무효화
     open(os.path.join(OUT_DIR, ".nojekyll"), "w").close()
 
-    # 뉴럴 TTS 오디오 연결: url 해시(gen_audio와 동일)로 docs/audio/<hash>.mp3 존재 시 주입
-    n_audio = 0
+    # 기사 이미지 연결: url 해시로 docs/images/<hash>.* 존재 시 주입
     n_img = 0
     for _did, rec in days:
         for it in rec.get("news", []):
@@ -234,12 +233,10 @@ def main():
             if not u:
                 continue
             h = hashlib.md5(u.encode("utf-8")).hexdigest()[:12]
-            if os.path.exists(os.path.join(OUT_DIR, "audio", h + ".mp3")):
-                it["audio"] = "../audio/" + h + ".mp3"; n_audio += 1
             imgs = glob.glob(os.path.join(OUT_DIR, "images", h + ".*"))
             if imgs:
                 it["image"] = "../images/" + os.path.basename(imgs[0]); n_img += 1
-    print("audio linked:", n_audio, "| images linked:", n_img)
+    print("images linked:", n_img)
 
     # 빌드 버전(콘텐츠 변경 시마다 달라짐) → 클라이언트가 자동 갱신 감지에 사용
     build_v = hashlib.md5(json.dumps([r for _, r in days], ensure_ascii=False, sort_keys=True).encode("utf-8")).hexdigest()[:10]
