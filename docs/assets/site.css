@@ -253,6 +253,13 @@ body:not(.modal-open) .sel-ask{display:none !important;}
 .ask-head, .ask-quote, .ask-foot{flex:0 0 auto;}
 .ask-foot{margin-top:2px;}
 .ask-head{display:flex; align-items:center; font-size:15px; font-weight:600; color:var(--ink); margin-bottom:12px;}
+.ask-min-btn{margin-left:auto; border:none; background:var(--bg-sub); color:var(--ink-3); cursor:pointer;
+  width:28px; height:28px; border-radius:8px; font-size:13px; line-height:1;}
+.ask-min-btn:hover{background:var(--line);}
+/* 접힘: 헤더 바만 남김 → 모바일에서 '원문 보기' 링크 가림 해소 */
+.ask-panel.ask-min{max-height:none;}
+.ask-panel.ask-min .ask-thread,.ask-panel.ask-min .ask-quote,.ask-panel.ask-min .ask-foot{display:none;}
+.ask-panel.ask-min .ask-head{margin-bottom:0;}
 .ask-quote{font-size:13px; color:var(--ink-3); background:var(--bg-sub); border-left:3px solid var(--accent);
   border-radius:0 8px 8px 0; padding:9px 11px; margin-bottom:11px; max-height:84px; overflow:auto;}
 .ask-row{display:flex; gap:8px;}
@@ -352,7 +359,10 @@ body.modal-open .ask-panel{animation:popIn .28s both;}
   .sr-thumb{width:84px; height:60px;}
   .modal-hero{max-height:220px;}
   .dnav{padding:14px 18px 0;}
+  /* Q&A 패널(하단 고정)이 모달 마지막 요소를 가리므로 스크롤 여백 확보 → '원문 보기' 도달 가능 */
+  .modal-overlay{padding-bottom:150px;}
   .ask-panel{right:12px; left:12px; bottom:12px; width:auto; max-width:none;}
+  .ask-panel.ask-min{max-height:none;}
 }
 @media(max-width:380px){
   .nav .pill{display:none;}

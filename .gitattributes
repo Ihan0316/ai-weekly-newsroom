@@ -1,0 +1,19 @@
+# 텍스트 파일은 저장소에 항상 LF로 정규화 (Windows 로컬 빌드의 CRLF churn 방지)
+*.html  text eol=lf
+*.json  text eol=lf
+*.css   text eol=lf
+*.js    text eol=lf
+*.py    text eol=lf
+*.md    text eol=lf
+*.yml   text eol=lf
+*.toml  text eol=lf
+
+# 바이너리 (줄바꿈 변환 금지)
+*.mp3   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.webp  binary
+*.gif   binary
+*.avif  binary
+*.ico   binary
