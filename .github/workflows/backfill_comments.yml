@@ -1,0 +1,65 @@
+name: Backfill comments
+
+# 과거 day JSON에 블로그 코멘트(comment_kr) 백필. 수동 실행 전용.
+# 코멘트 기능(2026-07-03) 이전 날짜엔 comment_kr 이 없어 네이버 초안에 '내 생각'이 빠짐 → 이걸로 채움.
+on:
+  workflow_dispatch:
+    inputs:
+      dates:
+        description: "코멘트 채울 날짜(공백 구분, 예: 2026-07-01 2026-07-02) 또는 all"
+        required: true
+        default: "2026-07-01 2026-07-02"
+      force:
+        description: "이미 코멘트 있어도 재생성(true/false)"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: backfill-comments
+  cancel-in-progress: false
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Backfill comments
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TZ: Asia/Seoul
+          DATES: ${{ github.event.inputs.dates }}
+          FORCE_FLAG: ${{ github.event.inputs.force }}
+        run: |
+          FORCE=""
+          if [ "$FORCE_FLAG" = "true" ]; then FORCE="--force"; fi
+          for d in $DATES; do
+            echo "== backfill $d =="
+            python backfill_comments.py "$d" $FORCE
+          done
+
+      - name: Rebuild site
+        env:
+          TZ: Asia/Seoul
+        run: python build_site.py
+
+      - name: Commit & push
+        env:
+          DATES: ${{ github.event.inputs.dates }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "변경 없음 — 커밋 생략"
+          else
+            git commit -m "Backfill comments: $DATES" -m "Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>"
+            git push
+          fi
