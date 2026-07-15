@@ -8,6 +8,8 @@ env: GEMINI_API_KEY 필요. TZ=Asia/Seoul 권장(오늘 날짜 기준).
 """
 import os, sys, json, re, glob, time, datetime, subprocess
 import urllib.request
+import xml.etree.ElementTree as ET
+from email.utils import parsedate_to_datetime
 
 KEY = os.environ.get("GEMINI_API_KEY", "").strip()
 MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
@@ -40,17 +42,19 @@ def gemini(prompt, schema=None, max_tokens=8192, temp=0.4):
     raise RuntimeError("gemini failed: %s" % last)
 
 def fetch(url, maxbytes=500000):
-    # 직접 시도 → 실패(데이터센터 IP 403 등) 시 r.jina.ai 리더 프록시 경유
+    # r.jina.ai 프록시 폴백 제거(2026-07-10): 현재 CAPTCHA 페이지를 200으로 반환해
+    # 본문 추출을 오염시킴. 뉴스 목록은 RSS/Atom 피드 기반이라 403 우회 자체가 불필요.
     last = None
-    for u in (url, "https://r.jina.ai/" + url):
+    for attempt in range(2):
         try:
-            req = urllib.request.Request(u, headers={
-                "User-Agent": UA, "Accept": "text/html,*/*", "Accept-Language": "ko,en;q=0.8"})
+            req = urllib.request.Request(url, headers={
+                "User-Agent": UA, "Accept": "text/html,application/xml,*/*", "Accept-Language": "ko,en;q=0.8"})
             with urllib.request.urlopen(req, timeout=45) as r:
                 return r.read(maxbytes).decode("utf-8", "ignore")
         except Exception as e:
             last = e
-            sys.stderr.write("fetch fail (%s): %s\n" % (u[:40], e))
+            sys.stderr.write("fetch fail %d (%s): %s\n" % (attempt, url[:60], e))
+            time.sleep(3)
     raise last
 
 def clean_html(html, limit=120000):
@@ -59,14 +63,17 @@ def clean_html(html, limit=120000):
     return html[:limit]
 
 def existing():
-    urls, titles, qs, terms = set(), set(), [], set()
-    for f in glob.glob(os.path.join(DAYS, "*.json")):
+    # 파일명=날짜라 sorted()가 곧 시간순 → 퀴즈/용어는 프롬프트에 최근분만 보내 토큰 절약
+    urls, titles, qs, terms = set(), set(), [], []
+    for f in sorted(glob.glob(os.path.join(DAYS, "*.json"))):
         d = json.load(open(f, encoding="utf-8"))
         for it in d.get("news", []):
             urls.add((it.get("url") or "").strip()); titles.add(it.get("title_kr", ""))
         q = d.get("quiz", {})
         if q.get("question"): qs.append(q["question"])
-        for t in d.get("terms", []): terms.add(t.get("term", ""))
+        for t in d.get("terms", []):
+            name = t.get("term", "")
+            if name and name not in terms: terms.append(name)
     return urls, titles, qs, terms
 
 NEWS_SCHEMA = {"type": "OBJECT", "properties": {"items": {"type": "ARRAY", "items": {"type": "OBJECT",
@@ -81,36 +88,125 @@ QT_SCHEMA = {"type": "OBJECT", "properties": {
     "terms": {"type": "ARRAY", "items": {"type": "OBJECT", "properties": {"term": {"type": "STRING"}, "kind": {"type": "STRING"}, "meaning_kr": {"type": "STRING"}},
         "required": ["term", "kind", "meaning_kr"]}}}, "required": ["quiz", "terms"]}
 
-def select_news(today, ex_urls):
-    yozm = clean_html(fetch("https://yozm.wishket.com/magazine/list/new/"))
-    hada = clean_html(fetch("https://news.hada.io/"))
-    prompt = (
-        "오늘은 %s. 아래는 요즘IT 매거진 목록과 GeekNews 프런트 페이지 내용이다.\n"
-        "가장 최근(오늘 또는 가장 신선한) 기사 중 서로 다른 주제 3건을 고른다.\n"
-        "규칙:\n"
-        "- 출처를 섞을 것: 가능하면 요즘IT 1건 이상 포함.\n"
-        "- 한국어 본문이 있는 기사를 우선(영어 전용 외부 페이지·검색결과·툴·PDF 뷰어는 피함).\n"
-        "- GeekNews 항목의 url은 반드시 'https://news.hada.io/topic?id=...' (GeekNews 토픽 페이지)로 줄 것. 외부 원문 링크 금지.\n"
-        "- 요즘IT 항목의 url은 'https://yozm.wishket.com/magazine/detail/...' 형태.\n"
-        "- 광고·이벤트·채용·홍보 글 제외. 아래 '이미 수록된 URL'에 있는 것 제외.\n"
-        "각 항목: title_kr(한국어 제목), source('요즘IT' 또는 'GeekNews'), url(위 규칙대로), blurb_kr(한 줄 요약, 한국어).\n\n"
-        "[이미 수록된 URL]\n%s\n\n[요즘IT 페이지]\n%s\n\n[GeekNews 페이지]\n%s\n"
-    ) % (today, "\n".join(sorted(ex_urls)), yozm, hada)
-    out = gemini(prompt, NEWS_SCHEMA, max_tokens=4096)
+ATOM = "{http://www.w3.org/2005/Atom}"
+CE = "{http://purl.org/rss/1.0/modules/content/}encoded"
 
-    def valid_url(u):
-        # 프롬프트 규칙 강제: GeekNews=토픽 페이지, 요즘IT=매거진 상세. 그 외(모델이 재구성한
-        # 외부 원문/환각 링크)는 본문추출 실패·죽은 링크로 이어지므로 코드에서 버림.
-        return (u.startswith("https://news.hada.io/topic?id=")
-                or u.startswith("https://yozm.wishket.com/magazine/detail/"))
+def strip_tags(html, limit):
+    return re.sub(r"\s+", " ", re.sub(r"(?is)<[^>]+>", " ", html or "")).strip()[:limit]
+
+# 뉴스 소스 피드 — 다양성 위해 국내(GeekNews·요즘IT·AITimes·ZDNet KR)+해외(HackerNews·TechCrunch) 혼합.
+# 피드별 실패는 graceful(그 소스만 빠지고 나머지로 진행). 추가/제거는 이 리스트만 수정.
+#   kind: 'atom'|'rss' · prefix: 기사 URL 접두 검증(None=무검증) · cap: 후보 최대 · fresh_days: 최근 N일만(None=무시)
+#   body: content:encoded 에 본문 전문이 있어 상세크롤 불필요(요즘IT). 나머지는 extract_body 가 기사 크롤.
+FEEDS = [
+    {"source": "GeekNews", "url": "https://news.hada.io/rss/news", "kind": "atom",
+     "prefix": "https://news.hada.io/topic?id=", "cap": 15, "fresh_days": 2},
+    {"source": "요즘IT", "url": "https://yozm.wishket.com/magazine/feed/", "kind": "rss",
+     "prefix": "https://yozm.wishket.com/magazine/detail/", "cap": 10, "fresh_days": None, "body": True},
+    {"source": "AITimes", "url": "https://www.aitimes.com/rss/allArticle.xml", "kind": "rss",
+     "prefix": "https://www.aitimes.com/", "cap": 10, "fresh_days": 2},
+    {"source": "ZDNet Korea", "url": "https://feeds.feedburner.com/zdkorea", "kind": "rss",
+     "prefix": None, "cap": 10, "fresh_days": 2},
+    {"source": "Hacker News", "url": "https://hnrss.org/frontpage", "kind": "rss",
+     "prefix": None, "cap": 10, "fresh_days": 2},
+    {"source": "TechCrunch", "url": "https://techcrunch.com/feed/", "kind": "rss",
+     "prefix": None, "cap": 8, "fresh_days": 2},
+]
+
+def _entry_date(kind, e):
+    """피드 항목 → YYYY-MM-DD(없으면 '')."""
+    if kind == "atom":
+        return (e.findtext(ATOM + "published") or e.findtext(ATOM + "updated") or "")[:10]
+    pd = e.findtext("pubDate") or ""
+    if pd:
+        try:
+            return parsedate_to_datetime(pd).date().isoformat()
+        except Exception:
+            return ""
+    return ""
+
+def parse_feed(feed, today):
+    """한 피드 → 후보 리스트(atom/rss 공용). 실패 시 [](graceful)."""
+    try:
+        root = ET.fromstring(fetch(feed["url"], maxbytes=3000000))
+    except Exception as e:
+        sys.stderr.write("feed fail %s: %s\n" % (feed["source"], e)); return []
+    kind = feed["kind"]
+    entries = list(root.iter(ATOM + "entry")) if kind == "atom" else list(root.iter("item"))
+    cutoff = None
+    if feed.get("fresh_days"):
+        cutoff = datetime.date.fromisoformat(today) - datetime.timedelta(days=feed["fresh_days"])
+    out = []
+    for e in entries:
+        if kind == "atom":
+            link = e.find(ATOM + "link")
+            url = (link.get("href") if link is not None else "").strip()
+            title = (e.findtext(ATOM + "title") or "").strip()
+            snip = strip_tags(e.findtext(ATOM + "content") or e.findtext(ATOM + "summary"), 240)
+            body = ""
+        else:
+            url = (e.findtext("link") or "").strip()
+            title = (e.findtext("title") or "").strip()
+            snip = strip_tags(e.findtext("description"), 240)
+            ce = e.find(CE)
+            body = (ce.text or "") if (ce is not None and feed.get("body")) else ""
+        if not url or not title:
+            continue
+        if feed.get("prefix") and not url.startswith(feed["prefix"]):
+            continue
+        d = _entry_date(kind, e)
+        if cutoff is not None and d:
+            try:
+                if datetime.date.fromisoformat(d) < cutoff:
+                    continue
+            except ValueError:
+                pass
+        out.append({"source": feed["source"], "url": url, "date": d,
+                    "title": title, "snippet": snip, "body_html": body})
+        if len(out) >= feed.get("cap", 12):
+            break
+    return out
+
+def select_news(today, ex_urls):
+    # 피드 기반(2026-07-10 개편): 페이지 HTML 통째 투입(~240KB) 대신 후보 목록(~10KB)만
+    # 프롬프트에 넣는다. 날짜 필터·중복 제거·URL 검증은 전부 코드에서 확정.
+    cands, seen = [], set()
+    for feed in FEEDS:
+        for c in parse_feed(feed, today):
+            if c["url"] in seen:  # 피드 간 중복 URL 제거
+                continue
+            seen.add(c["url"]); cands.append(c)
+    cands = [c for c in cands if c["url"] not in ex_urls]
+    if not cands:
+        sys.stderr.write("후보 0건 (피드 실패 또는 전부 기수록)\n"); return []
+    by_url = {c["url"]: c for c in cands}
+    by_src = {}
+    for c in cands:
+        by_src[c["source"]] = by_src.get(c["source"], 0) + 1
+    sys.stderr.write("후보 %d건 · 출처별 %s\n" % (len(cands), by_src))
+    lines = ["%d. [%s%s] %s\n   %s\n   요약: %s" % (
+        i, c["source"], (" " + c["date"]) if c["date"] else "", c["title"], c["url"], c["snippet"])
+        for i, c in enumerate(cands, 1)]
+    prompt = (
+        "오늘은 %s. 아래 후보 기사 중 서로 다른 주제 3건을 고른다.\n"
+        "규칙:\n"
+        "- 오늘 날짜(%s) 기사 우선. 날짜 없는 항목(요즘IT 등)은 번호가 낮을수록 최신.\n"
+        "- **출처 다양성**: 3건을 최대한 서로 다른 출처에서 고른다. 한 출처에서 최대 2건. "
+        "특정 출처(GeekNews)에 쏠리지 말 것. 국내(요즘IT/AITimes/ZDNet Korea)와 해외(Hacker News/TechCrunch)를 섞으면 좋다.\n"
+        "- AI·개발·IT·기술 주제 중심. 광고·이벤트·채용·홍보·단순 툴 소개·정치/연예 등 비기술 글 제외.\n"
+        "- url은 후보에 적힌 것을 글자 그대로 복사(변형 금지).\n"
+        "각 항목: title_kr(한국어 제목, 영어면 자연스럽게 번역), source, url, blurb_kr(한 줄 요약, 한국어).\n\n"
+        "[후보]\n%s\n"
+    ) % (today, today, "\n".join(lines))
+    out = gemini(prompt, NEWS_SCHEMA, max_tokens=4096)
 
     items = []
     for it in out.get("items", []):
         u = (it.get("url") or "").strip()
-        if not u or u in ex_urls:
-            continue
-        if not valid_url(u):
-            sys.stderr.write("skip off-pattern url: %s\n" % u[:80]); continue
+        c = by_url.get(u)
+        if c is None:  # 후보에 없는 URL(환각·변형) → 버림
+            sys.stderr.write("skip non-candidate url: %s\n" % u[:80]); continue
+        it["url"] = u; it["source"] = c["source"]; it["body_html"] = c["body_html"]
         items.append(it)
         if len(items) >= 3:
             break
