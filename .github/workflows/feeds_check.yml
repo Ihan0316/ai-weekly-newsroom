@@ -1,0 +1,31 @@
+name: Feeds check
+
+# 뉴스 소스 피드가 Actions 러너(데이터센터 IP)에서 실제 도달·파싱되는지 진단.
+# 로컬은 되는데 Actions서 403 나는 소스(예: 요즘IT) 판별용. 수동 실행 전용, 읽기전용(커밋 없음).
+on:
+  workflow_dispatch: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Probe feeds from runner
+        env:
+          TZ: Asia/Seoul
+        run: |
+          python - <<'PY'
+          import datetime, pipeline_gemini as P
+          today = datetime.date.today().isoformat()
+          print("today:", today)
+          total = 0
+          for feed in P.FEEDS:
+              cs = P.parse_feed(feed, today)
+              total += len(cs)
+              ex = cs[0]["title"][:50] if cs else "(0건 — 실패/차단?)"
+              print(f"  {len(cs):3}  {feed['source']:14} {ex}")
+          print("합계 후보:", total)
+          PY
