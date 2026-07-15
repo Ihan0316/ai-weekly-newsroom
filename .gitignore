@@ -10,3 +10,6 @@ data/_*.json
 # 네이버 자동 발행 도구 — public repo 비공개 (계정ID·자동화 코드 노출 방지)
 naver_publish.py
 run_naver.bat
+run_naver_reconcile.bat
+.naver_state.json
+.naver_reconcile.log
