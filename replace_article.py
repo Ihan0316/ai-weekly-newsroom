@@ -80,8 +80,9 @@ def main():
     print("교체 대상[%d]: [%s] %s" % (idx, news[idx].get("source", ""), (news[idx].get("title_kr") or "")[:50]))
 
     ex_urls, _, _, _ = P.existing()          # 전 기간 기수록 URL → 중복 방지
-    keep_titles = [it.get("title_kr", "") for i, it in enumerate(news) if i != idx]
-    new_it = pick_replacement(a.date, ex_urls, keep_titles)
+    # 같은 날 유지 뉴스 + 최근 게재 제목 → 주제 겹치는 후보 배제
+    avoid = [it.get("title_kr", "") for i, it in enumerate(news) if i != idx] + P.recent_titles()
+    new_it = pick_replacement(a.date, ex_urls, avoid)
     print("새 기사: [%s] %s" % (new_it["source"], (new_it.get("title_kr") or "")[:50]))
 
     new_it["content"] = P.extract_body(new_it["url"])

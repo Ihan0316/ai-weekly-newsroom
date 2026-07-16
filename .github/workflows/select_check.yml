@@ -1,0 +1,32 @@
+name: Select check
+
+# select_news(카테고리 필터 + 주제중복 회피 + 출처 다양성)를 Actions서 실제 실행해 3건 픽 확인.
+# 읽기전용(파일 안 씀·커밋 없음). Gemini 무료 티어 호출만. 수동 실행 전용.
+on:
+  workflow_dispatch: {}
+
+jobs:
+  select:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Preview selection
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TZ: Asia/Seoul
+        run: |
+          python - <<'PY'
+          import datetime, pipeline_gemini as P
+          today = datetime.date.today().isoformat()
+          ex_urls, _, _, _ = P.existing()
+          news = P.select_news(today, ex_urls, recent=P.recent_titles())
+          print("=== 선택된 %d건 (카테고리+주제중복 회피 적용) ===" % len(news))
+          for n in news:
+              print("  [%s] %s" % (n.get("source"), n.get("title_kr")))
+              print("     %s" % n.get("blurb_kr", "")[:80])
+          srcs = [n.get("source") for n in news]
+          print("출처 분포:", {s: srcs.count(s) for s in set(srcs)})
+          PY

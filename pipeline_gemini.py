@@ -76,6 +76,16 @@ def existing():
             if name and name not in terms: terms.append(name)
     return urls, titles, qs, terms
 
+def recent_titles(days=14, cap=30):
+    """최근 며칠 게재 뉴스 제목(주제 중복 회피용). 파일명=날짜 정렬 → 뒤쪽이 최신."""
+    out = []
+    for f in sorted(glob.glob(os.path.join(DAYS, "*.json")))[-days:]:
+        for it in json.load(open(f, encoding="utf-8")).get("news", []):
+            t = (it.get("title_kr") or "").strip()
+            if t:
+                out.append(t)
+    return out[-cap:]
+
 NEWS_SCHEMA = {"type": "OBJECT", "properties": {"items": {"type": "ARRAY", "items": {"type": "OBJECT",
     "properties": {"title_kr": {"type": "STRING"}, "source": {"type": "STRING"}, "url": {"type": "STRING"}, "blurb_kr": {"type": "STRING"}},
     "required": ["title_kr", "source", "url", "blurb_kr"]}}}, "required": ["items"]}
@@ -197,24 +207,31 @@ def cand_lines(cands):
         i, c["source"], (" " + c["date"]) if c["date"] else "", c["title"], c["url"], c["snippet"])
         for i, c in enumerate(cands, 1)]
 
-def select_news(today, ex_urls):
+def select_news(today, ex_urls, recent=None):
     # 피드 기반(2026-07-10 개편): 페이지 HTML 통째 투입(~240KB) 대신 후보 목록(~10KB)만
     # 프롬프트에 넣는다. 날짜 필터·중복 제거·URL 검증은 전부 코드에서 확정.
     cands = gather_candidates(today, ex_urls)
     if not cands:
         sys.stderr.write("후보 0건 (피드 실패 또는 전부 기수록)\n"); return []
     by_url = {c["url"]: c for c in cands}
+    recent = recent or []
+    recent_block = ("\n[최근 게재 제목 — 이것과 주제 겹치면 제외]\n"
+                    + "\n".join("- " + t for t in recent) + "\n") if recent else ""
     prompt = (
         "오늘은 %s. 아래 후보 기사 중 서로 다른 주제 3건을 고른다.\n"
         "규칙:\n"
         "- 오늘 날짜(%s) 기사 우선. 날짜 없는 항목(요즘IT 등)은 번호가 낮을수록 최신.\n"
         "- **출처 다양성**: 3건을 최대한 서로 다른 출처에서 고른다. 한 출처에서 최대 2건. "
         "특정 출처(GeekNews)에 쏠리지 말 것. 국내(요즘IT/AITimes/ZDNet Korea)와 해외(Hacker News/TechCrunch)를 섞으면 좋다.\n"
+        "- **주제 중복 회피**: 아래 '최근 게재 제목'과 같은 사건·발표·제품이슈를 다루는 후보는 제외한다. "
+        "출처·표현·언어·각도가 달라도 본질이 같은 소재(예: 같은 모델의 같은 사고, 같은 제품 같은 버전 발표)면 고르지 말 것. "
+        "고른 3건끼리도 서로 소재가 겹치면 안 된다.\n"
         "- %s\n"
         "- url은 후보에 적힌 것을 글자 그대로 복사(변형 금지).\n"
-        "각 항목: title_kr(한국어 제목, 영어면 자연스럽게 번역), source, url, blurb_kr(한 줄 요약, 한국어).\n\n"
+        "각 항목: title_kr(한국어 제목, 영어면 자연스럽게 번역), source, url, blurb_kr(한 줄 요약, 한국어).\n"
+        "%s\n"
         "[후보]\n%s\n"
-    ) % (today, today, TOPIC_RULE, "\n".join(cand_lines(cands)))
+    ) % (today, today, TOPIC_RULE, recent_block, "\n".join(cand_lines(cands)))
     out = gemini(prompt, NEWS_SCHEMA, max_tokens=4096)
 
     items = []
@@ -324,7 +341,7 @@ def main():
         print("이미 처리됨:", did); return
     ex_urls, ex_titles, ex_qs, ex_terms = existing()
 
-    news = select_news(did, ex_urls)
+    news = select_news(did, ex_urls, recent=recent_titles())
     if not news:
         print("추가할 신규 뉴스 없음"); return
     for it in news:
