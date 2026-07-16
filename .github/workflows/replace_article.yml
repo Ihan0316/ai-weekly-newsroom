@@ -1,0 +1,63 @@
+name: Replace article
+
+# day JSON의 뉴스 1건을 새 기술 기사로 교체(비기술/부적절 픽 정정). 수동 실행 전용.
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "대상 날짜 YYYY-MM-DD"
+        required: true
+        default: "2026-07-16"
+      match:
+        description: "교체할 뉴스 제목 부분문자열(예: 원숭이). index 비우면 사용"
+        required: false
+        default: ""
+      index:
+        description: "교체할 뉴스 인덱스(0부터). 주면 match 무시"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: replace-article
+  cancel-in-progress: false
+
+jobs:
+  replace:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Replace article
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TZ: Asia/Seoul
+          DATE: ${{ github.event.inputs.date }}
+          MATCH: ${{ github.event.inputs.match }}
+          INDEX: ${{ github.event.inputs.index }}
+        run: |
+          if [ -n "$INDEX" ]; then
+            python replace_article.py "$DATE" --index "$INDEX"
+          else
+            python replace_article.py "$DATE" --match "$MATCH"
+          fi
+
+      - name: Commit & push
+        env:
+          DATE: ${{ github.event.inputs.date }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "변경 없음 — 커밋 생략"
+          else
+            git commit -m "Replace article in $DATE issue" -m "Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>"
+            git push
+          fi

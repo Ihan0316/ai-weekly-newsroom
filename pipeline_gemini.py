@@ -167,9 +167,18 @@ def parse_feed(feed, today):
             break
     return out
 
-def select_news(today, ex_urls):
-    # 피드 기반(2026-07-10 개편): 페이지 HTML 통째 투입(~240KB) 대신 후보 목록(~10KB)만
-    # 프롬프트에 넣는다. 날짜 필터·중복 제거·URL 검증은 전부 코드에서 확정.
+# 주제 필터 — select_news / replace_article 공용. 비기술 잡음(동물·환경·정치 등) 차단 강화.
+TOPIC_RULE = (
+    "주제는 반드시 AI·머신러닝·소프트웨어 개발·프로그래밍·데이터·클라우드/인프라·"
+    "하드웨어/반도체·IT 기업·기술 산업 동향 중 하나여야 한다.\n"
+    "다음은 기술 기사라도 아니면 전부 제외: 동물·생태·환경·기후·정치·선거·정책일반·"
+    "경제일반·연예·스포츠·범죄·사고·부고·건강/의료(기술 아닌 것)·사회일반. "
+    "특히 특정 기업/제품의 기술 내용이 아닌 '사회적 청원·규제 뉴스'는 제외.\n"
+    "또한 광고·이벤트·채용·홍보·단순 릴리즈 공지도 제외."
+)
+
+def gather_candidates(today, ex_urls):
+    """모든 FEEDS → 후보 리스트(피드간 중복·기수록 URL 제거). 피드 실패는 graceful."""
     cands, seen = [], set()
     for feed in FEEDS:
         for c in parse_feed(feed, today):
@@ -177,27 +186,35 @@ def select_news(today, ex_urls):
                 continue
             seen.add(c["url"]); cands.append(c)
     cands = [c for c in cands if c["url"] not in ex_urls]
-    if not cands:
-        sys.stderr.write("후보 0건 (피드 실패 또는 전부 기수록)\n"); return []
-    by_url = {c["url"]: c for c in cands}
     by_src = {}
     for c in cands:
         by_src[c["source"]] = by_src.get(c["source"], 0) + 1
     sys.stderr.write("후보 %d건 · 출처별 %s\n" % (len(cands), by_src))
-    lines = ["%d. [%s%s] %s\n   %s\n   요약: %s" % (
+    return cands
+
+def cand_lines(cands):
+    return ["%d. [%s%s] %s\n   %s\n   요약: %s" % (
         i, c["source"], (" " + c["date"]) if c["date"] else "", c["title"], c["url"], c["snippet"])
         for i, c in enumerate(cands, 1)]
+
+def select_news(today, ex_urls):
+    # 피드 기반(2026-07-10 개편): 페이지 HTML 통째 투입(~240KB) 대신 후보 목록(~10KB)만
+    # 프롬프트에 넣는다. 날짜 필터·중복 제거·URL 검증은 전부 코드에서 확정.
+    cands = gather_candidates(today, ex_urls)
+    if not cands:
+        sys.stderr.write("후보 0건 (피드 실패 또는 전부 기수록)\n"); return []
+    by_url = {c["url"]: c for c in cands}
     prompt = (
         "오늘은 %s. 아래 후보 기사 중 서로 다른 주제 3건을 고른다.\n"
         "규칙:\n"
         "- 오늘 날짜(%s) 기사 우선. 날짜 없는 항목(요즘IT 등)은 번호가 낮을수록 최신.\n"
         "- **출처 다양성**: 3건을 최대한 서로 다른 출처에서 고른다. 한 출처에서 최대 2건. "
         "특정 출처(GeekNews)에 쏠리지 말 것. 국내(요즘IT/AITimes/ZDNet Korea)와 해외(Hacker News/TechCrunch)를 섞으면 좋다.\n"
-        "- AI·개발·IT·기술 주제 중심. 광고·이벤트·채용·홍보·단순 툴 소개·정치/연예 등 비기술 글 제외.\n"
+        "- %s\n"
         "- url은 후보에 적힌 것을 글자 그대로 복사(변형 금지).\n"
         "각 항목: title_kr(한국어 제목, 영어면 자연스럽게 번역), source, url, blurb_kr(한 줄 요약, 한국어).\n\n"
         "[후보]\n%s\n"
-    ) % (today, today, "\n".join(lines))
+    ) % (today, today, TOPIC_RULE, "\n".join(cand_lines(cands)))
     out = gemini(prompt, NEWS_SCHEMA, max_tokens=4096)
 
     items = []
