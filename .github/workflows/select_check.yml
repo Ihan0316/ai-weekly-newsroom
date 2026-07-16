@@ -23,10 +23,16 @@ jobs:
           today = datetime.date.today().isoformat()
           ex_urls, _, _, _ = P.existing()
           news = P.select_news(today, ex_urls, recent=P.recent_titles())
-          print("=== 선택된 %d건 (카테고리+주제중복 회피 적용) ===" % len(news))
-          for n in news:
-              print("  [%s] %s" % (n.get("source"), n.get("title_kr")))
-              print("     %s" % n.get("blurb_kr", "")[:80])
+          print("=== 선택된 %d건 (카테고리+주제중복 회피) ===" % len(news))
           srcs = [n.get("source") for n in news]
           print("출처 분포:", {s: srcs.count(s) for s in set(srcs)})
+          for n in news:
+              n["content"] = P.extract_body(n.get("url", ""))
+          P.gen_seo(news)
+          print("=== 네이버 조회수 최적화(gen_seo) 미리보기 ===")
+          for n in news:
+              print("  [%s] 원제목: %s" % (n.get("source"), n.get("title_kr")))
+              print("     게시제목: %s" % n.get("title_blog"))
+              print("     후킹: %s" % (n.get("hook_kr") or "")[:90])
+              print("     태그: %s" % " ".join("#" + t for t in n.get("tags_kr", [])))
           PY

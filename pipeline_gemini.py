@@ -318,6 +318,45 @@ def gen_comments(news):
     for i, it in enumerate(news):
         it["comment_kr"] = (cs[i].get("comment_kr", "").strip() if i < len(cs) else "")
 
+# 네이버 조회수 최적화 — 최고 조회수 글(how-to/꿀팁: 검색키워드 제목·후킹 도입·키워드 태그) 분석 반영.
+SEO_PERSONA = (
+    "너는 네이버 블로그 조회수(검색 유입·체류) 최적화 담당이다. 각 IT뉴스마다 아래를 만든다.\n"
+    "- title_blog: 네이버 검색·클릭이 잘 되는 제목. 사람들이 실제로 검색할 핵심 키워드"
+    "(제품/회사/기술명, 예: GPT-5.6, 오픈AI, TypeScript)를 맨 앞에 배치. 38자 이내, 살짝 후킹하되 "
+    "과장·거짓·낚시 금지(내용과 일치). 이모지는 최대 1개. 영어 고유명은 한글 병기 가능.\n"
+    "- tags_kr: 검색 유입용 키워드 태그 6~8개(문자열 배열, # 없이). 제품명·회사명·기술명·분야 포함. "
+    "너무 일반적(예: '뉴스')인 것보다 구체 키워드 위주.\n"
+    "- hook_kr: 검색해서 들어온 독자를 붙잡는 도입부 1~2문장(구어체). 이 글을 읽으면 뭘 알게 되는지, "
+    "왜 지금 중요한지. 요약 반복 금지."
+)
+SEO_SCHEMA = {"type": "OBJECT", "properties": {"items": {"type": "ARRAY", "items": {"type": "OBJECT",
+    "properties": {"title_blog": {"type": "STRING"},
+                   "tags_kr": {"type": "ARRAY", "items": {"type": "STRING"}},
+                   "hook_kr": {"type": "STRING"}},
+    "required": ["title_blog", "tags_kr", "hook_kr"]}}}, "required": ["items"]}
+
+def gen_seo(news):
+    """뉴스별 네이버 최적화 필드(title_blog/tags_kr/hook_kr) 배치 생성. 실패 시 빈값(원 필드 폴백)."""
+    if not news:
+        return
+    lines = []
+    for i, it in enumerate(news, 1):
+        body = " ".join((b.get("text") or "") for b in (it.get("content") or []))[:400]
+        lines.append("[%d] 제목: %s\n요약: %s\n본문일부: %s" % (
+            i, it.get("title_kr", ""), it.get("blurb_kr", ""), body))
+    prompt = SEO_PERSONA + "\n\n뉴스 %d건. 순서대로 items 배열로 반환.\n\n%s" % (
+        len(news), "\n\n".join(lines))
+    try:
+        out = gemini(prompt, SEO_SCHEMA, max_tokens=2048, temp=0.6)
+        items = out.get("items", [])
+    except Exception as e:
+        sys.stderr.write("seo gen fail: %s\n" % e); items = []
+    for i, it in enumerate(news):
+        s = items[i] if i < len(items) else {}
+        it["title_blog"] = (s.get("title_blog") or "").strip()
+        it["tags_kr"] = [t.strip() for t in (s.get("tags_kr") or []) if t and t.strip()][:8]
+        it["hook_kr"] = (s.get("hook_kr") or "").strip()
+
 def make_quiz_terms(ex_qs, ex_terms):
     prompt = (
         "정보처리기사(정처기) 4지선다 문제 1개와 IT·개발·기획 현업 용어 3개를 만든다.\n"
@@ -347,6 +386,7 @@ def main():
     for it in news:
         it["content"] = extract_body(it.get("url", ""))
     gen_comments(news)   # 뉴스별 1인칭 블로그 코멘트(복사 시에만 사용)
+    gen_seo(news)        # 네이버 조회수 최적화: title_blog/tags_kr/hook_kr(복사·발행 시 사용)
     quiz, terms = make_quiz_terms(ex_qs, ex_terms)
 
     rec = {
@@ -354,7 +394,9 @@ def main():
         "weekday": WD[today.weekday()],
         "news": [{"title_kr": it["title_kr"], "source": it["source"], "url": it["url"],
                   "blurb_kr": it.get("blurb_kr", ""), "content": it.get("content", []),
-                  "comment_kr": it.get("comment_kr", "")} for it in news],
+                  "comment_kr": it.get("comment_kr", ""),
+                  "title_blog": it.get("title_blog", ""), "tags_kr": it.get("tags_kr", []),
+                  "hook_kr": it.get("hook_kr", "")} for it in news],
         "quiz": quiz, "terms": terms,
     }
     os.makedirs(DAYS, exist_ok=True)
