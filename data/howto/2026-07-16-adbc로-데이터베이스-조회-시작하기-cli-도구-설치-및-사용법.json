@@ -1,0 +1,86 @@
+{
+  "title_kr": "ADBC 데이터베이스 조회 시작하기 💡 (CLI 설치 및 사용법)",
+  "title_blog": "ADBC 데이터베이스 조회 시작하기 💡 (CLI 설치 및 사용법)",
+  "blurb_kr": "ADBC CLI 도구 설치부터 데이터베이스 연결, 쿼리 실행까지 단계별로 배우는 가이드.",
+  "hook_kr": "데이터베이스 조회를 처음 시작하시나요? ADBC CLI 도구를 설치하고 사용하는 방법을 쉽고 빠르게 알려드릴게요. 이 글만 따라 하면 바로 데이터베이스에 연결하고 쿼리를 날릴 수 있습니다!",
+  "comment_kr": "ADBC CLI 도구 덕분에 데이터베이스 조회가 정말 쉬워졌어요! 이제 저도 전문가처럼 데이터를 다룰 수 있을 것 같습니다. 다음에는 더 복잡한 쿼리도 도전해 봐야겠어요!",
+  "tags_kr": [
+    "ADBC",
+    "데이터베이스조회",
+    "CLI설치",
+    "데이터분석",
+    "SQL",
+    "파이썬데이터베이스",
+    "ADBC사용법"
+  ],
+  "content": [
+    {
+      "t": "h",
+      "text": "준비물: 파이썬 환경 확인"
+    },
+    {
+      "t": "p",
+      "text": "ADBC CLI 도구는 파이썬 기반으로 동작하므로, 먼저 시스템에 파이썬이 설치되어 있는지 확인해야 합니다. 터미널 또는 명령 프롬프트에서 'python --version' 또는 'python3 --version'을 입력하여 버전을 확인해 주세요. 파이썬 3.8 이상을 권장합니다."
+    },
+    {
+      "t": "h",
+      "text": "1단계: ADBC CLI 도구 설치"
+    },
+    {
+      "t": "p",
+      "text": "파이썬이 준비되었다면, pip를 사용하여 ADBC CLI 도구를 설치할 수 있습니다. 터미널에서 다음 명령어를 입력하세요: 'pip install adbc-driver-manager adbc-driver-sqlite3 adbc-driver-postgresql adbc-driver-snowflake'. 이 명령어는 ADBC 드라이버 매니저와 함께 SQLite3, PostgreSQL, Snowflake 드라이버를 설치합니다. 필요한 드라이버만 선택적으로 설치할 수도 있습니다."
+    },
+    {
+      "t": "h",
+      "text": "2단계: 데이터베이스 드라이버 준비 (예: PostgreSQL)"
+    },
+    {
+      "t": "p",
+      "text": "ADBC는 다양한 데이터베이스를 지원합니다. 사용할 데이터베이스에 맞는 드라이버를 설치해야 합니다. 예를 들어, PostgreSQL 데이터베이스에 연결하려면 'pip install adbc-driver-postgresql' 명령어를 실행해야 합니다. 이미 1단계에서 설치했다면 이 단계는 건너뛰셔도 좋습니다."
+    },
+    {
+      "t": "h",
+      "text": "3단계: ADBC CLI를 사용하여 데이터베이스 연결"
+    },
+    {
+      "t": "p",
+      "text": "설치가 완료되었다면, 'adbc' 명령어를 사용하여 데이터베이스에 연결할 수 있습니다. 예를 들어, 로컬 SQLite3 데이터베이스 파일에 연결하려면 다음과 같이 입력합니다: 'adbc connect 'sqlite:///path/to/your/database.db''. PostgreSQL의 경우: 'adbc connect 'postgresql://user:password@host:port/database_name''."
+    },
+    {
+      "t": "h",
+      "text": "4단계: 쿼리 실행 및 결과 확인"
+    },
+    {
+      "t": "p",
+      "text": "데이터베이스에 성공적으로 연결되었다면, 이제 쿼리를 실행할 차례입니다. 'adbc query 'SELECT * FROM your_table_name LIMIT 10''과 같이 입력하여 데이터를 조회할 수 있습니다. 결과는 터미널에 표 형식으로 출력됩니다."
+    },
+    {
+      "t": "h",
+      "text": "5단계: 쿼리 결과 파일로 저장"
+    },
+    {
+      "t": "p",
+      "text": "조회한 결과를 파일로 저장하고 싶다면, 'adbc query 'SELECT * FROM your_table_name' --output-format csv --output-file results.csv' 명령어를 사용합니다. CSV, JSON 등 다양한 형식으로 저장이 가능합니다."
+    },
+    {
+      "t": "h",
+      "text": "팁: 환경 변수 활용"
+    },
+    {
+      "t": "p",
+      "text": "데이터베이스 연결 정보(예: 비밀번호)를 직접 명령어에 노출하기 꺼려진다면 환경 변수를 활용할 수 있습니다. 예를 들어, 'export ADBC_POSTGRESQL_URI='postgresql://user:password@host:port/database_name''와 같이 설정한 후, 'adbc connect 'postgresql:///''로 연결할 수 있습니다."
+    },
+    {
+      "t": "h",
+      "text": "주의사항: 보안 관리"
+    },
+    {
+      "t": "p",
+      "text": "데이터베이스 연결 정보, 특히 비밀번호는 외부에 노출되지 않도록 주의해야 합니다. 환경 변수 사용이나 설정 파일을 통해 안전하게 관리하는 것이 중요합니다."
+    }
+  ],
+  "source": "직접작성",
+  "url": "howto:adbc로-데이터베이스-조회-시작하기-cli-도구-설치-및-사용법",
+  "date": "2026-07-16",
+  "topic": "ADBC로 데이터베이스 조회 시작하기: CLI 도구 설치 및 사용법"
+}
