@@ -13,3 +13,7 @@ run_naver.bat
 run_naver_reconcile.bat
 .naver_state.json
 .naver_reconcile.log
+
+# 티스토리 how-to 발행 도구 — public repo 비공개 (애드핏 광고ID·수익 도구 노출 방지)
+tistory_export.py
+tistory/
