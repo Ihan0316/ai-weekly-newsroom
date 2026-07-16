@@ -49,19 +49,50 @@ def slugify(t):
     return re.sub(r"[^0-9a-z가-힣]+", "-", t.lower()).strip("-")[:40] or "howto"
 
 
-def main():
-    topic = " ".join(a for a in sys.argv[1:] if not a.startswith("--")).strip()
-    if not topic:
-        sys.exit('주제 인자 필요. 예) python gen_howto.py "GPT-5.6 처음 쓰는 법"')
-    if not P.KEY:
-        sys.stderr.write("GEMINI_API_KEY 없음 — 키 설정 후 실행\n"); sys.exit(1)
+def existing_topics():
+    """이미 만든 how-to 주제 set(배치 중복 방지)."""
+    import glob
+    ts = set()
+    for f in glob.glob(os.path.join(HOWTO_DIR, "*.json")):
+        try:
+            ts.add((json.load(io.open(f, encoding="utf-8")).get("topic") or "").strip())
+        except Exception:
+            pass
+    return {t for t in ts if t}
 
+
+TOPIC_SCHEMA = {"type": "OBJECT", "properties": {
+    "topics": {"type": "ARRAY", "items": {"type": "STRING"}}}, "required": ["topics"]}
+
+
+def propose_topics(n):
+    """최근 뉴스 기반으로 검색수요 있는 how-to 주제 n개 제안(이미 만든 것·비기술 제외)."""
+    recent = P.recent_titles(days=21, cap=40)
+    done = existing_topics()
+    prompt = (
+        "아래 최근 IT/AI 뉴스 제목을 참고해, 네이버·구글 검색 수요가 있을 'how-to/가이드' 글 주제 %d개를 제안한다.\n"
+        "- 초보가 실제로 검색할 실용 주제: 설치·사용법·세팅·입문·비교·문제해결. '~하는 법/~시작하기/~설치/~설정/~비교' 형태.\n"
+        "- AI·개발·IT·툴/제품 범위만. 비기술(동물·정치 등) 제외.\n"
+        "- 이미 다룬 주제 제외: %s\n"
+        "- 서로 겹치지 않게, 검색량 있을 법한 구체 키워드로.\n\n"
+        "topics 배열(문자열)로만 반환.\n\n[최근 뉴스]\n%s"
+    ) % (n, (" / ".join(sorted(done)) or "(없음)"), "\n".join("- " + t for t in recent))
+    out = P.gemini(prompt, TOPIC_SCHEMA, max_tokens=1024, temp=0.8)
+    seen, topics = set(), []
+    for t in out.get("topics", []):
+        t = (t or "").strip()
+        if t and t not in done and t.lower() not in seen:
+            seen.add(t.lower()); topics.append(t)
+    return topics[:n]
+
+
+def generate_one(topic):
+    """주제 1개 → how-to json 작성, 경로 반환(실패 시 None)."""
     out = P.gemini(PERSONA + "\n\n주제: %s\n" % topic, SCHEMA, max_tokens=4096, temp=0.7)
     content = [{"t": ("h" if b.get("t") == "h" else "p"), "text": (b.get("text") or "").strip()}
                for b in out.get("content", []) if (b.get("text") or "").strip()]
     if len(content) < 4:
-        sys.exit("본문 블록이 너무 적음(%d) — 주제를 더 구체적으로." % len(content))
-
+        sys.stderr.write("본문 블록 부족(%d) 스킵: %s\n" % (len(content), topic)); return None
     today = datetime.date.today().isoformat()
     sl = slugify(topic)
     tb = (out.get("title_blog") or topic).strip()
@@ -75,10 +106,36 @@ def main():
     os.makedirs(HOWTO_DIR, exist_ok=True)
     path = os.path.join(HOWTO_DIR, "%s-%s.json" % (today, sl))
     json.dump(rec, io.open(path, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-    print("작성:", path)
-    print("제목:", tb)
-    print("블록:", len(content), "| 태그:", " ".join("#" + t for t in rec["tags_kr"]))
-    print("초안:  python naver_publish.py --howto %s --blog-id aijnj123" % path)
+    print("작성:", path, "| 제목:", tb, "| 블록:", len(content))
+    return path
+
+
+def main():
+    import argparse
+    ap = argparse.ArgumentParser(description="how-to 글 생성(단일 주제 또는 --batch 자동제안)")
+    ap.add_argument("topic", nargs="*", help="주제(생략 시 --batch 필요)")
+    ap.add_argument("--batch", type=int, help="최근 뉴스에서 N개 주제 자동제안 후 생성")
+    a = ap.parse_args()
+    if not P.KEY:
+        sys.stderr.write("GEMINI_API_KEY 없음 — 키 설정 후 실행\n"); sys.exit(1)
+
+    if a.batch:
+        topics = propose_topics(a.batch)
+        if not topics:
+            sys.exit("제안된 신규 주제 없음(이미 다 다뤘거나 뉴스 부족)")
+        print("제안 주제 %d개: %s" % (len(topics), " / ".join(topics)))
+        made = [p for t in topics if (p := generate_one(t))]
+        print("배치 완료: %d편" % len(made))
+        print("티스토리 변환:  ls data/howto/*.json  →  python tistory_export.py <파일>")
+        return
+
+    topic = " ".join(a.topic).strip()
+    if not topic:
+        sys.exit('주제 인자 또는 --batch N 필요. 예) python gen_howto.py "GPT-5.6 처음 쓰는 법"')
+    path = generate_one(topic)
+    if path:
+        print("티스토리:  python tistory_export.py %s" % path)
+        print("네이버(선택):  python naver_publish.py --howto %s --blog-id aijnj123" % path)
 
 
 if __name__ == "__main__":
