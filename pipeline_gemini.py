@@ -28,7 +28,7 @@ def gemini(prompt, schema=None, max_tokens=8192, temp=0.4):
     body = {"contents": [{"parts": [{"text": prompt}]}], "generationConfig": cfg}
     data = json.dumps(body).encode("utf-8")
     last = None
-    for attempt in range(3):
+    for attempt in range(4):
         try:
             req = urllib.request.Request(API, data=data, headers={"Content-Type": "application/json"})
             with urllib.request.urlopen(req, timeout=180) as r:
@@ -37,8 +37,10 @@ def gemini(prompt, schema=None, max_tokens=8192, temp=0.4):
             return json.loads(txt)
         except Exception as e:
             last = e
-            sys.stderr.write("gemini retry %d: %s\n" % (attempt, e))
-            time.sleep(6)
+            # 429(무료 티어 rate limit)는 6초 재시도로는 안 풀림 → 길게 대기(분당 쿼터 회복 노림)
+            wait = 45 if "429" in str(e) else 6
+            sys.stderr.write("gemini retry %d (%ds 대기): %s\n" % (attempt, wait, e))
+            time.sleep(wait)
     raise RuntimeError("gemini failed: %s" % last)
 
 def fetch(url, maxbytes=500000):
@@ -374,12 +376,34 @@ def make_quiz_terms(ex_qs, ex_terms):
 def main():
     if not KEY:
         sys.stderr.write("GEMINI_API_KEY 없음\n"); sys.exit(1)
-    today = datetime.date.today()
+    # 날짜 오버라이드(누락일 백필용): PIPELINE_DATE=YYYY-MM-DD 또는 argv[1]
+    override = (os.environ.get("PIPELINE_DATE", "").strip()
+                or (sys.argv[1].strip() if len(sys.argv) > 1 and re.match(r"^\d{4}-\d{2}-\d{2}$", sys.argv[1]) else ""))
+    today = datetime.date.fromisoformat(override) if override else datetime.date.today()
     did = today.isoformat()
+    if override:
+        print("날짜 오버라이드(백필):", did)
     out_path = os.path.join(DAYS, did + ".json")
+    fill_only = False   # 뉴스는 있는데 퀴즈만 비어 있는 날 → 퀴즈만 보충
     if os.path.exists(out_path):
-        print("이미 처리됨:", did); return
+        try:
+            cur = json.load(open(out_path, encoding="utf-8"))
+        except Exception:
+            cur = {}
+        if (cur.get("quiz") or {}).get("question"):
+            print("이미 처리됨:", did); return
+        fill_only = True
+        print("퀴즈 없는 날 발견 → 퀴즈/용어만 보충:", did)
+
     ex_urls, ex_titles, ex_qs, ex_terms = existing()
+
+    if fill_only:
+        cur["quiz"], cur["terms"] = make_quiz_terms(ex_qs, ex_terms)
+        json.dump(cur, open(out_path, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+        print("퀴즈/용어 보충 완료:", out_path)
+        print("== run build_site.py ==")
+        subprocess.run([sys.executable, os.path.join(HERE, "build_site.py")], check=True)
+        return
 
     news = select_news(did, ex_urls, recent=recent_titles())
     if not news:
@@ -388,7 +412,6 @@ def main():
         it["content"] = extract_body(it.get("url", ""))
     gen_comments(news)   # 뉴스별 1인칭 블로그 코멘트(복사 시에만 사용)
     gen_seo(news)        # 네이버 조회수 최적화: title_blog/tags_kr/hook_kr(복사·발행 시 사용)
-    quiz, terms = make_quiz_terms(ex_qs, ex_terms)
 
     rec = {
         "date_label": "%d. %d. %d" % (today.year, today.month, today.day),
@@ -398,11 +421,23 @@ def main():
                   "comment_kr": it.get("comment_kr", ""),
                   "title_blog": it.get("title_blog", ""), "tags_kr": it.get("tags_kr", []),
                   "hook_kr": it.get("hook_kr", "")} for it in news],
-        "quiz": quiz, "terms": terms,
+        "quiz": {}, "terms": [],
     }
     os.makedirs(DAYS, exist_ok=True)
-    json.dump(rec, open(out_path, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-    print("작성:", out_path, "| 뉴스", len(news), "| 본문", sum(1 for it in news if it.get("content")))
+
+    def save():
+        json.dump(rec, open(out_path, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+
+    # 뉴스를 먼저 저장 → 이후 퀴즈 생성이 실패(429 등)해도 그날 콘텐츠를 통째로 잃지 않음.
+    save()
+    print("뉴스 저장:", out_path, "| 뉴스", len(news), "| 본문", sum(1 for it in news if it.get("content")))
+    try:
+        rec["quiz"], rec["terms"] = make_quiz_terms(ex_qs, ex_terms)
+        save()
+        print("퀴즈/용어 추가 완료")
+    except Exception as e:
+        # quiz 없으면 build_site 가 그날을 스킵하지만 데이터는 남음 → 나중에 이 날짜로 재실행하면 채워짐
+        sys.stderr.write("퀴즈/용어 실패(뉴스는 저장됨): %s\n" % e)
 
     # day JSON은 위에서 이미 기록됨. 이미지는 부가물 → 실패해도 그날 콘텐츠를 버리지 않음
     # (check=False). 사이트 생성(build_site)만 필수라 실패 시 예외로 중단.

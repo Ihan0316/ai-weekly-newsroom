@@ -3,7 +3,12 @@ name: Daily digest
 on:
   schedule:
     - cron: '23 22 * * *'   # 22:23 UTC = 07:23 KST (매일). 혼잡 슬롯(:00·:30, 0시 UTC) 회피용 애매한 분/시
-  workflow_dispatch: {}     # 수동 실행
+  workflow_dispatch:        # 수동 실행 / 누락일 백필
+    inputs:
+      date:
+        description: "백필할 날짜 YYYY-MM-DD (비우면 오늘). 퀴즈 없는 날이면 퀴즈만 보충"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -26,6 +31,7 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           TZ: Asia/Seoul
+          PIPELINE_DATE: ${{ github.event.inputs.date }}
         run: python pipeline_gemini.py
 
       - name: Export Naver copy page
