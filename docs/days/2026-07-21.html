@@ -1,0 +1,139 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>데일리 다이제스트 · 2026. 7. 21</title>
+<meta name="description" content="&quot;상태 관리와 흐름 제어가 깔끔해지겠지&quot;라는 기대로 LangGraph를 도입했는데, 오히려 코드가 복잡해졌습니다. 프레임워크를 도입하고도 구조가 나빠질 수 있다는 걸 직접 겪고 정리한 경험에 대한 기록과 공유입니다. 진단해보니 상태는 이러했는데 그래프에 노드가 하나뿐.">
+<link rel="canonical" href="https://ihan0316.github.io/ai-weekly-newsroom/days/2026-07-21.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2026. 7. 21 · 데일리 다이제스트">
+<meta property="og:description" content="&quot;상태 관리와 흐름 제어가 깔끔해지겠지&quot;라는 기대로 LangGraph를 도입했는데, 오히려 코드가 복잡해졌습니다. 프레임워크를 도입하고도 구조가 나빠질 수 있다는 걸 직접 겪고 정리한 경험에 대한 기록과 공유입니다. 진단해보니 상태는 이러했는데 그래프에 노드가 하나뿐.">
+<meta property="og:url" content="https://ihan0316.github.io/ai-weekly-newsroom/days/2026-07-21.html">
+<meta property="og:image" content="https://ihan0316.github.io/ai-weekly-newsroom/images/4ee7317c3614.png">
+<link rel="stylesheet" href="../assets/site.css?v=f6c4ef09">
+<meta name="site-build" content="ae8555aaa1" data-src="../build.json">
+<meta name="ask-endpoint" content="https://ai-weekly-newsroom.aijnjj12.workers.dev">
+</head>
+<body>
+<div class="dnav"><a class="backlink" href="../index.html">← 전체 보기</a></div>
+<main class="reader">
+  <div class="kicker">2026. 7. 21 (화) · 데일리 다이제스트</div>
+  <h1 class="dhead">오늘 <em>읽을거리</em></h1>
+  <p class="dsub">뉴스 · 기초상식(정처기) · IT·개발·기획 용어</p>
+  <div class="rule"></div>
+
+  <section class="daystack">
+    <article class="daysec sec-news">
+      <div class="secnum">01</div>
+      <span class="seclabel">오늘의 뉴스</span>
+      <ul class="newslist">
+        <li>
+          <button class="newsitem has-thumb" data-idx="0" type="button">
+            <div class="ni-text">
+              <span class="ni-src">GeekNews</span>
+              <h3 class="ni-title">왜 LangGraph 도입 후 코드가 더 복잡해졌나 — 실패에서 배운 기록</h3>
+              <p class="ni-blurb">&quot;상태 관리와 흐름 제어가 깔끔해지겠지&quot;라는 기대로 LangGraph를 도입했는데, 오히려 코드가 복잡해졌습니다. 프레임워크를 도입하고도 구조가 나빠질 수 있다는 걸 직접 겪고 정리한 경험에 대한 기록과 공유입니다. 진단해보니 상태는 이러했는데 그래프에 노드가 하나뿐.</p>
+              <span class="ni-open">원문 보기 →</span>
+            </div>
+            <img class="ni-thumb" src="../images/4ee7317c3614.png" alt="" loading="lazy" onerror="this.remove()">
+          </button>
+        </li>
+        <li>
+          <button class="newsitem has-thumb" data-idx="1" type="button">
+            <div class="ni-text">
+              <span class="ni-src">Hacker News</span>
+              <h3 class="ni-title">Hyprland 0.55, 설정 파일에 Lua 전환 발표</h3>
+              <p class="ni-blurb">Hyprland 0.55는 설정 파일에 Lua를 사용하도록 전환한다고 발표했습니다.</p>
+              <span class="ni-open">원문 보기 →</span>
+            </div>
+            <img class="ni-thumb" src="../images/41c1025ffebc.png" alt="" loading="lazy" onerror="this.remove()">
+          </button>
+        </li>
+        <li>
+          <button class="newsitem has-thumb" data-idx="2" type="button">
+            <div class="ni-text">
+              <span class="ni-src">TechCrunch</span>
+              <h3 class="ni-title">Google, Gemini 효율성 향상을 위한 새로운 AI 칩 개발 중</h3>
+              <p class="ni-blurb">Google의 모회사 Alphabet은 Gemini 모델을 훨씬 더 효율적으로 실행하도록 설계된 새로운 칩을 개발 중인 것으로 알려졌습니다.</p>
+              <span class="ni-open">원문 보기 →</span>
+            </div>
+            <img class="ni-thumb" src="../images/20d9bcdf5693.jpg" alt="" loading="lazy" onerror="this.remove()">
+          </button>
+        </li></ul>
+    </article>
+
+    <article class="daysec sec-quiz">
+      <div class="secnum">02</div>
+      <span class="seclabel">기초상식 · 정처기</span>
+      
+      <div class="quiz" data-answer="1">
+        <div class="sectag">#소프트웨어 공학</div>
+        <p class="q-question">소프트웨어 설계 원칙 중, &#x27;높은 응집도(High Cohesion)&#x27;에 대한 설명으로 가장 적절한 것은?</p>
+        <ol class="qopts"><li class="qopt" data-i="0"><span class="ql">①</span><span class="qtext">모듈 간의 의존성을 최소화하여 변경의 파급 효과를 줄이는 원칙이다.</span><span class="qmark"></span></li><li class="qopt" data-i="1"><span class="ql">②</span><span class="qtext">하나의 모듈이 단일하고 명확한 기능을 수행하도록 하여 관련 기능들이 함께 묶이도록 하는 원칙이다.</span><span class="qmark"></span></li><li class="qopt" data-i="2"><span class="ql">③</span><span class="qtext">클래스는 확장에 대해 열려 있어야 하지만, 수정에 대해서는 닫혀 있어야 한다는 원칙이다.</span><span class="qmark"></span></li><li class="qopt" data-i="3"><span class="ql">④</span><span class="qtext">상위 모듈은 하위 모듈에 의존해서는 안 되며, 둘 다 추상화에 의존해야 한다는 원칙이다.</span><span class="qmark"></span></li></ol>
+        <p class="q-hint">보기를 클릭해 정답을 확인하세요.</p>
+        <div class="q-explain" hidden><b>정답: ②</b><p>높은 응집도는 모듈 내부의 구성 요소들이 얼마나 밀접하게 관련되어 하나의 기능을 수행하는지를 나타냅니다. 응집도가 높을수록 모듈은 독립적이고 재사용하기 쉬워지며, 유지보수성이 향상됩니다. 각 보기는 응집도 외의 다른 설계 원칙들을 설명하고 있습니다.</p></div>
+      </div>
+    </article>
+
+    <article class="daysec sec-terms">
+      <div class="secnum">03</div>
+      <span class="seclabel">IT · 개발 · 기획 용어</span>
+      <ul class="terms">
+        <li class="termrow">
+          <span class="t-kind" style="background:#c25e00">기획</span>
+          <span class="t-term">데브렐 (DevRel)</span>
+          <span class="t-mean">개발자 관계(Developer Relations)의 줄임말로, 개발자 커뮤니티와의 소통을 통해 제품 또는 기술의 채택을 촉진하고 피드백을 수집하는 활동을 의미한다.</span>
+        </li>
+        <li class="termrow">
+          <span class="t-kind" style="background:#1d9d57">개발</span>
+          <span class="t-term">옵티미스틱 락 (Optimistic Lock)</span>
+          <span class="t-mean">데이터베이스에서 동시성 제어를 위한 기법 중 하나로, 충돌이 발생할 확률이 낮다고 가정하고 일단 데이터를 수정하되, 커밋 시점에 충돌 여부를 확인하여 처리하는 방식이다.</span>
+        </li>
+        <li class="termrow">
+          <span class="t-kind" style="background:#1d9d57">개발</span>
+          <span class="t-term">코드 스멜 (Code Smell)</span>
+          <span class="t-mean">소프트웨어 소스 코드에서 잠재적인 문제나 개선의 필요성을 나타내는 특정 패턴이나 특징을 의미하며, 리팩토링의 필요성을 시사한다.</span>
+        </li></ul>
+    </article>
+  </section>
+
+  <div class="foot">
+    <span class="fbrand">데일리</span> · 읽을거리 · 2026. 7. 21<br>
+    뉴스 본문은 yozm.wishket · GeekNews(news.hada.io) 등에서 수집·요약한 것입니다. 정확한 내용은 원문을 확인하세요.
+  </div>
+</main>
+
+<div class="modal-overlay" id="news-modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" type="button" aria-label="닫기">✕</button>
+    <div class="modal-src"></div>
+    <h2 class="modal-title" id="modal-title"></h2>
+    <div class="modal-tools">
+      <button class="np-copy" type="button" data-part="title" aria-label="네이버 제목 복사">
+        <span class="np-ico">📋</span><span>제목</span>
+      </button>
+      <button class="np-copy" type="button" data-part="body" aria-label="네이버 본문 복사">
+        <span class="np-ico">📝</span><span>본문</span>
+      </button>
+    </div>
+    <img class="modal-hero" alt="" hidden>
+    <div class="modal-body"></div>
+    <a class="modal-orig" target="_blank" rel="noopener">원문 사이트에서 보기 ↗</a>
+    <div class="np-toast" role="status" aria-live="polite" hidden>복사됨</div>
+  </div>
+</div>
+<div class="ask-panel" hidden role="dialog" aria-label="기사 질문">
+  <div class="ask-head"><span>이 기사에 질문</span><button class="ask-min-btn" type="button" aria-label="질문창 접기/펴기">▾</button></div>
+  <div class="ask-thread"></div>
+  <div class="ask-foot">
+    <div class="ask-quote" hidden></div>
+    <div class="ask-row">
+      <input class="ask-input" type="text" maxlength="500" autocomplete="off"
+        placeholder="이 기사에서 궁금한 점" aria-label="질문 입력">
+      <button class="ask-send" type="button">질문</button>
+    </div>
+    <div class="ask-count"></div>
+  </div>
+</div>
+<div class="sel-ask" hidden><button class="sel-ask-btn" type="button">🤔 질문</button></div>
+<script id="news-data" type="application/json">[{"title": "왜 LangGraph 도입 후 코드가 더 복잡해졌나 — 실패에서 배운 기록", "source": "GeekNews", "url": "https://news.hada.io/topic?id=31628", "blurb": "\"상태 관리와 흐름 제어가 깔끔해지겠지\"라는 기대로 LangGraph를 도입했는데, 오히려 코드가 복잡해졌습니다. 프레임워크를 도입하고도 구조가 나빠질 수 있다는 걸 직접 겪고 정리한 경험에 대한 기록과 공유입니다. 진단해보니 상태는 이러했는데 그래프에 노드가 하나뿐.", "content": [{"t": "p", "text": "\"상태 관리와 흐름 제어가 깔끔해지겠지\"라는 기대로 LangGraph를 도입했는데, 오히려 코드가 복잡해졌습니다. 프레임워크를 도입하고도 구조가 나빠질 수 있다는 걸 직접 겪고 정리한 경험에 대한 기록과 공유입니다."}, {"t": "p", "text": "진단해보니 상태는 이러했는데"}, {"t": "p", "text": "그래프에 노드가 하나뿐. current_step → END 구조라 조건부 엣지도 분기도 없었고, graph.invoke()가 함수를 직접 호출하는 것과 똑같음. Step 전환은 그래프 밖 서비스 코드가 판단하는 형태. 같은 상태를 두 곳에 저장. LangGraph MemorySaver(인메모리)와 자체 PostgreSQL Checkpointer가 동일 세션을 이중으로 저장·복원하면서 불일치 발생. 8,700여 줄 정도의 3개 LangGraph 실행 코드 (Executor)에 중복. 실질 핵심 로직은 \"LLM 호출 + 프롬프트 조립\" 정도였고, 나머지 대부분은 상태 관리·조건 분기·에지케이스 패치."}, {"t": "p", "text": "표면적으로는 프레임워크의 실제 기능(조건부 엣지, 내장 체크포인터, Human-in-the-Loop)을 쓰지 않고 껍데기로만 도입한 게 문제였는데, 더 파고들었더니 원인은 따로 있었습니다."}, {"t": "p", "text": "대부분 바이브 코딩으로 만들어졌지만, 제작 과정중에 내부 코드나 설계 원칙을 깊이 들여다보지 않고, 매번 요구사항과 의도만 정리해 구현을 이어간 방식. 문제는 바이브 코딩 자체가 아니라 검증 없는 진행이었음. 눈앞의 기능을 최적화할 뿐 전체 구조의 책임 경계는 지켜주지 않음. 이중 체크포인팅도, 흩어진 상태도, 중복된 로직도 전부 부분 최적화의 누적. 설계자가 없었던 게 아니라, 프레임워크가 무엇을 책임지도록 설계됐는지 충분히 이해하지 못한 채 그 위에서 지시만 내린 상태가 진짜 원인."}, {"t": "p", "text": "그래서 반성하고, 이렇게 되돌렸습니다."}, {"t": "p", "text": "독립 토폴로지 + thread_id 격리로 세션 분리. State에는 메타데이터만 두고 본문은 Store로 이동. regex 파싱 대신 네이티브 tool_use 사용. 테스트 가능하도록 노드 분리. 프레임워크에 대한 정확한 이해와 활용 구조가 필요했던 나 자신."}, {"t": "p", "text": "\"어떻게 쓰는가\"가 아니라 \"어떻게 잘못 썼는가\"에 대한 기록/공유 입니다."}], "image": "../images/4ee7317c3614.png", "comment": "LangGraph 도입 후 코드가 더 복잡해졌다는 기사를 보니, 저도 새 기술을 무작정 도입하기 전에 깊이 이해해야겠다는 생각이 들었어요. '프레임워크가 만능은 아니다'라는 교훈을 다시 한번 새기게 됩니다. 실제 필요한 기능이 뭔지 파악하고 도입해야 삽질을 줄일 수 있겠죠?"}, {"title": "Hyprland 0.55, 설정 파일에 Lua 전환 발표", "source": "Hacker News", "url": "https://hypr.land/news/update55/", "blurb": "Hyprland 0.55는 설정 파일에 Lua를 사용하도록 전환한다고 발표했습니다.", "content": [{"t": "p", "text": "꽤 오랜만에 Hyprland 0.55가 출시되었습니다! 이번 업데이트는 커밋, 기여자, 기능 및 변경 사항 등 모든 면에서 엄청난 규모입니다."}, {"t": "h", "text": "주요 내용"}, {"t": "p", "text": "0.55 버전에는 수많은 변경 사항이 있습니다. 주요 내용을 먼저 살펴보겠습니다."}, {"t": "h", "text": "Lua 설정"}, {"t": "p", "text": "이전에 발표했듯이, Hyprland 설정은 이제 Lua로 이루어집니다. 하지만 기존의 hyprlang 설정이 작동하지 않는다는 의미는 아닙니다. 몇몇 릴리스 동안은 계속 작동할 것입니다."}, {"t": "p", "text": "전체 위키가 새로운 Lua 설정을 반영하여 업데이트되었으며, Lua로 마이그레이션하는 것을 권장합니다."}, {"t": "h", "text": "사용자 정의 레이아웃"}, {"t": "p", "text": "Lua와 함께, 설정에서 직접 자신만의 레이아웃을 정의할 수 있는 레이아웃 API를 추가했습니다. 이 레이아웃은 전역적으로, 작업 공간별로, 모니터별로 설정할 수 있으며, 일반 레이아웃과 동일하게 작동하지만 전적으로 사용자가 제어합니다."}, {"t": "h", "text": "다양한 스크롤 개선"}, {"t": "p", "text": "스크롤은 이제 기본적으로 테이프의 일부로 전체 화면 창을 지원합니다."}, {"t": "p", "text": "또한 Lua의 scroll_move를 통해 네이티브 트랙패드 제스처를 지원합니다."}, {"t": "h", "text": "ICC 프로필"}, {"t": "p", "text": "이제 설정에서 icc = \"..path..\"를 통해 출력별로 ICC 프로필을 로드하여 색상 정확도를 높일 수 있습니다."}, {"t": "h", "text": "렌더러 및 CM 개선"}, {"t": "p", "text": "Hyprland는 이제 색상 관리 디스플레이에 대해 기본적으로 FP16 정밀도와 개선된 CM 파이프라인을 사용합니다. 이는 색상 정확도, 화면 공유 및 다양한 색상 관련 기능에 도움이 됩니다."}, {"t": "h", "text": "호환성 변경"}, {"t": "p", "text": "일부 설정 옵션이 업데이트되었습니다."}, {"t": "p", "text": "dwindle:pseudotile은 아무것도 하지 않아 제거되었습니다. decoration:shadow:ignore_window는 제거되었습니다(기본적으로 활성화됨). render:cm_fs_passthrough는 제거되었으며, render:cm_auto_hdr로 자동 처리되어야 합니다. misc:vfr은 프로덕션 환경에서 변경되어서는 안 되는 디버그 변수이므로 debug:로 이동되었습니다."}, {"t": "h", "text": "새로운 기능 및 수정 사항"}, {"t": "p", "text": "늘 그렇듯이, 수많은 좋은 기능들이 있습니다."}, {"t": "p", "text": "스크롤 관련 기능: expel, consume, consume_or_expel, 래핑 옵션 등. 바인드에 대한 새로운 auto_consuming 플래그. 장치 태그. confine_pointer 창 규칙. 이동 디스패처를 위한 move_into_or_create_group. dwindle을 위한 rotatesplit 레이아웃 메시지. 새로운 라이브 핀치 커서 줌 트랙패드 제스처. 창을 위한 새로운 글로우 장식. 그리고 훨씬 더 많은 것들이 있습니다."}, {"t": "p", "text": "그리고 평소와 같은 수정 사항들은 너무 많아서 나열할 수 없습니다."}, {"t": "h", "text": "원문 릴리스"}, {"t": "p", "text": "항상 그렇듯이, 더 자세한 내용을 읽고 싶다면 Github의 릴리스를 확인하세요."}, {"t": "p", "text": "건배, vax"}], "image": "../images/41c1025ffebc.png", "comment": "Hyprland가 설정 파일을 Lua로 전환한다는 소식을 들으니 흥미롭네요. 설정 파일이 프로그래밍 언어로 바뀌면 더 유연하고 강력한 커스터마이징이 가능할 것 같아요. 저도 언젠가 이런 식으로 복잡한 설정을 직접 다뤄보고 싶습니다."}, {"title": "Google, Gemini 효율성 향상을 위한 새로운 AI 칩 개발 중", "source": "TechCrunch", "url": "https://techcrunch.com/2026/07/20/google-is-working-on-a-new-ai-chip-designed-to-make-gemini-more-efficient/", "blurb": "Google의 모회사 Alphabet은 Gemini 모델을 훨씬 더 효율적으로 실행하도록 설계된 새로운 칩을 개발 중인 것으로 알려졌습니다.", "content": [{"t": "p", "text": "Google의 모회사인 Alphabet은 자체 Gemini 모델을 더욱 효율적으로 운영하는 데 도움이 되는 새로운 서버 칩을 설계하고 있습니다."}, {"t": "p", "text": "익명의 소식통에 따르면, 내부적으로"}, {"t": "p", "text": "Frozen v2"}], "image": "../images/20d9bcdf5693.jpg", "comment": "Google이 Gemini 효율성 향상을 위해 새로운 AI 칩을 개발 중이라는 뉴스를 보니, AI 모델 발전만큼이나 하드웨어 최적화도 정말 중요하구나 싶어요. 소프트웨어만 배우고 있었는데, 칩 설계 같은 하드웨어 분야도 AI 시대에는 필수적인 역량이 되겠네요. 저 같은 주니어 개발자도 이런 기술 흐름에 계속 관심을 가져야겠습니다."}]</script>
+<script src="../assets/site.js?v=f6c4ef09"></script>
+</body></html>
