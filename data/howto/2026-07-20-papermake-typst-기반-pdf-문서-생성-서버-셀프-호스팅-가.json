@@ -1,0 +1,94 @@
+{
+  "title_kr": "Typst 기반 PDF 문서 생성 서버 셀프 호스팅 가이드",
+  "title_blog": "Typst 기반 PDF 문서 생성 서버 셀프 호스팅 가이드",
+  "blurb_kr": "Papermake Typst 기반 PDF 문서 생성 서버를 직접 구축하는 단계별 가이드입니다.",
+  "hook_kr": "문서 생성 자동화에 관심 있으신가요? Papermake Typst 서버를 직접 구축해서 나만의 PDF 생성 환경을 만들어보세요!",
+  "comment_kr": "이렇게 직접 Papermake Typst 서버를 구축하고 나니, 나만의 문서 생성 시스템을 가진 것 같아 뿌듯하네요! 자동화의 세계, 정말 매력적입니다.",
+  "tags_kr": [
+    "Typst",
+    "Papermake",
+    "PDF생성",
+    "셀프호스팅",
+    "문서자동화",
+    "서버구축",
+    "개발가이드"
+  ],
+  "content": [
+    {
+      "t": "h",
+      "text": "준비물 확인하기"
+    },
+    {
+      "t": "p",
+      "text": "Papermake Typst 서버를 호스팅하기 전에 몇 가지 준비물이 필요합니다. 안정적인 인터넷 연결과 최소 2GB RAM을 가진 리눅스 기반 서버(Ubuntu, Debian 등), Docker 및 Docker Compose 설치가 완료되어 있어야 합니다. 또한, Typst 문서를 작성할 기본적인 이해가 필요합니다."
+    },
+    {
+      "t": "h",
+      "text": "1단계: 서버 환경 설정 및 Git 설치"
+    },
+    {
+      "t": "p",
+      "text": "먼저 서버에 접속하여 시스템 업데이트를 진행하고 Git을 설치합니다. 터미널에서 'sudo apt update && sudo apt upgrade -y' 명령어를 실행한 후, 'sudo apt install git -y' 명령어로 Git을 설치합니다. 이는 Papermake 소스 코드를 클론하는 데 필요합니다."
+    },
+    {
+      "t": "h",
+      "text": "2단계: Papermake 저장소 클론"
+    },
+    {
+      "t": "p",
+      "text": "원하는 디렉토리로 이동한 후, Papermake Typst 서버의 GitHub 저장소를 클론합니다. 'git clone https://github.com/your-papermake-repo-url.git' (실제 저장소 URL로 대체) 명령어를 사용합니다. 클론이 완료되면 해당 디렉토리로 이동합니다."
+    },
+    {
+      "t": "h",
+      "text": "3단계: Docker Compose 파일 확인 및 수정"
+    },
+    {
+      "t": "p",
+      "text": "클론한 Papermake 디렉토리 내에 있는 'docker-compose.yml' 파일을 확인합니다. 필요한 경우 포트 번호나 볼륨 경로 등을 수정할 수 있습니다. 예를 들어, 'ports: - \"8000:8000\"' 라인을 통해 서버가 8000번 포트로 서비스되도록 설정되어 있는지 확인합니다."
+    },
+    {
+      "t": "h",
+      "text": "4단계: Docker Compose를 이용한 서버 실행"
+    },
+    {
+      "t": "p",
+      "text": "모든 설정이 완료되었다면, Papermake 디렉토리에서 'docker-compose up -d' 명령어를 실행하여 서버를 백그라운드에서 시작합니다. 이 명령어는 Docker Compose 파일에 정의된 서비스들을 빌드하고 실행합니다. 처음 실행 시에는 이미지 다운로드 및 빌드 시간이 소요될 수 있습니다."
+    },
+    {
+      "t": "h",
+      "text": "5단계: 서버 상태 확인"
+    },
+    {
+      "t": "p",
+      "text": "서버가 정상적으로 실행되는지 확인하려면 'docker-compose ps' 명령어를 사용합니다. 모든 서비스가 'Up' 상태로 표시되면 성공적으로 서버가 시작된 것입니다. 만약 문제가 발생하면 'docker-compose logs' 명령어를 통해 로그를 확인하여 원인을 파악할 수 있습니다."
+    },
+    {
+      "t": "h",
+      "text": "6단계: Papermake Typst 서버 접속 테스트"
+    },
+    {
+      "t": "p",
+      "text": "웹 브라우저를 열고 'http://[서버IP주소]:8000' (설정한 포트 번호에 따라 변경)으로 접속하여 Papermake Typst 서버의 웹 인터페이스에 접근할 수 있는지 확인합니다. 정상적으로 페이지가 로드되면 서버 구축이 완료된 것입니다."
+    },
+    {
+      "t": "h",
+      "text": "팁: Typst 문서 업로드 및 PDF 생성"
+    },
+    {
+      "t": "p",
+      "text": "Papermake 웹 인터페이스에서 Typst 파일을 업로드하거나 직접 작성하여 PDF를 생성할 수 있습니다. Typst 문법에 따라 작성된 .typ 파일을 업로드하고 'Compile' 버튼을 누르면 실시간으로 PDF 문서가 생성되는 것을 확인할 수 있습니다."
+    },
+    {
+      "t": "h",
+      "text": "주의사항: 보안 설정 및 유지보수"
+    },
+    {
+      "t": "p",
+      "text": "공개적으로 접근 가능한 서버를 운영할 경우, 반드시 방화벽 설정을 통해 불필요한 포트 접근을 차단하고, HTTPS를 적용하여 보안을 강화해야 합니다. 또한, 주기적으로 Papermake 및 Typst의 업데이트를 확인하고 적용하여 최신 기능을 유지하고 보안 취약점을 보완하는 것이 중요합니다."
+    }
+  ],
+  "source": "직접작성",
+  "url": "howto:papermake-typst-기반-pdf-문서-생성-서버-셀프-호스팅-가",
+  "date": "2026-07-20",
+  "topic": "Papermake Typst 기반 PDF 문서 생성 서버 셀프 호스팅 가이드"
+}
