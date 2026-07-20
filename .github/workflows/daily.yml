@@ -40,6 +40,8 @@ jobs:
         run: python naver_export.py
 
       - name: Commit & push
+        env:
+          PIPELINE_DATE: ${{ github.event.inputs.date }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -47,6 +49,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "변경 없음 — 커밋 생략"
           else
-            git commit -m "Daily auto: add $(TZ=Asia/Seoul date +%F) issue" -m "Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>"
+            D="${PIPELINE_DATE:-$(TZ=Asia/Seoul date +%F)}"
+            git commit -m "Daily auto: add $D issue" -m "Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>"
             git push
           fi
