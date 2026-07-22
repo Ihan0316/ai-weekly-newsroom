@@ -82,5 +82,6 @@
   "source": "직접작성",
   "url": "howto:adbc로-데이터베이스-조회-시작하기-cli-도구-설치-및-사용법",
   "date": "2026-07-16",
-  "topic": "ADBC로 데이터베이스 조회 시작하기: CLI 도구 설치 및 사용법"
+  "topic": "ADBC로 데이터베이스 조회 시작하기: CLI 도구 설치 및 사용법",
+  "audience": "niche"
 }

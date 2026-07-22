@@ -90,5 +90,6 @@
   "source": "직접작성",
   "url": "howto:papermake-typst-기반-pdf-문서-생성-서버-셀프-호스팅-가",
   "date": "2026-07-20",
-  "topic": "Papermake Typst 기반 PDF 문서 생성 서버 셀프 호스팅 가이드"
+  "topic": "Papermake Typst 기반 PDF 문서 생성 서버 셀프 호스팅 가이드",
+  "audience": "niche"
 }

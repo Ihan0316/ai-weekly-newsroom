@@ -83,5 +83,6 @@
   "source": "직접작성",
   "url": "howto:git-기반-시맨틱-버전-관리-도구-sem-설치-및-활용법",
   "date": "2026-07-16",
-  "topic": "Git 기반 시맨틱 버전 관리 도구 sem 설치 및 활용법"
+  "topic": "Git 기반 시맨틱 버전 관리 도구 sem 설치 및 활용법",
+  "audience": "niche"
 }

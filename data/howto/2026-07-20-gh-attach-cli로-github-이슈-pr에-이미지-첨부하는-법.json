@@ -98,5 +98,6 @@
   "source": "직접작성",
   "url": "howto:gh-attach-cli로-github-이슈-pr에-이미지-첨부하는-법",
   "date": "2026-07-20",
-  "topic": "gh-attach CLI로 GitHub 이슈/PR에 이미지 첨부하는 법"
+  "topic": "gh-attach CLI로 GitHub 이슈/PR에 이미지 첨부하는 법",
+  "audience": "niche"
 }
