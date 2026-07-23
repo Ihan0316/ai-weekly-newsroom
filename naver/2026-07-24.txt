@@ -1,38 +1,6 @@
-<!doctype html>
-<html lang="ko"><head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex">
-<title>네이버 복사 · AI 데일리 다이제스트</title>
-<style>
-:root{color-scheme:light dark}
-*{box-sizing:border-box}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic",sans-serif;
-background:#0f1115;color:#e8eaed;line-height:1.6}
-.wrap{max-width:720px;margin:0 auto;padding:20px 16px 80px}
-h1{font-size:18px;margin:8px 0 4px}
-.meta{font-size:13px;color:#9aa0a6;margin-bottom:16px}
-.bar{position:sticky;top:0;display:flex;gap:8px;padding:12px 0;background:#0f1115;z-index:2}
-button{flex:1;padding:14px 10px;border:0;border-radius:12px;font-size:15px;font-weight:700;
-cursor:pointer;background:#03c75a;color:#fff}
-button.sec{background:#2a2d34;color:#e8eaed}
-button:active{transform:scale(.98)}
-.card{background:#171a1f;border:1px solid #24272e;border-radius:14px;padding:14px;margin:12px 0}
-.card h2{font-size:13px;color:#9aa0a6;margin:0 0 8px;font-weight:600}
-pre{white-space:pre-wrap;word-break:break-word;margin:0;font:inherit;font-size:14.5px}
-.hint{font-size:12.5px;color:#9aa0a6;margin-top:10px}
-.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#03c75a;color:#fff;
-padding:10px 18px;border-radius:999px;font-size:14px;opacity:0;transition:.2s;pointer-events:none}
-.toast.on{opacity:1}
-</style></head><body><div class="wrap">
-<h1>📋 네이버 블로그 복붙용</h1>
-<div class="meta">2026. 7. 24 (금) · 아래 버튼으로 제목/본문 복사 → 네이버 글쓰기에 붙여넣기</div>
-<div class="bar">
-<button onclick="cp('t')">① 제목 복사</button>
-<button class="sec" onclick="cp('b')">② 본문 복사</button>
-</div>
-<div class="card"><h2>제목</h2><pre id="t">🤖 AI 데일리 다이제스트 | 2026. 7. 24 (금)</pre></div>
-<div class="card"><h2>본문</h2><pre id="b">오늘의 AI·개발 소식 3건 + 정보처리기사 퀴즈 + IT 용어 3개 정리했습니다.
+제목: 🤖 AI 데일리 다이제스트 | 2026. 7. 24 (금)
+
+오늘의 AI·개발 소식 3건 + 정보처리기사 퀴즈 + IT 용어 3개 정리했습니다.
 
 ━━━━━━━━━━━━━━━━━━━━
 📰 오늘의 뉴스
@@ -82,15 +50,4 @@ AMD는 올해 말 고객에게 배송될 새로운 랙 스케일 시스템으로
 ---
 ※ 뉴스는 자동 수집·요약본입니다. 정확한 내용은 원문 링크를 확인하세요.
 🌐 전체 보기(뉴스 원문·음성·검색): https://ihan0316.github.io/ai-weekly-newsroom/
-#AI #인공지능 #개발 #IT용어 #정보처리기사 #개발자 #데일리뉴스</pre></div>
-<div class="hint">팁: 제목 복사 → 네이버 제목칸 붙여넣기 → 본문 복사 → 본문칸 붙여넣기 → 발행.
-자동 발행은 네이버 정책상 계정 제재 위험이 있어 발행 버튼만 직접 누르는 방식입니다.</div>
-</div>
-<div class="toast" id="toast">복사됨</div>
-<script>
-function cp(id){var el=document.getElementById(id);var t=el.innerText;
-function ok(){var x=document.getElementById('toast');x.classList.add('on');setTimeout(function(){x.classList.remove('on')},1200)}
-if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){sel(el)})}
-else{sel(el)}}
-function sel(el){var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r);try{document.execCommand('copy');document.getElementById('toast').classList.add('on');setTimeout(function(){document.getElementById('toast').classList.remove('on')},1200)}catch(e){}}
-</script></body></html>
+#AI #인공지능 #개발 #IT용어 #정보처리기사 #개발자 #데일리뉴스
