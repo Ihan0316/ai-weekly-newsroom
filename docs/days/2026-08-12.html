@@ -1,0 +1,139 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>데일리 다이제스트 · 2026. 8. 12</title>
+<meta name="description" content="Apple Virtualization.framework의 가상 GPU가 보수적인 Metal 기능을 보고해 llama.cpp가 느린 커널을 선택하던 문제를, 게스트 프로세스 한정 호환성 계층으로 우회해 최대 16.36배 가속함.">
+<link rel="canonical" href="https://ihan0316.github.io/ai-weekly-newsroom/days/2026-08-12.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2026. 8. 12 · 데일리 다이제스트">
+<meta property="og:description" content="Apple Virtualization.framework의 가상 GPU가 보수적인 Metal 기능을 보고해 llama.cpp가 느린 커널을 선택하던 문제를, 게스트 프로세스 한정 호환성 계층으로 우회해 최대 16.36배 가속함.">
+<meta property="og:url" content="https://ihan0316.github.io/ai-weekly-newsroom/days/2026-08-12.html">
+<meta property="og:image" content="https://ihan0316.github.io/ai-weekly-newsroom/images/d0815050da86.png">
+<link rel="stylesheet" href="../assets/site.css?v=f6c4ef09">
+<meta name="site-build" content="3fd8231c2e" data-src="../build.json">
+<meta name="ask-endpoint" content="https://ai-weekly-newsroom.aijnjj12.workers.dev">
+</head>
+<body>
+<div class="dnav"><a class="backlink" href="../index.html">← 전체 보기</a></div>
+<main class="reader">
+  <div class="kicker">2026. 8. 12 (수) · 데일리 다이제스트</div>
+  <h1 class="dhead">오늘 <em>읽을거리</em></h1>
+  <p class="dsub">뉴스 · 기초상식(정처기) · IT·개발·기획 용어</p>
+  <div class="rule"></div>
+
+  <section class="daystack">
+    <article class="daysec sec-news">
+      <div class="secnum">01</div>
+      <span class="seclabel">오늘의 뉴스</span>
+      <ul class="newslist">
+        <li>
+          <button class="newsitem has-thumb" data-idx="0" type="button">
+            <div class="ni-text">
+              <span class="ni-src">GeekNews</span>
+              <h3 class="ni-title">Apple Silicon macOS VM에서 llama.cpp LLM 추론 가속하기</h3>
+              <p class="ni-blurb">Apple Virtualization.framework의 가상 GPU가 보수적인 Metal 기능을 보고해 llama.cpp가 느린 커널을 선택하던 문제를, 게스트 프로세스 한정 호환성 계층으로 우회해 최대 16.36배 가속함.</p>
+              <span class="ni-open">원문 보기 →</span>
+            </div>
+            <img class="ni-thumb" src="../images/d0815050da86.png" alt="" loading="lazy" onerror="this.remove()">
+          </button>
+        </li>
+        <li>
+          <button class="newsitem has-thumb" data-idx="1" type="button">
+            <div class="ni-text">
+              <span class="ni-src">ZDNet Korea</span>
+              <h3 class="ni-title">ICANN, 2026년 10월 루트 KSK 롤오버 대비 위한 지침 발표</h3>
+              <p class="ni-blurb">국제인터넷주소관리기구(ICANN)가 2026년 10월 11일로 예정된 루트 존 키 서명 키(Root Zone Key Signing Key, KSK) 롤오버의 잠재적 영향을 이해하는 데 도움이 되도록 업데이트된 지침을 발표했다.</p>
+              <span class="ni-open">원문 보기 →</span>
+            </div>
+            <img class="ni-thumb" src="../images/7720568a89a6.jpg" alt="" loading="lazy" onerror="this.remove()">
+          </button>
+        </li>
+        <li>
+          <button class="newsitem" data-idx="2" type="button">
+            <div class="ni-text">
+              <span class="ni-src">Hacker News</span>
+              <h3 class="ni-title">OpenSSH 10.5/10.5p1</h3>
+              <p class="ni-blurb">OpenSSH 10.5/10.5p1 릴리스 노트.</p>
+              <span class="ni-open">원문 보기 →</span>
+            </div>
+            
+          </button>
+        </li></ul>
+    </article>
+
+    <article class="daysec sec-quiz">
+      <div class="secnum">02</div>
+      <span class="seclabel">기초상식 · 정처기</span>
+      
+      <div class="quiz" data-answer="2">
+        <div class="sectag">#운영체제</div>
+        <p class="q-question">다음 중 운영체제에서 프로세스 간의 통신(IPC, Inter-Process Communication) 기법으로 가장 적절하지 않은 것은?</p>
+        <ol class="qopts"><li class="qopt" data-i="0"><span class="ql">①</span><span class="qtext">파이프(Pipe)</span><span class="qmark"></span></li><li class="qopt" data-i="1"><span class="ql">②</span><span class="qtext">메시지 큐(Message Queue)</span><span class="qmark"></span></li><li class="qopt" data-i="2"><span class="ql">③</span><span class="qtext">세마포어(Semaphore)</span><span class="qmark"></span></li><li class="qopt" data-i="3"><span class="ql">④</span><span class="qtext">공유 메모리(Shared Memory)</span><span class="qmark"></span></li></ol>
+        <p class="q-hint">보기를 클릭해 정답을 확인하세요.</p>
+        <div class="q-explain" hidden><b>정답: ③</b><p>세마포어는 프로세스 간 동기화를 위한 메커니즘으로, 공유 자원에 대한 접근을 제어하여 경쟁 상태를 방지합니다. 프로세스 간 통신(IPC)을 직접적으로 제공하기보다는 공유 자원 접근 순서를 조절하는 역할을 합니다. 파이프, 메시지 큐, 공유 메모리는 프로세스 간 데이터를 주고받는 통신 기법에 해당합니다.</p></div>
+      </div>
+    </article>
+
+    <article class="daysec sec-terms">
+      <div class="secnum">03</div>
+      <span class="seclabel">IT · 개발 · 기획 용어</span>
+      <ul class="terms">
+        <li class="termrow">
+          <span class="t-kind" style="background:#1d9d57">개발</span>
+          <span class="t-term">데드레터 큐 (Dead-Letter Queue, DLQ)</span>
+          <span class="t-mean">메시지 처리 시스템에서 정상적으로 처리되지 못하고 실패한 메시지들을 별도로 모아두는 큐로, 실패 원인 분석 및 재처리를 위해 사용됩니다.</span>
+        </li>
+        <li class="termrow">
+          <span class="t-kind" style="background:#1d9d57">개발</span>
+          <span class="t-term">CQRS (Command Query Responsibility Segregation)</span>
+          <span class="t-mean">명령(데이터 변경)과 쿼리(데이터 조회)의 책임을 분리하여 시스템의 확장성과 유지보수성을 높이는 아키텍처 패턴입니다.</span>
+        </li>
+        <li class="termrow">
+          <span class="t-kind" style="background:#c25e00">기획</span>
+          <span class="t-term">GTM (Go-To-Market)</span>
+          <span class="t-mean">새로운 제품이나 서비스를 시장에 성공적으로 출시하고 고객에게 도달하기 위한 전략적 계획을 의미합니다.</span>
+        </li></ul>
+    </article>
+  </section>
+
+  <div class="foot">
+    <span class="fbrand">데일리</span> · 읽을거리 · 2026. 8. 12<br>
+    뉴스 본문은 yozm.wishket · GeekNews(news.hada.io) 등에서 수집·요약한 것입니다. 정확한 내용은 원문을 확인하세요.
+  </div>
+</main>
+
+<div class="modal-overlay" id="news-modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" type="button" aria-label="닫기">✕</button>
+    <div class="modal-src"></div>
+    <h2 class="modal-title" id="modal-title"></h2>
+    <div class="modal-tools">
+      <button class="np-copy" type="button" data-part="title" aria-label="네이버 제목 복사">
+        <span class="np-ico">📋</span><span>제목</span>
+      </button>
+      <button class="np-copy" type="button" data-part="body" aria-label="네이버 본문 복사">
+        <span class="np-ico">📝</span><span>본문</span>
+      </button>
+    </div>
+    <img class="modal-hero" alt="" hidden>
+    <div class="modal-body"></div>
+    <a class="modal-orig" target="_blank" rel="noopener">원문 사이트에서 보기 ↗</a>
+    <div class="np-toast" role="status" aria-live="polite" hidden>복사됨</div>
+  </div>
+</div>
+<div class="ask-panel" hidden role="dialog" aria-label="기사 질문">
+  <div class="ask-head"><span>이 기사에 질문</span><button class="ask-min-btn" type="button" aria-label="질문창 접기/펴기">▾</button></div>
+  <div class="ask-thread"></div>
+  <div class="ask-foot">
+    <div class="ask-quote" hidden></div>
+    <div class="ask-row">
+      <input class="ask-input" type="text" maxlength="500" autocomplete="off"
+        placeholder="이 기사에서 궁금한 점" aria-label="질문 입력">
+      <button class="ask-send" type="button">질문</button>
+    </div>
+    <div class="ask-count"></div>
+  </div>
+</div>
+<div class="sel-ask" hidden><button class="sel-ask-btn" type="button">🤔 질문</button></div>
+<script id="news-data" type="application/json">[{"title": "Apple Silicon macOS VM에서 llama.cpp LLM 추론 가속하기", "source": "GeekNews", "url": "https://news.hada.io/topic?id=32414", "blurb": "Apple Virtualization.framework의 가상 GPU가 보수적인 Metal 기능을 보고해 llama.cpp가 느린 커널을 선택하던 문제를, 게스트 프로세스 한정 호환성 계층으로 우회해 최대 16.36배 가속함.", "content": [{"t": "p", "text": "Apple Virtualization.framework의 가상 GPU가 보수적인 Metal 기능을 보고하여 llama.cpp가 느린 커널을 선택하던 문제를, 게스트 프로세스에 한정된 호환성 계층으로 우회하여 최대 16.36배 가속했습니다."}, {"t": "p", "text": "이 호환성 계층은 supportsFamily: 응답을 Apple family 9까지 허용하고, 최대 스레드그룹 메모리를 32KB에서 64KB로 높여 SIMD-그룹 축소, 매트릭스, bfloat16 경로를 활성화합니다."}, {"t": "p", "text": "M1 Ultra에서 TinyLlama 1.1B는 프롬프트 처리와 토큰 생성이 각각 11.08배, 16.36배 빨라졌고, Gemma 4 12B는 7.20배, 14.54배, Muse Glimmer 30B는 7.55배, 8.87배 향상되었습니다."}, {"t": "p", "text": "이는 물리 GPU 할당이나 VFIO 패스스루 방식이 아니라, 기존 Apple 가상 GPU 경로의 기능 응답만 변경하는 방식입니다. MLX-LM은 기본 VM에서도 이미 빨라 성능 차이가 거의 없었습니다."}, {"t": "p", "text": "이것은 사설 Metal 구현에 의존하는 실험적인 연구 릴리스로, M1 Ultra와 지정된 Tahoe 환경에서만 검증되었으며, Apple Silicon 세대, macOS 버전, Metal API별 추가 검증이 필요합니다."}, {"t": "h", "text": "macOS VM에서 제한되던 Metal 경로"}, {"t": "p", "text": "Apple Virtualization.framework는 macOS 게스트에 가상 그래픽 장치를 제공합니다. 게스트는 가상화 인식 GPU 드라이버로 Metal 작업을 제출하고, 호스트의 Apple 스택이 물리 GPU에서 실행하는 반가상화 방식입니다."}, {"t": "p", "text": "기본 Tahoe VM의 가상 장치는 대략 Apple family 5, 최대 스레드그룹 메모리 32KB, SIMD-그룹 매트릭스 미지원으로 보고합니다. 이로 인해 llama.cpp가 느린 경로를 사용하게 됩니다."}, {"t": "h", "text": "프로세스 한정 Metal 기능 호환성 계층"}, {"t": "p", "text": "작은 Metal 기능 호환성 계층을 게스트 프로세스와 API 사이에 삽입하여 일부 기능 질의의 반환값만 변경합니다. supportsFamily:에 Apple family 9(1009)까지 지원한다고 응답하고, 최대 스레드그룹 메모리를 32KB에서 64KB로 높여 보고합니다."}, {"t": "p", "text": "테스트한 llama.cpp 빌드는 변경된 응답을 바탕으로 SIMD-그룹 매트릭스, SIMD-그룹 축소, bfloat16 경로를 활성화합니다."}, {"t": "p", "text": "이 작업은 계속 Virtualization.framework 그래픽 경로와 호스트 Apple GPU에서 실행되며, 변경 범위는 dylib를 주입한 게스트 프로세스로 제한됩니다. 물리 GPU 할당, raw PCI·VFIO 패스스루, 커널 변경은 포함하지 않습니다."}], "image": "../images/d0815050da86.png", "comment": "와, Apple Silicon 맥에서 VM 성능 개선이라니, 이건 정말 반가운 소식이네요. 특히 LLM 추론 가속이 최대 16배 이상 빨라졌다는 점이 인상 깊어요. 저처럼 맥으로 개발 환경을 꾸리는 주니어 개발자들에게는 VM 성능이 항상 아쉬웠는데, 이런 최적화 노력이 계속된다는 게 정말 좋습니다. 나중에 저도 맥북을 바꾸면 꼭 한번 테스트해보고 싶네요!"}, {"title": "ICANN, 2026년 10월 루트 KSK 롤오버 대비 위한 지침 발표", "source": "ZDNet Korea", "url": "https://zdnet.co.kr/view/?no=20260812011002", "blurb": "국제인터넷주소관리기구(ICANN)가 2026년 10월 11일로 예정된 루트 존 키 서명 키(Root Zone Key Signing Key, KSK) 롤오버의 잠재적 영향을 이해하는 데 도움이 되도록 업데이트된 지침을 발표했다.", "content": [{"t": "p", "text": "국제인터넷주소관리기구(ICANN)는 2026년 10월 11일로 예정된 루트 존 키 서명 키(KSK) 롤오버의 잠재적 영향을 인터넷 커뮤니티 구성원들이 이해할 수 있도록 업데이트된 지침을 8월 11일 발표했다. 이 가이드인 '루트 KSK 롤오버 시 예상되는 사항'은 도메인 네임 시스템 보안 확장(DNSSEC)을 검증하는 리졸버에 미칠 수 있는 잠재적 영향, 영향을 받는 사용자가 겪을 수 있는 상황, 그리고 리졸버 운영자가 장애를 식별하고 해결하는 방법을 설명한다."}, {"t": "p", "text": "이 인터랙티브 멀티채널 보도자료는 다음 링크에서 확인할 수 있다: https://www.multivu.com/icann/9384251-en-icann-guidance-to-prepare-for-october-2026-root-ksk-rollover"}, {"t": "p", "text": "유엔 6개 공용어와 포르투갈어로 제공되는 이 가이드는 2018년 롤오버 경험을 바탕으로 운영자들이 롤오버 전, 진행 중, 이후에 예상해야 할 사항을 설명한다. 또한 시스템 준비를 위한 권고사항을 제공하고, 자동화된 트러스트 앵커 업데이트를 설명하며, 수동 조치가 필요한 경우를 제시하는 한편 일반적인 운영 관련 질문에 대한 답변도 포함된다."}, {"t": "p", "text": "루트 KSK는 DNSSEC를 통해 도메인 네임 시스템(DNS) 루트 존을 보호하는 암호화 키다. 이 키를 정기적으로 교체하는 것은 인터넷 네이밍 시스템의 장기적인 보안과 복원력을 유지하는 데 도움이 되는 표준 보안 관행이다."}, {"t": "p", "text": "2026년 10월 11일에는 새로운 루트 KSK인 KSK-2024가 루트 존 서명에 사용되는 활성 키로 전환된다."}, {"t": "p", "text": "이번 롤오버는 DNSSEC 검증이 올바르게 구성된 인터넷 사용자와 조직에 미치는 영향을 최소화하도록 설계됐다. DNSSEC 검증 재귀 리졸버를 운영하는 조직, DNS 소프트웨어 공급업체, 수동으로 구성된 트러스트 앵커를 사용하는 운영자는 10월 11일 이전에 시스템이 준비되어 있는지 확인해야 한다."}, {"t": "p", "text": "ICANN은 업데이트된 문서, 자주 묻는 질문(FAQ), 교육용 동영상, 웨비나, 기술 프레젠테이션을 제공하고 네트워크 운영자, 인터넷 서비스 제공업체, 정부 및 기타 이해관계자들과 직접 소통함으로써 기술 커뮤니티를 지원하고 있다."}, {"t": "p", "text": "ICANN의 IANA 서비스 부문 부사장인 킴 데이비스(Kim Davies) PTI 사장은"}], "image": "../images/7720568a89a6.jpg", "comment": "2026년에 또 루트 KSK 롤오버가 예정되어 있군요. 2018년에도 이런 일이 있었는데, 그때는 제가 개발을 시작하기 전이라 잘 몰랐거든요. DNSSEC 검증 리졸버에 영향을 줄 수 있다니, 인터넷 인프라의 핵심적인 부분이라서 그런지 미리 대비하는 게 정말 중요해 보여요. 저는 아직 DNSSEC까지 깊이 있게 다뤄보진 못했지만, 이번 기회에 관련 문서를 찾아보면서 공부해봐야겠습니다."}, {"title": "OpenSSH 10.5/10.5p1", "source": "Hacker News", "url": "https://www.openssh.org/releasenotes.html#10.5", "blurb": "OpenSSH 10.5/10.5p1 릴리스 노트.", "content": [{"t": "h", "text": "OpenSSH 10.5/10.5p1 (2026-08-11)"}, {"t": "p", "text": "OpenSSH 10.5는 2026년 8월 11일에 출시되었습니다. OpenSSH는 100% 완전한 SSH 프로토콜 2.0 구현이며 sftp 클라이언트 및 서버 지원을 포함합니다."}, {"t": "p", "text": "최근 OpenSSH 팀은 수많은 보안 버그 보고서를 받았습니다. 이 중 상당수는 AI 모델 또는 AI 지원을 통해 발견된 것입니다. 많은 AI 보고서가 현실적인 위협 모델의 맥락에서 고려될 때 보안 영향이 없는 것으로 판단되지만, 이러한 보고서는 특히 사람의 분류, 분석, 테스트 사례와 결합될 때, 그리고 제안된 수정 사항이 함께 제공될 때 매우 환영합니다."}, {"t": "p", "text": "AI 도구로 식별된 보안 버그가 나중에 다른 연구원에 의해 독립적으로 발견되는 여러 사례를 목격했습니다. 이는 OSS 프로젝트에 버그를 보고하지 않는 공격자들도 이러한 버그를 발견할 수 있음을 시사합니다. 이를 고려하여 OpenSSH 팀은 당분간 다음 예정된 릴리스까지 버그 수정을 일괄 처리하기보다는 사용자에게 더 빨리 버그 수정을 제공하기 위해 더 자주 릴리스할 예정입니다."}, {"t": "p", "text": "다시 한번, 프로젝트에 대한 지속적인 지원에 대해 OpenSSH 커뮤니티, 특히 코드나 패치를 기여하고, 버그를 보고하고, 스냅샷을 테스트하거나, 프로젝트에 기부한 모든 분들께 감사드립니다. 기부에 대한 자세한 정보는 https://www.openssh.com/donations.html에서 확인할 수 있습니다."}, {"t": "h", "text": "잠재적으로 호환되지 않는 변경 사항"}, {"t": "p", "text": "휴대용 OpenSSH는 이제 NISTP521 곡선 지원을 포함하여 libcrypto의 ECC(타원 곡선 암호화) 지원을 필요로 합니다. ECC는 LibreSSL, OpenSSL, BoringSSL 및 AWS LC를 포함하여 OpenSSH에서 현재 지원하는 모든 libcrypto 구현의 모든 버전의 기본 빌드 구성에 포함되어 있습니다. --without-openssl 빌드 구성은 영향을 받지 않습니다."}, {"t": "h", "text": "OpenSSH 10.4 이후 변경 사항"}, {"t": "p", "text": "이 릴리스에는 여러 보안 수정 사항과 작은 버그 수정 사항이 포함되어 있습니다."}, {"t": "h", "text": "보안"}, {"t": "p", "text": "ssh-agent(1): 에이전트 잠금과 전달된 에이전트를 식별하는 데 사용되는 session-bind@openssh.com 확장 간의 상호 작용을 수정했습니다. 이러한 바인딩 요청은 에이전트가 잠겨 있을 때 거부되었으며, 그 결과 로컬 사용으로만 제한될 의도였던 작업이 원격으로 수행될 수 있었고, PKCS#11 토큰을 추가하고 대상 제한이 적용된 키를 사용할 수 있었습니다. sn0x-sharma가 보고했습니다."}, {"t": "p", "text": "ssh(1): 원격 전달 열기 요청이 서버에 보류 중인 동안 로컬 세션 다중화 소켓을 통해 원격 전달이 추가될 경우 클라이언트에서 잠재적인 realloc use-after-free를 방지합니다. Cognatory의 Brian Mingus가 보고하고 수정했습니다."}], "image": "", "comment": "OpenSSH 10.5 릴리스 소식인데, AI 모델이 보안 버그를 발견하는 데 기여했다는 점이 정말 흥미롭네요. AI가 개발 생산성을 높이는 것을 넘어, 이렇게 보안 취약점을 찾아내는 데도 활용될 수 있다는 게 신기해요. 그리고 보안 업데이트를 더 자주 릴리스하겠다는 결정도 사용자 입장에서 안심이 됩니다. 앞으로는 저도 AI 기반 보안 도구들을 관심 있게 지켜봐야겠어요."}]</script>
+<script src="../assets/site.js?v=f6c4ef09"></script>
+</body></html>
