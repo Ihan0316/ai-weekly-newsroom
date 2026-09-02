@@ -1,0 +1,28 @@
+제목: 🤖 AI 데일리 다이제스트 | 2026. 9. 2 (수)
+
+오늘의 AI·개발 소식 3건 + 정보처리기사 퀴즈 + IT 용어 0개 정리했습니다.
+
+━━━━━━━━━━━━━━━━━━━━
+📰 오늘의 뉴스
+━━━━━━━━━━━━━━━━━━━━
+
+1. iOS용 Firefox에 선택형 광고 차단 기능 도입
+출처: GeekNews
+iOS용 Firefox에 Ad Blocker 를 내장해 다수의 서드파티 광고와 광고 관련 추적기를 로드 전에 차단할 수 있게 됨 Apple의 WebKit Content Blocker 와 EasyList 필터를 사용하며, 별도 확장 없이 Settings &gt; Browsing &gt; Ad Blocker 에서 활성화할 ...
+주요 내용: 차단 방식과 적용 범위 / iOS에 직접 내장한 이유
+🔗 원문 보기: https://news.hada.io/topic?id=33136
+
+2. 리본, 시장을 선도하는 핵심 인프라 포트폴리오 강화
+출처: ZDNet Korea
+[지디넷코리아] 신세대 라우터, 확장된 라우팅과 자동화, 보안, 동기화 역량 제공 플레이노, 텍사스, 2026년 9월 2일 /PRNewswire/ - 실시간 통신 기술과 IP 라우팅, 광 네트워크 솔루션 분야의 글로벌 선도기업 리본 커뮤니케이션즈(Ribbon Communications Inc., 나스닥: RBBN)가 9월 1일, 핵심 인프라 포트폴리오 확대를 발표했다. 이 포트폴리오는 유틸리티 기업들이 점차 복잡해지는 운영
+🔗 원문 보기: https://zdnet.co.kr/view/?no=20260902021002
+
+3. AfterQuery, Y Combinator 역사상 가장 빠른 유니콘 등극, 현재 가치 32억 달러
+출처: TechCrunch
+AI 모델 훈련 스타트업 AfterQuery는 4월에 3억 달러 가치로 3천만 달러 시리즈 A 투자를 발표한 지 5개월 만에 32억 달러 가치로 투자를 유치한 것으로 알려졌다.
+🔗 원문 보기: https://techcrunch.com/2026/09/01/afterquery-reportedly-becomes-y-combinators-fastest-ever-unicorn-now-valued-at-3-2b/
+
+---
+※ 뉴스는 자동 수집·요약본입니다. 정확한 내용은 원문 링크를 확인하세요.
+🌐 전체 보기(뉴스 원문·음성·검색): https://ihan0316.github.io/ai-weekly-newsroom/
+#AI #인공지능 #개발 #IT용어 #정보처리기사 #개발자 #데일리뉴스
