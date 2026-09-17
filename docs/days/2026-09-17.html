@@ -1,0 +1,139 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>데일리 다이제스트 · 2026. 9. 17</title>
+<meta name="description" content="CUDA Rust는 GPU 커널 자체를 Rust로 작성하고 네이티브 PTX로 컴파일하는 두 가지 개발 경로를 제공하며, 스레드와 메모리를 직접 제어하는 SIMT 방식의 cuda-oxide와 데이터 타일링을 지원하는 cutile-rs를 포함합니다.">
+<link rel="canonical" href="https://ihan0316.github.io/ai-weekly-newsroom/days/2026-09-17.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2026. 9. 17 · 데일리 다이제스트">
+<meta property="og:description" content="CUDA Rust는 GPU 커널 자체를 Rust로 작성하고 네이티브 PTX로 컴파일하는 두 가지 개발 경로를 제공하며, 스레드와 메모리를 직접 제어하는 SIMT 방식의 cuda-oxide와 데이터 타일링을 지원하는 cutile-rs를 포함합니다.">
+<meta property="og:url" content="https://ihan0316.github.io/ai-weekly-newsroom/days/2026-09-17.html">
+<meta property="og:image" content="https://ihan0316.github.io/ai-weekly-newsroom/images/39b65feda2fc.png">
+<link rel="stylesheet" href="../assets/site.css?v=f6c4ef09">
+<meta name="site-build" content="fafcbc8d1d" data-src="../build.json">
+<meta name="ask-endpoint" content="https://ai-weekly-newsroom.aijnjj12.workers.dev">
+</head>
+<body>
+<div class="dnav"><a class="backlink" href="../index.html">← 전체 보기</a></div>
+<main class="reader">
+  <div class="kicker">2026. 9. 17 (목) · 데일리 다이제스트</div>
+  <h1 class="dhead">오늘 <em>읽을거리</em></h1>
+  <p class="dsub">뉴스 · 기초상식(정처기) · IT·개발·기획 용어</p>
+  <div class="rule"></div>
+
+  <section class="daystack">
+    <article class="daysec sec-news">
+      <div class="secnum">01</div>
+      <span class="seclabel">오늘의 뉴스</span>
+      <ul class="newslist">
+        <li>
+          <button class="newsitem has-thumb" data-idx="0" type="button">
+            <div class="ni-text">
+              <span class="ni-src">GeekNews</span>
+              <h3 class="ni-title">NVIDIA, Rust 네이티브 GPU 프로그래밍 지원 발표</h3>
+              <p class="ni-blurb">CUDA Rust는 GPU 커널 자체를 Rust로 작성하고 네이티브 PTX로 컴파일하는 두 가지 개발 경로를 제공하며, 스레드와 메모리를 직접 제어하는 SIMT 방식의 cuda-oxide와 데이터 타일링을 지원하는 cutile-rs를 포함합니다.</p>
+              <span class="ni-open">원문 보기 →</span>
+            </div>
+            <img class="ni-thumb" src="../images/39b65feda2fc.png" alt="" loading="lazy" onerror="this.remove()">
+          </button>
+        </li>
+        <li>
+          <button class="newsitem has-thumb" data-idx="1" type="button">
+            <div class="ni-text">
+              <span class="ni-src">AITimes</span>
+              <h3 class="ni-title">메타, 자체 AI 칩 본격 배치...비용·전력 절감 속도</h3>
+              <p class="ni-blurb">메타가 자체 설계한 AI 칩 &#x27;MTIA 450&#x27;을 데이터센터에 본격적으로 배치하며 AI 인프라 비용과 전력 소비 절감에 나섰고, 4세대 칩 &#x27;MTIA 500&#x27;도 2027년 말까지 공급할 계획입니다.</p>
+              <span class="ni-open">원문 보기 →</span>
+            </div>
+            <img class="ni-thumb" src="../images/b48cc88bb1d4.jpg" alt="" loading="lazy" onerror="this.remove()">
+          </button>
+        </li>
+        <li>
+          <button class="newsitem has-thumb" data-idx="2" type="button">
+            <div class="ni-text">
+              <span class="ni-src">TechCrunch</span>
+              <h3 class="ni-title">Pulley, Carta의 경쟁사, 사업 종료</h3>
+              <p class="ni-blurb">General Catalyst, Stripe, Founders Fund의 지원을 받던 캡 테이블 관리 플랫폼 Pulley가 12월에 사업을 종료한다고 발표했습니다.</p>
+              <span class="ni-open">원문 보기 →</span>
+            </div>
+            <img class="ni-thumb" src="../images/553a38183ddf.jpg" alt="" loading="lazy" onerror="this.remove()">
+          </button>
+        </li></ul>
+    </article>
+
+    <article class="daysec sec-quiz">
+      <div class="secnum">02</div>
+      <span class="seclabel">기초상식 · 정처기</span>
+      
+      <div class="quiz" data-answer="2">
+        <div class="sectag">#데이터베이스</div>
+        <p class="q-question">데이터베이스 시스템에서 트랜잭션의 특성 중, 모든 트랜잭션이 동시에 실행되더라도 각각의 트랜잭션이 독립적으로 실행되는 것처럼 보이는 특성은 무엇인가?</p>
+        <ol class="qopts"><li class="qopt" data-i="0"><span class="ql">①</span><span class="qtext">원자성 (Atomicity)</span><span class="qmark"></span></li><li class="qopt" data-i="1"><span class="ql">②</span><span class="qtext">일관성 (Consistency)</span><span class="qmark"></span></li><li class="qopt" data-i="2"><span class="ql">③</span><span class="qtext">격리성 (Isolation)</span><span class="qmark"></span></li><li class="qopt" data-i="3"><span class="ql">④</span><span class="qtext">영속성 (Durability)</span><span class="qmark"></span></li></ol>
+        <p class="q-hint">보기를 클릭해 정답을 확인하세요.</p>
+        <div class="q-explain" hidden><b>정답: ③</b><p>격리성(Isolation)은 여러 트랜잭션이 동시에 실행될 때, 각 트랜잭션이 독립적으로 실행되는 것처럼 보이게 하여 다른 트랜잭션의 연산에 영향을 받지 않도록 하는 특성입니다. 이는 동시성 제어를 통해 보장됩니다. 원자성, 일관성, 영속성과 함께 트랜잭션의 ACID 특성을 구성합니다.</p></div>
+      </div>
+    </article>
+
+    <article class="daysec sec-terms">
+      <div class="secnum">03</div>
+      <span class="seclabel">IT · 개발 · 기획 용어</span>
+      <ul class="terms">
+        <li class="termrow">
+          <span class="t-kind" style="background:#0071e3">IT</span>
+          <span class="t-term">API Gateway</span>
+          <span class="t-mean">마이크로서비스 아키텍처에서 클라이언트의 요청을 받아 여러 백엔드 서비스로 라우팅하고, 인증, 로깅, 모니터링 등의 공통 기능을 처리하는 단일 진입점입니다.</span>
+        </li>
+        <li class="termrow">
+          <span class="t-kind" style="background:#1d9d57">개발</span>
+          <span class="t-term">컨테이너 오케스트레이션</span>
+          <span class="t-mean">도커와 같은 컨테이너화된 애플리케이션의 배포, 관리, 스케일링, 네트워킹 등을 자동화하는 기술입니다.</span>
+        </li>
+        <li class="termrow">
+          <span class="t-kind" style="background:#c25e00">기획</span>
+          <span class="t-term">유저 스토리 맵</span>
+          <span class="t-mean">사용자 여정을 시각화하여 제품의 기능과 사용자 요구사항을 이해하고, 개발 우선순위를 정하는 데 활용되는 기획 도구입니다.</span>
+        </li></ul>
+    </article>
+  </section>
+
+  <div class="foot">
+    <span class="fbrand">데일리</span> · 읽을거리 · 2026. 9. 17<br>
+    뉴스 본문은 yozm.wishket · GeekNews(news.hada.io) 등에서 수집·요약한 것입니다. 정확한 내용은 원문을 확인하세요.
+  </div>
+</main>
+
+<div class="modal-overlay" id="news-modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" type="button" aria-label="닫기">✕</button>
+    <div class="modal-src"></div>
+    <h2 class="modal-title" id="modal-title"></h2>
+    <div class="modal-tools">
+      <button class="np-copy" type="button" data-part="title" aria-label="네이버 제목 복사">
+        <span class="np-ico">📋</span><span>제목</span>
+      </button>
+      <button class="np-copy" type="button" data-part="body" aria-label="네이버 본문 복사">
+        <span class="np-ico">📝</span><span>본문</span>
+      </button>
+    </div>
+    <img class="modal-hero" alt="" hidden>
+    <div class="modal-body"></div>
+    <a class="modal-orig" target="_blank" rel="noopener">원문 사이트에서 보기 ↗</a>
+    <div class="np-toast" role="status" aria-live="polite" hidden>복사됨</div>
+  </div>
+</div>
+<div class="ask-panel" hidden role="dialog" aria-label="기사 질문">
+  <div class="ask-head"><span>이 기사에 질문</span><button class="ask-min-btn" type="button" aria-label="질문창 접기/펴기">▾</button></div>
+  <div class="ask-thread"></div>
+  <div class="ask-foot">
+    <div class="ask-quote" hidden></div>
+    <div class="ask-row">
+      <input class="ask-input" type="text" maxlength="500" autocomplete="off"
+        placeholder="이 기사에서 궁금한 점" aria-label="질문 입력">
+      <button class="ask-send" type="button">질문</button>
+    </div>
+    <div class="ask-count"></div>
+  </div>
+</div>
+<div class="sel-ask" hidden><button class="sel-ask-btn" type="button">🤔 질문</button></div>
+<script id="news-data" type="application/json">[{"title": "NVIDIA, Rust 네이티브 GPU 프로그래밍 지원 발표", "source": "GeekNews", "url": "https://news.hada.io/topic?id=33815", "blurb": "CUDA Rust는 GPU 커널 자체를 Rust로 작성하고 네이티브 PTX로 컴파일하는 두 가지 개발 경로를 제공하며, 스레드와 메모리를 직접 제어하는 SIMT 방식의 cuda-oxide와 데이터 타일링을 지원하는 cutile-rs를 포함합니다.", "content": [{"t": "p", "text": "CUDA Rust는 다른 언어로 작성된 커널을 호출하는 래퍼를 넘어, GPU 커널 자체를 Rust로 작성하고 네이티브 PTX로 컴파일하는 두 가지 개발 경로를 제공합니다."}, {"t": "p", "text": "cuda-oxide는 스레드와 메모리를 직접 제어하는 SIMT 방식을 사용하며, cutile-rs는 데이터 타일 단위로 계산을 작성하고 실제 스레드 배치는 컴파일러에 맡기는 방식입니다."}, {"t": "p", "text": "NVIDIA는 먼저 Tile 방식을 선택하고, 아키텍처별 제어나 직접적인 메모리 및 스레드 관리가 필요할 때 SIMT를 사용할 것을 권장합니다."}, {"t": "p", "text": "두 경로 모두 Rust의 빌림과 소유권 기능을 활용하여 입력과 출력 버퍼가 동일한 메모리를 잘못 참조하는 상황을 컴파일 시점에 차단합니다. 다만, SIMT의 공유 메모리 사용에는 현재 unsafe 키워드가 필요합니다."}, {"t": "p", "text": "두 프로젝트 모두 프로덕션용으로 준비되지 않은 초기 단계입니다. cuda-oxide는 초기 알파 버전이며, cutile-rs는 외부 프로젝트에서 사용 중이지만 기능이 불완전하고 API도 변경될 예정입니다."}, {"t": "h", "text": "Rust에서 커널까지 작성하는 CUDA"}, {"t": "p", "text": "추론 엔진, 서빙 인프라, 드라이버, 에이전트 런타임 등 AI 시스템 계층에서 Rust 사용이 증가하고 있습니다. 이는 성능을 유지하면서도 다양한 종류의 버그를 컴파일 시점에 잡을 수 있기 때문입니다."}, {"t": "p", "text": "NVIDIA 또한 Nova Linux 드라이버를 Rust로 작성하고, NVIDIA Dynamo를 Rust 코어 위에 구축했으며, NVTX에 Rust 바인딩을 제공하고 있습니다."}, {"t": "p", "text": "기존에는 Rust에서 GPU 커널을 실행하더라도 커널 자체는 다른 언어로 작성해야 하는 경우가 많았습니다. CUDA Rust는 커널 자체를 Rust로 작성하고 PTX로 네이티브 컴파일하는 경로를 제공합니다."}, {"t": "p", "text": "NVIDIA는 2026년 9월 Rust 네이티브 GPU 프로그래밍에 대한 투자를 발표했으며, 2027년 이후에도 CUDA Rust를 발전시킬 계획입니다. CUDA C++와 CUDA Python은 이미 성숙한 엔터프라이즈급 도구 체인이지만, CUDA Rust는 아직 성숙도를 높여가는 단계입니다."}, {"t": "h", "text": "SIMT와 Tile의 선택 기준"}, {"t": "p", "text": "SIMT 방식에서는 스레드 하나가 수행할 작업을 작성한 뒤 수천 개의 스레드를 실행합니다. 이는 CUDA C++와 numba-cuda에서 사용하는 모델입니다."}], "image": "../images/39b65feda2fc.png", "comment": "와, 러스트가 GPU 프로그래밍까지 확장된다니 정말 놀랍네요! 개인적으로 러스트의 안정성을 좋아하는데, GPU 커널에서도 빌림과 소유권 개념을 활용해서 메모리 오류를 컴파일 시점에 막아준다는 점이 개발자 입장에서 엄청난 장점 같아요. 아직 초기 단계라고 하니, 앞으로 어떻게 발전할지 꾸준히 지켜봐야겠어요!"}, {"title": "메타, 자체 AI 칩 본격 배치...비용·전력 절감 속도", "source": "AITimes", "url": "https://www.aitimes.com/news/articleView.html?idxno=215334", "blurb": "메타가 자체 설계한 AI 칩 'MTIA 450'을 데이터센터에 본격적으로 배치하며 AI 인프라 비용과 전력 소비 절감에 나섰고, 4세대 칩 'MTIA 500'도 2027년 말까지 공급할 계획입니다.", "content": [{"t": "p", "text": "메타가 자체 설계한 AI 칩을 데이터센터에 본격적으로 배치하며 AI 인프라 비용과 전력 소비 절감에 나선다."}, {"t": "p", "text": "15일(현지시간) 블룸버그에 따르면, 메타는 3세대 자체 AI 칩인 ‘MTIA 450(코드명 아르케)’을 테스트하고 있으며, 내년 상반기부터 데이터센터에 배치할 계획이다."}, {"t": "p", "text": "4세대 칩 ‘MTIA 500(코드명 아스트리드)’도 한 달 뒤 설계를 마무리하고 2027년 말까지 데이터센터에 공급할 예정이다."}, {"t": "p", "text": "메타의 자체 칩 개발은 2023년부터 시작됐다. 브로드컴과 설계를 협력하고 대만 TSMC에 생산을 맡기는 방식으로 자체 칩을 개발해 왔다. AI 모델 구동에 필요한 추론용 칩을 직접 설계해 엔비디아 등 외부 공급업체에 대한 의존도를 낮추고, 와트당·달러당 처리 성능을 높이겠다는 전략이다."}, {"t": "p", "text": "자체 실리콘 프로그램을 총괄하는 이준 송 엔지니어링 부사장은 각 세대가 기술적 위험을 조금씩 감수하면서 더 나은 성능을 제공하도록 설계되고 있다며, 특히 전력과 비용 대비 성능 향상에 초점을 맞추고 있다고 설명했다."}, {"t": "p", "text": "실제 성능 검증도 진행 중이다. TSMC에서 생산된 MTIA 450 시제품 12개가 지난 9월 1일 메타에 도착했으며, 테스트 결과는 사전에 진행한 시뮬레이션과 비교해 성능 차이가 2~3% 수준에 그쳤다. 칩을 받은 첫날부터 자체 AI 모델뿐 아니라 딥시크와 알리바바의 AI 모델도 구동하는 데 성공했다고 밝혔다."}, {"t": "p", "text": "앞으로 12개월 동안 1기가와트(GW) 이상의 자체 AI 칩을 데이터센터에 투입할 계획이다. AI 모델 추론 수요가 계속 증가할 경우 이후 배치 규모를 더 확대한다는 방침이다. 특히 메타 슈퍼인텔리전스 랩스(MSL)가 차세대 AI 모델의 요구사항을 칩 설계에 반영해 추론 효율을 높이고 있다."}, {"t": "p", "text": "메타는 당초 AI 모델의 학습과 추론을 모두 처리하는 ‘올림푸스’ 칩도 개발할 계획이었지만, 비용 문제 등을 이유로 해당 프로젝트를 취소하고 추론용 칩에 집중하기로 했다. 대규모 데이터센터에서 수GW 규모의 연산 능력을 운용하게 되면 칩 가격이 핵심 요소가 되기 때문이다."}, {"t": "p", "text": "현재 MTIA 계열 칩은 초저지연 추론보다는 범용적인 AI 모델 추론을 위한 주력 엔진 역할에 초점을 맞춘다. 아스트리드 이후에는 처리 속도와 처리량을 높이는 방향으로 후속 칩을 개발하고 광섬유 기술도 활용해 성능을 개선할 계획이다."}], "image": "../images/b48cc88bb1d4.jpg", "comment": "메타가 자체 AI 칩을 만들어서 데이터센터에 직접 배치한다는 소식은 정말 흥미롭네요. 엔비디아 같은 외부 의존도를 줄이고 비용이랑 전력을 절감하려는 노력이 대단해 보여요. 저도 나중에 이런 대규모 인프라를 다루는 개발자가 된다면, 하드웨어 최적화가 얼마나 중요한지 직접 경험해보고 싶어요."}, {"title": "Pulley, Carta의 경쟁사, 사업 종료", "source": "TechCrunch", "url": "https://techcrunch.com/2026/09/16/pulley-a-carta-rival-is-shutting-down/", "blurb": "General Catalyst, Stripe, Founders Fund의 지원을 받던 캡 테이블 관리 플랫폼 Pulley가 12월에 사업을 종료한다고 발표했습니다.", "content": [{"t": "p", "text": "캡 테이블 관리 플랫폼 Pulley는 이번 주 웹사이트를 통해 12월 8일을 마지막으로 운영 및 서비스를 중단한다고 발표했습니다. 놀랍게도, Pulley는 경쟁사인 Carta와 제휴하여 고객을 인계하고 있으며, 잠재 고객을 Carta로 리디렉션하고 있습니다."}, {"t": "p", "text": "연쇄 창업가이자 전 마이크로소프트 직원인 Yin Wu는 2020년에 Pulley를 설립했으며, General Catalyst, Stripe, Founders Fund를 포함한 최고 투자자들로부터 5천만 달러 이상을 유치했습니다."}, {"t": "p", "text": "Pulley는 폐쇄 이유를 밝히지 않았습니다(우리는 Wu에게 의견을 요청했지만 즉시 응답하지 않았습니다). 그러나 한 전직 직원은 온라인에서 Pulley가 Carta와 경쟁하기보다는 스프레드시트와 경쟁하고 있었다고 추측했습니다. 그리고 요즘 스타트업들은 AI를 사용하여 스프레드시트를 쉽게 유지, 개선 및 관리할 수 있습니다."}, {"t": "p", "text": "LinkedIn에 게시된 성명에서 Wu는 팀과 후원자들에게 감사를 표하며, “이것은 한 장의 끝이지만, 저와 많은 강력한 팀원들은 조용히 사라질 의도가 없습니다”라고 썼습니다."}, {"t": "p", "text": "그녀는 이어서 “큰 문제를 해결하기에 이보다 더 좋은 시기는 없었습니다. 수년 동안 우리를 지원해 주신 모든 분들께 다시 한번 감사드립니다”라고 말했습니다."}], "image": "../images/553a38183ddf.jpg", "comment": "Pulley가 사업을 종료하고 심지어 경쟁사인 Carta로 고객을 넘긴다는 소식은 스타트업 생태계의 현실을 보여주는 것 같아요. 아무리 좋은 투자와 아이디어가 있어도 시장에서 경쟁 우위를 확보하기가 정말 어렵다는 걸 다시 한번 느끼게 되네요. 저도 나중에 창업을 꿈꾼다면 이런 사례들을 보면서 많이 배워야겠어요."}]</script>
+<script src="../assets/site.js?v=f6c4ef09"></script>
+</body></html>
