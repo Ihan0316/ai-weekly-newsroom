@@ -63,6 +63,12 @@ img{max-width:100%;}
 .nav .spacer{flex:1;}
 .nav .pill{font-family:var(--mono); font-size:11px; letter-spacing:.02em; color:var(--ink-4);
   border:1px solid var(--line); border-radius:980px; padding:4px 11px;}
+/* 다크/라이트 전환 (nav·상세 상단). 아이콘: 라이트일 때 달, 다크일 때 해 */
+.theme-btn{flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; padding:0;
+  border:1px solid var(--line); border-radius:50%; background:transparent; color:var(--ink-3); cursor:pointer;
+  transition:background .2s, color .2s;}
+.theme-btn:hover{background:var(--bg-sub); color:var(--ink);}
+.theme-btn .i-sun{display:none;}
 
 .wrap{max-width:var(--maxw); margin:0 auto; padding:0 22px;}
 
@@ -150,7 +156,7 @@ mark{background:var(--mark); color:inherit; border-radius:3px; padding:0 1px;}
    DETAIL (reader)
    =================================================================== */
 .dnav{max-width:var(--maxw); margin:0 auto; padding:18px 22px 0; display:flex; align-items:center; justify-content:space-between; gap:12px;}
-.dn-mini{display:flex; gap:2px;}
+.dn-mini{display:flex; gap:2px; margin-left:auto;}   /* 전환 버튼 옆 오른쪽에 붙임 */
 .dn-mini a{font-size:14px; padding:7px 11px; border-radius:980px; white-space:nowrap;}
 .dn-mini a:hover{background:var(--bg-sub); text-decoration:none;}
 .backlink{font-size:15px; color:var(--accent); display:inline-flex; align-items:center; gap:5px; padding:8px 2px; margin:-4px 0;}
@@ -394,8 +400,8 @@ body.modal-open .ask-panel{animation:popIn .28s both;}
 }
 /* 터치 기기: 작은 아이콘 버튼에 44px 히트존 확보 (시각 크기는 유지) */
 @media(pointer:coarse){
-  .search-clear{position:relative;}
-  .modal-close::before,.search-clear::before{
+  .search-clear,.theme-btn{position:relative;}
+  .modal-close::before,.search-clear::before,.theme-btn::before{
     content:""; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
     width:44px; height:44px;}
 }
@@ -407,9 +413,14 @@ body.modal-open .ask-panel{animation:popIn .28s both;}
 /* ===================================================================
    다크 모드 — Apple 다크 톤: 완전 검정 배경, #1d1d1f 섹션, #2c2c2e 안쪽 표면,
    본문 #f5f5f7 · 링크 #2997ff · 시스템 그린/오렌지/레드. 작은 글씨까지 WCAG AA(4.5:1) 확인.
+   기본은 기기 설정. 전환 버튼으로 고르면 <html data-theme="light|dark"> 가 우선한다.
+   아래 @media 블록과 맨 끝 '직접 고른 다크' 블록은 선택자만 다르고 내용이 같아야 함(테스트가 비교).
+   :where() 는 컴포넌트 규칙의 우선순위를 기존과 같게 유지하려는 것.
    =================================================================== */
+:root[data-theme="light"]{color-scheme:light;}
+:root[data-theme="dark"]{color-scheme:dark;}
 @media (prefers-color-scheme: dark){
-  :root{
+  :root:not([data-theme="light"]){
     --bg:#000000; --bg-sub:#1d1d1f; --surface:#1d1d1f; --surface-2:#2c2c2e; --fill:#2c2c2e;
     --ink:#f5f5f7; --ink-2:#d2d2d7; --ink-3:#a1a1a6; --ink-4:#98989d;
     --line:#424245; --line-soft:#2c2c2e;
@@ -420,11 +431,36 @@ body.modal-open .ask-panel{animation:popIn .28s both;}
     --ok-bg:rgba(48,209,88,.16); --ok-ink:#30d158;
     --bad-bg:rgba(255,69,58,.14); --bad-ink:#ff7b72; --bad-line:#ff453a;
   }
-  .card:hover{box-shadow:0 12px 32px rgba(0,0,0,.6);}
-  .modal{border:1px solid var(--line-soft); box-shadow:0 30px 80px rgba(0,0,0,.7);}
-  .ask-panel{box-shadow:0 22px 60px rgba(0,0,0,.7);}
-  .modal-close:hover,.ask-min-btn:hover{background:var(--line);}
-  .update-toast{background:rgba(44,44,46,.94);}
+  :where(:root:not([data-theme="light"])) .card:hover{box-shadow:0 12px 32px rgba(0,0,0,.6);}
+  :where(:root:not([data-theme="light"])) .modal{border:1px solid var(--line-soft); box-shadow:0 30px 80px rgba(0,0,0,.7);}
+  :where(:root:not([data-theme="light"])) .ask-panel{box-shadow:0 22px 60px rgba(0,0,0,.7);}
+  :where(:root:not([data-theme="light"])) .modal-close:hover,:where(:root:not([data-theme="light"])) .ask-min-btn:hover{background:var(--line);}
+  :where(:root:not([data-theme="light"])) .update-toast{background:rgba(44,44,46,.94);}
   /* 흰 바탕 og 이미지의 눈부심 완화 */
-  .card .thumb img,.ni-thumb,.sr-thumb,.modal-hero{filter:brightness(.9);}
+  :where(:root:not([data-theme="light"])) .card .thumb img,:where(:root:not([data-theme="light"])) .ni-thumb,
+  :where(:root:not([data-theme="light"])) .sr-thumb,:where(:root:not([data-theme="light"])) .modal-hero{filter:brightness(.9);}
+  :where(:root:not([data-theme="light"])) .theme-btn .i-moon{display:none;}
+  :where(:root:not([data-theme="light"])) .theme-btn .i-sun{display:block;}
 }
+/* 직접 고른 다크 — 위 @media 블록과 같은 내용 유지 */
+:root[data-theme="dark"]{
+  --bg:#000000; --bg-sub:#1d1d1f; --surface:#1d1d1f; --surface-2:#2c2c2e; --fill:#2c2c2e;
+  --ink:#f5f5f7; --ink-2:#d2d2d7; --ink-3:#a1a1a6; --ink-4:#98989d;
+  --line:#424245; --line-soft:#2c2c2e;
+  --accent:#2997ff; --accent-2:#47a6ff; --accent-fill:#0071e3; --accent-fill-2:#0077ed;
+  --green:#30d158; --orange:#ff9f0a;
+  --nav-bg:rgba(22,22,23,.78); --overlay:rgba(0,0,0,.62);
+  --mark:rgba(255,214,10,.30); --select:rgba(41,151,255,.38);
+  --ok-bg:rgba(48,209,88,.16); --ok-ink:#30d158;
+  --bad-bg:rgba(255,69,58,.14); --bad-ink:#ff7b72; --bad-line:#ff453a;
+}
+:where(:root[data-theme="dark"]) .card:hover{box-shadow:0 12px 32px rgba(0,0,0,.6);}
+:where(:root[data-theme="dark"]) .modal{border:1px solid var(--line-soft); box-shadow:0 30px 80px rgba(0,0,0,.7);}
+:where(:root[data-theme="dark"]) .ask-panel{box-shadow:0 22px 60px rgba(0,0,0,.7);}
+:where(:root[data-theme="dark"]) .modal-close:hover,:where(:root[data-theme="dark"]) .ask-min-btn:hover{background:var(--line);}
+:where(:root[data-theme="dark"]) .update-toast{background:rgba(44,44,46,.94);}
+/* 흰 바탕 og 이미지의 눈부심 완화 */
+:where(:root[data-theme="dark"]) .card .thumb img,:where(:root[data-theme="dark"]) .ni-thumb,
+:where(:root[data-theme="dark"]) .sr-thumb,:where(:root[data-theme="dark"]) .modal-hero{filter:brightness(.9);}
+:where(:root[data-theme="dark"]) .theme-btn .i-moon{display:none;}
+:where(:root[data-theme="dark"]) .theme-btn .i-sun{display:block;}
