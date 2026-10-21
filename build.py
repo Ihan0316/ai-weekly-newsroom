@@ -59,7 +59,6 @@ def news_payload(news):
             "blurb": it.get("blurb_kr", ""),
             "content": it.get("content", []) or [],
             "image": it.get("image", ""),
-            "comment": it.get("comment_kr", ""),   # 화면 미표시, 복사 시에만 사용
         })
     js = json.dumps(items, ensure_ascii=False)
     return js.replace("</", "<\\/")
@@ -102,18 +101,9 @@ MODAL = '''
     <button class="modal-close" type="button" aria-label="닫기">✕</button>
     <div class="modal-src"></div>
     <h2 class="modal-title" id="modal-title"></h2>
-    <div class="modal-tools">
-      <button class="np-copy" type="button" data-part="title" aria-label="블로그용 제목 복사" title="블로그에 붙여넣기 좋은 형식으로 제목 복사">
-        <span class="np-ico">📋</span><span>제목 복사</span>
-      </button>
-      <button class="np-copy" type="button" data-part="body" aria-label="블로그용 본문 복사" title="블로그에 붙여넣기 좋은 형식으로 본문 복사">
-        <span class="np-ico">📝</span><span>본문 복사</span>
-      </button>
-    </div>
     <img class="modal-hero" alt="" hidden>
     <div class="modal-body"></div>
     <a class="modal-orig" target="_blank" rel="noopener">원문 사이트에서 보기 ↗</a>
-    <div class="np-toast" role="status" aria-live="polite" hidden>복사됨</div>
   </div>
 </div>
 <div class="ask-panel" hidden role="dialog" aria-label="기사 질문">
@@ -172,6 +162,9 @@ def render_day(d, back_href=None, asset_prefix="../", ver="", build_v="", canoni
     og_img = f'<meta property="og:image" content="{esc(og_image)}">' if og_image else ''
     return f'''<!doctype html><html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <title>데일리 다이제스트 · {esc(d["date_label"])}</title>
 <meta name="description" content="{desc}">
 {canon}
