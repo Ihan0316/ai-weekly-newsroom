@@ -56,19 +56,7 @@
           "t": "p",
           "text": "PM: Polymarket과 Kalshi 예측 데이터, PORT: 포트폴리오 위험과 섹터 노출, NOTE: 메모장, ALRT: 가격 알림, CG: 미국 의회 거래 공개 자료, TBO: TheBuildout 인프라 인텔리전스, CHAT: Gloomberb Cloud 채팅. 데스크톱 앱과 TUI로 제공되며, TUI는 'curl -fsSL gloomberb.com/install | bash'로 설치합니다. 소스 코드는 GitHub 저장소에 공개되어 있으며, 문서와 변경 기록도 확인할 수 있습니다."
         }
-      ],
-      "comment_kr": "오픈소스 금융 터미널이라니, 개발자로서 정말 흥미로운데요! 키보드 중심으로 빠르게 정보를 탐색하고 확장성까지 좋다니, 실무에서 쓰는 분들은 정말 편할 것 같아요. 저도 나중에 금융 데이터 분석 쪽에 관심 있으면 한 번 써보고 싶네요.",
-      "title_blog": "Gloomberb: 오픈소스 금융 터미널, 주식 정보 끝판왕!",
-      "tags_kr": [
-        "Gloomberb",
-        "오픈소스금융터미널",
-        "주식정보",
-        "주식차트",
-        "금융투자",
-        "증권사연결",
-        "AI스크리닝"
-      ],
-      "hook_kr": "복잡한 주식 정보, 이제 헤매지 마세요! Gloomberb 하나면 모든 금융 데이터를 한눈에 확인하고 빠르게 투자 결정을 내릴 수 있습니다."
+      ]
     },
     {
       "title_kr": "KAIST, \"반도체 PDN 데이터 695분의 1로 압축…저장용량 해결\"",
@@ -124,38 +112,14 @@
           "t": "p",
           "text": "이를 통해 방대한 임피던스 값을 하나씩 저장하는 대신 전체 응답을 구성하는 대표적인 공간 및 주파수 패턴을 압축해 저장할 수 있도록 했다."
         }
-      ],
-      "comment_kr": "반도체 PDN 데이터 압축 기술이라니, 정말 대단하네요. 695분의 1로 줄일 수 있다니 저장 용량 문제 해결에 크게 기여할 것 같아요. 이런 기초 기술이 발전해야 AI나 고성능 컴퓨팅도 더 빠르게 발전할 수 있겠죠? 저도 텐서 기반 표현 학습이 뭔지 좀 더 찾아봐야겠어요.",
-      "title_blog": "KAIST, 반도체 PDN 데이터 695배 압축 기술 개발!",
-      "tags_kr": [
-        "KAIST",
-        "반도체",
-        "PDN압축기술",
-        "데이터저장",
-        "첨단반도체패키지",
-        "전원공급망",
-        "텐서학습"
-      ],
-      "hook_kr": "반도체 데이터 저장 용량 문제, 드디어 해결될까요? KAIST가 개발한 혁신적인 압축 기술로 미래 반도체 산업의 새로운 장이 열립니다."
+      ]
     },
     {
       "title_kr": "조직은 AI를 어떻게 활용하는가: ChatGPT의 증거 [pdf]",
       "source": "Hacker News",
       "url": "https://cdn.openai.com/pdf/how-organizations-use-chatgpt.pdf",
       "blurb_kr": "Article URL: https://cdn.openai.com/pdf/how-organizations-use-chatgpt.pdf Comments URL: https://news.ycombinator.com/item?id=49290768 Points: 45 # Comments: 21",
-      "content": [],
-      "comment_kr": "조직에서 ChatGPT를 어떻게 활용하는지에 대한 연구 결과라니 궁금하네요. 저도 개발 학습에 ChatGPT 도움을 많이 받는데, 실제 기업에서는 어떤 방식으로 생산성을 높이고 있는지 궁금합니다. PDF를 읽어보면서 제가 생각하지 못했던 새로운 활용법들을 배울 수 있을 것 같아요.",
-      "title_blog": "ChatGPT: 기업들은 AI를 어떻게 활용할까? 최신 보고서!",
-      "tags_kr": [
-        "ChatGPT",
-        "AI활용",
-        "기업AI",
-        "조직AI",
-        "인공지능보고서",
-        "오픈AI",
-        "업무자동화"
-      ],
-      "hook_kr": "우리 회사도 AI를 도입해야 할까요? ChatGPT를 통해 실제 기업들이 AI를 어떻게 사용하고 있는지, 그 최신 트렌드를 지금 바로 확인해보세요!"
+      "content": []
     }
   ],
   "quiz": {

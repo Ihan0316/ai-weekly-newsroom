@@ -7,8 +7,7 @@
       "source": "GeekNews",
       "url": "https://news.hada.io/topic?id=31242",
       "blurb_kr": "Go로 재작성된 TypeScript가 정식으로 공개됐습니다.",
-      "content": [],
-      "comment_kr": "TypeScript가 Go로 재작성되었다는 소식은 정말 흥미롭네요! 기존에 자바스크립트 기반이었던 TypeScript 컴파일러가 Go로 바뀌면 성능이나 안정성 면에서 어떤 변화가 있을지 궁금해요. Go를 배우고 있어서 혹시 내부 동작 방식을 살펴보는 데 도움이 될까 하는 기대도 살짝 해봅니다."
+      "content": []
     },
     {
       "title_kr": "30 Papers - 일리야 서츠케버 추천 AI 핵심 논문 목록 요약",
@@ -60,8 +59,7 @@
           "t": "p",
           "text": "The Unreasonable Effectiveness of Recurrent Neural Networks는 문자 단위 RNN으로 텍스트 생성을 실험한 블로그 글로, RNN이 데이터 안의 구조와 패턴을 포착할 수 있음을 보여줍니다. Understanding LSTM Networks는 LSTM의 게이트 구조와 정보 전달 방식을 시각적으로 설명하여 긴 시퀀스에서 정보를 유지하는 원리를 이해하는 데 초점을 둡니다. Recurrent Neural Network Regularization은 LSTM에 dropout을 적용하는 적절한 방법을 제시하여 대형 순환 신경망의 과적합을 줄이는 데 기여했습니다. Order Matters: Sequence to Sequence for Sets는 sequence-to-sequence 모델에서 입력과 출력 순서가 성능에 미치는 영향을 분석하여 순서가 없는 데이터 구조를 모델링하는 방법에 대한 논의를 제공합니다."
         }
-      ],
-      "comment_kr": "일리야 서츠케버가 추천한 AI 핵심 논문 목록이라니, 이건 정말 보물 지도 같아요! 초보 개발자 입장에서 어떤 논문부터 봐야 할지 막막했는데, 이렇게 가이드라인이 제시되니 학습 방향을 잡는 데 큰 도움이 될 것 같아요. 논문뿐만 아니라 해설 글이나 코드 예시도 함께 제공된다니 진입 장벽도 낮춰줄 것 같아서 꼭 한번 살펴봐야겠어요."
+      ]
     },
     {
       "title_kr": "Oracle Always Free 백엔드 구축 기록: 용량 부족, PAYG 전환, 과금 차단",
@@ -117,8 +115,7 @@
           "t": "p",
           "text": "최종 구성 Oracle 오사카 A1 2코어/12GB (월 0원, PAYG 계정) Docker Compose 3컨테이너: Caddy(HTTPS 자동 발급) + NestJS + PostgreSQL 16 도메인은 sslip.io로 연결 과금 방어: 무료 사양만 요청하는 생성 스크립트 + 쿼터 잠금 + 예산 알림"
         }
-      ],
-      "comment_kr": "Oracle Always Free로 백엔드를 구축하는 과정에서 용량 부족이나 PAYG 전환 같은 실제 겪은 문제들을 공유해주셔서 정말 현실적인 도움이 될 것 같아요. 저도 개인 프로젝트를 무료로 운영해보고 싶은데, 막연히 '무료'라고 생각했던 부분에 이렇게 함정이 있을 수 있다는 걸 미리 알게 돼서 감사합니다. 다른 무료/저가 서버들의 현황까지 같이 정리해주셔서 비교해보는 데도 좋네요."
+      ]
     }
   ],
   "quiz": {
