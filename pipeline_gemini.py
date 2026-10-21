@@ -118,10 +118,6 @@ def strip_tags(html, limit):
 FEEDS = [
     {"source": "GeekNews", "url": "https://news.hada.io/rss/news", "kind": "atom",
      "prefix": "https://news.hada.io/topic?id=", "cap": 15, "fresh_days": 2},
-    # 요즘IT: Actions 러너(데이터센터 IP)에서 HTTP 405 차단 — 2026-06-25 이후 게재 0건(2026-10 확인).
-    # 러너에서 다시 도달되면(feeds_check 워크플로우로 확인) 주석 해제.
-    # {"source": "요즘IT", "url": "https://yozm.wishket.com/magazine/feed/", "kind": "rss",
-    #  "prefix": "https://yozm.wishket.com/magazine/detail/", "cap": 10, "fresh_days": None, "body": True},
     {"source": "AITimes", "url": "https://www.aitimes.com/rss/allArticle.xml", "kind": "rss",
      "prefix": "https://www.aitimes.com/", "cap": 10, "fresh_days": 2},
     {"source": "ZDNet Korea", "url": "https://feeds.feedburner.com/zdkorea", "kind": "rss",
@@ -130,6 +126,12 @@ FEEDS = [
      "prefix": None, "cap": 10, "fresh_days": 2},
     {"source": "TechCrunch", "url": "https://techcrunch.com/feed/", "kind": "rss",
      "prefix": None, "cap": 8, "fresh_days": 2},
+]
+# 비활성 피드 — 파이프라인은 읽지 않고 feeds_check 만 함께 검사. 러너에서 다시 수집되면 FEEDS 로 옮긴다.
+DISABLED_FEEDS = [
+    # 요즘IT: Actions 러너(데이터센터 IP)에서 HTTP 405 차단 — 2026-06-25 이후 게재 0건(2026-10 확인).
+    {"source": "요즘IT", "url": "https://yozm.wishket.com/magazine/feed/", "kind": "rss",
+     "prefix": "https://yozm.wishket.com/magazine/detail/", "cap": 10, "fresh_days": None, "body": True},
 ]
 
 def _entry_date(kind, e):

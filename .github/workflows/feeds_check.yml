@@ -22,10 +22,11 @@ jobs:
           today = datetime.date.today().isoformat()
           print("today:", today)
           total = 0
-          for feed in P.FEEDS:
+          for feed in P.FEEDS + P.DISABLED_FEEDS:   # 비활성 피드도 검사 → 복구되면 FEEDS 로 옮김
               cs = P.parse_feed(feed, today)
-              total += len(cs)
+              off = feed in P.DISABLED_FEEDS
+              total += 0 if off else len(cs)
               ex = cs[0]["title"][:50] if cs else "(0건 — 실패/차단?)"
-              print(f"  {len(cs):3}  {feed['source']:14} {ex}")
-          print("합계 후보:", total)
+              print(f"  {len(cs):3}  {feed['source']:14} {ex}" + ("  [비활성]" if off else ""))
+          print("합계 후보(활성 피드):", total)
           PY

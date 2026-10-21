@@ -43,12 +43,14 @@ def optimize(data, ext):
         return data, ext
     try:
         im = Image.open(io.BytesIO(data))
-        if getattr(im, "is_animated", False):
+        # 애니메이션·특수 모드(CMYK, 16비트 I;16 등)는 RGB 변환 시 색·값이 틀어져 원본 유지
+        if getattr(im, "is_animated", False) or im.mode not in ("1", "L", "LA", "P", "RGB", "RGBA"):
             return data, ext
-        alpha = im.mode in ("RGBA", "LA") or (im.mode == "P" and "transparency" in im.info)
+        icc = im.info.get("icc_profile") if im.mode in ("P", "RGB", "RGBA") else None   # Display P3 등 색공간 보존
+        alpha = im.mode in ("RGBA", "LA") or "transparency" in im.info   # tRNS 지정색 투명 포함
         if alpha and (im.width > MAX_W or (ext == "png" and len(data) > PNG_MAX)):
             alpha = im.convert("RGBA").getchannel("A").getextrema()[0] < 255   # 알파 채널이 전부 불투명이면 JPEG 가능
-        big_png =ext == "png" and not alpha and len(data) > PNG_MAX
+        big_png = ext == "png" and not alpha and len(data) > PNG_MAX
         if im.width <= MAX_W and not big_png:
             return data, ext
         im = ImageOps.exif_transpose(im).convert("RGBA" if alpha else "RGB")
@@ -56,9 +58,9 @@ def optimize(data, ext):
             im = im.resize((MAX_W, max(1, round(im.height * MAX_W / im.width))), Image.LANCZOS)
         buf = io.BytesIO()
         if alpha:
-            im.save(buf, "PNG", optimize=True); out = "png"
+            im.save(buf, "PNG", optimize=True, icc_profile=icc); out = "png"
         else:
-            im.save(buf, "JPEG", quality=82, optimize=True, progressive=True); out = "jpg"
+            im.save(buf, "JPEG", quality=82, optimize=True, progressive=True, icc_profile=icc); out = "jpg"
         if buf.tell() < len(data):
             return buf.getvalue(), out
     except Exception:
