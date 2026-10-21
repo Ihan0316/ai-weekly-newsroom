@@ -1,5 +1,5 @@
 /* 데일리 다이제스트 — 공유 인터랙션
-   1) 정처기 퀴즈  2) 뉴스 모달(복사·Q&A)  3) 검색  4) 새 빌드 자동 감지  5) 피드 더보기 */
+   1) 정처기 퀴즈  2) 뉴스 모달(Q&A)  3) 검색  4) 새 빌드 자동 감지  5) 피드 더보기  6) 다크/라이트 전환 */
 (function () {
   /* ---------- 1) 정처기 퀴즈: 클릭 시 정답/오답 ---------- */
   function initQuiz() {
@@ -420,7 +420,41 @@
     refresh();
   }
 
-  function boot() { initQuiz(); initNews(); initSearch(); initUpdateCheck(); initFeed(); }
+  /* ---------- 6) 다크/라이트 전환: 기본은 기기 설정, 버튼으로 고르면 저장 ----------
+     고른 테마가 기기 설정과 같아지면 저장을 지워 다시 기기 설정을 따름.
+     저장 키는 build.py THEME_INIT(페이지 head 에서 먼저 적용)과 같아야 함. */
+  function initTheme() {
+    var btns = Array.prototype.slice.call(document.querySelectorAll('.theme-btn'));
+    if (!btns.length) return;
+    var root = document.documentElement, KEY = 'digest:theme';
+    var mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+    // 모바일 주소창 색(theme-color): 직접 고르면 그 테마 색으로 맞추고, 아니면 원래(media 별) 값
+    var metas = Array.prototype.slice.call(document.querySelectorAll('meta[name="theme-color"]'));
+    var orig = metas.map(function (m) { return m.getAttribute('content'); });
+    var colorOf = {};
+    metas.forEach(function (m, i) { colorOf[/dark/.test(m.getAttribute('media') || '') ? 'dark' : 'light'] = orig[i]; });
+    function sysTheme() { return mq && mq.matches ? 'dark' : 'light'; }
+    function current() { return root.getAttribute('data-theme') || sysTheme(); }
+    function sync() {
+      var t = root.getAttribute('data-theme');
+      btns.forEach(function (b) { b.setAttribute('aria-pressed', current() === 'dark' ? 'true' : 'false'); });
+      metas.forEach(function (m, i) { m.setAttribute('content', t && colorOf[t] ? colorOf[t] : orig[i]); });
+    }
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var next = current() === 'dark' ? 'light' : 'dark';
+        var save = next === sysTheme() ? null : next;
+        if (save) root.setAttribute('data-theme', save); else root.removeAttribute('data-theme');
+        try { if (save) localStorage.setItem(KEY, save); else localStorage.removeItem(KEY); } catch (e) {}
+        sync();
+      });
+    });
+    if (mq && mq.addEventListener) mq.addEventListener('change', sync);
+    else if (mq && mq.addListener) mq.addListener(sync);   // 구형 Safari
+    sync();
+  }
+
+  function boot() { initQuiz(); initNews(); initSearch(); initUpdateCheck(); initFeed(); initTheme(); }
   if (document.readyState !== 'loading') boot();
   else document.addEventListener('DOMContentLoaded', boot);
 })();

@@ -8,7 +8,7 @@
 usage: python build_site.py
 """
 import json, os, glob, re, shutil, hashlib, sys
-from build import render_day, esc
+from build import render_day, esc, THEME_INIT, THEME_BTN
 
 DAYS_DIR = os.path.join("data", "days")
 OUT_DIR = "docs"
@@ -110,6 +110,7 @@ def build_index(days, ver="", build_v=""):
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+{THEME_INIT}
 <title>데일리 · 알아두면 좋은 것들</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{SITE_BASE}">
@@ -138,6 +139,7 @@ def build_index(days, ver="", build_v=""):
   <span class="tag">알아두면 좋은 것들 — 뉴스·정처기·용어</span>
   <span class="spacer"></span>
   <span class="pill">{n} days</span>
+  {THEME_BTN}
 </nav>
 <div class="wrap">
   <section class="masthead">
