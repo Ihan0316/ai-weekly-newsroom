@@ -7,6 +7,7 @@ import io, json, os, shutil, sys, tempfile, unittest, urllib.error
 from unittest import mock
 
 import pipeline_gemini as P
+import build
 import build_site
 import fetch_images as F
 import replace_article as R
@@ -162,6 +163,27 @@ class CleanBlocksTest(unittest.TestCase):
     def test_drops_dangling_headings(self):
         b = [{"t": "h", "text": "h1"}, {"t": "h", "text": "h2"}, {"t": "p", "text": "x" * 50}, {"t": "h", "text": "tail"}]
         self.assertEqual(P.clean_blocks(b), [{"t": "h", "text": "h2"}, {"t": "p", "text": "x" * 50}])
+
+
+class RenderDayTest(unittest.TestCase):
+    def test_past_day_wording_and_day_nav(self):   # 지난 날 페이지에 '오늘'이 남지 않고 이전/다음 이동 제공
+        html = build.render_day(day(), back_href="../index.html", prev_day=("a.html", "2026. 1. 1 (목)"),
+                                next_day=("b.html", "2026. 1. 3 (토)"), latest=False)
+        self.assertIn("이날의 <em>읽을거리</em>", html)
+        self.assertIn('class="daynav"', html)
+        self.assertTrue('href="a.html"' in html and 'href="b.html"' in html)
+
+    def test_latest_day_wording_without_next(self):
+        html = build.render_day(day(), back_href="../index.html", prev_day=("a.html", "x"), latest=True)
+        self.assertIn("오늘 <em>읽을거리</em>", html)
+        self.assertNotIn("dn-next", html)
+
+    def test_quiz_options_are_buttons(self):   # 키보드(Tab/Enter)로 풀 수 있게
+        self.assertEqual(build.render_day(day()).count('<button type="button" class="qopt"'), 4)
+
+    def test_card_meta_lists_other_headlines(self):
+        self.assertEqual(build_site.card_meta(day(news=3)).count("<li>"), 2)
+        self.assertIn('class="cmeta"', build_site.card_meta(day(news=1)))
 
 
 class ValidateDayTest(unittest.TestCase):
