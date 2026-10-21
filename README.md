@@ -1,7 +1,7 @@
 # 데일리 다이제스트 (Daily Digest)
 
-매일 **오늘의 뉴스 + 기초상식(정처기 문제) + IT·개발·기획 용어**를 미니멀 에디토리얼 + 3D 정적 사이트로.
-뉴스는 요즘IT(yozm) · GeekNews(news.hada.io)에서 수집. **PC 없이 매일 자동**으로 갱신·배포된다.
+매일 **오늘의 뉴스 + 기초상식(정처기 문제) + IT·개발·기획 용어**를 미니멀 에디토리얼 정적 사이트로.
+뉴스는 GeekNews · AITimes · ZDNet Korea · Hacker News · TechCrunch RSS/Atom 피드에서 수집. **PC 없이 매일 자동**으로 갱신·배포된다.
 
 🔗 **라이브: https://ihan0316.github.io/ai-weekly-newsroom/**
 
@@ -18,7 +18,7 @@
 data/days/<YYYY-MM-DD>.json   # 하루치 원천 (news[]/quiz/terms)
 build.py                      # render_day(): 하루 상세 HTML
 build_site.py                 # 전체 빌드 → docs/ (index 피드 + 날짜별 + search.json + build.json)
-assets/site.css, site.js      # 공유 디자인·인터랙션(3D 히어로/틸트/모달/검색/Q&A/자동갱신)
+assets/site.css, site.js      # 공유 디자인·인터랙션(모달/검색/Q&A/자동갱신)
 fetch_images.py               # 기사 대표 이미지(og:image) → docs/images (증분)
 attach_content.py             # 크롤 본문(_crawled.json) → day json 주입
 pipeline_gemini.py            # [무인용] 뉴스선별·본문추출·퀴즈/용어를 Gemini로 + 위 스크립트 호출
@@ -36,7 +36,8 @@ GitHub Actions (cron 07:23 KST)
  → github-actions[bot] 커밋 → GitHub Pages 자동 배포
 ```
 - 키: repo secret `GEMINI_API_KEY` (무료). 비용 $0 (Gemini 무료티어·Pages 전부 무료).
-- 데이터센터 IP 차단(yozm 403) 우회: `r.jina.ai` 리더 프록시 폴백.
+- 뉴스 후보는 `pipeline_gemini.py`의 `FEEDS`에서 수집(피드별 실패는 그 소스만 제외). 요즘IT는 러너 IP 차단(405)으로 비활성.
+- 퀴즈 생성이 실패해 사이트에 안 보이는 과거 날은 다음 실행 때 최대 3일씩 자동 보충. Gemini 429/5xx는 점증 대기 후 재시도.
 - 수동 실행: `gh workflow run "Daily digest"` 또는 Actions 탭.
 
 ## 수동 빌드/배포
