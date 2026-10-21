@@ -8,7 +8,7 @@ usage: python build.py <day.json> [out.html]
 """
 import json, sys, html, os
 
-KIND_COLORS = {"IT": "#0071e3", "개발": "#1d9d57", "기획": "#c25e00"}
+KIND_COLORS = {"IT": "#0066cc", "개발": "#15803d", "기획": "#b45309"}   # 흰 글씨 대비 4.5:1 이상
 
 # 기사 Q&A 프록시(Cloudflare Worker 등) 엔드포인트. 비우면 질문 UI 숨김.
 ASK_ENDPOINT = "https://ai-weekly-newsroom.aijnjj12.workers.dev"
@@ -41,7 +41,7 @@ def build_news(news):
               <span class="ni-src">{esc(it.get("source",""))}</span>
               <h3 class="ni-title">{esc(oneline(it["title_kr"]))}</h3>
               {blurb}
-              <span class="ni-open">원문 보기 →</span>
+              <span class="ni-open">본문 읽기 →</span>
             </div>
             {thumb}
           </button>
@@ -67,8 +67,8 @@ def news_payload(news):
 def build_quiz(q):
     letters = "①②③④⑤"
     opts = "".join(
-        f'<li class="qopt" data-i="{i}"><span class="ql">{letters[i]}</span>'
-        f'<span class="qtext">{esc(o)}</span><span class="qmark"></span></li>'
+        f'<li><button type="button" class="qopt" data-i="{i}"><span class="ql">{letters[i]}</span>'
+        f'<span class="qtext">{esc(o)}</span><span class="qmark" aria-hidden="true"></span></button></li>'
         for i, o in enumerate(q["options"])
     )
     cat = esc(q.get("category", "정보처리기사"))
@@ -78,7 +78,8 @@ def build_quiz(q):
         <div class="sectag">#{cat}</div>
         <p class="q-question">{esc(q["question"])}</p>
         <ol class="qopts">{opts}</ol>
-        <p class="q-hint">보기를 클릭해 정답을 확인하세요.</p>
+        <p class="q-hint">보기를 눌러 정답을 확인하세요.</p>
+        <p class="q-live sr-only" aria-live="polite"></p>
         <div class="q-explain" hidden><b>정답: {ans}</b><p>{esc(q["explain_kr"])}</p></div>
       </div>'''
 
@@ -102,11 +103,11 @@ MODAL = '''
     <div class="modal-src"></div>
     <h2 class="modal-title" id="modal-title"></h2>
     <div class="modal-tools">
-      <button class="np-copy" type="button" data-part="title" aria-label="네이버 제목 복사">
-        <span class="np-ico">📋</span><span>제목</span>
+      <button class="np-copy" type="button" data-part="title" aria-label="블로그용 제목 복사" title="블로그에 붙여넣기 좋은 형식으로 제목 복사">
+        <span class="np-ico">📋</span><span>제목 복사</span>
       </button>
-      <button class="np-copy" type="button" data-part="body" aria-label="네이버 본문 복사">
-        <span class="np-ico">📝</span><span>본문</span>
+      <button class="np-copy" type="button" data-part="body" aria-label="블로그용 본문 복사" title="블로그에 붙여넣기 좋은 형식으로 본문 복사">
+        <span class="np-ico">📝</span><span>본문 복사</span>
       </button>
     </div>
     <img class="modal-hero" alt="" hidden>
@@ -139,9 +140,28 @@ def day_desc(d):
         return oneline(news[0]["title_kr"])[:155]
     return "그날의 IT·개발 뉴스, 정보처리기사 기초 문제, IT·개발·기획 용어를 한 장에."
 
-def render_day(d, back_href=None, asset_prefix="../", ver="", build_v="", canonical="", og_image=""):
+def day_nav(prev_day, next_day):
+    """상단 미니(‹ 이전 · 다음 ›) + 하단 카드형 날짜 이동. prev/next = (href, 날짜 라벨) 또는 None."""
+    if not prev_day and not next_day:
+        return "", ""
+    mini, cards = [], []
+    if prev_day:
+        mini.append(f'<a href="{esc(prev_day[0])}" aria-label="이전 날: {esc(prev_day[1])}">‹ 이전 날</a>')
+        cards.append(f'<a class="dn-prev" href="{esc(prev_day[0])}"><span class="dn-dir">← 이전 날</span>'
+                     f'<span class="dn-date">{esc(prev_day[1])}</span></a>')
+    if next_day:
+        mini.append(f'<a href="{esc(next_day[0])}" aria-label="다음 날: {esc(next_day[1])}">다음 날 ›</a>')
+        cards.append(f'<a class="dn-next" href="{esc(next_day[0])}"><span class="dn-dir">다음 날 →</span>'
+                     f'<span class="dn-date">{esc(next_day[1])}</span></a>')
+    return (f'<span class="dn-mini">{"".join(mini)}</span>',
+            f'<nav class="daynav" aria-label="날짜 이동">{"".join(cards)}</nav>')
+
+def render_day(d, back_href=None, asset_prefix="../", ver="", build_v="", canonical="", og_image="",
+               prev_day=None, next_day=None, latest=True):
     a = asset_prefix
-    back = (f'<div class="dnav"><a class="backlink" href="{esc(back_href)}">← 전체 보기</a></div>') if back_href else ''
+    mini_nav, day_nav_html = day_nav(prev_day, next_day)
+    back = (f'<div class="dnav"><a class="backlink" href="{esc(back_href)}">← 전체 보기</a>{mini_nav}</div>') if back_href else ''
+    when = "오늘" if latest else "이날의"   # 지난 날 페이지에 '오늘'이 남지 않게
     wd = d.get("weekday", "")
     label = f'{esc(d["date_label"])}' + (f' ({esc(wd)})' if wd else '')
     news = d.get("news", [])
@@ -168,14 +188,14 @@ def render_day(d, back_href=None, asset_prefix="../", ver="", build_v="", canoni
 {back}
 <main class="reader">
   <div class="kicker">{label} · 데일리 다이제스트</div>
-  <h1 class="dhead">오늘 <em>읽을거리</em></h1>
+  <h1 class="dhead">{when} <em>읽을거리</em></h1>
   <p class="dsub">뉴스 · 기초상식(정처기) · IT·개발·기획 용어</p>
   <div class="rule"></div>
 
   <section class="daystack">
     <article class="daysec sec-news">
       <div class="secnum">01</div>
-      <span class="seclabel">오늘의 뉴스</span>
+      <span class="seclabel">{"오늘의" if latest else "이날의"} 뉴스</span>
       {build_news(news)}
     </article>
 
@@ -191,6 +211,7 @@ def render_day(d, back_href=None, asset_prefix="../", ver="", build_v="", canoni
       {build_terms(d.get("terms", []))}
     </article>
   </section>
+  {day_nav_html}
 
   <div class="foot">
     <span class="fbrand">데일리</span> · 읽을거리 · {esc(d["date_label"])}<br>

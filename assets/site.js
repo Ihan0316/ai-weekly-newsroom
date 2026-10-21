@@ -22,6 +22,9 @@
               correct.querySelector('.qmark').textContent = '✓';
             }
           }
+          quiz.querySelectorAll('.qopt').forEach(function (o) { o.setAttribute('aria-disabled', 'true'); });
+          var live = quiz.querySelector('.q-live');   // 스크린리더에 결과 낭독
+          if (live) live.textContent = i === answer ? '정답입니다.' : '오답입니다. 정답은 ' + (answer + 1) + '번입니다.';
           var ex = quiz.querySelector('.q-explain');
           if (ex) ex.hidden = false;
         });
@@ -151,7 +154,7 @@
       if (selectedText) { askQuote.hidden = false; askQuote.textContent = '“' + selectedText.slice(0, 140) + (selectedText.length > 140 ? '…' : '') + '”'; }
       else { askQuote.hidden = true; askQuote.textContent = ''; }
     }
-    function openPanel() { if (!enabled || !askPanel) return; askPanel.hidden = false; updateCount(); setTimeout(function () { if (askInput && !askInput.disabled) askInput.focus(); }, 50); }
+    function openPanel() { if (!enabled || !askPanel) return; askPanel.hidden = false; setMin(false); updateCount(); setTimeout(function () { if (askInput && !askInput.disabled) askInput.focus(); }, 50); }
     function closePanel() { if (askPanel) askPanel.hidden = true; hideSel(); }
     // 질문창 접기/펴기 — 모바일에서 패널이 '원문 보기' 링크를 가릴 때 사용자가 접을 수 있게.
     var askMinBtn = askPanel ? askPanel.querySelector('.ask-min-btn') : null;
@@ -161,6 +164,12 @@
       if (askMinBtn) askMinBtn.textContent = min ? '▴' : '▾';
     }
     if (askMinBtn) askMinBtn.addEventListener('click', function () { setMin(!askPanel.classList.contains('ask-min')); });
+    // 접힌 상태에선 헤더 어디를 눌러도 펼침(작은 ▴ 버튼만 누르기 어려운 모바일 대응)
+    var askHead = askPanel ? askPanel.querySelector('.ask-head') : null;
+    if (askHead) askHead.addEventListener('click', function (e) {
+      if (e.target === askMinBtn || !askPanel.classList.contains('ask-min')) return;
+      setMin(false); if (askInput && !askInput.disabled) askInput.focus();
+    });
     function bubble(cls, text) {
       var el = document.createElement('div');
       el.className = 'msg ' + cls; el.textContent = text;
@@ -273,7 +282,8 @@
       overlay.hidden = false;
       document.body.classList.add('modal-open');
       setBackgroundInert(true);   // 배경(reader/dnav) 탭 순서에서 제외 → 포커스 다이얼로그 안에 가둠
-      if (enabled && askPanel) { askPanel.hidden = false; setMin(false); updateCount(); }  // 패널 상시 표시(FAB 없음), 펼친 상태로 시작
+      // 패널 상시 표시(FAB 없음). 좁은 화면은 접힌 상태로 시작 → 본문 가림 최소화(헤더 탭으로 펼침)
+      if (enabled && askPanel) { askPanel.hidden = false; setMin(window.matchMedia('(max-width:620px)').matches); updateCount(); }
       overlay.classList.add('open');            // display:flex 즉시 (rAF 비의존)
       var showIt = function () { overlay.classList.add('show'); };
       requestAnimationFrame(showIt);

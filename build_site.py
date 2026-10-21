@@ -50,6 +50,18 @@ def meta_line(rec):
     nt = len(rec.get("terms") or [])
     return f"뉴스 {nn} · 정처기 1 · 용어 {nt}"
 
+def card_meta(rec):
+    """카드 보조줄: 대표 기사 외 그날 다룬 다른 기사 제목(최대 2) — 없으면 구성 요약."""
+    more = [" ".join((n.get("title_kr") or "").split()) for n in (rec.get("news") or [])[1:3]]
+    more = [t for t in more if t]
+    if not more:
+        return f'<p class="cmeta">{esc(meta_line(rec))}</p>'
+    return '<ul class="cmore">' + "".join(f"<li>{esc(t)}</li>" for t in more) + "</ul>"
+
+def day_label(rec):
+    wd = rec.get("weekday", "")
+    return rec["date_label"] + (f" ({wd})" if wd else "")
+
 def card(day_id, rec, hero=False):
     top = headline(rec)
     wd = rec.get("weekday", "")
@@ -63,7 +75,7 @@ def card(day_id, rec, hero=False):
       <div class="cbody">
         <div class="eyebrow">오늘 · {esc(label)}</div>
         <h3 class="ctitle">{esc(top)}</h3>
-        <p class="cmeta">{esc(meta_line(rec))}</p>
+        {card_meta(rec)}
         <span class="clink">오늘 읽기 <span class="arr">→</span></span>
       </div></a></div>'''
     return f'''<a class="card" href="{esc(href)}">
@@ -71,7 +83,7 @@ def card(day_id, rec, hero=False):
       <div class="cbody">
         <div class="eyebrow">{esc(label)}</div>
         <h3 class="ctitle">{esc(top)}</h3>
-        <p class="cmeta">{esc(meta_line(rec))}</p>
+        {card_meta(rec)}
         <span class="clink">읽기 <span class="arr">→</span></span>
       </div></a>'''
 
@@ -134,7 +146,7 @@ def build_index(days, ver="", build_v=""):
   </section>
 
   <div class="searchbar">
-    <span class="search-ico" aria-hidden="true">🔎</span>
+    <svg class="search-ico" aria-hidden="true" viewBox="0 0 20 20" width="17" height="17"><circle cx="8.5" cy="8.5" r="5.75" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 13l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     <input id="news-search" class="search-input" type="search" autocomplete="off"
       data-index="search.json{ver}"
       placeholder="주제·키워드로 뉴스 검색 (제목·본문까지)" aria-label="뉴스 검색">
@@ -150,7 +162,7 @@ def build_index(days, ver="", build_v=""):
   </div>
 
   <div class="foot">
-    <span class="fbrand">데일리</span> · 자동 생성 MVP<br>
+    <span class="fbrand">데일리</span> · 매일 아침 자동 갱신<br>
     뉴스 본문은 RSS 피드 기사를 자동 수집·요약한 것입니다. 게시 전 출처 확인을 권장합니다.
   </div>
 </div>
@@ -240,7 +252,9 @@ def main():
         json.dump({"v": build_v}, fh, ensure_ascii=False)
 
     os.makedirs(os.path.join(OUT_DIR, "days"), exist_ok=True)
-    for did, rec in days:
+    for i, (did, rec) in enumerate(days):   # days 는 최신순 → i+1 이 이전 날, i-1 이 다음 날
+        prev_day = (days[i + 1][0] + ".html", day_label(days[i + 1][1])) if i + 1 < len(days) else None
+        next_day = (days[i - 1][0] + ".html", day_label(days[i - 1][1])) if i > 0 else None
         out = os.path.join(OUT_DIR, "days", did + ".html")
         canonical = SITE_BASE + "days/" + did + ".html"
         news0 = (rec.get("news") or [{}])[0]
@@ -253,7 +267,8 @@ def main():
             og_image = ""
         with open(out, "w", encoding="utf-8") as fh:
             fh.write(render_day(rec, back_href="../index.html", asset_prefix="../",
-                                ver=ver, build_v=build_v, canonical=canonical, og_image=og_image))
+                                ver=ver, build_v=build_v, canonical=canonical, og_image=og_image,
+                                prev_day=prev_day, next_day=next_day, latest=(i == 0)))
     # 클라이언트 검색 인덱스(전체 뉴스, 본문 포함) → docs/search.json (지연 로드)
     search = []
     for did, rec in days:
