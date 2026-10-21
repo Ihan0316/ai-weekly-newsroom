@@ -112,8 +112,8 @@ class MainFlowTest(DaysDirTest):
         news = [{"title_kr": "t", "source": "GeekNews", "url": "https://n/new", "blurb_kr": "b"}]
         fill = mock.Mock(return_value=0)
         with mock.patch.multiple(P, KEY="k", select_news=mock.Mock(return_value=news),
-                                 extract_body=mock.Mock(return_value=[]), gen_comments=mock.Mock(),
-                                 gen_seo=mock.Mock(), make_quiz_terms=mqt, fill_missing_quiz=fill), \
+                                 extract_body=mock.Mock(return_value=[]), make_quiz_terms=mqt,
+                                 fill_missing_quiz=fill), \
                 mock.patch.object(P.subprocess, "run"), \
                 mock.patch.dict(os.environ, {"PIPELINE_DATE": "2026-02-01"}):
             P.main()
@@ -123,6 +123,7 @@ class MainFlowTest(DaysDirTest):
         fill, rec = self.run_main(quiz_ok=True)
         fill.assert_called_once_with("2026-02-01")
         self.assertTrue(rec["quiz"]["question"])
+        self.assertEqual(sorted(rec["news"][0]), ["blurb_kr", "content", "source", "title_kr", "url"])   # 블로그용 필드 없음
 
     def test_no_backfill_when_quiz_fails_but_news_kept(self):
         fill, rec = self.run_main(quiz_ok=False)
@@ -131,26 +132,17 @@ class MainFlowTest(DaysDirTest):
 
 
 class ReplaceArticleTest(DaysDirTest):
-    def test_keeps_seo_and_comment_fields(self):
+    def test_replaces_item_with_pipeline_schema(self):
         self.put("2026-01-01", day(news=2))
         cand = {"source": "TechCrunch", "url": "https://tc/x", "date": "", "title": "T", "snippet": "s", "body_html": ""}
-
-        def seo(news):
-            for it in news:
-                it.update(title_blog="TB", tags_kr=["태그"], hook_kr="HK")
-
-        def cmt(news):
-            for it in news:
-                it["comment_kr"] = "C"
-
         with mock.patch.multiple(P, KEY="k", gather_candidates=mock.Mock(return_value=[cand]),
                                  gemini=mock.Mock(return_value={"items": [{"title_kr": "새", "source": "?", "url": "https://tc/x", "blurb_kr": "b"}]}),
-                                 extract_body=mock.Mock(return_value=[]), gen_comments=cmt, gen_seo=seo), \
+                                 extract_body=mock.Mock(return_value=[])), \
                 mock.patch.object(sys, "argv", ["replace_article.py", "2026-01-01", "--index", "1", "--no-build"]):
             R.main()
         it = self.get("2026-01-01")["news"][1]
-        self.assertEqual((it["url"], it["source"], it["comment_kr"], it["title_blog"], it["tags_kr"], it["hook_kr"]),
-                         ("https://tc/x", "TechCrunch", "C", "TB", ["태그"], "HK"))
+        self.assertEqual((it["url"], it["source"], it["title_kr"]), ("https://tc/x", "TechCrunch", "새"))
+        self.assertEqual(sorted(it), ["blurb_kr", "content", "source", "title_kr", "url"])   # pipeline 과 같은 필드
 
 
 class CleanBlocksTest(unittest.TestCase):

@@ -42,5 +42,4 @@ jobs:
           TZ: Asia/Seoul
         run: |
           python build_site.py
-          python naver_export.py
           test -s docs/index.html && test -s docs/search.json && test -s docs/today.html

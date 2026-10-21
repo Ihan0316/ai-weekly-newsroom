@@ -22,7 +22,6 @@ assets/site.css, site.js      # 공유 디자인·인터랙션(모달/검색/Q&A
 fetch_images.py               # 기사 대표 이미지(og:image) → docs/images (증분, Pillow 있으면 폭 1200px 축소·큰 PNG→JPEG)
 attach_content.py             # 크롤 본문(_crawled.json) → day json 주입
 pipeline_gemini.py            # [무인용] 뉴스선별·본문추출·퀴즈/용어를 Gemini로 + 위 스크립트 호출
-naver_export.py               # 최신 day → 네이버 붙여넣기용 텍스트 + docs/naver 복사 페이지
 ask-worker/                   # 기사 Q&A용 Cloudflare Worker(Gemini 프록시)
 .github/workflows/daily.yml   # 매일 07:23 KST 자동 실행 → 커밋 → Pages 배포
 .github/workflows/ci.yml      # PR·main push 검증(문법·단위테스트·빌드 스모크)

@@ -86,18 +86,12 @@ def main():
     print("새 기사: [%s] %s" % (new_it["source"], (new_it.get("title_kr") or "")[:50]))
 
     new_it["content"] = P.extract_body(new_it["url"])
-    P.gen_comments([new_it])
-    P.gen_seo([new_it])   # 네이버 발행용 필드 — 교체 시 유실 방지(pipeline 과 동일 스키마)
     news[idx] = {
         "title_kr": new_it["title_kr"], "source": new_it["source"], "url": new_it["url"],
         "blurb_kr": new_it.get("blurb_kr", ""), "content": new_it.get("content", []),
-        "comment_kr": new_it.get("comment_kr", ""),
-        "title_blog": new_it.get("title_blog", ""), "tags_kr": new_it.get("tags_kr", []),
-        "hook_kr": new_it.get("hook_kr", ""),
     }
     json.dump(d, io.open(path, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-    print("교체 완료 →", path, "| 본문", len(news[idx]["content"]), "블록 | 코멘트",
-          "O" if news[idx]["comment_kr"] else "X")
+    print("교체 완료 →", path, "| 본문", len(news[idx]["content"]), "블록")
 
     if not a.no_build:
         print("== run fetch_images.py ==")
