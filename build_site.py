@@ -26,9 +26,9 @@ def thumb_svg(day_id, rec):
     mo, da = parse_md(day_id)
     wd = rec.get("weekday", "")
     return f'''<svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
-      <rect width="480" height="300" fill="#f5f5f7"/>
-      <text x="40" y="186" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="150" font-weight="700" fill="#1d1d1f" letter-spacing="-7">{da}</text>
-      <text x="46" y="238" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="20" font-weight="500" fill="#6e6e73">{mo}월 · {wd}요일</text>
+      <rect width="480" height="300" style="fill:var(--bg-sub)"/>
+      <text x="40" y="186" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="150" font-weight="700" style="fill:var(--ink)" letter-spacing="-7">{da}</text>
+      <text x="46" y="238" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="20" font-weight="500" style="fill:var(--ink-3)">{mo}월 · {wd}요일</text>
     </svg>'''
 
 def card_image(rec):
@@ -107,6 +107,9 @@ def build_index(days, ver="", build_v=""):
     desc = "매일 IT·개발 뉴스, 정보처리기사 기초 문제, IT·개발·기획 용어를 한 장에 모은 데일리 다이제스트."
     return f'''<!doctype html><html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <title>데일리 · 알아두면 좋은 것들</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{SITE_BASE}">
@@ -298,8 +301,10 @@ def main():
                   '<meta name="viewport" content="width=device-width,initial-scale=1">'
                   '<title>오늘의 다이제스트…</title><link rel="canonical" href="days/%s.html">'
                   '<script>location.replace("days/%s.html"+location.search);</script>'
-                  '<style>body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f1efe7;'
-                  'color:#6a6353;display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0}</style>'
+                  '<meta name="color-scheme" content="light dark">'
+                  '<style>body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#fff;'
+                  'color:#6e6e73;display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0}'
+                  '@media(prefers-color-scheme:dark){body{background:#000;color:#a1a1a6}a{color:#2997ff}}</style>'
                   '</head><body><p>오늘의 다이제스트로 이동 중… <a href="days/%s.html">바로가기</a></p></body></html>'
                   ) % (latest, latest, latest, latest)
     with open(os.path.join(OUT_DIR, "today.html"), "w", encoding="utf-8") as fh:

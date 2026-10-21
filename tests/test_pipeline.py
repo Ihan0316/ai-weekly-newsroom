@@ -178,6 +178,11 @@ class RenderDayTest(unittest.TestCase):
         self.assertIn("오늘 <em>읽을거리</em>", html)
         self.assertNotIn("dn-next", html)
 
+    def test_dark_mode_meta_and_no_blog_copy(self):   # 다크 모드 지원 메타, 블로그 복사 버튼 제거
+        html = build.render_day(day())
+        self.assertIn('name="color-scheme" content="light dark"', html)
+        self.assertNotIn("np-copy", html)
+
     def test_quiz_options_are_buttons(self):   # 키보드(Tab/Enter)로 풀 수 있게
         self.assertEqual(build.render_day(day()).count('<button type="button" class="qopt"'), 4)
 
