@@ -27,12 +27,5 @@ jobs:
           srcs = [n.get("source") for n in news]
           print("출처 분포:", {s: srcs.count(s) for s in set(srcs)})
           for n in news:
-              n["content"] = P.extract_body(n.get("url", ""))
-          P.gen_seo(news)
-          print("=== 네이버 조회수 최적화(gen_seo) 미리보기 ===")
-          for n in news:
-              print("  [%s] 원제목: %s" % (n.get("source"), n.get("title_kr")))
-              print("     게시제목: %s" % n.get("title_blog"))
-              print("     후킹: %s" % (n.get("hook_kr") or "")[:90])
-              print("     태그: %s" % " ".join("#" + t for t in n.get("tags_kr", [])))
+              print("  [%s] %s" % (n.get("source"), n.get("title_kr")))
           PY

@@ -38,11 +38,6 @@ jobs:
           PIPELINE_DATE: ${{ github.event.inputs.date }}
         run: python pipeline_gemini.py
 
-      - name: Export Naver copy page
-        env:
-          TZ: Asia/Seoul
-        run: python naver_export.py
-
       - name: Commit & push
         env:
           PIPELINE_DATE: ${{ github.event.inputs.date }}
