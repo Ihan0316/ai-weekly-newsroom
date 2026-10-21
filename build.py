@@ -194,7 +194,7 @@ def render_day(d, back_href=None, asset_prefix="../", ver="", build_v="", canoni
 
   <div class="foot">
     <span class="fbrand">데일리</span> · 읽을거리 · {esc(d["date_label"])}<br>
-    뉴스 본문은 yozm.wishket · GeekNews(news.hada.io) 등에서 수집·요약한 것입니다. 정확한 내용은 원문을 확인하세요.
+    뉴스 본문은 각 출처 기사를 자동 수집·요약한 것입니다. 정확한 내용은 원문을 확인하세요.
   </div>
 </main>
 {MODAL}

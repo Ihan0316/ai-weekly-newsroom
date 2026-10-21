@@ -27,9 +27,9 @@ jobs:
   howto:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -58,5 +58,6 @@ jobs:
           else
             MSG="${TOPIC:-weekly batch $(TZ=Asia/Seoul date +%F)}"
             git commit -m "Add how-to: $MSG" -m "Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>"
+            git pull --rebase origin "$GITHUB_REF_NAME"   # 다른 워크플로우가 먼저 push 했어도 거부되지 않게
             git push
           fi

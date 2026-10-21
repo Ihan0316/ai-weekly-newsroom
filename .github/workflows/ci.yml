@@ -1,0 +1,46 @@
+name: CI
+
+# PR·main push 검증: 문법 → 단위테스트 → 사이트 빌드 스모크. 읽기전용(커밋·배포 없음).
+# 배포(CD)는 main 의 docs/ 를 GitHub Pages(pages-build-deployment)가 push 마다 자동 수행.
+# 참고: daily 등 봇(GITHUB_TOKEN) push 는 워크플로우를 트리거하지 않아 여기서 돌지 않음.
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"   # daily 등 운영 워크플로우와 동일
+
+      - name: Install deps
+        run: pip install -r requirements.txt
+
+      - name: Syntax check
+        run: |
+          python -m py_compile *.py tests/*.py
+          node --check assets/site.js
+
+      - name: Unit tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Build smoke
+        env:
+          TZ: Asia/Seoul
+        run: |
+          python build_site.py
+          python naver_export.py
+          test -s docs/index.html && test -s docs/search.json && test -s docs/today.html

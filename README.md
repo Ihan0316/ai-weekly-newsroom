@@ -1,7 +1,7 @@
 # 데일리 다이제스트 (Daily Digest)
 
-매일 **오늘의 뉴스 + 기초상식(정처기 문제) + IT·개발·기획 용어**를 미니멀 에디토리얼 + 3D 정적 사이트로.
-뉴스는 요즘IT(yozm) · GeekNews(news.hada.io)에서 수집. **PC 없이 매일 자동**으로 갱신·배포된다.
+매일 **오늘의 뉴스 + 기초상식(정처기 문제) + IT·개발·기획 용어**를 미니멀 에디토리얼 정적 사이트로.
+뉴스는 GeekNews · AITimes · ZDNet Korea · Hacker News · TechCrunch RSS/Atom 피드에서 수집. **PC 없이 매일 자동**으로 갱신·배포된다.
 
 🔗 **라이브: https://ihan0316.github.io/ai-weekly-newsroom/**
 
@@ -18,13 +18,15 @@
 data/days/<YYYY-MM-DD>.json   # 하루치 원천 (news[]/quiz/terms)
 build.py                      # render_day(): 하루 상세 HTML
 build_site.py                 # 전체 빌드 → docs/ (index 피드 + 날짜별 + search.json + build.json)
-assets/site.css, site.js      # 공유 디자인·인터랙션(3D 히어로/틸트/모달/검색/Q&A/자동갱신)
-fetch_images.py               # 기사 대표 이미지(og:image) → docs/images (증분)
+assets/site.css, site.js      # 공유 디자인·인터랙션(모달/검색/Q&A/자동갱신)
+fetch_images.py               # 기사 대표 이미지(og:image) → docs/images (증분, Pillow 있으면 폭 1200px 축소·큰 PNG→JPEG)
 attach_content.py             # 크롤 본문(_crawled.json) → day json 주입
 pipeline_gemini.py            # [무인용] 뉴스선별·본문추출·퀴즈/용어를 Gemini로 + 위 스크립트 호출
 naver_export.py               # 최신 day → 네이버 붙여넣기용 텍스트 + docs/naver 복사 페이지
 ask-worker/                   # 기사 Q&A용 Cloudflare Worker(Gemini 프록시)
 .github/workflows/daily.yml   # 매일 07:23 KST 자동 실행 → 커밋 → Pages 배포
+.github/workflows/ci.yml      # PR·main push 검증(문법·단위테스트·빌드 스모크)
+tests/                        # 단위 테스트(네트워크·Gemini 없이 mock)
 ```
 주의: `assemble_days.py`는 **초기 한 달 일괄 생성용**. 재실행하면 기존 날짜의 퀴즈/용어가 재셔플되니 **운영 중 실행 금지**(하루 추가는 day json 하나만 넣고 `build_site.py`).
 
@@ -36,11 +38,16 @@ GitHub Actions (cron 07:23 KST)
  → github-actions[bot] 커밋 → GitHub Pages 자동 배포
 ```
 - 키: repo secret `GEMINI_API_KEY` (무료). 비용 $0 (Gemini 무료티어·Pages 전부 무료).
-- 데이터센터 IP 차단(yozm 403) 우회: `r.jina.ai` 리더 프록시 폴백.
+- 뉴스 후보는 `pipeline_gemini.py`의 `FEEDS`에서 수집(피드별 실패는 그 소스만 제외). 요즘IT는 러너 IP 차단(405)으로 비활성.
+- 퀴즈 생성이 실패해 사이트에 안 보이는 과거 날은 다음 실행 때 최대 3일씩 자동 보충. Gemini 429/5xx는 점증 대기 후 재시도.
 - 수동 실행: `gh workflow run "Daily digest"` 또는 Actions 탭.
+- CI: PR·main push 때 `ci.yml` 이 문법·단위테스트·사이트 빌드를 검증(커밋·배포 없음). 봇 커밋은 트리거 안 함.
+- CD: main 에 push 되면 GitHub Pages(`pages-build-deployment`)가 `docs/` 를 자동 배포.
 
 ## 수동 빌드/배포
 ```powershell
+pip install -r requirements.txt          # (선택) Pillow: 이미지 최적화
+python -m unittest discover -s tests -v   # 테스트
 python build_site.py
 git add -A; git commit -m "update"; git push   # Pages 자동 재배포(1~2분)
 ```

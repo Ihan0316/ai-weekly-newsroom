@@ -120,7 +120,7 @@ def render(day, date, full=False):
     L.append("")
     L.append("---")
     L.append("※ 뉴스는 자동 수집·요약본입니다. 정확한 내용은 원문 링크를 확인하세요.")
-    L.append("🌐 전체 보기(뉴스 원문·음성·검색): {}".format(LIVE_URL))
+    L.append("🌐 전체 보기(뉴스 원문·검색): {}".format(LIVE_URL))
     L.append("#AI #인공지능 #개발 #IT용어 #정보처리기사 #개발자 #데일리뉴스")
 
     return title, "\n".join(L)

@@ -7,7 +7,7 @@ fetch_images.py / build_site.py 실행. (git 커밋·푸시는 워크플로우�
 env: GEMINI_API_KEY 필요. TZ=Asia/Seoul 권장(오늘 날짜 기준).
 """
 import os, sys, json, re, glob, time, datetime, subprocess
-import urllib.request
+import urllib.request, urllib.error
 import xml.etree.ElementTree as ET
 from email.utils import parsedate_to_datetime
 
@@ -28,7 +28,8 @@ def gemini(prompt, schema=None, max_tokens=8192, temp=0.4):
     body = {"contents": [{"parts": [{"text": prompt}]}], "generationConfig": cfg}
     data = json.dumps(body).encode("utf-8")
     last = None
-    for attempt in range(4):
+    tries = 5
+    for attempt in range(tries):
         try:
             req = urllib.request.Request(API, data=data, headers={"Content-Type": "application/json"})
             with urllib.request.urlopen(req, timeout=180) as r:
@@ -37,8 +38,12 @@ def gemini(prompt, schema=None, max_tokens=8192, temp=0.4):
             return json.loads(txt)
         except Exception as e:
             last = e
-            # 429(무료 티어 rate limit)는 6초 재시도로는 안 풀림 → 길게 대기(분당 쿼터 회복 노림)
-            wait = 45 if "429" in str(e) else 6
+            if attempt == tries - 1:
+                break
+            # 429(무료 티어 rate limit)·5xx(서버 과부하)는 6초 재시도로는 안 풀림 → 점증 대기(45·90·135·180초).
+            # 2026-09-10: 503 이 6초 간격 4회로 끝나 하루치 통째 유실.
+            transient = isinstance(e, urllib.error.HTTPError) and (e.code == 429 or e.code >= 500)
+            wait = 45 * (attempt + 1) if transient else 6
             sys.stderr.write("gemini retry %d (%ds 대기): %s\n" % (attempt, wait, e))
             time.sleep(wait)
     raise RuntimeError("gemini failed: %s" % last)
@@ -106,15 +111,17 @@ CE = "{http://purl.org/rss/1.0/modules/content/}encoded"
 def strip_tags(html, limit):
     return re.sub(r"\s+", " ", re.sub(r"(?is)<[^>]+>", " ", html or "")).strip()[:limit]
 
-# 뉴스 소스 피드 — 다양성 위해 국내(GeekNews·요즘IT·AITimes·ZDNet KR)+해외(HackerNews·TechCrunch) 혼합.
+# 뉴스 소스 피드 — 다양성 위해 국내(GeekNews·AITimes·ZDNet KR)+해외(HackerNews·TechCrunch) 혼합.
 # 피드별 실패는 graceful(그 소스만 빠지고 나머지로 진행). 추가/제거는 이 리스트만 수정.
 #   kind: 'atom'|'rss' · prefix: 기사 URL 접두 검증(None=무검증) · cap: 후보 최대 · fresh_days: 최근 N일만(None=무시)
 #   body: content:encoded 에 본문 전문이 있어 상세크롤 불필요(요즘IT). 나머지는 extract_body 가 기사 크롤.
 FEEDS = [
     {"source": "GeekNews", "url": "https://news.hada.io/rss/news", "kind": "atom",
      "prefix": "https://news.hada.io/topic?id=", "cap": 15, "fresh_days": 2},
-    {"source": "요즘IT", "url": "https://yozm.wishket.com/magazine/feed/", "kind": "rss",
-     "prefix": "https://yozm.wishket.com/magazine/detail/", "cap": 10, "fresh_days": None, "body": True},
+    # 요즘IT: Actions 러너(데이터센터 IP)에서 HTTP 405 차단 — 2026-06-25 이후 게재 0건(2026-10 확인).
+    # 러너에서 다시 도달되면(feeds_check 워크플로우로 확인) 주석 해제.
+    # {"source": "요즘IT", "url": "https://yozm.wishket.com/magazine/feed/", "kind": "rss",
+    #  "prefix": "https://yozm.wishket.com/magazine/detail/", "cap": 10, "fresh_days": None, "body": True},
     {"source": "AITimes", "url": "https://www.aitimes.com/rss/allArticle.xml", "kind": "rss",
      "prefix": "https://www.aitimes.com/", "cap": 10, "fresh_days": 2},
     {"source": "ZDNet Korea", "url": "https://feeds.feedburner.com/zdkorea", "kind": "rss",
@@ -222,9 +229,9 @@ def select_news(today, ex_urls, recent=None):
     prompt = (
         "오늘은 %s. 아래 후보 기사 중 서로 다른 주제 3건을 고른다.\n"
         "규칙:\n"
-        "- 오늘 날짜(%s) 기사 우선. 날짜 없는 항목(요즘IT 등)은 번호가 낮을수록 최신.\n"
+        "- 오늘 날짜(%s) 기사 우선. 날짜 없는 항목은 번호가 낮을수록 최신.\n"
         "- **출처 다양성**: 3건을 최대한 서로 다른 출처에서 고른다. 한 출처에서 최대 2건. "
-        "특정 출처(GeekNews)에 쏠리지 말 것. 국내(요즘IT/AITimes/ZDNet Korea)와 해외(Hacker News/TechCrunch)를 섞으면 좋다.\n"
+        "특정 출처(GeekNews)에 쏠리지 말 것. 국내(AITimes/ZDNet Korea)와 해외(Hacker News/TechCrunch)를 섞으면 좋다.\n"
         "- **주제 중복 회피**: 아래 '최근 게재 제목'과 같은 사건·발표·제품이슈를 다루는 후보는 제외한다. "
         "출처·표현·언어·각도가 달라도 본질이 같은 소재(예: 같은 모델의 같은 사고, 같은 제품 같은 버전 발표)면 고르지 말 것. "
         "고른 3건끼리도 서로 소재가 겹치면 안 된다.\n"
@@ -373,6 +380,32 @@ def make_quiz_terms(ex_qs, ex_terms):
     q = out["quiz"]; q["answer"] = max(0, min(3, int(q.get("answer", 0))))
     return q, out["terms"][:3]
 
+def fill_missing_quiz(skip_id, limit=3):
+    """뉴스는 저장됐는데 퀴즈 생성이 실패한 과거 날을 최신순으로 최대 limit일 보충. 보충한 날 수 반환.
+    quiz 없는 날은 build_site 가 스킵해 사이트에 안 보이므로 매일 실행 때 자동 복구한다."""
+    n = 0
+    for f in sorted(glob.glob(os.path.join(DAYS, "*.json")), reverse=True):
+        if n >= limit:
+            break
+        did = os.path.splitext(os.path.basename(f))[0]
+        if did == skip_id:
+            continue
+        try:
+            cur = json.load(open(f, encoding="utf-8"))
+        except Exception:
+            continue
+        if not cur.get("news") or (cur.get("quiz") or {}).get("question"):
+            continue
+        _, _, ex_qs, ex_terms = existing()   # 직전 보충분까지 반영해 중복 회피
+        try:
+            cur["quiz"], cur["terms"] = make_quiz_terms(ex_qs, ex_terms)
+        except Exception as e:
+            sys.stderr.write("퀴즈 보충 실패 %s: %s\n" % (did, e)); break
+        json.dump(cur, open(f, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+        n += 1
+        print("퀴즈 없는 날 보충:", did)
+    return n
+
 def main():
     if not KEY:
         sys.stderr.write("GEMINI_API_KEY 없음\n"); sys.exit(1)
@@ -436,8 +469,10 @@ def main():
         save()
         print("퀴즈/용어 추가 완료")
     except Exception as e:
-        # quiz 없으면 build_site 가 그날을 스킵하지만 데이터는 남음 → 나중에 이 날짜로 재실행하면 채워짐
+        # quiz 없으면 build_site 가 그날을 스킵하지만 데이터는 남음 → 다음 실행의 fill_missing_quiz 가 채움
         sys.stderr.write("퀴즈/용어 실패(뉴스는 저장됨): %s\n" % e)
+    else:
+        fill_missing_quiz(did)   # 오늘 퀴즈가 됐을 때만(쿼터 막힌 날 재시도 낭비 방지) 과거 실패분 보충
 
     # day JSON은 위에서 이미 기록됨. 이미지는 부가물 → 실패해도 그날 콘텐츠를 버리지 않음
     # (check=False). 사이트 생성(build_site)만 필수라 실패 시 예외로 중단.

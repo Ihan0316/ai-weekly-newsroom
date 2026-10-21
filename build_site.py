@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 데일리 다이제스트 사이트 생성기.
-- index.html: 미니멀 에디토리얼 + Three.js 3D 히어로 + 카드 틸트 (데일리 피드)
+- index.html: 미니멀 에디토리얼 데일리 피드 + 검색
 - days/<id>.html: 하루치 상세 (뉴스 / 기초상식·정처기 / IT·개발·기획 용어) — build.render_day()
 공유 assets/site.css · site.js (단일 디자인 소스).
 
@@ -14,10 +14,6 @@ DAYS_DIR = os.path.join("data", "days")
 OUT_DIR = "docs"
 ASSETS_SRC = "assets"
 SITE_BASE = "https://ihan0316.github.io/ai-weekly-newsroom/"   # GitHub Pages 루트(canonical·OG용)
-THREE_CDN = "https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"
-
-INK = "#191711"; BONE = "#f6f4ec"; FAINT = "#ece3d2"; MUTED = "#7c7669"
-ACCENT = "#c2532f"; ADEEP = "#9c3f20"; LINE = "#e2ddcf"
 
 def parse_md(day_id):
     m = re.match(r"(\d+)-(\d+)-(\d+)", day_id)
@@ -155,7 +151,7 @@ def build_index(days, ver="", build_v=""):
 
   <div class="foot">
     <span class="fbrand">데일리</span> · 자동 생성 MVP<br>
-    뉴스 본문은 LLM 웹검색 자동 수집물입니다. 게시 전 출처 확인을 권장합니다.
+    뉴스 본문은 RSS 피드 기사를 자동 수집·요약한 것입니다. 게시 전 출처 확인을 권장합니다.
   </div>
 </div>
 <script src="assets/site.js{ver}"></script>
