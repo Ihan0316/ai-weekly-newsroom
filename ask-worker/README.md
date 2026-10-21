@@ -12,6 +12,7 @@
 6. 그 URL을 알려주면 사이트에 연결(`ASK_ENDPOINT`)하고 재빌드 → 질문 기능 켜짐.
 
 ## (선택) 남용 방지 — 무료 Rate Limit
+IP당 일일 질문 한도(`IP_DAILY_CAP`)는 KV(`RL`)로 강제한다. `wrangler.toml`에 id 없이 선언돼 있어 GitHub 연동 배포 때 KV가 자동 생성된다.
 Worker → **Settings → 보안/Rate limiting** 규칙 1개(무료): 예) IP당 1분 20회 초과 차단.
 무료 티어는 한도 초과 시 **과금이 아니라 차단**이라 비용 위험은 사실상 없음. 레이트리밋은 한도 빨리 소진되는 것만 막는 용도.
 
