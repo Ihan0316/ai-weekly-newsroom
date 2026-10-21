@@ -196,6 +196,26 @@ class ImageOptimizeTest(unittest.TestCase):
             out, out_ext = F.optimize(data, ext)
             self.assertIs(out, data); self.assertEqual(out_ext, ext)
 
+    def test_keeps_icc_profile(self):   # Display P3 등 색공간 유지(프로필 유실 시 색 틀어짐)
+        from PIL import ImageCms
+        icc = ImageCms.ImageCmsProfile(ImageCms.createProfile("sRGB")).tobytes()
+        out, ext = F.optimize(self.encode(2400, 1200, icc_profile=icc), "png")
+        self.assertEqual((ext, F.Image.open(io.BytesIO(out)).info.get("icc_profile")), ("jpg", icc))
+
+    def test_skips_16bit_grayscale(self):   # RGB 변환 시 값이 255로 잘려 하얗게 됨
+        im = F.Image.frombytes("I;16", (2000, 1000), os.urandom(2000 * 1000 * 2))
+        b = io.BytesIO(); im.save(b, "PNG"); data = b.getvalue()
+        out, ext = F.optimize(data, "png")
+        self.assertEqual((out is data, ext), (True, "png"))
+
+    def test_keeps_color_key_transparency(self):   # tRNS 지정색 투명 PNG → JPEG 로 바뀌면 투명 유실
+        im = F.Image.frombytes("RGB", (2000, 1000), os.urandom(2000 * 1000 * 3))
+        im.paste((255, 255, 255), (0, 0, 500, 500))
+        b = io.BytesIO(); im.save(b, "PNG", transparency=(255, 255, 255))
+        out, ext = F.optimize(b.getvalue(), "png")
+        o = F.Image.open(io.BytesIO(out))
+        self.assertEqual((ext, o.mode, o.getpixel((10, 10))[3]), ("png", "RGBA", 0))
+
     def test_without_pillow_passthrough(self):
         data = self.encode(2400, 1200)
         with mock.patch.object(F, "Image", None):
