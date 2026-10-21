@@ -89,14 +89,14 @@ def main():
     built = [d for d in dates if buckets[d]]
     built.sort(reverse=True)
 
-    # 기존 day 파일 제거 — 파괴적. 이미 발행된 날(창 밖)의 content/comment_kr 유실 +
+    # 기존 day 파일 제거 — 파괴적. 이미 발행된 날(창 밖)의 content 유실 +
     # 퀴즈/용어 재셔플 위험이 있어 --force 없이는 중단 (운영 중 재실행 금지).
     days_dir = os.path.join(HERE, "data", "days")
     os.makedirs(days_dir, exist_ok=True)
     existing = glob.glob(os.path.join(days_dir, "*.json"))
     if existing and "--force" not in sys.argv:
         print(f"중단: data/days 에 {len(existing)}개 파일 존재. 이 스크립트는 전량 삭제 후 "
-              f"{END_DATE} 기준 {DAYS}일 창만 재생성하므로 창 밖 날짜의 본문/코멘트가 유실됩니다.\n"
+              f"{END_DATE} 기준 {DAYS}일 창만 재생성하므로 창 밖 날짜의 본문이 유실됩니다.\n"
               f"정말 초기화하려면 --force 로 실행하세요.")
         return
     for f in existing:

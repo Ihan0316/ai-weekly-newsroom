@@ -13,6 +13,18 @@ KIND_COLORS = {"IT": "#0066cc", "개발": "#15803d", "기획": "#b45309"}   # �
 # 기사 Q&A 프록시(Cloudflare Worker 등) 엔드포인트. 비우면 질문 UI 숨김.
 ASK_ENDPOINT = "https://ai-weekly-newsroom.aijnjj12.workers.dev"
 
+# 테마: 기본은 기기 설정. 버튼으로 고른 값(localStorage 'digest:theme' — site.js 와 같은 키)을
+# CSS 로드 전에 <html data-theme> 로 적용해 페이지 이동 때 깜빡이지 않게 한다.
+THEME_INIT = ("<script>try{var t=localStorage.getItem('digest:theme');"
+              "if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>")
+THEME_BTN = ('<button class="theme-btn" type="button" aria-label="다크 모드" aria-pressed="false" title="다크 모드 켜기/끄기">'
+             '<svg class="i-moon" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">'
+             '<path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" fill="currentColor"/></svg>'
+             '<svg class="i-sun" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">'
+             '<circle cx="12" cy="12" r="4.2" fill="currentColor"/><path d="M12 2.6v2.3M12 19.1v2.3M2.6 12h2.3M19.1 12h2.3'
+             'M5.4 5.4l1.6 1.6M17 17l1.6 1.6M5.4 18.6 7 17M17 7l1.6-1.6" stroke="currentColor" stroke-width="1.8" '
+             'stroke-linecap="round" fill="none"/></svg></button>')
+
 def esc(s):
     return html.escape(html.unescape(str(s)))
 
@@ -150,7 +162,7 @@ def render_day(d, back_href=None, asset_prefix="../", ver="", build_v="", canoni
                prev_day=None, next_day=None, latest=True):
     a = asset_prefix
     mini_nav, day_nav_html = day_nav(prev_day, next_day)
-    back = (f'<div class="dnav"><a class="backlink" href="{esc(back_href)}">← 전체 보기</a>{mini_nav}</div>') if back_href else ''
+    back = (f'<div class="dnav"><a class="backlink" href="{esc(back_href)}">← 전체 보기</a>{mini_nav}{THEME_BTN}</div>') if back_href else ''
     when = "오늘" if latest else "이날의"   # 지난 날 페이지에 '오늘'이 남지 않게
     wd = d.get("weekday", "")
     label = f'{esc(d["date_label"])}' + (f' ({esc(wd)})' if wd else '')
@@ -165,6 +177,7 @@ def render_day(d, back_href=None, asset_prefix="../", ver="", build_v="", canoni
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+{THEME_INIT}
 <title>데일리 다이제스트 · {esc(d["date_label"])}</title>
 <meta name="description" content="{desc}">
 {canon}

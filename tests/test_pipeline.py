@@ -3,7 +3,7 @@
 
 실행(저장소 루트): python -m unittest discover -s tests -v
 """
-import io, json, os, shutil, sys, tempfile, unittest, urllib.error
+import io, json, os, re, shutil, sys, tempfile, unittest, urllib.error
 from unittest import mock
 
 import pipeline_gemini as P
@@ -175,12 +175,35 @@ class RenderDayTest(unittest.TestCase):
         self.assertIn('name="color-scheme" content="light dark"', html)
         self.assertNotIn("np-copy", html)
 
+    def test_theme_toggle_on_day_and_index(self):   # 전환 버튼 + CSS 로드 전 저장 테마 적용(깜빡임 방지)
+        pages = [build.render_day(day(), back_href="../index.html"),
+                 build_site.build_index([("2026-01-02", day()), ("2026-01-01", day())])]
+        for html in pages:
+            self.assertEqual(html.count('class="theme-btn"'), 1)
+            self.assertLess(html.index("digest:theme"), html.index("assets/site.css"))
+
     def test_quiz_options_are_buttons(self):   # 키보드(Tab/Enter)로 풀 수 있게
         self.assertEqual(build.render_day(day()).count('<button type="button" class="qopt"'), 4)
 
     def test_card_meta_lists_other_headlines(self):
         self.assertEqual(build_site.card_meta(day(news=3)).count("<li>"), 2)
         self.assertIn('class="cmeta"', build_site.card_meta(day(news=1)))
+
+
+class ThemeCssTest(unittest.TestCase):
+    def test_forced_dark_matches_system_dark(self):   # 기기 다크(@media)와 직접 고른 다크 블록이 어긋나지 않게
+        css = io.open(os.path.join(os.path.dirname(__file__), "..", "assets", "site.css"), encoding="utf-8").read()
+        start = css.index("@media (prefers-color-scheme: dark){")
+        i, depth = css.index("{", start), 0
+        for j in range(i, len(css)):
+            depth += {"{": 1, "}": -1}.get(css[j], 0)
+            if depth == 0:
+                break
+        norm = lambda s: " ".join(re.sub(r"/\*.*?\*/", "", s, flags=re.S).split())
+        system = norm(css[i + 1:j]).replace(':root:not([data-theme="light"])', ':root[data-theme="dark"]')
+        forced = norm(css[j + 1:])
+        self.assertIn("--bg:#000000", forced)
+        self.assertEqual(system, forced)
 
 
 class ValidateDayTest(unittest.TestCase):
