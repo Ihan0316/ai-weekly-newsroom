@@ -19,7 +19,7 @@ data/days/<YYYY-MM-DD>.json   # 하루치 원천 (news[]/quiz/terms)
 build.py                      # render_day(): 하루 상세 HTML
 build_site.py                 # 전체 빌드 → docs/ (index 피드 + 날짜별 + search.json + build.json)
 assets/site.css, site.js      # 공유 디자인·인터랙션(모달/검색/Q&A/자동갱신)
-fetch_images.py               # 기사 대표 이미지(og:image) → docs/images (증분)
+fetch_images.py               # 기사 대표 이미지(og:image) → docs/images (증분, Pillow 있으면 폭 1200px 축소·큰 PNG→JPEG)
 attach_content.py             # 크롤 본문(_crawled.json) → day json 주입
 pipeline_gemini.py            # [무인용] 뉴스선별·본문추출·퀴즈/용어를 Gemini로 + 위 스크립트 호출
 naver_export.py               # 최신 day → 네이버 붙여넣기용 텍스트 + docs/naver 복사 페이지
