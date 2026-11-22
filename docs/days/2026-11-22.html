@@ -1,0 +1,136 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<script>try{var t=localStorage.getItem('digest:theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<title>데일리 다이제스트 · 2026. 11. 22</title>
+<meta name="description" content="Android의 핵심 프로세스 간 통신 드라이버인 Binder의 C 구현이 Linux 7.4에서 제거됨. 5년 넘게 진행한 Rust 전환이 기존 구현을 대체하는 단계에 도달함. Google 내부 보안팀은 Binder를 운영체제에서 코드 줄 수 대비 CVE가 가장 많은 구성 요소">
+<link rel="canonical" href="https://ihan0316.github.io/ai-weekly-newsroom/days/2026-11-22.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2026. 11. 22 · 데일리 다이제스트">
+<meta property="og:description" content="Android의 핵심 프로세스 간 통신 드라이버인 Binder의 C 구현이 Linux 7.4에서 제거됨. 5년 넘게 진행한 Rust 전환이 기존 구현을 대체하는 단계에 도달함. Google 내부 보안팀은 Binder를 운영체제에서 코드 줄 수 대비 CVE가 가장 많은 구성 요소">
+<meta property="og:url" content="https://ihan0316.github.io/ai-weekly-newsroom/days/2026-11-22.html">
+<meta property="og:image" content="https://ihan0316.github.io/ai-weekly-newsroom/images/2278dfe7965e.webp">
+<link rel="stylesheet" href="../assets/site.css?v=95735ce8">
+<meta name="site-build" content="1495eee4ac" data-src="../build.json">
+<meta name="ask-endpoint" content="https://ai-weekly-newsroom.aijnjj12.workers.dev">
+</head>
+<body>
+<div class="dnav"><a class="backlink" href="../index.html">← 전체 보기</a><span class="dn-mini"><a href="2026-11-21.html" aria-label="이전 날: 2026. 11. 21 (토)">‹ 이전 날</a></span><button class="theme-btn" type="button" aria-label="다크 모드" aria-pressed="false" title="다크 모드 켜기/끄기"><svg class="i-moon" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" fill="currentColor"/></svg><svg class="i-sun" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><path d="M12 2.6v2.3M12 19.1v2.3M2.6 12h2.3M19.1 12h2.3M5.4 5.4l1.6 1.6M17 17l1.6 1.6M5.4 18.6 7 17M17 7l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></button></div>
+<main class="reader">
+  <div class="kicker">2026. 11. 22 (일) · 데일리 다이제스트</div>
+  <h1 class="dhead">오늘 <em>읽을거리</em></h1>
+  <p class="dsub">뉴스 · 기초상식(정처기) · IT·개발·기획 용어</p>
+  <div class="rule"></div>
+
+  <section class="daystack">
+    <article class="daysec sec-news">
+      <div class="secnum">01</div>
+      <span class="seclabel">오늘의 뉴스</span>
+      <ul class="newslist">
+        <li>
+          <button class="newsitem has-thumb" data-idx="0" type="button">
+            <div class="ni-text">
+              <span class="ni-src">GeekNews</span>
+              <h3 class="ni-title">binder.c 제거, Android Binder의 C 구현을 Rust로 대체</h3>
+              <p class="ni-blurb">Android의 핵심 프로세스 간 통신 드라이버인 Binder의 C 구현이 Linux 7.4에서 제거됨. 5년 넘게 진행한 Rust 전환이 기존 구현을 대체하는 단계에 도달함. Google 내부 보안팀은 Binder를 운영체제에서 코드 줄 수 대비 CVE가 가장 많은 구성 요소로 평가함. C 구현에 새 기능을 추가할 때마다 취약점이 계속 생겨, 새 기능은 Rust 구현에만 추가하도록 정책을 바꿈. 성능 측면에서 전환의 관건은</p>
+              <span class="ni-open">본문 읽기 →</span>
+            </div>
+            <img class="ni-thumb" src="../images/2278dfe7965e.webp" alt="" loading="lazy" onerror="this.remove()">
+          </button>
+        </li>
+        <li>
+          <button class="newsitem has-thumb" data-idx="1" type="button">
+            <div class="ni-text">
+              <span class="ni-src">AITimes</span>
+              <h3 class="ni-title">미국 AI 칩 규제에 중국 기업들 잇단 타격…WSJ &quot;엔비디아 금단 현상&quot;</h3>
+              <p class="ni-blurb">미국의 첨단 AI 칩 규제가 강화되면서 중국 주요 AI 기업들이 모델 개발 지연과 사업 차질을 인정하기 시작했다. 문샷 AI가 대규모 해외 GPU 이용 계약을 취소한 데 이어 텐센트와 알리바바도 차세대 모델 개발과 서비스에 미칠 영향을 경고하면서, 엔비디아 칩에 의존해 온 중국 AI 산업이 &#x27;금단 현상&#x27;을 겪고 있다는 평가까지 나왔다.월스트리트저널(WSJ)은 19일(현지시간) 중국 AI 기업들이 그동안 미국의 수출 통제를 피해</p>
+              <span class="ni-open">본문 읽기 →</span>
+            </div>
+            <img class="ni-thumb" src="../images/ef32e2eb49e4.png" alt="" loading="lazy" onerror="this.remove()">
+          </button>
+        </li>
+        <li>
+          <button class="newsitem has-thumb" data-idx="2" type="button">
+            <div class="ni-text">
+              <span class="ni-src">Hacker News</span>
+              <h3 class="ni-title">PcapAnalyzer – 27가지 문제 탐지기가 있는 자체 호스팅 pcap 분석기</h3>
+              <p class="ni-blurb">Article URL: https://github.com/sebaandrada-cell/PcapAnalyzer Comments URL: https://news.ycombinator.com/item?id=50594132 Points: 64 # Comments: 6</p>
+              <span class="ni-open">본문 읽기 →</span>
+            </div>
+            <img class="ni-thumb" src="../images/7f062c485c75.png" alt="" loading="lazy" onerror="this.remove()">
+          </button>
+        </li></ul>
+    </article>
+
+    <article class="daysec sec-quiz">
+      <div class="secnum">02</div>
+      <span class="seclabel">기초상식 · 정처기</span>
+      
+      <div class="quiz" data-answer="1">
+        <div class="sectag">#소프트웨어 공학</div>
+        <p class="q-question">소프트웨어 설계 원칙 중, &#x27;개방-폐쇄 원칙(Open/Closed Principle, OCP)&#x27;에 대한 설명으로 가장 적절한 것은?</p>
+        <ol class="qopts"><li><button type="button" class="qopt" data-i="0"><span class="ql">①</span><span class="qtext">모든 모듈은 하나의 책임만을 가져야 한다.</span><span class="qmark" aria-hidden="true"></span></button></li><li><button type="button" class="qopt" data-i="1"><span class="ql">②</span><span class="qtext">소프트웨어 개체(클래스, 모듈, 함수 등)는 확장에 대해서는 개방적이어야 하지만, 수정에 대해서는 폐쇄적이어야 한다.</span><span class="qmark" aria-hidden="true"></span></button></li><li><button type="button" class="qopt" data-i="2"><span class="ql">③</span><span class="qtext">클라이언트는 자신이 사용하지 않는 인터페이스에 의존해서는 안 된다.</span><span class="qmark" aria-hidden="true"></span></button></li><li><button type="button" class="qopt" data-i="3"><span class="ql">④</span><span class="qtext">상위 타입의 객체는 하위 타입의 객체로 대체 가능해야 한다.</span><span class="qmark" aria-hidden="true"></span></button></li></ol>
+        <p class="q-hint">보기를 눌러 정답을 확인하세요.</p>
+        <p class="q-live sr-only" aria-live="polite"></p>
+        <div class="q-explain" hidden><b>정답: ②</b><p>개방-폐쇄 원칙(OCP)은 소프트웨어 개체가 기능 확장을 위해서는 열려 있어야 하지만, 기존 코드를 수정하지 않고 확장이 가능하도록 닫혀 있어야 한다는 원칙입니다. 이는 시스템 변경 시 기존 코드에 미치는 영향을 최소화하여 유지보수성을 높이는 데 기여합니다.</p></div>
+      </div>
+    </article>
+
+    <article class="daysec sec-terms">
+      <div class="secnum">03</div>
+      <span class="seclabel">IT · 개발 · 기획 용어</span>
+      <ul class="terms">
+        <li class="termrow">
+          <span class="t-kind" style="background:#15803d">개발</span>
+          <span class="t-term">멱등성 (Idempotency)</span>
+          <span class="t-mean">동일한 연산을 여러 번 수행하더라도 항상 같은 결과를 반환하며, 시스템의 상태를 변경하지 않는 특성을 의미한다.</span>
+        </li>
+        <li class="termrow">
+          <span class="t-kind" style="background:#15803d">개발</span>
+          <span class="t-term">백프레셔 (Backpressure)</span>
+          <span class="t-mean">데이터 처리 시스템에서 생산자의 데이터 생성 속도가 소비자의 처리 속도보다 빠를 때, 생산자의 속도를 조절하여 시스템 과부하를 방지하는 메커니즘이다.</span>
+        </li>
+        <li class="termrow">
+          <span class="t-kind" style="background:#0066cc">IT</span>
+          <span class="t-term">블루/그린 배포 (Blue/Green Deployment)</span>
+          <span class="t-mean">기존 운영 환경(블루)과 동일한 새로운 환경(그린)을 미리 준비한 후, 트래픽을 한 번에 전환하여 무중단 배포를 가능하게 하는 전략이다.</span>
+        </li></ul>
+    </article>
+  </section>
+  <nav class="daynav" aria-label="날짜 이동"><a class="dn-prev" href="2026-11-21.html"><span class="dn-dir">← 이전 날</span><span class="dn-date">2026. 11. 21 (토)</span></a></nav>
+
+  <div class="foot">
+    <span class="fbrand">데일리</span> · 읽을거리 · 2026. 11. 22<br>
+    뉴스 본문은 각 출처 기사를 자동 수집·요약한 것입니다. 정확한 내용은 원문을 확인하세요.
+  </div>
+</main>
+
+<div class="modal-overlay" id="news-modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" type="button" aria-label="닫기">✕</button>
+    <div class="modal-src"></div>
+    <h2 class="modal-title" id="modal-title"></h2>
+    <img class="modal-hero" alt="" hidden>
+    <div class="modal-body"></div>
+    <a class="modal-orig" target="_blank" rel="noopener">원문 사이트에서 보기 ↗</a>
+  </div>
+</div>
+<div class="ask-panel" hidden role="dialog" aria-label="기사 질문">
+  <div class="ask-head"><span>이 기사에 질문</span><button class="ask-min-btn" type="button" aria-label="질문창 접기/펴기">▾</button></div>
+  <div class="ask-thread"></div>
+  <div class="ask-foot">
+    <div class="ask-quote" hidden></div>
+    <div class="ask-row">
+      <input class="ask-input" type="text" maxlength="500" autocomplete="off"
+        placeholder="이 기사에서 궁금한 점" aria-label="질문 입력">
+      <button class="ask-send" type="button">질문</button>
+    </div>
+    <div class="ask-count"></div>
+  </div>
+</div>
+<div class="sel-ask" hidden><button class="sel-ask-btn" type="button">🤔 질문</button></div>
+<script id="news-data" type="application/json">[{"title": "binder.c 제거, Android Binder의 C 구현을 Rust로 대체", "source": "GeekNews", "url": "https://news.hada.io/topic?id=37594&utm_source=geeknews&utm_medium=rss&utm_campaign=news", "blurb": "Android의 핵심 프로세스 간 통신 드라이버인 Binder의 C 구현이 Linux 7.4에서 제거됨. 5년 넘게 진행한 Rust 전환이 기존 구현을 대체하는 단계에 도달함. Google 내부 보안팀은 Binder를 운영체제에서 코드 줄 수 대비 CVE가 가장 많은 구성 요소로 평가함. C 구현에 새 기능을 추가할 때마다 취약점이 계속 생겨, 새 기능은 Rust 구현에만 추가하도록 정책을 바꿈. 성능 측면에서 전환의 관건은", "content": [{"t": "p", "text": "Android의 핵심 프로세스 간 통신 드라이버인 Binder의 C 구현이 Linux 7.4에서 제거되었습니다. 5년 넘게 진행된 Rust 전환이 기존 구현을 대체하는 단계에 도달했습니다."}, {"t": "p", "text": "Google 내부 보안팀은 Binder를 운영체제에서 코드 줄 수 대비 CVE가 가장 많은 구성 요소로 평가했습니다. C 구현에 새 기능을 추가할 때마다 취약점이 계속 발생하여, 새 기능은 Rust 구현에만 추가하도록 정책을 변경했습니다."}, {"t": "p", "text": "성능 측면에서 전환의 관건은 처리량보다 꼬리 지연 시간이었습니다. 화면 렌더링 경로에 Binder가 들어가므로, 잠금 경합으로 드물게 발생하는 20밀리초 지연도 사용자가 체감할 수 있습니다."}, {"t": "p", "text": "기존 프로그램이 내부 트레이스포인트와 참조 횟수까지 의존하여 호환성 확보가 어려웠습니다. 일부 벤더 훅도 그대로 재현하지 못해, 해당 벤더는 코드를 수정하기 전까지 C 구현에 머물러야 합니다."}, {"t": "p", "text": "기존 안정 커널의 C Binder에는 보안 수정이 계속 제공됩니다. 이번 전환에서 가장 어려웠던 문제는 Rust 자체보다 어떤 재작성에서도 마주칠 수 있는 기존 동작과의 호환성이었습니다."}, {"t": "h", "text": "Binder를 Rust로 옮긴 이유와 규모"}, {"t": "p", "text": "Kangrejos 2026 마지막 세션에서 Carlos Llamas가 C Binder 코드 삭제를 발표하고, Rust 구현을 수년간 개발한 Alice Ryhl과 함께 전환 경험을 공유했습니다."}, {"t": "p", "text": "Binder는 Android의 주요 프로세스 간 통신 메커니즘으로, 2008년 커널에 추가되었습니다. 설계는 BeOS에서 출발했지만 이후 크게 확장되었습니다. 최소한의 오버헤드로 프로세스가 통신하도록 풍부한 연산을 제공하는 만큼 공격 표면도 큽니다. Android를 겨냥한 복잡한 연쇄 공격 상당수가 중간 단계에서 Binder를 이용했으며, Google 내부 레드팀은 코드 줄 수 대비 CVE가 운영체제 전체에서 가장 많은 구성 요소로 평가했습니다."}, {"t": "p", "text": "Binder는 커널 내 첫 Rust 사용 사례였으며, 전환에는 총 5년 넘게 걸렸습니다. 커널의 Rust 실험은 2021년 시작됐지만, 현재 Rust 구현으로 이어진 첫 버전 공개는 2023년에 이뤄졌습니다."}, {"t": "p", "text": "Android는 30억 대 이상 기기에서 실행되며, 모든 화면 터치, 권한 검사, 애플리케이션 간 메시지에 Binder를 사용합니다. 전 세계 Binder 트랜잭션은 초당 수천억 건에 달합니다. 이 규모에서는 C와 Rust 구현이 제공하는 인터페이스의 아주 작은 차이도 특정 사용 사례의 문제나 회귀로 이어질 수 있습니다."}, {"t": "h", "text": "처리량보다 까다로웠던 꼬리 지연 시간"}, {"t": "p", "text": "대부분의 Android 화면 프레임은 렌더링의 핵심 경로에 Binder 트랜잭션을 포함하므로, 처리량보다 꼬리 지연 시간이 중요합니다. 평균 2마이크로초 차이는 큰 문제가 아니지만, 드물게라도 20밀리초 더 느려지면 사용자가 알아차립니다."}], "image": "../images/2278dfe7965e.webp"}, {"title": "미국 AI 칩 규제에 중국 기업들 잇단 타격…WSJ \"엔비디아 금단 현상\"", "source": "AITimes", "url": "https://www.aitimes.com/news/articleView.html?idxno=217660", "blurb": "미국의 첨단 AI 칩 규제가 강화되면서 중국 주요 AI 기업들이 모델 개발 지연과 사업 차질을 인정하기 시작했다. 문샷 AI가 대규모 해외 GPU 이용 계약을 취소한 데 이어 텐센트와 알리바바도 차세대 모델 개발과 서비스에 미칠 영향을 경고하면서, 엔비디아 칩에 의존해 온 중국 AI 산업이 '금단 현상'을 겪고 있다는 평가까지 나왔다.월스트리트저널(WSJ)은 19일(현지시간) 중국 AI 기업들이 그동안 미국의 수출 통제를 피해", "content": [{"t": "p", "text": "미국의 첨단 AI 칩 규제가 강화되면서 중국 주요 AI 기업들이 모델 개발 지연과 사업 차질을 인정하기 시작했다. 문샷 AI가 대규모 해외 GPU 이용 계약을 취소한 데 이어 텐센트와 알리바바도 차세대 모델 개발과 서비스에 미칠 영향을 경고하면서, 엔비디아 칩에 의존해 온 중국 AI 산업이 '금단 현상'을 겪고 있다는 평가까지 나왔다."}, {"t": "p", "text": "월스트리트저널(WSJ)은 19일(현지시간) 중국 AI 기업들이 그동안 미국의 수출 통제를 피해 해외 데이터센터에서 엔비디아의 첨단 GPU를 이용해 모델을 개발해 왔다며, 이번 규제로 이러한 경로까지 막히면서 '금단 현상'에 직면했다고 보도했다. 중국 정부가 자체 AI 반도체 개발을 추진해 왔지만, 주요 기업들은 여전히 엔비디아 칩에 크게 의존하고 있다는 것이다."}, {"t": "p", "text": "실제로 중국 주요 기업들은 새로운 규제가 사업에 미칠 영향을 공개적으로 인정했다. 마틴 라우 텐센트 사장은 18일 실적 발표에서 미국의 조치를 \"유감스럽다\"고 평가하며 중국 기업들이 첨단 연산 자원을 확보하기 어려워졌다고 밝혔다."}, {"t": "p", "text": "라우 사장은 \"이번 조치는 중국의 모든 기업에 부정적인 영향을 미칠 것\"이라며 \"단기적으로 차세대 모델을 개발하는 데 시간이 더 걸릴 것\"이라고 말했다. 장기적으로는 중국 기업들이 자체 반도체 공급망에 의존할 수밖에 없으며, 이번 규제가 중국산 AI 칩 개발을 앞당길 것으로 내다봤다."}, {"t": "p", "text": "그러나 기존 클라우드 사업에 미치는 영향은 제한적일 것이라고 주장했다. 제임스 미첼 텐센트 최고전략책임자(CSO)는 현재 클라우드 사업이 주로 AI 추론에 집중돼 있으며, 효율성이 개선된 모델은 적은 수의 중국산 칩으로도 운영할 수 있다고 설명했다. 대신 최첨단 모델을 새로 학습하는 과정이 더 큰 타격을 받을 수 있다고 봤다."}, {"t": "p", "text": "알리바바도 비슷한 전망을 내놨다. 우융밍 알리바바 CEO는 19일 실적 발표에서 새로운 미국 규제가 \"내년 제품과 서비스에 영향을 미칠 것\"이라고 밝혔다. 특히 데이터센터 건설 속도를 늦추고 장기적인 연산 능력 확보 목표를 낮춰야 할 가능성도 있다고 설명했다."}, {"t": "p", "text": "알리바바는 자체 개발 AI 칩이 이미 모델 학습을 지원할 수 있는 수준에 도달했다며 엔비디아 의존도를 줄이겠다는 방침을 밝혔다. 그러나 AI 클라우드 및 컴퓨팅 서비스 매출이 전년 동기 대비 53% 증가하는 등 사업이 빠르게 성장하는 상황에서 첨단 GPU 확보에 새로운 제약이 발생한 셈이다."}, {"t": "p", "text": "해외 GPU 확보 계획을 실제로 취소한 기업도 나왔다. '키미' 개발사 문샷 AI는 인도네시아 데이터센터를 통해 엔비디아의 최신 '블랙웰 울트라 B300' GPU를 이용하려던 1억5000만달러(약 2200억원) 규모의 계약을 취소한 것으로 알려졌다. 미국의 새로운 규제가 발표된 이후 계약을 중단한 것으로, 차세대 모델 학습에 필요한 연산 자원 확보 계획에 차질이 발생했다."}, {"t": "p", "text": "다른 중국 기업의 해외 GPU 이용 계약도 영향을 받고 있다. 블룸버그는 19일 영국 AI 클라우드 기업 엔스케일이 바이트댄스에 엔비디아 GPU를 계속 제공하려면 미국 정부의 허가를 받아야 한다고 보도했다. 엔스케일에는 허가를 신청할 수 있는 90일의 기한이 주어졌다."}, {"t": "p", "text": "엔스케일은 아이슬란드와 노르웨이 등의 데이터센터에서 바이트댄스에 컴퓨팅 자원을 공급하고 있다. 특히 2025년 매출 3300만달러 중 약 73%가 바이트댄스에서 발생했다."}, {"t": "p", "text": "중국 AI 기업들의 연산 자원 부족은 이미 실제 서비스에도 나타나고 있다. 딥시크는 이달 중순부터 챗봇이 처리할 수 있는 문서 길이를 제한하는 등 이용 조건을 강화했다. 관계자들은 딥시크가 제한된 컴퓨팅 자원을 차세대 모델 학습에 우선 배정하고 있다고 전했다."}, {"t": "p", "text": "문샷 AI도 지난 7월 '키미 K3'를 출시한 직후 신규 구독 서비스 가입을 중단했으며, 10월 '키미 K3.1 프로'를 공개할 때는 이용량 제한에 대해 사과했다. 딥시크와 문샷 AI, 알리바바의 엔지니어들은 지난 1년 동안 연산 자원 부족으로 연구와 신형 모델 출시가 여러 차례 지연됐다고 밝혔다. 이러한 문제는 이번 규제 이전부터 있었지만, 새로운 조치로 상황이 악화할 가능성이 커졌다."}], "image": "../images/ef32e2eb49e4.png"}, {"title": "PcapAnalyzer – 27가지 문제 탐지기가 있는 자체 호스팅 pcap 분석기", "source": "Hacker News", "url": "https://github.com/sebaandrada-cell/PcapAnalyzer", "blurb": "Article URL: https://github.com/sebaandrada-cell/PcapAnalyzer Comments URL: https://news.ycombinator.com/item?id=50594132 Points: 64 # Comments: 6", "content": [], "image": "../images/7f062c485c75.png"}]</script>
+<script src="../assets/site.js?v=95735ce8"></script>
+</body></html>
